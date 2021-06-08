@@ -58,6 +58,8 @@
 18 * * * * node /scripts/jd_daily_egg.js | ts >> /scripts/logs/jd_daily_egg.log 2>&1
 # 金融养猪
 12 * * * * node /scripts/jd_pigPet.js | ts >> /scripts/logs/jd_pigPet.log 2>&1
+# 金融养猪2
+10 0 * * * node /scripts/jd_pigPetNew.js | ts >> /scripts/logs/jd_pigPet.log 2>&1
 # 点点券
 20 0,20 * * * node /scripts/jd_necklace.js | ts >> /scripts/logs/jd_necklace.log 2>&1
 # 京喜工厂
