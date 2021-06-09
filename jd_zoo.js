@@ -34,59 +34,10 @@ const pKHelpAuthorFlag = true;//是否助力作者PK  true 助力，false 不助
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [];
 $.cookie = '';
-$.inviteList = [
-{
-            'ues': "",
-            'secretp': "",
-            'inviteId': 'ZXTKT018v_VzQRob8VLRJxKb1AFjRWn6-7zx55awQ',
-            'max': false
-          },
-				{
-            'ues': "",
-            'secretp': "",
-            'inviteId':'ZXTKT0225KkcRB9K8lHVdhL0lP4JdAFjRWn6-7zx55awQ',
-            'max': false
-          },
-				{
-            'ues': "",
-            'secretp': "",
-            'inviteId': 'ZXTKT012vPt6RRgQ91TSFjRWn6-7zx55awQ',
-            'max': false
-          },
-				{
-            'ues': "",
-            'secretp': "",
-            'inviteId': 'ZXTKT0205KkcNkptry6lVWSt7r17FjRWn6-7zx55awQ',
-            'max': false
-          },
-				{
-            'ues': "",
-            'secretp': "",
-            'inviteId': 'ZXTKT0205KkcH2Vkpja9fl-G_KF3FjRWn6-7zx55awQ',
-            'max': false
-          },
-				{
-            'ues': "",
-            'secretp': "",
-            'inviteId': 'ZXTKT0225KkcRktIoVaDIBL0wPZZdQFjRWn6-7zx55awQ',
-            'max': false
-          },
-				{
-            'ues': "",
-            'secretp': "",
-            'inviteId': 'ZXTKT0225KkcRx8Rp1XXIBLwxqIOIgFjRWn6-7zx55awQ',
-            'max': false
-          },
-				{
-            'ues': "",
-            'secretp': "",
-            'inviteId': 'ZXTKT018v_V6QRsb_F3XIR-b1AFjRWn6-7zx55awQ',
-            'max': false
-          },
-];
+$.inviteList = ['ZXTKT0114qQhGUBRsh4FjRWn6-7zx55awQ','ZXTKT0225KkcRh9N8AKBcx3zxaFYJwFjRWn6-7zx55awQ','ZXTKT019-akzE355iBGldUSs76AFjRWn6-7zx55awQ'];
 
-$.pkInviteList = ["sSKNX-MpqKOJsNu-zMqNBs5hj9opOa6o2wMU-znwJwM0H_YU7EUkvQKXqSkaPmQ","sSKNX-MpqKPS7LS5nZndAizWFGo2JEHVTYrhQP_YgMarYwUsDccKRlU",
-"sSKNX-MpqKPS7LS5nZndAizWFGo2JEHVTdG9L6Gn_5Fmm8I-WEE9tIASFg","sSKNX-MpqKPS7L25nJnQDUIVQmLuzDO-PyqZcdv-4L2qjZGpokmcSf0","sSKNX-MpqKOJsNu8mMjeAWHYKmobQiznvbxIe5Xsk02zf3zhVPXtKUoZnyfBFiQ","sSKNX-MpqKPS7LS5nZndAizWFGo2JEHVTdG9L4iI9pguJEc17IVLsw8UtA","sSKNX-MpqKOJsNu_mJOLBYkPNQK9xdaCPllFHVEV72jTOCgxc7wIIrOnnFpjjGs"];
+$.pkInviteList = ["sSKNX-MpqKOPvebhx9OeTh5Wh7BJypoFzfSRvQkZk5A","sSKNX-MpqKOJsNu-mM_cUpQltlEsUDTNQWYKoarHcCiZQl5FwwenNy2jHIaQ_7gV",
+"sSKNX-MpqKOUsPTr-fukQdL8MHABQuuR5YtK7QptYRJjIzrBJGODjfCUa6Y"];
 $.secretpInfo = {};
 $.innerPkInviteList = [
 ];
@@ -234,21 +185,21 @@ async function zoo() {
     //做任务
     for (let i = 0; i < $.taskList.length && $.secretp && !$.hotFlag; i++) {
       $.oneTask = $.taskList[i];
-      if ([1, 3, 5, 7, 9, 26].includes($.oneTask.taskType) && $.oneTask.status === 1) {
-        $.activityInfoList = $.oneTask.shoppingActivityVos || $.oneTask.brandMemberVos || $.oneTask.followShopVo || $.oneTask.browseShopVo;
+      if (([1, 3, 5, 7, 9, 26].includes($.oneTask.taskType)||$.oneTask.productInfoVos!=null) && $.oneTask.status === 1) {
+        $.activityInfoList = $.oneTask.shoppingActivityVos || $.oneTask.brandMemberVos || $.oneTask.followShopVo || $.oneTask.browseShopVo||$.oneTask.productInfoVos;
         for (let j = 0; j < $.activityInfoList.length; j++) {
           $.oneActivityInfo = $.activityInfoList[j];
           if ($.oneActivityInfo.status !== 1 || !$.oneActivityInfo.taskToken) {
             continue;
           }
           $.callbackInfo = {};
-          console.log(`做任务：${$.oneActivityInfo.title || $.oneActivityInfo.taskName || $.oneActivityInfo.shopName};等待完成`);
+          console.log(`做任务：${$.oneActivityInfo.title || $.oneActivityInfo.taskName || $.oneActivityInfo.shopName||$.oneActivityInfo.skuName};等待完成`);
           await takePostRequest('zoo_collectScore');
           if ($.callbackInfo.code === 0 && $.callbackInfo.data && $.callbackInfo.data.result && $.callbackInfo.data.result.taskToken) {
             await $.wait(8000);
             let sendInfo = encodeURIComponent(`{"dataSource":"newshortAward","method":"getTaskAward","reqParams":"{\\"taskToken\\":\\"${$.callbackInfo.data.result.taskToken}\\"}","sdkVersion":"1.0.0","clientLanguage":"zh"}`)
             await callbackResult(sendInfo)
-          } else if ($.oneTask.taskType === 5 || $.oneTask.taskType === 3 || $.oneTask.taskType === 26) {
+          } else if ($.oneTask.taskType === 5 || $.oneTask.taskType === 3 || $.oneTask.taskType === 2 ||$.oneTask.taskType === 26) {
             await $.wait(2000);
             console.log(`任务完成`);
           } else {
