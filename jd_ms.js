@@ -87,7 +87,6 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
   })
 
 async function jdMs() {
-console.log(require('./USER_AGENTS').USER_AGENT)
   $.score = 0
   await getActInfo()
   await getUserInfo()
@@ -264,7 +263,7 @@ function taskPostUrl(function_id, body = {}, extra = '', function_id2) {
       "origin": "https://h5.m.jd.com",
       "referer": "https://h5.m.jd.com/babelDiy/Zeus/2NUvze9e1uWf4amBhe1AV6ynmSuH/index.html",
       'Content-Type': 'application/x-www-form-urlencoded',
-      "User-Agent": require('./USER_AGENTS').USER_AGENT,
+      "User-Agent": 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36 Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.10',
     }
   }
 }
@@ -281,7 +280,7 @@ function TotalBean() {
         "Connection": "keep-alive",
         "Cookie": cookie,
         "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-        "User-Agent": require('./USER_AGENTS').USER_AGENT,
+        "User-Agent": 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36 Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.10',
       }
     }
     $.post(options, (err, resp, data) => {
