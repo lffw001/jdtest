@@ -87,6 +87,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
   })
 
 async function jdMs() {
+console.log(require('./USER_AGENTS').USER_AGENT)
   $.score = 0
   await getActInfo()
   await getUserInfo()
@@ -263,7 +264,7 @@ function taskPostUrl(function_id, body = {}, extra = '', function_id2) {
       "origin": "https://h5.m.jd.com",
       "referer": "https://h5.m.jd.com/babelDiy/Zeus/2NUvze9e1uWf4amBhe1AV6ynmSuH/index.html",
       'Content-Type': 'application/x-www-form-urlencoded',
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.2.2;14.2;%E4%BA%AC%E4%B8%9C/9.2.2 CFNetwork/1206 Darwin/20.1.0"),
+      "User-Agent": require('./USER_AGENTS').USER_AGENT,
     }
   }
 }
@@ -280,7 +281,7 @@ function TotalBean() {
         "Connection": "keep-alive",
         "Cookie": cookie,
         "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.2.2;14.2;%E4%BA%AC%E4%B8%9C/9.2.2 CFNetwork/1206 Darwin/20.1.0")
+        "User-Agent": require('./USER_AGENTS').USER_AGENT,
       }
     }
     $.post(options, (err, resp, data) => {
