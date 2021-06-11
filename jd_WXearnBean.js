@@ -1,4 +1,4 @@
-/*
+ /*
  * @Author: Xin https://github.com/Xin-code 
  * @Date: 2021-03-29 15:34:41 
  * @Last Modified by: Xin 
@@ -7,25 +7,26 @@
  * 微信小程序 - 赚京豆 - 天天领京豆
  */
 /*
-微信小程序 - 赚京豆 - 天天领京豆
+赚京豆-天天领京豆
 ============Quantumultx===============
 [task_local]
-#赚京豆
-10 2 * * * https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, tag=赚京豆, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_ms.jpg, enabled=true
+#赚京豆-天天领京豆
+10 2 * * * https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, tag=赚京豆-天天领京豆, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_ms.jpg, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 7 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js,tag=赚京豆
+cron "10 7 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js,tag=赚京豆-天天领京豆
 
 ===============Surge=================
-赚京豆 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js
+赚京豆-天天领京豆 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js
 
 ============小火箭=========
-赚京豆 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, cronexpr="10 7 * * *", timeout=200, enable=true
+赚京豆-天天领京豆 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, cronexpr="10 7 * * *", timeout=200, enable=true
  */
 
 
-const $ = Env('赚京豆 - 天天领京豆')
+
+const $ = Env('赚京豆-天天领京豆')
 
 const notify = $.isNode() ? require('./sendNotify') : '';
 
@@ -36,6 +37,8 @@ $.token = '';
 $.tasklist=[];
 
 $.isOpen=true;//是否开启红包
+
+$.isReward=false;//是否兑换京豆
 
 const JD_API_HOST = 'https://api.m.jd.com/api'
 
@@ -51,6 +54,10 @@ const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
     console.log(`········【帐号${i+1}】开始········`)
 	  //获取token
 	  await getToken();
+	  if($.isReward){
+		  console.log("已兑换完成，跳过")
+		  return;
+	  }
 	  if($.token!=""){
 		 //开红包
 		if(!$.isOpen){
@@ -220,6 +227,7 @@ async function getToken(){
 			  $.token=data.data.floorInfoList[0].token;
 			  console.log(`token:`+$.token);
 			  $.isOpen=data.data.floorInfoList[0].floorData.userActivityInfo.redPacketOpenFlag;
+			  $.isReward=data.data.floorInfoList[0].floorData.userActivityInfo.redPacketRewardTakeFlag;
               // console.log(data.data.result.taskInfos)
             }else{
               console.log(data)
