@@ -6,14 +6,36 @@
  * 
  * 微信小程序 - 赚京豆 - 天天领京豆
  */
+/*
+微信小程序 - 赚京豆 - 天天领京豆
+============Quantumultx===============
+[task_local]
+#赚京豆
+10 2 * * * https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, tag=赚京豆, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_ms.jpg, enabled=true
 
+================Loon==============
+[Script]
+cron "10 7 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js,tag=赚京豆
+
+===============Surge=================
+赚京豆 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js
+
+============小火箭=========
+赚京豆 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, cronexpr="10 7 * * *", timeout=200, enable=true
+ */
 
 
 const $ = Env('赚京豆 - 天天领京豆')
 
 const notify = $.isNode() ? require('./sendNotify') : '';
 
-$.message = ''
+$.message = '';
+
+$.token = '';
+
+$.tasklist=[];
+
+$.isOpen=true;//是否开启红包
 
 const JD_API_HOST = 'https://api.m.jd.com/api'
 
@@ -25,10 +47,32 @@ const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 	 if (!getCookies()) return;
 	// CookieArr=$.cookieArr;
   for (let i = 0; i < CookieArr.length; i++) {
-
     cookie = CookieArr[i]
     console.log(`········【帐号${i+1}】开始········`)
-    await doTask()
+	  //获取token
+	  await getToken();
+	  if($.token!=""){
+		 //开红包
+		if(!$.isOpen){
+		  await startJob();			 
+		}
+		// 获取任务列表
+		await getTaskList();
+		for(var j=0;j<$.tasklist.length&&$.tasklist[j].taskDataStatus!=3;j++){
+			console.log("去做任务："+$.tasklist[j].title)
+			if($.tasklist[j].taskDataStatus!=2){
+				await getTask($.tasklist[j].id);
+				await $.wait(10000);
+				await reachTask($.tasklist[j].id);
+			}
+			await $.wait(2000);
+			await reveive($.tasklist[j].id);
+		}
+		// 提现
+		await tixian();
+		
+	  }
+
     
     //推送消息
     // await sendMsg()
@@ -36,8 +80,7 @@ const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
     console.log(`········【帐号${i+1}】结束········`)
 
   }
-})()
-    .catch((e) => $.logErr(e))
+})().catch((e) => $.logErr(e))
     .finally(() => $.done())
 
 function getCookies() {
@@ -59,17 +102,172 @@ function getCookies() {
   return true;
 }
 
-async function doTask() {
-  
-  // 获取任务列表
-  await getTaskList()
 
+async function getTask(id){//点击
+	return new Promise((resolve) => {
+	   $.post(taskUrl(`vviptask_receive_getone`,{"ids":id+"\n","systemId":"19","channel":"SWAT_RED_PACKET"}),(error, response, data) =>{
+		try{
+		  if (error) {
+			console.log(`${JSON.stringify(error)}`)
+			console.log(`API请求失败，请检查网路重试`)
+		  } else {
+			const result = JSON.parse(data)
+			// 反馈信息
+			//console.log(result);
+			//result.data.forEach((item)=>{
+			//  console.log(item.id);
+			//})
+		  }}catch(e) {
+			  console.log(e)
+			} finally {
+			resolve();
+		  } 
+		})
+   })
+}
+async function reachTask(id){//完成
+	return new Promise((resolve) => {
+	   $.post(taskUrl(`vviptask_reach_task`,{"taskIdEncrypted":id+"\n","systemId":"19","channel":"SWAT_RED_PACKET"}),(error, response, data) =>{
+		try{
+		  if (error) {
+			console.log(`${JSON.stringify(error)}`)
+			console.log(`API请求失败，请检查网路重试`)
+		  } else {
+			const result = JSON.parse(data)
+			// 反馈信息
+			if(result.success==true){
+				console.log("任务完成");
+			}else{
+				console.log("任务失败");
+			}
+			//console.log(result);
+			//result.data.forEach((item)=>{
+			//  console.log(item.id);
+			//})
+		  }}catch(e) {
+			  console.log(e)
+			} finally {
+			resolve();
+		  } 
+		})
+   })
+}
+async function reveive(id){//领取
+	return new Promise((resolve) => {
+	   $.post(taskUrl(`vviptask_reward_receive`,{"idEncKey":id+"\n","systemId":"19","channel":"SWAT_RED_PACKET"}),(error, response, data) =>{
+		try{
+		  if (error) {
+			console.log(`${JSON.stringify(error)}`)
+			console.log(`API请求失败，请检查网路重试`)
+		  } else {
+			const result = JSON.parse(data)
+			// 反馈信息
+			if(result.success==true){
+				console.log("领取成功");
+			}else{
+				console.log("领取失败");
+			}
+			//result.data.forEach((item)=>{
+			//  console.log(item.id);
+			//})
+		  }}catch(e) {
+			  console.log(e)
+			} finally {
+			resolve();
+		  } 
+		})
+   })
+}
+async function tixian(){
+   return new Promise((resolve) => {
+    $.get(tokenUrl("pg_interact_interface_invoke",{"floorToken":"d7f086c1-5e6e-4572-b8dd-93ec7353d89e","dataSourceCode":"takeReward","argMap":{}}), (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+           //console.log(data)
+            data = JSON.parse(data);
+            if( data.success == true){
+              console.log("提现成功")
+			  //$.token=data.data.floorInfoList[0].token;
+			  
+              // console.log(data.data.result.taskInfos)
+            }else{
+              console.log(data)
+            }
+          
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
+async function getToken(){
+   return new Promise((resolve) => {
+    $.get(tokenUrl("pg_channel_page_data",{"paramData":{"token":"3b9f3e0d-7a67-4be3-a05f-9b076cb8ed6a"}}), (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+           //console.log(data)
+            data = JSON.parse(data);
+            if( data.success == true){
+			  $.token=data.data.floorInfoList[0].token;
+			  console.log(`token:`+$.token);
+			  $.isOpen=data.data.floorInfoList[0].floorData.userActivityInfo.redPacketOpenFlag;
+              // console.log(data.data.result.taskInfos)
+            }else{
+              console.log(data)
+            }
+          
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
 }
 
+async function startJob(){
+   return new Promise((resolve) => {
+    $.get(tokenUrl("pg_interact_interface_invoke",{"floorToken":$.token,"dataSourceCode":"openRedPacket","argMap":{}}), (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API请求失败，请检查网路重试`)
+        } else {
+          
+            data = JSON.parse(data);
+			
+            if( data.success == true){
+              
+			  
+			  
+              // console.log(data.data.result.taskInfos)
+            }else{
+              //console.log(data)
+            }
+          
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
     
 async function getTaskList(){
  return new Promise((resolve) => {
-   $.post(taskUrl(`vviptask_receive_list`,{"channel":"SWAT_RED_PACKET","systemId":"19","withAutoAward":1}),async(error, response, data) =>{
+   $.post(taskUrl(`vviptask_receive_list`,{"channel":"SWAT_RED_PACKET","systemId":"19","withAutoAward":1}),(error, response, data) =>{
     try{
       if (error) {
         console.log(`${JSON.stringify(error)}`)
@@ -77,10 +275,11 @@ async function getTaskList(){
       } else {
         const result = JSON.parse(data)
         // 反馈信息
-        console.log(result)
-        result.data.forEach((item)=>{
-          console.log(item.id);
-        })
+        //console.log(result);
+		$.tasklist=result.data;
+        //result.data.forEach((item)=>{
+        //  console.log(item.id);
+        //})
       }}catch(e) {
           console.log(e)
         } finally {
@@ -94,12 +293,10 @@ async function sendMsg() {
   await notify.sendNotify(`xxxx`,`${$.message}`);
 }
 
-
 // URL  
-function taskUrl(activity,body={}) {
+function tokenUrl(activity,body={}) {
   return {
-    url: `${JD_API_HOST}?functionId=${activity}`,
-    body:`${body}&appid=swat_miniprogram&client=tjj_m&screen=1920*1080&osVersion=5.0.0&networkType=wifi&sdkName=orderDetail&sdkVersion=1.0.0&clientVersion=3.1.3&area=1_72_4137_0`,
+    url: `${JD_API_HOST}?functionId=${activity}&body=${JSON.stringify(body)}&appid=swat_miniprogram&client=tjj_m&screen=1920*1080&osVersion=5.0.0&networkType=wifi&sdkName=orderDetail&sdkVersion=1.0.0&clientVersion=3.1.3&area=11`,
     headers: {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate, br",
@@ -108,7 +305,26 @@ function taskUrl(activity,body={}) {
       "Content-Type": "application/x-www-form-urlencoded",
       'Host': 'api.m.jd.com',
       'Cookie': cookie,
-      'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+      'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.2.2;14.2;%E4%BA%AC%E4%B8%9C/9.2.2 CFNetwork/1206 Darwin/20.1.0"),
+      'Referer': 'https://servicewechat.com/wxa5bf5ee667d91626/130/page-frame.html',
+    }
+  }
+}
+
+// URL  
+function taskUrl(activity,body={}) {
+  return {
+    url: `${JD_API_HOST}?functionId=${activity}&fromType=wxapp`,
+    body:`body=${JSON.stringify(body)}&appid=swat_miniprogram&client=tjj_m&screen=1920*1080&osVersion=5.0.0&networkType=wifi&sdkName=orderDetail&sdkVersion=1.0.0&clientVersion=3.1.3&area=11`,
+    headers: {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "zh-cn",
+      "Connection": "keep-alive",
+      "Content-Type": "application/x-www-form-urlencoded",
+      'Host': 'api.m.jd.com',
+      'Cookie': cookie,
+      'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.2.2;14.2;%E4%BA%AC%E4%B8%9C/9.2.2 CFNetwork/1206 Darwin/20.1.0"),
       'Referer': 'https://servicewechat.com/wxa5bf5ee667d91626/130/page-frame.html',
     }
   }
