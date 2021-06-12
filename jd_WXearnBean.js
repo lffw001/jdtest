@@ -56,7 +56,7 @@ const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 	  await getToken();
 	  if($.isReward){
 		  console.log("已兑换完成，跳过")
-		  return;
+		  continue;
 	  }
 	  if($.token!=""){
 		 //开红包
