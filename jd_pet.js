@@ -68,7 +68,7 @@ let randomCount = $.isNode() ? 20 : 5;
       goodsUrl = '';
       taskInfoKey = [];
       option = {};
-      //await shareCodesFormat();
+      await shareCodesFormat();
       await jdPet();
     }
   }
@@ -276,7 +276,7 @@ async function slaveHelp() {
   //$.log(`\n因1.6日好友助力功能下线。故暂时屏蔽\n`)
   //return
   let helpPeoples = '';
-  for (let code of shareCodes) {
+  for (let code of newShareCodes) {
     console.log(`开始助力京东账号${$.index} - ${$.nickName}的好友: ${code}`);
     if (!code) continue;
     let response = await request(arguments.callee.name.toString(), {'shareCode': code});
@@ -482,11 +482,11 @@ function shareCodesFormat() {
       newShareCodes = shareCodes[tempIndex].split('@');
     }
     //因好友助力功能下线。故暂时屏蔽
-    const readShareCodeRes = await readShareCode();
+    //const readShareCodeRes = await readShareCode();
     //const readShareCodeRes = null;
-    if (readShareCodeRes && readShareCodeRes.code === 200) {
-      newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
-    }
+    //if (readShareCodeRes && readShareCodeRes.code === 200) {
+    //  newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
+    //}
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
     resolve();
   })
