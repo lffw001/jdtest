@@ -1,10 +1,4 @@
 /*
- * @Author: lxk0301 https://github.com/lxk0301 
- * @Date: 2020-11-10 14:07:07 
- * @Last Modified by: lxk0301
- * @Last Modified time: 2020-11-23 12:27:16
- */
-/*
 京东金融养猪猪
 一键开完所有的宝箱功能。耗时70秒
 大转盘抽奖
@@ -16,17 +10,17 @@
 ============Quantumultx===============
 [task_local]
 #金融养猪
-10 2 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_dreamFactory.js, tag=金融养猪, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
+10 2 * * * https://github.com/libinxwz/jdtest/jd_pigPetNew.js, tag=金融养猪, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 * * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_dreamFactory.js,tag=金融养猪
+cron "10 2 * * *" script-path=https://github.com/libinxwz/jdtest/jd_pigPetNew.js,tag=金融养猪
 
 ===============Surge=================
-金融养猪 = type=cron,cronexp="10 * * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_dreamFactory.js
+金融养猪 = type=cron,cronexp="10 2 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_pigPetNew.js
 
 ============小火箭=========
-金融养猪 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_dreamFactory.js, cronexpr="10 * * * *", timeout=3600, enable=true
+金融养猪 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_pigPetNew.js, cronexpr="10 2 * * *", timeout=3600, enable=true
 
  */
 
