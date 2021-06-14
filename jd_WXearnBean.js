@@ -1,13 +1,9 @@
- /*
- * @Author: Xin https://github.com/Xin-code 
- * @Date: 2021-03-29 15:34:41 
- * @Last Modified by: Xin 
- * @Last Modified time: 2021-03-29 17:31:33
- * 
- * 微信小程序 - 赚京豆 - 天天领京豆
- */
 /*
 赚京豆-天天领京豆
+可互助，助力码每日不变，只变日期
+更新时间：2021-06-14
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #赚京豆-天天领京豆
