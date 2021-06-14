@@ -13,7 +13,7 @@ cron "42 19,21,22 * * *" script-path=https://github.com/libinxwz/jdtest/jd_618jc
 ===============小火箭==========
 618竞猜 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_618jc.js, cronexpr="23 0 * * *", timeout=3600, enable=true
 */
-
+const $ = new Env("618手机竞猜");
 const Ariszy = '618手机竞猜'
 const $ = Env(Ariszy)
 const notify = $.isNode() ?require('./sendNotify') : '';
