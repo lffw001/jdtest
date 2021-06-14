@@ -11,7 +11,23 @@
 喂食
 每日签到
 完成分享任务得猪粮
-12 * * * *
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+============Quantumultx===============
+[task_local]
+#金融养猪
+10 2 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_dreamFactory.js, tag=金融养猪, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
+
+================Loon==============
+[Script]
+cron "10 * * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_dreamFactory.js,tag=金融养猪
+
+===============Surge=================
+金融养猪 = type=cron,cronexp="10 * * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_dreamFactory.js
+
+============小火箭=========
+金融养猪 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_dreamFactory.js, cronexpr="10 * * * *", timeout=3600, enable=true
+
  */
 
 const $ = new Env('金融养猪');
