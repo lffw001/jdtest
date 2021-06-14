@@ -1,9 +1,9 @@
  /*
- * @Author: Xin https://github.com/Xin-code 
- * @Date: 2021-03-29 15:34:41 
- * @Last Modified by: Xin 
+ * @Author: Xin https://github.com/Xin-code
+ * @Date: 2021-03-29 15:34:41
+ * @Last Modified by: Xin
  * @Last Modified time: 2021-03-29 17:31:33
- * 
+ *
  * 微信小程序 - 赚京豆 - 天天领京豆
  */
 /*
@@ -15,13 +15,13 @@
 
 ================Loon==============
 [Script]
-cron "10 2 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js,tag=赚京豆-天天领京豆
+cron "10 7 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js,tag=赚京豆-天天领京豆
 
 ===============Surge=================
-赚京豆-天天领京豆 = type=cron,cronexp="10 2 * * *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js
+赚京豆-天天领京豆 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js
 
 ============小火箭=========
-赚京豆-天天领京豆 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, cronexpr="10 2 * * *", timeout=200, enable=true
+赚京豆-天天领京豆 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, cronexpr="10 7 * * *", timeout=200, enable=true
  */
 
 
@@ -61,7 +61,7 @@ const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 	  if($.token!=""){
 		 //开红包
 		if(!$.isOpen){
-		  await startJob();			 
+		  await startJob();
 		}
 		// 获取任务列表
 		await getTaskList();
@@ -77,10 +77,10 @@ const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 		}
 		// 提现
 		await tixian();
-		
+
 	  }
 
-    
+
     //推送消息
     // await sendMsg()
 
@@ -128,7 +128,7 @@ async function getTask(id){//点击
 			  console.log(e)
 			} finally {
 			resolve();
-		  } 
+		  }
 		})
    })
 }
@@ -155,7 +155,7 @@ async function reachTask(id){//完成
 			  console.log(e)
 			} finally {
 			resolve();
-		  } 
+		  }
 		})
    })
 }
@@ -181,7 +181,7 @@ async function reveive(id){//领取
 			  console.log(e)
 			} finally {
 			resolve();
-		  } 
+		  }
 		})
    })
 }
@@ -198,12 +198,12 @@ async function tixian(){
             if( data.success == true){
               console.log("提现成功")
 			  //$.token=data.data.floorInfoList[0].token;
-			  
+
               // console.log(data.data.result.taskInfos)
             }else{
               console.log(data)
             }
-          
+
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -232,7 +232,7 @@ async function getToken(){
             }else{
               console.log(data)
             }
-          
+
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -251,18 +251,18 @@ async function startJob(){
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
-          
+
             data = JSON.parse(data);
-			
+
             if( data.success == true){
-              
-			  
-			  
+
+
+
               // console.log(data.data.result.taskInfos)
             }else{
               //console.log(data)
             }
-          
+
         }
       } catch (e) {
         $.logErr(e, resp)
@@ -272,7 +272,7 @@ async function startJob(){
     })
   })
 }
-    
+
 async function getTaskList(){
  return new Promise((resolve) => {
    $.post(taskUrl(`vviptask_receive_list`,{"channel":"SWAT_RED_PACKET","systemId":"19","withAutoAward":1}),(error, response, data) =>{
@@ -292,7 +292,7 @@ async function getTaskList(){
           console.log(e)
         } finally {
         resolve();
-      } 
+      }
     })
    })
 }
@@ -301,7 +301,7 @@ async function sendMsg() {
   await notify.sendNotify(`xxxx`,`${$.message}`);
 }
 
-// URL  
+// URL
 function tokenUrl(activity,body={}) {
   return {
     url: `${JD_API_HOST}?functionId=${activity}&body=${JSON.stringify(body)}&appid=swat_miniprogram&client=tjj_m&screen=1920*1080&osVersion=5.0.0&networkType=wifi&sdkName=orderDetail&sdkVersion=1.0.0&clientVersion=3.1.3&area=11`,
@@ -319,7 +319,7 @@ function tokenUrl(activity,body={}) {
   }
 }
 
-// URL  
+// URL
 function taskUrl(activity,body={}) {
   return {
     url: `${JD_API_HOST}?functionId=${activity}&fromType=wxapp`,
