@@ -3,8 +3,21 @@
 更新时间：2021-06-02 08:53
 脚本说明：星店长，和去年一样，稍微改了改，后面的账户默认助力第一个
 活动进入方式：京东app搜索【星店长】
-5 9 * * * https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_starStore.js, tag=京东星店长, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jd.png, enabled=true
-*/
+=================================Quantumultx=========================
+[task_local]
+#京东星店长
+5 9 * * * https://github.com/libinxwz/jdtest/jd_starstore.js, tag=京东星店长, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+=================================Loon===================================
+[Script]
+cron "5 9 * * *" script-path=https://github.com/libinxwz/jdtest/jd_starstore.js,tag=京东星店长
+
+===================================Surge================================
+京东星店长 = type=cron,cronexp="5 9 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_starstore.js
+
+====================================小火箭=============================
+京东星店长 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_starstore.js, cronexpr="5 9 * * *", timeout=3600, enable=true
+ */
 const $ = new Env('京东星店长');
 //Node.js用户请在jdCookie.js处填写京东ck;
 //IOS等用户直接用NobyDa的jd cookie
