@@ -3,20 +3,20 @@
 活动入口：https://lzdz-isv.isvjcloud.com/dingzhi/yili/bg/activity?activityId=dz2103100001340208
 活动时间：2021-03-24 - 2021-03-26
 
-更新地址：https://raw.githubusercontent.com/i-chenzhe/qx/main/z_sister.js
+更新地址：https://github.com/libinxwz/jdtest/jd_sister.js
 已支持IOS双京东账号, Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #乘风破浪的姐姐
-12 12 24-26 3 * https://raw.githubusercontent.com/i-chenzhe/qx/main/z_sister.js, tag=乘风破浪的姐姐, enabled=true
+12 12 24-26 3 * https://github.com/libinxwz/jdtest/jd_sister.js, tag=乘风破浪的姐姐, enabled=true
 ================Loon==============
 [Script]
-cron "12 12 24-26 3 *" script-path=https://raw.githubusercontent.com/i-chenzhe/qx/main/z_sister.js, tag=乘风破浪的姐姐
+cron "12 12 24-26 3 *" script-path=https://github.com/libinxwz/jdtest/jd_sister.js, tag=乘风破浪的姐姐
 ===============Surge=================
-乘风破浪的姐姐 = type=cron,cronexp="12 12 24-26 3 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/i-chenzhe/qx/main/z_sister.js
+乘风破浪的姐姐 = type=cron,cronexp="12 12 24-26 3 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_sister.js
 ============小火箭=========
-乘风破浪的姐姐 = type=cron,script-path=https://raw.githubusercontent.com/i-chenzhe/qx/main/z_sister.js, cronexpr="12 12 24-26 3 *", timeout=3600, enable=true
+乘风破浪的姐姐 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_sister.js, cronexpr="12 12 24-26 3 *", timeout=3600, enable=true
  */
 
 const $ = new Env('乘风破浪的姐姐');

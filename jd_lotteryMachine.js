@@ -6,6 +6,20 @@ github： https://github.com/yangtingxiao
 
 修改自用 By lxk0301
 更新时间：2021-05-21 12:06
+============Quantumultx===============
+[task_local]
+#京东抽奖机&内部互助
+10 * * * * https://github.com/libinxwz/jdtest/jd_lotteryMachine.js, tag=京东抽奖机&内部互助, enabled=true
+
+================Loon==============
+[Script]
+cron "10 * * * *" script-path=https://github.com/libinxwz/jdtest/jd_lotteryMachine.js,tag=京东抽奖机&内部互助
+
+===============Surge=================
+京东抽奖机&内部互助 = type=cron,cronexp="10 * * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_lotteryMachine.js
+
+============小火箭=========
+京东抽奖机&内部互助 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_lotteryMachine.js, cronexpr="10 * * * *", timeout=3600, enable=true
  */
 const $ = new Env('京东抽奖机&内部互助');
 const notify = $.isNode() ? require('./sendNotify') : '';

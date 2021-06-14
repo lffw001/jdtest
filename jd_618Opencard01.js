@@ -1,4 +1,4 @@
-/**
+/*
  * Date:2021-06-04
  * Version:1.0
  * Url:https://raw.githubusercontent.com/zooPanda/zoo/dev/zooOpencard01.js
@@ -7,8 +7,17 @@
  * 活动地址：https://lzdz1-isv.isvjcloud.com/dingzhi/dz/openCard/activity?activityId=d4aeb27dd22845d2ad70ad5f1f10b430
  * 活动时间：截止2021-06-13
  * 
- * 环境变量：
- *     - export ZOO_ADD2CART="true" //默认不加购商品
+============Quantumultx===============
+[task_local]
+#大牌联合618提前购
+3 11 * * * https://github.com/libinxwz/jdtest/jd_618Opencard01.js, tag=大牌联合618提前购,  enabled=true
+================Loon==============
+[Script]
+cron "3 11 * * *" script-path=https://github.com/libinxwz/jdtest/jd_618Opencard01.js,tag=大牌联合618提前购
+===============Surge=================
+大牌联合618提前购 = type=cron,cronexp="3 11 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_618Opencard01.js
+============小火箭=========
+大牌联合618提前购 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_618Opencard01.js, cronexpr="3 11 * * *", timeout=3600, enable=true
  */
  const $ = new Env("大牌联合618提前购");
  const ZOO_ADD2CART = $.isNode() ? process.env.ZOO_ADD2CART || 'false' : 'false'

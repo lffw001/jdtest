@@ -1,15 +1,22 @@
 /*
- * @Author: LXK9301 https://github.com/LXK9301
- * @Date: 2020-11-10 14:10:27 
- * @Last Modified by: LXK9301
- * @Last Modified time: 2020-11-20 14:11:01
- */
-/*
 京东金融-天天提鹅
 定时收鹅蛋,兑换金币
 先这样子吧
+============Quantumultx===============
+[task_local]
+#天天提鹅
+0 0-23/3 * * * https://github.com/libinxwz/jdtest/jd_daily_egg.js, tag=天天提鹅, enabled=true
+
+================Loon==============
+[Script]
+cron "0 0-23/3 * * *" script-path=https://github.com/libinxwz/jdtest/jd_daily_egg.js,tag=天天提鹅
+
+===============Surge=================
+天天提鹅 = type=cron,cronexp="0 0-23/3 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_daily_egg.js
+
+============小火箭=========
+天天提鹅 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_daily_egg.js, cronexpr="0 0-23/3 * * *", timeout=3600, enable=true
  */
-//0 */3 * * *
 const $ = new Env('天天提鹅');
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://ms.jr.jd.com/gw/generic/uc/h5/m';

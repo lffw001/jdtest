@@ -19,7 +19,7 @@ cron "0 2 * * *" script-path=https://github.com/libinxwz/jdtest/jd_wx_bean.js,ta
 ====================================小火箭=============================
 赚京豆领豆 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_wx_bean.js, cronexpr="0 2 * * *", timeout=3600, enable=true
  */
-const $ = Env('赚京豆领豆')
+const $ = new Env('赚京豆领豆');
 
 const notify = $.isNode() ? require('./sendNotify') : '';
 
