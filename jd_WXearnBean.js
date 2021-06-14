@@ -1,34 +1,51 @@
+ /*
+ * @Author: Xin https://github.com/Xin-code 
+ * @Date: 2021-03-29 15:34:41 
+ * @Last Modified by: Xin 
+ * @Last Modified time: 2021-03-29 17:31:33
+ * 
+ * 微信小程序 - 赚京豆 - 天天领京豆
+ */
 /*
-赚京豆领豆，每日挑战
-活动入口：京东app首页-我的-更多-赚京豆领豆
-已支持IOS双京东账号,Node.js支持N个京东账号
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+赚京豆-天天领京豆
 ============Quantumultx===============
 [task_local]
-#赚京豆领豆
-0 * * * * https://github.com/libinxwz/jdtest/jd_axc.js, tag=赚京豆领豆, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/main/Icon/shylocks/jd_xxl.jpg, enabled=true
+#赚京豆-天天领京豆
+10 2 * * * https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, tag=赚京豆-天天领京豆, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_ms.jpg, enabled=true
 
 ================Loon==============
 [Script]
-cron "0 * * * *" script-path=https://github.com/libinxwz/jdtest/jd_axc.js,tag=赚京豆领豆
+cron "10 2 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js,tag=赚京豆-天天领京豆
 
 ===============Surge=================
-赚京豆领豆 = type=cron,cronexp="0 * * * *",wake-system=1,timeout=20,script-path=https://github.com/libinxwz/jdtest/jd_axc.js
+赚京豆-天天领京豆 = type=cron,cronexp="10 2 * * *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js
 
 ============小火箭=========
-赚京豆领豆 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_axc.js, cronexpr="0 * * * *", timeout=200, enable=true
+赚京豆-天天领京豆 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, cronexpr="10 2 * * *", timeout=200, enable=true
  */
-const $ = Env('赚京豆领豆')
+
+
+
+const $ = Env('赚京豆-天天领京豆')
+
 const notify = $.isNode() ? require('./sendNotify') : '';
-const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
+
 $.message = '';
+
 $.token = '';
+
 $.tasklist=[];
+
 $.isOpen=true;//是否开启红包
+
 $.isReward=false;//是否兑换京豆
+
 const JD_API_HOST = 'https://api.m.jd.com/api'
+
 let CookieArr = [];
 //let $.cookieArr = [];
+const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
+
 !(async () => {
 	 if (!getCookies()) return;
 	// CookieArr=$.cookieArr;
