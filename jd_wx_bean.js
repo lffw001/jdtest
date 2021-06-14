@@ -7,17 +7,17 @@
 =================================Quantumultx=========================
 [task_local]
 #赚京豆领豆
-0 2 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_star_shop.js, tag=赚京豆领豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+0 2 * * * https://github.com/libinxwz/jdtest/jd_wx_bean.js, tag=赚京豆领豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 =================================Loon===================================
 [Script]
-cron "0 2 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_star_shop.js,tag=赚京豆领豆
+cron "0 2 * * *" script-path=https://github.com/libinxwz/jdtest/jd_wx_bean.js,tag=赚京豆领豆
 
 ===================================Surge================================
-赚京豆领豆 = type=cron,cronexp="0 2 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_star_shop.js
+赚京豆领豆 = type=cron,cronexp="0 2 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_wx_bean.js
 
 ====================================小火箭=============================
-赚京豆领豆 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_star_shop.js, cronexpr="0 2 * * *", timeout=3600, enable=true
+赚京豆领豆 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_wx_bean.js, cronexpr="0 2 * * *", timeout=3600, enable=true
  */
 const $ = Env('赚京豆领豆')
 
