@@ -2,6 +2,21 @@
 沸腾之夜
 开启预约活动得0.18元红包，得到五个助力后，得1.58元红包
 内部账号自己相互助力，一个账号3次助力机会。
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+============Quantumultx===============
+[task_local]
+#沸腾之夜
+0 1 * * * https://github.com/libinxwz/jdtest/jd_party_night.js, tag=沸腾之夜, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/main/Icon/shylocks/jd_xxl.jpg, enabled=true
+
+================Loon==============
+[Script]
+cron "0 1 * * *" script-path=https://github.com/libinxwz/jdtest/jd_party_night.js,tag=沸腾之夜
+
+===============Surge=================
+沸腾之夜 = type=cron,cronexp="0 1 * * *",wake-system=1,timeout=20,script-path=https://github.com/libinxwz/jdtest/jd_party_night.js
+
+============小火箭=========
+沸腾之夜 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_party_night.js, cronexpr="0 1 * * *", timeout=200, enable=true
  */
 const $ = new Env('沸腾之夜');
 const notify = $.isNode() ? require('./sendNotify') : '';

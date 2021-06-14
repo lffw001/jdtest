@@ -6,22 +6,22 @@
 2、可能有两位数误差,影响不大
 3、聚宝盆最下方显示上轮前六名的投入狗粮，收入积分，以及纯收益（即：收入积分 - 投入狗粮）
 new Env('聚宝盆投狗粮辅助');//此处忽略即可，为自动生成iOS端软件配置文件所需
-[MITM]
-hostname = jdjoy.jd.com,draw.jdfcloud.com
+============Quantumultx===============
+[task_local]
+#聚宝盆投狗粮辅助
+30 6 * * * https://github.com/libinxwz/jdtest/jd_petTreasureBox.js, tag=聚宝盆投狗粮辅助, enabled=true
 
-==========Surge=============
+================Loon==============
 [Script]
-聚宝盆投狗粮辅助 = type=http-response,pattern=^https:\/\/jdjoy\.jd\.com\/pet\/getPetTreasureBox|^https:\/\/draw\.jdfcloud\.com\/\/pet\/getPetTreasureBox,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_petTreasureBox.js
+cron "30 6 * * *" script-path=https://github.com/libinxwz/jdtest/jd_petTreasureBox.js,tag=聚宝盆投狗粮辅助
 
-===================Quantumult X=====================
-[rewrite_local]
-^https:\/\/jdjoy\.jd\.com\/pet\/getPetTreasureBox|^https:\/\/draw\.jdfcloud\.com\/\/pet\/getPetTreasureBox url script-response-body https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_petTreasureBox.js
+===============Surge=================
+聚宝盆投狗粮辅助 = type=cron,cronexp="30 6 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_petTreasureBox.js
 
-=====================Loon=====================
-[Script]
-http-response ^https:\/\/jdjoy\.jd\.com\/pet\/getPetTreasureBox|^https:\/\/draw\.jdfcloud\.com\/\/pet\/getPetTreasureBox script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_petTreasureBox.js, requires-body=true, timeout=3600, tag=聚宝盆投狗粮辅助
-
-*/
+============小火箭=========
+聚宝盆投狗粮辅助 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_petTreasureBox.js, cronexpr="30 6 * * *", timeout=3600, enable=true
+ */
+const $ = new Env('聚宝盆投狗粮辅助');
 let body = $response.body;
 try {
   body = JSON.parse(body)

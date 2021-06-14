@@ -8,19 +8,18 @@
 ============Quantumultx===============
 [task_local]
 #女装盲盒
-0 8 9-20/1 3 * * https://jdsharedresourcescdn.azureedge.net/jdresource/jd_nzmh.js, tag=女装盲盒, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+0 8 9-20/1 3 * * https://github.com/libinxwz/jdtest/jd_nzmhfz.js, tag=女装盲盒, enabled=true
 
 ================Loon==============
 [Script]
-cron "0 8 9-20/1 3 * *" script-path=https://jdsharedresourcescdn.azureedge.net/jdresource/jd_nzmh.js,tag=女装盲盒
+cron "0 8 9-20/1 3 * *" script-path=https://github.com/libinxwz/jdtest/jd_nzmhfz.js,tag=女装盲盒
 
 ===============Surge=================
-女装盲盒 = type=cron,cronexp="0 8 9-20/1 3 * *",wake-system=1,timeout=3600,script-path=https://jdsharedresourcescdn.azureedge.net/jdresource/jd_nzmh.js
+女装盲盒 = type=cron,cronexp="0 8 9-20/1 3 * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_nzmhfz.js
 
 ============小火箭=========
-女装盲盒 = type=cron,script-path=https://jdsharedresourcescdn.azureedge.net/jdresource/jd_nzmh.js, cronexpr="0 8 9-20/1 3 * *", timeout=3600, enable=true
+女装盲盒 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_nzmhfz.js, cronexpr="0 8 9-20/1 3 * *", timeout=3600, enable=true
  */
-
 const $ = new Env('女装盲盒抽京豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

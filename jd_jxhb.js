@@ -7,18 +7,18 @@
 脚本只进行内循环助力，一个ID可以助力3个用户
 作者的助力会psuh一个到本地助力池，介意的话请注释脚本
 
-更新地址：https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_jxhb.js
+更新地址：https://github.com/libinxwz/jdtest/jd_jxhb.js
 ============Quantumultx===============
 [task_local]
 #京喜阶梯红包
-15 9 * 5,6 * https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_jxhb.js, tag=京喜阶梯红包,  enabled=true
+15 9 * 5,6 * https://github.com/libinxwz/jdtest/jd_jxhb.js, tag=京喜阶梯红包,  enabled=true
 ================Loon==============
 [Script]
-cron "10 23 * 5,6 *" script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_jxhb.js,tag=京喜阶梯红包
+cron "10 23 * 5,6 *" script-path=https://github.com/libinxwz/jdtest/jd_jxhb.js,tag=京喜阶梯红包
 ===============Surge=================
-京喜阶梯红包 = type=cron,cronexp="15 9 * 5,6 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_jxhb.js
+京喜阶梯红包 = type=cron,cronexp="15 9 * 5,6 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_jxhb.js
 ============小火箭=========
-京喜阶梯红包 = type=cron,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_jxhb.js, cronexpr="15 9 * 5,6 *", timeout=3600, enable=true
+京喜阶梯红包 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_jxhb.js, cronexpr="15 9 * 5,6 *", timeout=3600, enable=true
 */
 const $ = new Env("京喜阶梯红包");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

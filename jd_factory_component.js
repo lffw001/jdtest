@@ -10,14 +10,14 @@
  * 点击厂长任务
   quanx:
   [task_local]
-  0 1,18 * * * https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory_component.js, tag=京喜工厂plus, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdgc.png, enabled=true
+  0 1,18 * * * https://github.com/libinxwz/jdtest/jd_factory_component.js, tag=京喜工厂plus, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdgc.png, enabled=true
 
   Loon:
   [Script]
-  cron "0 1,18 * * *" script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory_component.js,tag=京喜工厂plus
+  cron "0 1,18 * * *" script-path=https://github.com/libinxwz/jdtest/jd_factory_component.js,tag=京喜工厂plus
 
   Surge:
-  京喜工厂plus = type=cron,cronexp="0 1,18 * * *",wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory_component.js
+  京喜工厂plus = type=cron,cronexp="0 1,18 * * *",wake-system=1,timeout=20,script-path=https://github.com/libinxwz/jdtest/jd_factory_component.js
 *
 **/
 
