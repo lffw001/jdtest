@@ -1,32 +1,25 @@
- /*
- * @Author: Xin https://github.com/Xin-code
- * @Date: 2021-03-29 15:34:41
- * @Last Modified by: Xin
- * @Last Modified time: 2021-03-29 17:31:33
- *
- * 微信小程序 - 赚京豆 - 天天领京豆
- */
 /*
-赚京豆-天天领京豆
-============Quantumultx===============
+赚京豆领豆
+助力逻辑：每个ck随机获取一个明星，然后会先内部助力，然后再助力内置助力码
+抽奖：是否中奖没判断，需自行查看
+更新时间：2021-06-04
+脚本兼容: QuantumultX, Surge,Loon, JSBox, Node.js
+=================================Quantumultx=========================
 [task_local]
-#赚京豆-天天领京豆
-10 2 * * * https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, tag=赚京豆-天天领京豆, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_ms.jpg, enabled=true
+#赚京豆领豆
+0 2 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_star_shop.js, tag=赚京豆领豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
-================Loon==============
+=================================Loon===================================
 [Script]
-cron "10 7 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js,tag=赚京豆-天天领京豆
+cron "0 2 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_star_shop.js,tag=赚京豆领豆
 
-===============Surge=================
-赚京豆-天天领京豆 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js
+===================================Surge================================
+赚京豆领豆 = type=cron,cronexp="0 2 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_star_shop.js
 
-============小火箭=========
-赚京豆-天天领京豆 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, cronexpr="10 7 * * *", timeout=200, enable=true
+====================================小火箭=============================
+赚京豆领豆 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_star_shop.js, cronexpr="0 2 * * *", timeout=3600, enable=true
  */
-
-
-
-const $ = Env('赚京豆-天天领京豆')
+const $ = Env('赚京豆领豆')
 
 const notify = $.isNode() ? require('./sendNotify') : '';
 
