@@ -6,14 +6,14 @@
 ============Quantumultx===============
 [task_local]
 #探秘无限星空
-15 8 9-13 5 * https://raw.githubusercontent.com/monk-coder/dust/dust/car/adolf_ETIP.js, tag=探秘无限星空,  enabled=true
+15 8 9-13 5 * https://github.com/libinxwz/jdtest/jd_etip.js, tag=探秘无限星空,  enabled=true
 ================Loon==============
 [Script]
-cron "15 8 9-13 5 *" script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/car/adolf_ETIP.js,tag=探秘无限星空
+cron "15 8 9-13 5 *" script-path=https://github.com/libinxwz/jdtest/jd_etip.js,tag=探秘无限星空
 ===============Surge=================
-探秘无限星空 = type=cron,cronexp="15 8 9-13 5 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/car/adolf_ETIP.js
+探秘无限星空 = type=cron,cronexp="15 8 9-13 5 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_etip.js
 ============小火箭=========
-探秘无限星空 = type=cron,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/car/adolf_ETIP.js, cronexpr="15 8 9-13 5 *", timeout=3600, enable=true
+探秘无限星空 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_etip.js, cronexpr="15 8 9-13 5 *", timeout=3600, enable=true
 */
 const $ = new Env("探秘无限星空");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
