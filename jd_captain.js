@@ -1,18 +1,18 @@
-/**
+/*
  * 超级无线组队分奖品
  * 
-更新地址：https://raw.githubusercontent.com/monk-coder/dust/dust/i-chenzhe/z_shop_captain.js
+更新地址：https://github.com/libinxwz/jdtest/jd_captain.js
 ============Quantumultx===============
 [task_local]
 #超级无线组队分奖品
-25 3 * * 2 https://raw.githubusercontent.com/monk-coder/dust/dust/i-chenzhe/z_shop_captain.js, tag=超级无线组队分奖品,  enabled=true
+25 3 * * 2 https://github.com/libinxwz/jdtest/jd_captain.js, tag=超级无线组队分奖品,  enabled=true
 ================Loon==============
 [Script]
-cron "10,25 1 * * 2,5" script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/i-chenzhe/z_shop_captain.js,tag=超级无线组队分奖品
+cron "10,25 1 * * 2,5" script-path=https://github.com/libinxwz/jdtest/jd_captain.js,tag=超级无线组队分奖品
 ===============Surge=================
-超级无线组队分奖品 = type=cron,cronexp="25 3 * * 2",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/i-chenzhe/z_shop_captain.js
+超级无线组队分奖品 = type=cron,cronexp="25 3 * * 2",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_captain.js
 ============小火箭=========
-超级无线组队分奖品 = type=cron,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/i-chenzhe/z_shop_captain.js, cronexpr="25 3 * * 2", timeout=3600, enable=true
+超级无线组队分奖品 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_captain.js, cronexpr="25 3 * * 2", timeout=3600, enable=true
  */
 const $ = new Env('超级无线组队分京豆');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

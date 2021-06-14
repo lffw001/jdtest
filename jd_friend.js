@@ -1,5 +1,26 @@
 /*
 joy总动员
+https://t.me/wenmouxx
+抄自 @yangtingxiao 抽奖机脚本
+活动入口：
+更新地址：https://cdn.jsdelivr.net/gh/Wenmoux/scripts/js/jd_mcxhd_brandcity.js
+已支持IOS双京东账号, Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
+============Quantumultx===============
+[task_local]
+#joy总动员
+30 16 * * * https://github.com/libinxwz/jdtest/jd_friend.js, tag=joy总动员, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+================Loon==============
+[Script]
+cron "30 16 * * *" script-path=https://github.com/libinxwz/jdtest/jd_friend.js tag=joy总动员
+
+===============Surge=================
+joy总动员 = type=cron,cronexp="30 16 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_friend.js
+
+============小火箭=========
+joy总动员 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_friend.js, cronexpr="30 16 * * *", timeout=3600, enable=true
+
  */
 const $ = new Env('joy总动员');
 

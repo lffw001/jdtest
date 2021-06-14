@@ -3,20 +3,20 @@
 活动入口：https://grassy.m.jd.com/#/home?activityId=349
 活动时间：2021-03-22 - 2021-03-25
 
-更新地址：https://raw.githubusercontent.com/i-chenzhe/qx/main/z_grassy.js
+更新地址：https://github.com/libinxwz/jdtest/jd_grassy.js
 已支持IOS双京东账号, Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #答题赢京豆
-5 1 23-25 3 * https://raw.githubusercontent.com/i-chenzhe/qx/main/z_grassy.js, tag=答题赢京豆, enabled=true
+5 1 23-25 3 * https://github.com/libinxwz/jdtest/jd_grassy.js, tag=答题赢京豆, enabled=true
 ================Loon==============
 [Script]
-cron "5 1 23-25 3 *" script-path=https://raw.githubusercontent.com/i-chenzhe/qx/main/z_grassy.js, tag=答题赢京豆
+cron "5 1 23-25 3 *" script-path=https://github.com/libinxwz/jdtest/jd_grassy.js, tag=答题赢京豆
 ===============Surge=================
-答题赢京豆 = type=cron,cronexp="5 1 23-25 3 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/i-chenzhe/qx/main/z_grassy.js
+答题赢京豆 = type=cron,cronexp="5 1 23-25 3 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_grassy.js
 ============小火箭=========
-答题赢京豆 = type=cron,script-path=https://raw.githubusercontent.com/i-chenzhe/qx/main/z_grassy.js, cronexpr="5 1 23-25 3 *", timeout=3600, enable=true
+答题赢京豆 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_grassy.js, cronexpr="5 1 23-25 3 *", timeout=3600, enable=true
  */
 const $ = new Env('答题赢京豆');
 const notify = $.isNode() ? require('./sendNotify') : '';

@@ -6,6 +6,21 @@
 活动时间：长期
 活动入口：京东极速版app-现金签到
 原脚本作者：lxk0301
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+============Quantumultx===============
+[task_local]
+#京东极速版红包
+45 2,21 * * * https://github.com/libinxwz/jdtest/jd_speed_sign.js, tag=京东极速版红包, enabled=true
+
+================Loon==============
+[Script]
+cron "45 2,21 * * *" script-path=https://github.com/libinxwz/jdtest/jd_speed_sign.js,tag=京东极速版红包
+
+===============Surge=================
+京东极速版红包 = type=cron,cronexp="45 2,21 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_speed_sign.js
+
+============小火箭=========
+京东极速版红包 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_speed_sign.js, cronexpr="45 2,21 * * *", timeout=3600, enable=true
 */
 const $ = new Env('京东极速版');
 const notify = $.isNode() ? require('./sendNotify') : '';

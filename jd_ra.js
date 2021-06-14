@@ -1,3 +1,22 @@
+/*
+直播间抽奖（全局）
+脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
+============Quantumultx===============
+[task_local]
+#直播间抽奖（全局）
+5 12 * * * https://github.com/libinxwz/jdtest/jd_ra.js, tag=直播间抽奖（全局）, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+================Loon==============
+[Script]
+cron "5 12 * * *" script-path=https://github.com/libinxwz/jdtest/jd_ra.js tag=直播间抽奖（全局）
+
+===============Surge=================
+直播间抽奖（全局） = type=cron,cronexp="5 12 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_ra.js
+
+============小火箭=========
+直播间抽奖（全局） = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_ra.js, cronexpr="5 12 * * *", timeout=3600, enable=true
+
+ */
 const $ = new Env('直播间抽奖（全局）');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let cookiesArr = [

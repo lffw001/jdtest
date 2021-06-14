@@ -11,17 +11,17 @@
 ============Quantumultx===============
 [task_local]
 #特物ZX联想
-30 11 * * * https://cdn.jsdelivr.net/gh/Wenmoux/scripts/superBrand.js, tag=特物ZX联想, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+30 11 * * * https://github.com/libinxwz/jdtest/jd_twlx.js, tag=特物ZX联想, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "11 0,1,19 * * *" script-path=https://g/jd_scripts/raw/ tag=特物ZX联想
+cron "30 11 * * *" script-path=https://github.com/libinxwz/jdtest/jd_twlx.js tag=特物ZX联想
 
 ===============Surge=================
 特物ZX联想 = type=cron,cronexp="30 11 * * *",wake-system=1,timeout=3600,script-path=https://cdn.jsdelivr.net/gh/Wenmoux/scripts/js/superBrand.js
 
 ============小火箭=========
-特物ZX联想 = type=cron,script-path=https://cdn.jsdelivr.net/gh/Wenmoux/scripts/js/superBrand.js, cronexpr="30 11 * * *", timeout=3600, enable=true
+特物ZX联想 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_twlx.js, cronexpr="30 11 * * *", timeout=3600, enable=true
 
  */
 const $ = new Env('特物ZX联想');

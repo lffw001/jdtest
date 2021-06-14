@@ -1,18 +1,18 @@
 /*
 健康社区
 活动入口：京东app-边玩边赚
-更新地址：https://share.r2ray.com/dust/i-chenzhe/z_health_community.js
+更新地址：https://github.com/libinxwz/jdtest/jd_health_community.js
 ============Quantumultx===============
 [task_local]
 #健康社区
-25 10-22/3 * * * https://share.r2ray.com/dust/i-chenzhe/z_health_community.js, tag=健康社区,  enabled=true
+25 10-22/3 * * * https://github.com/libinxwz/jdtest/jd_health_community.js, tag=健康社区,  enabled=true
 ================Loon==============
 [Script]
-cron "13 10-22/3 * * *" script-path=https://share.r2ray.com/dust/i-chenzhe/z_health_community.js,tag=健康社区
+cron "13 10-22/3 * * *" script-path=https://github.com/libinxwz/jdtest/jd_health_community.js,tag=健康社区
 ===============Surge=================
-健康社区 = type=cron,cronexp="25 10-22/3 * * *",wake-system=1,timeout=3600,script-path=https://share.r2ray.com/dust/i-chenzhe/z_health_community.js
+健康社区 = type=cron,cronexp="25 10-22/3 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_health_community.js
 ============小火箭=========
-健康社区 = type=cron,script-path=https://share.r2ray.com/dust/i-chenzhe/z_health_community.js, cronexpr="25 10-22/3 * * *", timeout=3600, enable=true
+健康社区 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_health_community.js, cronexpr="25 10-22/3 * * *", timeout=3600, enable=true
 */
 const $ = new Env('健康社区');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

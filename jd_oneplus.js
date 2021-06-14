@@ -6,18 +6,18 @@
 脚本默认开通一个一加会员，加购任务默认不做。
 环境变量 export ADOLF_ADDSKU="true"//执行加购任务
 
-更新地址：https://raw.githubusercontent.com/monk-coder/dust/dust/member/adolf_oneplus.js
+更新地址：https://github.com/libinxwz/jdtest/jd_oneplus.js
 ============Quantumultx===============
 [task_local]
 #赢一加新品手机
-25 9 * 5,6 * https://raw.githubusercontent.com/monk-coder/dust/dust/member/adolf_oneplus.js, tag=赢一加新品手机,  enabled=true
+25 9 * 5,6 * https://github.com/libinxwz/jdtest/jd_oneplus.js, tag=赢一加新品手机,  enabled=true
 ================Loon==============
 [Script]
-cron "20 7 * 5,6 *" script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/member/adolf_oneplus.js,tag=赢一加新品手机
+cron "20 7 * 5,6 *" script-path=https://github.com/libinxwz/jdtest/jd_oneplus.js,tag=赢一加新品手机
 ===============Surge=================
-赢一加新品手机 = type=cron,cronexp="25 9 * 5,6 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/member/adolf_oneplus.js
+赢一加新品手机 = type=cron,cronexp="25 9 * 5,6 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_oneplus.js
 ============小火箭=========
-赢一加新品手机 = type=cron,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/member/adolf_oneplus.js, cronexpr="25 9 * 5,6 *", timeout=3600, enable=true
+赢一加新品手机 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_oneplus.js, cronexpr="25 9 * 5,6 *", timeout=3600, enable=true
 */
 const $ = new Env("赢一加新品手机");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

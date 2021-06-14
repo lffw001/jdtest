@@ -1,18 +1,18 @@
 /*
 618大势新品赏
 
-更新地址：https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_newInteraction.js
+更新地址：https://github.com/libinxwz/jdtest/jd_new.js
 ============Quantumultx===============
 [task_local]
 #618大势新品赏
-15 9,20 * 5,6 * https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_newInteraction.js, tag=618大势新品赏,  enabled=true
+15 9,20 * 5,6 * https://github.com/libinxwz/jdtest/jd_new.js, tag=618大势新品赏,  enabled=true
 ================Loon==============
 [Script]
-cron "15 8,21 * 5,6 *" script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_newInteraction.js,tag=618大势新品赏
+cron "15 8,21 * 5,6 *" script-path=https://github.com/libinxwz/jdtest/jd_new.js,tag=618大势新品赏
 ===============Surge=================
-618大势新品赏 = type=cron,cronexp="15 9,20 * 5,6 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_newInteraction.js
+618大势新品赏 = type=cron,cronexp="15 9,20 * 5,6 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_new.js
 ============小火箭=========
-618大势新品赏 = type=cron,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_newInteraction.js, cronexpr="15 9,20 * 5,6 *", timeout=3600, enable=true
+618大势新品赏 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_new.js, cronexpr="15 9,20 * 5,6 *", timeout=3600, enable=true
 */
 const $ = new Env("618大势新品赏");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

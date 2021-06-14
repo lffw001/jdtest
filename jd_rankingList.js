@@ -5,6 +5,21 @@
 自用
 author：yangtingxiao
 github： https://github.com/yangtingxiao
+============Quantumultx===============
+[task_local]
+#京东排行榜
+30 0 * * * https://github.com/libinxwz/jdtest/jd_xcppkh.js, tag=京东排行榜, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+================Loon==============
+[Script]
+cron "30 0 * * *" script-path=https://github.com/libinxwz/jdtest/jd_xcppkh.js tag=京东排行榜
+
+===============Surge=================
+京东排行榜 = type=cron,cronexp="30 0 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_xcppkh.js
+
+============小火箭=========
+京东排行榜 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_xcppkh.js, cronexpr="30 0 * * *", timeout=3600, enable=true
+
  */
 const $ = new Env('京东排行榜');
 main();

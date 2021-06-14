@@ -2,18 +2,18 @@
 海尔_欢乐大逃亡
 活动地址：https://lzkj-isv.isvjcloud.com/wxgame/activity/1770831?activityId=54f0ddef8de44eab8faafd23520601ac
 活动日期：2021-05-07 至 2021-05-31
-更新地址：https://raw.githubusercontent.com/monk-coder/dust/dust/car/adolf_haier.js
+更新地址：https://github.com/libinxwz/jdtest/jd_haier.js
 ============Quantumultx===============
 [task_local]
 #海尔_欢乐大逃亡
-1 8 7-31 5 * https://raw.githubusercontent.com/monk-coder/dust/dust/car/adolf_haier.js, tag=海尔_欢乐大逃亡,  enabled=true
+1 8 7-31 5 * https://github.com/libinxwz/jdtest/jd_haier.js, tag=海尔_欢乐大逃亡,  enabled=true
 ================Loon==============
 [Script]
-cron "15 0 7-31 5 *" script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/car/adolf_haier.js,tag=海尔_欢乐大逃亡
+cron "15 0 7-31 5 *" script-path=https://github.com/libinxwz/jdtest/jd_haier.js,tag=海尔_欢乐大逃亡
 ===============Surge=================
-海尔_欢乐大逃亡 = type=cron,cronexp="15 8 7-31 5 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/car/adolf_haier.js
+海尔_欢乐大逃亡 = type=cron,cronexp="15 8 7-31 5 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_haier.js
 ============小火箭=========
-海尔_欢乐大逃亡 = type=cron,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/car/adolf_haier.js, cronexpr="15 8 7-31 5 *", timeout=3600, enable=true
+海尔_欢乐大逃亡 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_haier.js, cronexpr="15 8 7-31 5 *", timeout=3600, enable=true
 */
 const $ = new Env("海尔_欢乐大逃亡");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

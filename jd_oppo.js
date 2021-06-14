@@ -1,21 +1,21 @@
 /*
 刺客567之寻宝
 活动入口：京东app-OPPO自营旗舰店
-更新地址：https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_oppo.js
+更新地址：https://github.com/libinxwz/jdtest/jd_oppo.js
 
 环境变量： ADOLF_OPPO_OPENCARD="true"//默认不开卡，如需开卡请添加这一环境变量
 
 ============Quantumultx===============
 [task_local]
 #刺客567之寻宝
-25 8,12 6-11 5 * https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_oppo.js, tag=刺客567之寻宝,  enabled=true
+25 8,12 6-11 5 * https://github.com/libinxwz/jdtest/jd_oppo.js, tag=刺客567之寻宝,  enabled=true
 ================Loon==============
 [Script]
-cron "1 0,8,13,20 6-11 5 *" script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_oppo.js,tag=刺客567之寻宝
+cron "1 0,8,13,20 6-11 5 *" script-path=https://github.com/libinxwz/jdtest/jd_oppo.js,tag=刺客567之寻宝
 ===============Surge=================
-刺客567之寻宝 = type=cron,cronexp="25 8,12 6-11 5 *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_oppo.js
+刺客567之寻宝 = type=cron,cronexp="25 8,12 6-11 5 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_oppo.js
 ============小火箭=========
-刺客567之寻宝 = type=cron,script-path=https://raw.githubusercontent.com/monk-coder/dust/dust/normal/adolf_oppo.js, cronexpr="25 8,12 6-11 5 *", timeout=3600, enable=true
+刺客567之寻宝 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_oppo.js, cronexpr="25 8,12 6-11 5 *", timeout=3600, enable=true
 */
 const $ = new Env('OPPO_刺客567之寻宝');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

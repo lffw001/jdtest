@@ -1,5 +1,4 @@
-/**
-*
+/*
     Name: 京喜牧场
     Address: 京喜App -> 我的 -> 京喜牧场
     Author: MoPoQAQ  https://github.com/moposmall/Script/blob/main/Me/jx_mc.js
@@ -10,14 +9,17 @@
         https://www.orzlee.com/web-development/2021/03/03/lxk0301-jingdong-signin-scriptjingxi-factory-solves-the-problem-of-unable-to-signin.html
     
     ！！！先将新手任务做完，再执行本脚本，不然会出现未知错误
-cron "12 * * * *" script-path=
-    cron表达式 0 * * * * 或者 0 0 * * * *
-    hostname = m.jingxi.com
-
-    BoxJS订阅
-    https://raw.githubusercontent.com/whyour/hundun/master/quanx/whyour.boxjs.json
-*
-**/
+ =====================================Quantumult X=================================
+ [task_local]
+ 15 * * * * https://github.com/libinxwz/jdtest/jx_mc.js, tag=京喜牧场, enabled=true
+ =====================================Loon================================
+ [Script]
+ cron "15 * * * *" script-path=https://github.com/libinxwz/jdtest/jx_mc.js,tag=京喜牧场
+ ======================================Surge==========================
+ 京喜牧场 = type=cron,cronexp="15 * * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jx_mc.js
+ ====================================小火箭=============================
+ 京喜牧场 = type=cron,script-path=https://github.com/libinxwz/jdtest/jx_mc.js, cronexpr="15 * * * *", timeout=3600, enable=true
+ */
 
 
 // prettier-ignore
