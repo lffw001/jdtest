@@ -1,6 +1,6 @@
 /*
 赚京豆领豆,每日30豆
-更新时间：2021-06-14
+活动入口：京东app首页-我的-更多-东东爱消除
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
@@ -10,13 +10,13 @@
 
 ================Loon==============
 [Script]
-cron "10 7 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js,tag=赚京豆领豆
+cron "10 2 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js,tag=赚京豆领豆
 
 ===============Surge=================
-赚京豆领豆 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js
+赚京豆领豆 = type=cron,cronexp="10 2 * * *",wake-system=1,timeout=200,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js
 
 ============小火箭=========
-赚京豆领豆 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, cronexpr="10 7 * * *", timeout=200, enable=true
+赚京豆领豆 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_ms.js, cronexpr="10 2 * * *", timeout=200, enable=true
  */
 const $ = Env('赚京豆领豆')
 const notify = $.isNode() ? require('./sendNotify') : '';
