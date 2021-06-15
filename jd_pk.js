@@ -8,14 +8,14 @@ cron 15 0,6,13,19,21 * * * ddo_pk.js
 ============Quantumultx===============
 [task_local]
 #京享值PK
-15 0,6,13,19,21 * * * https://github.com/libinxwz/jdtest/jd_pk.js, tag=京享值PK
+35 0,3,6,11,13,19,21 * * * https://github.com/libinxwz/jdtest/jd_pk.js, tag=京享值PK
 ================Loon==============
 [Script]
-cron "15 1,5,9,15,18,20,21,22 * * *" script-path=https://github.com/libinxwz/jdtest/jd_pk.js,tag=京享值PK
+cron "35 0,3,6,11,13,19,21 * * *" script-path=https://github.com/libinxwz/jdtest/jd_pk.js,tag=京享值PK
 ===============Surge=================
 京享值PK = type=cron,cronexp="15 0,6,13,19,21 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_pk.js
 ============小火箭=========
-京享值PK = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_pk.js, cronexpr="15 0,6,13,19,21 * * *", timeout=3600, enable=true
+京享值PK = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_pk.js, cronexpr="35 0,3,6,11,13,19,21 * * *", timeout=3600, enable=true
 */
 
 const $ = new Env('京享值PK');

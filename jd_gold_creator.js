@@ -11,13 +11,13 @@
 
 =====================Loon================
 [Script]
-cron "13 1,22 * * *" script-path=https://github.com/libinxwz/jdtestjd_gold_creator.js, tag=金榜创造营
+cron "13 1,3,22 * * *" script-path=https://github.com/libinxwz/jdtestjd_gold_creator.js, tag=金榜创造营
 
 ====================Surge================
-金榜创造营 = type=cron,cronexp="13 1,22 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtestjd_gold_creator.js
+金榜创造营 = type=cron,cronexp="13 1,3,22 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtestjd_gold_creator.js
 
 ============小火箭=========
-金榜创造营 = type=cron,script-path=https://github.com/libinxwz/jdtestjd_gold_creator.js, cronexpr="13 1,22 * * *", timeout=3600, enable=true
+金榜创造营 = type=cron,script-path=https://github.com/libinxwz/jdtestjd_gold_creator.js, cronexpr="13 1,3,22 * * *", timeout=3600, enable=true
  */
 const $ = new Env('金榜创造营');
 const notify = $.isNode() ? require('./sendNotify') : '';

@@ -6,12 +6,12 @@
 // quantumultx
 [task_local]
 #京东抽奖机
-11 1 * * * https://github.com/libinxwz/jdtest/jd_cj.js, tag=京东抽奖机, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jdlottery.png, enabled=true
+11 1,2,5 * * * https://github.com/libinxwz/jdtest/jd_cj.js, tag=京东抽奖机, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jdlottery.png, enabled=true
 // Loon
 [Script]
-cron "31 0 * * *" script-path=https://github.com/libinxwz/jdtest/jd_cj.js,tag=京东抽奖机
+cron "11 1,2,5 * * *" script-path=https://github.com/libinxwz/jdtest/jd_cj.js,tag=京东抽奖机
 // Surge
-京东抽奖机 = type=cron,cronexp=11 1 * * *,wake-system=1,timeout=20,script-path=https://github.com/libinxwz/jdtest/jd_cj.js
+京东抽奖机 = type=cron,cronexp=11 1,2,5 * * *,wake-system=1,timeout=20,script-path=https://github.com/libinxwz/jdtest/jd_cj.js
  */
 const $ = new Env('京东抽奖机');
 const STRSPLIT = "|";

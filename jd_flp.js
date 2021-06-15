@@ -11,14 +11,14 @@
 ============Quantumultx===============
 [task_local]
 #飞利浦电视成长记
-15 9 * 5,6 * https://github.com/libinxwz/jdtest/jd_flp.js, tag=飞利浦电视成长记,  enabled=true
+15 2,4,12,16 * 5,6 * https://github.com/libinxwz/jdtest/jd_flp.js, tag=飞利浦电视成长记,  enabled=true
 ================Loon==============
 [Script]
-cron "10 7 * 5,6 *" script-path=https://github.com/libinxwz/jdtest/jd_flp.js,tag=飞利浦电视成长记
+cron "15 2,4,12,16 * 5,6 *" script-path=https://github.com/libinxwz/jdtest/jd_flp.js,tag=飞利浦电视成长记
 ===============Surge=================
-飞利浦电视成长记 = type=cron,cronexp="15 9 * 5,6 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_flp.js
+飞利浦电视成长记 = type=cron,cronexp="15 2,4,12,16 * 5,6 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_flp.js
 ============小火箭=========
-飞利浦电视成长记 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_flp.js, cronexpr="15 9 * 5,6 *", timeout=3600, enable=true
+飞利浦电视成长记 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_flp.js, cronexpr="15 2,4,12,16 * 5,6 *", timeout=3600, enable=true
 */
 const $ = new Env("飞利浦电视成长记");
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
