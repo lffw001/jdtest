@@ -10,17 +10,17 @@
 ============Quantumultx===============
 [task_local]
 #京东极速版红包
-45 2,21 * * * https://github.com/libinxwz/jdtest/jd_speed_sign.js, tag=京东极速版红包, enabled=true
+20 2,17 * * * https://github.com/libinxwz/jdtest/jd_speed_sign.js, tag=京东极速版红包, enabled=true
 
 ================Loon==============
 [Script]
-cron "45 2,21 * * *" script-path=https://github.com/libinxwz/jdtest/jd_speed_sign.js,tag=京东极速版红包
+cron "20 2,17 * * *" script-path=https://github.com/libinxwz/jdtest/jd_speed_sign.js,tag=京东极速版红包
 
 ===============Surge=================
-京东极速版红包 = type=cron,cronexp="45 2,21 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_speed_sign.js
+京东极速版红包 = type=cron,cronexp="20 2,17 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_speed_sign.js
 
 ============小火箭=========
-京东极速版红包 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_speed_sign.js, cronexpr="45 2,21 * * *", timeout=3600, enable=true
+京东极速版红包 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_speed_sign.js, cronexpr="20 2,17 * * *", timeout=3600, enable=true
 */
 const $ = new Env('京东极速版');
 const notify = $.isNode() ? require('./sendNotify') : '';
