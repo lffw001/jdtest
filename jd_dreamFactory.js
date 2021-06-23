@@ -35,7 +35,7 @@ cron "10 * * * *" script-path=https://github.com/libinxwz/jdtestjd_dreamFactory.
 
 const $ = new Env('京喜工厂');
 const JD_API_HOST = 'https://m.jingxi.com';
-const helpAuthor = true; //帮助力 免费拿活动
+const helpAuthor = false; //帮助力 免费拿活动
 const notify = $.isNode() ? require('./sendNotify') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const randomCount = $.isNode() ? 20 : 5;
