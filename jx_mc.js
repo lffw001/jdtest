@@ -1,5 +1,6 @@
 /*
 惊喜牧场https://raw.githubusercontent.com/star261/jd/main/scripts/jd_jxmc.js
+cron 15 8,12,18 * * *  jd_jxmc.js
 */
 // prettier-ignore
 !function (t, r) { "object" == typeof exports ? module.exports = exports = r() : "function" == typeof define && define.amd ? define([], r) : t.CryptoJS = r() }(this, function () {

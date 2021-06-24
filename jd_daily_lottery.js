@@ -1,4 +1,7 @@
-
+/*
+小鸽有礼-每日抽奖
+cron 20 0 * * *  jd_daily_lottery.js
+ */
 const $ = new Env('小鸽有礼-每日抽奖');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';

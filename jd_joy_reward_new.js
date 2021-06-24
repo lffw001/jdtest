@@ -1,4 +1,4 @@
-/**
+/*
  脚本兼容: Docker, Node.js
  更新时间：2021-06-22
  活动入口：京东APP我的-宠汪汪
@@ -7,6 +7,7 @@
 
  默认500
  export JD_JOY_REWARD_NAME = 500
+ cron 0 8,12,16 * * *  jd_joy_reward_new.js
  */
 
 const $ = new Env("宠汪汪兑换二代目")

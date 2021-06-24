@@ -5,7 +5,7 @@ update 2021/6/14
 ==========================Quantumultx=========================
 [task_local]
 # 京东价格保护
-5 0 * * * https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_priceProtect.js, tag=京东价格保护, img-url=https://raw.githubusercontent.com/ZCY01/img/master/pricev1.png, enabled=true
+cron 5 0 * * *  jd_priceProtect.js
 */
 
 const $ = new Env('X东价格保护');
