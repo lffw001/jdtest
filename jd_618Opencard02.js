@@ -13,14 +13,14 @@
  *     - export ZOO_ADD2CART="true" //默认不加购商品
  =====================================Quantumult X=================================
 [task_local]
-10 11,13,15 4-20 6 * https://github.com/libinxwz/jdtest/jd_618Opencard04.js, tag=大牌强联合好物提前购, enabled=true
+10 11,13,15 4-20 6 * https://github.com/libinxwz/jdtest/jd_618Opencard02.js, tag=大牌强联合好物提前购, enabled=true
 =====================================Loon================================
 [Script]
-cron "10 11,13,15 4-20 6 *" script-path=https://github.com/libinxwz/jdtest/jd_618Opencard04.js,tag=大牌强联合好物提前购
+cron "10 11,13,15 4-20 6 *" script-path=https://github.com/libinxwz/jdtest/jd_618Opencard02.js,tag=大牌强联合好物提前购
 ======================================Surge==========================
-大牌强联合好物提前购 = type=cron,cronexp="10 11,13,15 4-20 6 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_618Opencard04.js
+大牌强联合好物提前购 = type=cron,cronexp="10 11,13,15 4-20 6 *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_618Opencard02.js
 ====================================小火箭=============================
-大牌强联合好物提前购 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_618Opencard04.js, cronexpr="10 11,13,15 4-20 6 *", timeout=3600, enable=true
+大牌强联合好物提前购 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_618Opencard02.js, cronexpr="10 11,13,15 4-20 6 *", timeout=3600, enable=true
 */
  const $ = new Env("大牌强联合好物提前购");
  const ZOO_ADD2CART = $.isNode() ? process.env.ZOO_ADD2CART || 'false' : 'false'

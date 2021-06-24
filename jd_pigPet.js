@@ -10,17 +10,17 @@
 ============Quantumultx===============
 [task_local]
 #金融养猪
-10 2 * * * https://github.com/libinxwz/jdtest/jd_pigPetNew.js, tag=金融养猪, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
+10 2 * * * https://github.com/libinxwz/jdtest/jd_pigPet.js, tag=金融养猪, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 2 * * *" script-path=https://github.com/libinxwz/jdtest/jd_pigPetNew.js,tag=金融养猪
+cron "10 2 * * *" script-path=https://github.com/libinxwz/jdtest/jd_pigPet.js,tag=金融养猪
 
 ===============Surge=================
-金融养猪 = type=cron,cronexp="10 2 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_pigPetNew.js
+金融养猪 = type=cron,cronexp="10 2 * * *",wake-system=1,timeout=3600,script-path=https://github.com/libinxwz/jdtest/jd_pigPet.js
 
 ============小火箭=========
-金融养猪 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_pigPetNew.js, cronexpr="10 2 * * *", timeout=3600, enable=true
+金融养猪 = type=cron,script-path=https://github.com/libinxwz/jdtest/jd_pigPet.js, cronexpr="10 2 * * *", timeout=3600, enable=true
 
  */
 

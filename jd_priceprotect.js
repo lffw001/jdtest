@@ -3,9 +3,7 @@ update 2021/6/14
 京东价格保护：脚本更新地址 https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_priceProtect.js
 脚本兼容: QuantumultX, Node.js
 ==========================Quantumultx=========================
-[task_local]
-# 京东价格保护
-cron 5 0 * * *  jd_priceProtect.js
+cron 5 0 * * *  jd_priceprotect.js
 */
 
 const $ = new Env('X东价格保护');
