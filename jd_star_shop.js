@@ -1,6 +1,7 @@
 /*
 明星小店(星店长)
-cron "37 9 * * *"
+[task_local]
+30 11 1-18 6 *  enabled=true
  */
 const $ = new Env('明星小店');
 const notify = $.isNode() ? require('./sendNotify') : '';
