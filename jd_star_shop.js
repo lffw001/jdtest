@@ -1,7 +1,7 @@
 /*
 明星小店(星店长)
 
-cron 1 12 1-18 6 *  jd_start_shop.js
+cron 1 12 1-18 6 *  jd_star_shop.js
  */
 const $ = new Env('明星小店');
 const notify = $.isNode() ? require('./sendNotify') : '';
