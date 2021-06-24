@@ -1,5 +1,6 @@
 /*
 明星小店(星店长)
+cron "37 9 * * *"
  */
 const $ = new Env('明星小店');
 const notify = $.isNode() ? require('./sendNotify') : '';
