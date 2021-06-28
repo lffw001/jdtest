@@ -1,4 +1,4 @@
-/*
+/**
  脚本兼容: Docker, Node.js
  更新时间：2021-06-22
  活动入口：京东APP我的-宠汪汪
@@ -7,7 +7,6 @@
 
  默认500
  export JD_JOY_REWARD_NAME = 500
- cron 0 8,12,16 * * *  jd_joy_reward_new.js
  */
 
 const $ = new Env("宠汪汪兑换二代目")
@@ -218,7 +217,7 @@ const DATA = {
   "product": "embed",
   "lang": "zh_CN",
 };
-const SERVER = 'iv.jd.com';
+const SERVER = '61.49.99.122';
 
 class JDJRValidator {
   constructor() {
@@ -292,7 +291,7 @@ class JDJRValidator {
       }
     }
 
-    console.log('successful: %f\%', (count / n) * 100);
+    // console.log('successful: %f\%', (count / n) * 100);
     console.timeEnd('PuzzleRecognizer');
   }
 
@@ -313,40 +312,40 @@ class JDJRValidator {
         'User-Agent': UA,
       };
       const req = http.get(url, {headers}, (response) => {
-        let res = response;
-        if (res.headers['content-encoding'] === 'gzip') {
-          const unzipStream = new stream.PassThrough();
-          stream.pipeline(
-            response,
-            zlib.createGunzip(),
-            unzipStream,
-            reject,
-          );
-          res = unzipStream;
-        }
-        res.setEncoding('utf8');
-
-        let rawData = '';
-
-        res.on('data', (chunk) => rawData += chunk);
-        res.on('end', () => {
-          try {
-            const ctx = {
-              [fnId]: (data) => ctx.data = data,
-              data: {},
-            };
-
-            vm.createContext(ctx);
-            vm.runInContext(rawData, ctx);
-
-            // console.log(ctx.data);
-            res.resume();
-            resolve(ctx.data);
-          } catch (e) {
-            reject(e);
+        try {
+          let res = response;
+          if (res.headers['content-encoding'] === 'gzip') {
+            const unzipStream = new stream.PassThrough();
+            stream.pipeline(
+              response,
+              zlib.createGunzip(),
+              unzipStream,
+              reject,
+            );
+            res = unzipStream;
           }
-        });
-      });
+          res.setEncoding('utf8');
+
+          let rawData = '';
+
+          res.on('data', (chunk) => rawData += chunk);
+          res.on('end', () => {
+            try {
+              const ctx = {
+                [fnId]: (data) => ctx.data = data,
+                data: {},
+              };
+              vm.createContext(ctx);
+              vm.runInContext(rawData, ctx);
+              res.resume();
+              resolve(ctx.data);
+            } catch (e) {
+              console.log('生成验证码必须使用大陆IP')
+            }
+          })
+        } catch (e) {
+        }
+      })
 
       req.on('error', reject);
       req.end();
