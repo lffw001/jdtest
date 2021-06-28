@@ -75,7 +75,10 @@ message = ""
             }
         }
         if ($.isNode()) {
-            if (message.length != 0) {
+			var d = new Date();
+			var hour=d.getHours();
+			var m=d.getMinutes();
+            if (message.length != 0&&hour==10) {
                 await notify.sendNotify("10s阅读", `${message}\n\n吹水群：https://t.me/wenmou_car`);
             }
         } else {
