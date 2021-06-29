@@ -153,11 +153,15 @@ async function PrizeIndex() {
 			return ;
 		  }
 		  //兑换万能的京豆(1-20京豆)
-		  if ($.totalBlue > $.blueCost) {
-			await smtg_obtainPrize(prizeList[0].prizeId,1000);
-		  } else {
-			console.log(`兑换失败,您目前蓝币${$.totalBlue}个,不足以兑换${$.title}所需的${$.blueCost}个`);
-			$.beanerr = `兑换失败,您目前蓝币${$.totalBlue}个,不足以兑换${$.title}所需的${$.blueCost}个`;
+			  do{
+				  if ($.totalBlue > $.blueCost) {
+					await smtg_obtainPrize(prizeList[0].prizeId,1000);
+				  } else {
+					console.log(`兑换失败,您目前蓝币${$.totalBlue}个,不足以兑换${$.title}所需的${$.blueCost}个`);
+					$.beanerr = `兑换失败,您目前蓝币${$.totalBlue}个,不足以兑换${$.title}所需的${$.blueCost}个`;
+				  }
+			    }while($.beanscount>0&&$.beanscount<=20)
+			 
 		  }
 	  }
     } else if (`${coinToBeans}` === '20') {
