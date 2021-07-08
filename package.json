@@ -16,6 +16,7 @@
   "author": "LXK9301",
   "license": "ISC",
   "dependencies": {
+    "canvas": "^2.8.0",
     "crypto-js": "^4.0.0",
     "download": "^8.0.0",
     "got": "^11.5.1",
@@ -32,8 +33,6 @@
     "vm": "^0.1.0",
     "websocket": "^1.0.33",
     "ws": "^7.4.3",
-    "zlib": "^1.0.5",
-    "js-yaml":"^4.0.0",
-    "canvas":"^2.8.0"
+    "zlib": "^1.0.5"
   }
 }

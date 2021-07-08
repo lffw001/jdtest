@@ -114,10 +114,12 @@ class FoodRunning:
         for i in range(1, 4):
             res = self.mission('OpenBox', {"awardId": f"jdRunningBox{i}"})
             print('拆盒子：', res['data']['data']['msg'])
+            time.sleep(3)
 
 
 if __name__ == '__main__':
     if root():
-        ck = cookies[0]
-        fr = FoodRunning(ck)
-        fr.run()
+        for ck in cookies:
+            #ck = cookies[0]
+            fr = FoodRunning(ck)
+            fr.run()
