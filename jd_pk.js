@@ -1,7 +1,8 @@
 /*
 京享值PK
 [task_local]
-0 10,11 * * *
+#京享值PK
+0 10,11 * * * https://gitee.com/SuperManito/scripts/raw/master/jd_jxzpk.js, tag=京享值PK
 
  */
 const $ = new Env('京享值PK');
