@@ -29,7 +29,7 @@ if ($.isNode() && process.env.summer_movement_ShHelpFlag) {
 }
 
 // 邀请助力
-let summer_movement_HelpHelpHelpFlag = true;// 是否只执行邀请助力  true 是，false 不是
+let summer_movement_HelpHelpHelpFlag = false;// 是否只执行邀请助力  true 是，false 不是
 if ($.isNode() && process.env.summer_movement_HelpHelpHelpFlag) {
   summer_movement_HelpHelpHelpFlag = process.env.summer_movement_HelpHelpHelpFlag;
 }
@@ -149,7 +149,9 @@ function randomString(e) {
     // $.secretp = $.secretpInfo[$.UserName];
     $.index = i + 1;
     if ($.inviteList && $.inviteList.length) console.log(`\n******开始内部京东账号【邀请好友助力】*********\n`);
-    for (let j = 0; j < $.inviteList.length && $.canHelp; j++) {
+	var length=5;
+	if($.inviteList.length<length){length=$.inviteList.length}
+    for (let j = 0; j < length && $.canHelp; j++) {
       $.oneInviteInfo = $.inviteList[j];
       if ($.oneInviteInfo.ues === $.UserName || $.oneInviteInfo.max) {
         continue;
