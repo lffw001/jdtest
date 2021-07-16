@@ -620,6 +620,7 @@ async function joyReward() {
         giftSaleInfos = 'beanConfigs16';
       }
       console.log(`\ndebug场次:${giftSaleInfos}\n`)
+	  
       for (let item of data[giftSaleInfos]) {
         console.log(`${item['giftName']}当前库存:${item['leftStock']}，id：${item.id}`)
         if (item.giftType === 'jd_bean' && item['giftValue'] === rewardNum) {
@@ -695,7 +696,7 @@ async function joyReward() {
 }
 function getExchangeRewards() {
   let opt = {
-    url: "//jdjoy.jd.com/common/gift/getBeanConfigs?reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE",
+    url: "//jdjoy.jd.com/common/gift/getBeanConfigs?reqSource=h5&invokeKey=qRKHmL4sna8ZOP9F",
     method: "GET",
     data: {},
     credentials: "include",
