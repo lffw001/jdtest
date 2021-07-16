@@ -193,6 +193,9 @@ var  substr=function(str, start, n) {
     }
     return tmpStr;
   }
+  function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 async function sendNotify(text, desp, params = {}) {
 	/*let des=desp.split("账号5");
 	//for(var i=0;i<des.length;i++){
@@ -202,14 +205,19 @@ async function sendNotify(text, desp, params = {}) {
 	//}*/
 	let des1=substr(desp,0,1000);
 	let index2=des1.length;
-	let des2=desp.substr(index2,desp.length-index2);
-	console.log(des1)
+	let des2=desp.substr(1001,2000);
+	let des3=desp.substr(2001,3000);
+	let des4=desp.substr(3001,4000);
 		await sendNotify1(text,des1,params)
-	console.log(des2)
 		if(des2)
 		await sendNotify1(text,des2,params)
+		if(des3)
+		await sendNotify1(text,des3,params)
+			if(des4)
+		await sendNotify1(text,des4,params)
 }
 async function sendNotify1(text, desp, params = {}) {
+  await sleep(1000);
   //提供6种通知
   desp += ``;
   await Promise.all([
