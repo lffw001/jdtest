@@ -81,15 +81,33 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
          //   await superBrandTaskLottery()
             await getCode()
             
-         
-            await doTask($.taskList[0].encryptAssignmentId,$.taskList[0].ext.followShop[0].itemId,$.taskList[0].assignmentType)            
-            await doTask($.taskList[2].encryptAssignmentId,$.taskList[2].ext.brandMemberList[0].itemId,$.taskList[2].assignmentType)            
+         for(var k=0;k<$.taskList.length-1;k++){
+			 if(k!=1){
+				 if($.taskList[k].ext.followShop!=null&&$.taskList[k].ext.followShop.length>0){
+					await doTask($.taskList[k].encryptAssignmentId,$.taskList[k].ext.followShop[0].itemId,$.taskList[k].assignmentType)   
+				 }else  if($.taskList[k].ext.brandMemberList!=null&&$.taskList[k].ext.brandMemberList.length>0){
+					 await doTask($.taskList[k].encryptAssignmentId,$.taskList[k].ext.brandMemberList[0].itemId,$.taskList[k].assignmentType) 
+				 }
+				 
+			 }
+		 }
+            //await doTask($.taskList[0].encryptAssignmentId,$.taskList[0].ext.followShop[0].itemId,$.taskList[0].assignmentType)  
+			//await doTask($.taskList[1].encryptAssignmentId,$.taskList[0].ext.followShop[0].itemId,$.taskList[0].assignmentType) 
+			//await doTask($.taskList[2].encryptAssignmentId,$.taskList[2].ext.followShop[0].itemId,$.taskList[2].assignmentType) 
+			//await doTask($.taskList[3].encryptAssignmentId,$.taskList[3].ext.followShop[0].itemId,$.taskList[3].assignmentType) 
+			//await doTask($.taskList[4].encryptAssignmentId,$.taskList[4].ext.followShop[0].itemId,$.taskList[4].assignmentType) 			
+            //await doTask($.taskList[2].encryptAssignmentId,$.taskList[2].ext.brandMemberList[0].itemId,$.taskList[2].assignmentType)            
 
            
             console.log("开始抽奖")
-                await superBrandTaskLottery()
-                await superBrandTaskLottery()
-                await superBrandTaskLottery()   
+				for(var k=0;k<$.taskList.length-1;k++){
+					await superBrandTaskLottery()
+				 }
+                //await superBrandTaskLottery()
+                //await superBrandTaskLottery()
+                //await superBrandTaskLottery()   
+				//await superBrandTaskLottery()   
+				//await superBrandTaskLottery()   
 
         }
     }
@@ -112,7 +130,7 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
             }
         }
     }
-for (let i = 0; i < cookiesArr.length; i++) {
+	for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
         if (cookie) {
            $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
@@ -132,9 +150,7 @@ for (let i = 0; i < cookiesArr.length; i++) {
 
         }
     }
-    
-    
-  //  await notify.sendNotify(`特物zx联想`, `${message}`);
+    //  await notify.sendNotify(`特物zx联想`, `${message}`);
 })()
 .catch((e) => $.logErr(e))
     .finally(() => $.done())
@@ -179,11 +195,11 @@ function getCode() {
                     console.log(`${$.name} API请求失败，请检查网路重试`);
                 } else {
                     data = JSON.parse(data);
-                    //    console.log(data.data.result)
+                        //console.log(JSON.stringify(data))
                     if (data && data.data && data.code === "0") {
                         if (data.data.result && data.data.result.taskList && data.data.result.taskList[3]) {
                            $.taskList = data.data.result.taskList
-                            let result = data.data.result.taskList[3]
+                            let result = data.data.result.taskList[$.taskList.length-1]
                            let encryptAssignmentId = result.encryptAssignmentId
                             let itemid = result.ext.assistTaskDetail.itemId
                             $.inviteenaid=result.encryptAssignmentId
