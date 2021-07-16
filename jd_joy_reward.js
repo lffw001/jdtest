@@ -641,6 +641,7 @@ async function joyReward() {
             // console.log(`当前账户积分:${data.coin}\n当前京豆库存:${leftStock}\n满足兑换条件,开始为您兑换京豆\n`);
             console.log(`\n您设置的兑换${giftValue}京豆库存充足,开始为您兑换${giftValue}京豆\n`);
             console.log(`脚本开始兑换${rewardNum}京豆时间 ${(new Date()).Format("yyyy-MM-dd hh:mm:ss | S")}`);
+			console.log(saleInfoId);
             await exchange(saleInfoId, 'pet');
             console.log(`请求兑换API后时间 ${(new Date()).Format("yyyy-MM-dd hh:mm:ss | S")}`);
             if ($.exchangeRes && $.exchangeRes.success) {
@@ -740,7 +741,7 @@ function getExchangeRewards() {
 function exchange(saleInfoId, orderSource) {
   let body = {"buyParam":{"orderSource":orderSource,"saleInfoId":saleInfoId},"deviceInfo":{}}
   let opt = {
-    "url": "//jdjoy.jd.com/common/gift/new/exchange?reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE",
+    "url": "//jdjoy.jd.com/common/gift/new/exchange?reqSource=h5&invokeKey=qRKHmL4sna8ZOP9F",
     "data":body,
     "credentials":"include","method":"POST","header":{"content-type":"application/json"}
   }
@@ -831,7 +832,7 @@ function TotalBean() {
 function validate() {
   return new Promise(resolve => {
     let opt = {
-      url: `//jdjoy.jd.com/common/pet/getPetTaskConfig?validate=${$.validate}&reqSource=h5&invokeKey=NRp8OPxZMFXmGkaE`,
+      url: `//jdjoy.jd.com/common/pet/getPetTaskConfig?validate=${$.validate}&reqSource=h5&invokeKey=qRKHmL4sna8ZOP9F`,
       method: "GET",
       data: {},
       credentials: "include",
