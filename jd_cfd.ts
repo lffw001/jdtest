@@ -8,6 +8,7 @@
  *
  * 使用jd_env_copy.js同步js环境变量到ts
  * 使用jd_ts_test.ts测试环境变量
+   20 0-23/1 * * *
  */
 
 import {format} from 'date-fns';
@@ -20,16 +21,12 @@ const CryptoJS = require('crypto-js')
 const notify = require('./sendNotify')
 dotenv.config()
 let appId: number = 10028, fingerprint: string | number, token: string = '', enCryptMethodJD: any;
-let cookie: string = '', cookiesArr: string[] = [], res: any = '', shareCodes: string[] = [
-"F23226A0E168CB913AA69AAEFD2C5E678EB154AC03E9086890E68991ED6174B2",
-"078588C361509E29916CCDA9265D316D8C780FB83134C92B7266DFC4612F07CC",
-"C0028153A0BEBAFFF2CA8C8CBB71DFB17E2AC5D48F11FAC8DA3C0BCF3BD00674",
-"17F7E5B37B1EA804939C2C8BE3F35E1085C690FCBCF24A959F66355E2E64A87F",
-"E2618D1A71364A3E172E38194329EB3C47B22242D29B302092E24C8652E7DED5",
-"E2618D1A71364A3E172E38194329EB3C5C055E51ADBE8B77C80D890E92987B69",
-"F0CA50D50CE659E5A672C38F39A4C8124FD9AF9EA069DD5D9359A96B6D439C9A",
-"F0CA50D50CE659E5A672C38F39A4C8124FD9AF9EA069DD5D9359A96B6D439C9A",
-"9105AA37CA35BA769444D3F44F5F92C62CEEC37DFEE7FF0B0EFCAE7D8B73E7A6",
+let cookie: string = '', cookiesArr: string[] = [], res: any = '', shareCodes: string[] =  [
+"3C43B21D861F601B29DD6BD42C03CFB7415D93890023162C241247E69697BA19",
+"7867A8AD11677941E6625B43CD411BD67F262C31CCCB41140F73371EE2B9072A",
+"0CD68370807679BDC3618FE269FD2CBA0AC5614C91FA0F05893DC498C10BBCCC",
+"98D11D8B6346CF74429DCAAEC5B4549CF63B84D3D3B96BC8580B319C1EA1CBE7",
+"CCA15E5461437FB9EA57C5468353999B0EFBB30A2500CA848438CFBB9E8E6922",
 ];
 
 let HELP_HW: string = process.env.HELP_HW ? process.env.HELP_HW : "true";
@@ -267,7 +264,7 @@ let UserName: string, index: number;
   // 获取随机助力码
   if (HELP_HW === 'true') {
     try {
-      let {data} = await axios.get("https://api.sharecode.ga/api/HW_CODES")
+      let {data} = await axios.get("https://api.sharecode.ga/api/HW_CODES", {timeout: 3000})
       shareCodes = [
         ...shareCodes,
         ...data.jxcfd
@@ -279,7 +276,7 @@ let UserName: string, index: number;
   }
   if (HELP_POOL === 'true') {
     try {
-      let {data} = await axios.get('https://api.sharecode.ga/api/jxcfd/20')
+      let {data} = await axios.get('https://api.sharecode.ga/api/jxcfd/20', {timeout: 3000})
       console.log('获取到20个随机助力码:', data.data)
       shareCodes = [...shareCodes, ...data.data]
     } catch (e) {
@@ -362,7 +359,7 @@ function makeShareCodes() {
     shareCodes.push(res.strMyShareId)
     let pin: string = cookie.match(/pt_pin=([^;]*)/)![1]
     pin = Md5.hashStr(pin)
-    axios.get(`https://api.sharecode.ga/api/autoInsert?db=jxcfd&code=${res.strMyShareId}&bean=${bean}&farm=${farm}&pin=${pin}`)
+    axios.get(`https://api.sharecode.ga/api/autoInsert?db=jxcfd&code=${res.strMyShareId}&bean=${bean}&farm=${farm}&pin=${pin}`, {timeout: 3000})
       .then(res => {
         if (res.data.code === 200)
           console.log('已自动提交助力码')
