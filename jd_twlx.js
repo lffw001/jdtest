@@ -86,7 +86,13 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
 				 if($.taskList[k].ext.followShop!=null&&$.taskList[k].ext.followShop.length>0){
 					await doTask($.taskList[k].encryptAssignmentId,$.taskList[k].ext.followShop[0].itemId,$.taskList[k].assignmentType)   
 				 }else  if($.taskList[k].ext.brandMemberList!=null&&$.taskList[k].ext.brandMemberList.length>0){
-					 await doTask($.taskList[k].encryptAssignmentId,$.taskList[k].ext.brandMemberList[0].itemId,$.taskList[k].assignmentType) 
+					await doTask($.taskList[k].encryptAssignmentId,$.taskList[k].ext.brandMemberList[0].itemId,$.taskList[k].assignmentType) 
+				 }else if($.taskList[k].assignmentType==0){
+					//分享
+					await doTask2($.taskList[k].encryptAssignmentId,null,$.taskList[k].assignmentType) 
+				 }else if($.taskList[k].assignmentType==7){
+					//会员
+					await doTask($.taskList[k].encryptAssignmentId,$.taskList[k].ext.brandMemberList[0].itemId,$.taskList[k].assignmentType) 
 				 }
 				 
 			 }
@@ -195,7 +201,7 @@ function getCode() {
                     console.log(`${$.name} API请求失败，请检查网路重试`);
                 } else {
                     data = JSON.parse(data);
-                        //console.log(JSON.stringify(data))
+                    //console.log(JSON.stringify(data))
                     if (data && data.data && data.code === "0") {
                         if (data.data.result && data.data.result.taskList && data.data.result.taskList[3]) {
                            $.taskList = data.data.result.taskList
@@ -222,7 +228,37 @@ function getCode() {
 
 function doTask(encryptAssignmentId, id, type) {
     return new Promise(async (resolve) => {
-        const options = taskPostUrl(`superBrandDoTask`, `{"source":"secondfloor","activityId":${$.actid},"encryptProjectId":"${$.enpid}","encryptAssignmentId":"${encryptAssignmentId}","assignmentType":2,"itemId":"${id}","actionType":0}`)
+        const options = taskPostUrl(`superBrandDoTask`, `{"source":"secondfloor","activityId":${$.actid},"encryptProjectId":"${$.enpid}","encryptAssignmentId":"${encryptAssignmentId}","assignmentType":"${type}","itemId":"${id}","actionType":0}`)
+        $.post(options, async (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`);
+                    console.log(`${$.name} API请求失败，请检查网路重试`);
+                } else {
+                    //      console.log(data)
+                    data = JSON.parse(data);
+                    if (data && data.code === "0") {
+                        if (data.data.bizCode === "0") {
+                            console.log("任务成功啦~")
+                        } else {
+                            console.log(data.data.bizMsg)
+                        }
+                        resolve(data.data.bizCode)
+                    } else {
+                        console.log(data)
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+function doTask2(encryptAssignmentId, id, type) {
+    return new Promise(async (resolve) => {
+        const options = taskPostUrl(`superBrandDoTask`, `{"source":"secondfloor","activityId":${$.actid},"encryptProjectId":"${$.enpid}","encryptAssignmentId":"${encryptAssignmentId}","assignmentType":"${type}","itemId":${id},"completionFlag":1,"actionType":0}`)
         $.post(options, async (err, resp, data) => {
             try {
                 if (err) {
