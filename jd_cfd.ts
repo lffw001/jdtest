@@ -8,12 +8,11 @@
  *
  * 使用jd_env_copy.js同步js环境变量到ts
  * 使用jd_ts_test.ts测试环境变量
-   20 0-23/1 * * *
  */
 
 import {format} from 'date-fns';
 import axios from 'axios';
-import USER_AGENT, {TotalBean, getBeanShareCode, getFarmShareCode} from './TS_USER_AGENTS';
+import USER_AGENT, {requireConfig, TotalBean, getBeanShareCode, getFarmShareCode, getRandomNumberByRange, wait} from './TS_USER_AGENTS';
 import {Md5} from 'ts-md5'
 import * as dotenv from 'dotenv';
 
@@ -21,13 +20,7 @@ const CryptoJS = require('crypto-js')
 const notify = require('./sendNotify')
 dotenv.config()
 let appId: number = 10028, fingerprint: string | number, token: string = '', enCryptMethodJD: any;
-let cookie: string = '', cookiesArr: string[] = [], res: any = '', shareCodes: string[] =  [
-"3C43B21D861F601B29DD6BD42C03CFB7415D93890023162C241247E69697BA19",
-"7867A8AD11677941E6625B43CD411BD67F262C31CCCB41140F73371EE2B9072A",
-"0CD68370807679BDC3618FE269FD2CBA0AC5614C91FA0F05893DC498C10BBCCC",
-"98D11D8B6346CF74429DCAAEC5B4549CF63B84D3D3B96BC8580B319C1EA1CBE7",
-"CCA15E5461437FB9EA57C5468353999B0EFBB30A2500CA848438CFBB9E8E6922",
-];
+let cookie: string = '', res: any = '', shareCodes: string[] = [], isCollector: Boolean = false;
 
 let HELP_HW: string = process.env.HELP_HW ? process.env.HELP_HW : "true";
 console.log('帮助HelloWorld:', HELP_HW)
@@ -63,13 +56,15 @@ interface Params {
   ddwCount?: number,
   __t?: number,
   strBT?: string,
-  dwCurStageEndCnt?: number
+  dwCurStageEndCnt?: number,
+  dwRewardType?: number,
+  dwRubbishId?: number
 }
 
 let UserName: string, index: number;
 !(async () => {
   await requestAlgo();
-  await requireConfig();
+  let cookiesArr: any = await requireConfig();
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
     UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)![1])
@@ -112,7 +107,8 @@ let UserName: string, index: number;
     for (let stage of res.stagelist) {
       if (res.dwCurProgress >= stage.dwCurStageEndCnt && stage.dwIsAward === 0) {
         let awardRes: any = await api('user/ComposeGameAward', '__t,dwCurStageEndCnt,strZone', {__t: Date.now(), dwCurStageEndCnt: stage.dwCurStageEndCnt})
-        console.log('珍珠领奖：', awardRes.ddwCoin)
+        console.log(awardRes)
+        console.log('珍珠领奖：', awardRes.ddwCoin, awardRes.addMonety)
         await wait(3000)
       }
     }
@@ -160,6 +156,11 @@ let UserName: string, index: number;
 
       if (res.StoryInfo.StoryList[0].Collector) {
         console.log('收藏家出现')
+        // TODO 背包满了再卖给收破烂的
+        // res = await api('story/CollectorOper', '_cfd_t,bizCode,dwEnv,ptag,source,strZone,strStoryId,dwType,ddwTriggerDay', {strStoryId: res.StoryInfo.StoryList[0].strStoryId, dwType: '2', ddwTriggerDay: res.StoryInfo.StoryList[0].ddwTriggerDay})
+        // console.log(res)
+        // await wait(1000)
+        // isCollector = true
       }
     }
 
@@ -167,7 +168,6 @@ let UserName: string, index: number;
     res = await api('story/querystorageroom', '_cfd_t,bizCode,dwEnv,ptag,source,strZone')
     let bags: number[] = []
     for (let s of res.Data.Office) {
-      console.log(s.dwCount, s.dwType)
       bags.push(s.dwType)
       bags.push(s.dwCount)
     }
@@ -181,14 +181,21 @@ let UserName: string, index: number;
     }
     if (bags.length !== 0) {
       res = await api('story/sellgoods', '_cfd_t,bizCode,dwEnv,dwSceneId,ptag,source,strTypeCnt,strZone',
-        {dwSceneId: '1', strTypeCnt: strTypeCnt})
+        {dwSceneId: isCollector ? '2' : '1', strTypeCnt: strTypeCnt})
       console.log('卖贝壳收入:', res.Data.ddwCoin, res.Data.ddwMoney)
     }
 
     // 垃圾🚮
     res = await api('story/QueryRubbishInfo', '_cfd_t,bizCode,dwEnv,ptag,source,strZone')
     if (res.Data.StoryInfo.StoryList.length !== 0) {
-      await api('story/RubbishOper', '')
+      console.log('有垃圾')
+      await api('story/RubbishOper', '_cfd_t,bizCode,dwEnv,dwRewardType,dwType,ptag,source,strZone', {dwType: '1', dwRewardType: 0})
+      await wait(1000)
+      for (let j = 1; j < 9; j++) {
+        res = await api('story/RubbishOper', '_cfd_t,bizCode,dwEnv,dwRewardType,dwRubbishId,dwType,ptag,source,strZone', {dwType: '2', dwRewardType: 0, dwRubbishId: j})
+        console.log('垃圾分类：', res.Data.RubbishGame.AllRubbish.ddwCoin)
+        await wait(1500)
+      }
     }
 
     // 任务➡️
@@ -264,7 +271,7 @@ let UserName: string, index: number;
   // 获取随机助力码
   if (HELP_HW === 'true') {
     try {
-      let {data} = await axios.get("https://api.sharecode.ga/api/HW_CODES", {timeout: 3000})
+      let {data} = await axios.get("https://api.sharecode.ga/api/HW_CODES")
       shareCodes = [
         ...shareCodes,
         ...data.jxcfd
@@ -276,7 +283,7 @@ let UserName: string, index: number;
   }
   if (HELP_POOL === 'true') {
     try {
-      let {data} = await axios.get('https://api.sharecode.ga/api/jxcfd/20', {timeout: 3000})
+      let {data} = await axios.get('https://api.sharecode.ga/api/jxcfd/20')
       console.log('获取到20个随机助力码:', data.data)
       shareCodes = [...shareCodes, ...data.data]
     } catch (e) {
@@ -359,7 +366,7 @@ function makeShareCodes() {
     shareCodes.push(res.strMyShareId)
     let pin: string = cookie.match(/pt_pin=([^;]*)/)![1]
     pin = Md5.hashStr(pin)
-    axios.get(`https://api.sharecode.ga/api/autoInsert?db=jxcfd&code=${res.strMyShareId}&bean=${bean}&farm=${farm}&pin=${pin}`, {timeout: 3000})
+    axios.get(`https://api.sharecode.ga/api/autoInsert?db=jxcfd&code=${res.strMyShareId}&bean=${bean}&farm=${farm}&pin=${pin}`)
       .then(res => {
         if (res.data.code === 200)
           console.log('已自动提交助力码')
@@ -368,7 +375,6 @@ function makeShareCodes() {
         resolve()
       })
       .catch((e) => {
-        console.log(e)
         reject('访问助力池出错')
       })
   })
@@ -434,20 +440,6 @@ function decrypt(stk: string, url: string) {
   return encodeURIComponent(["".concat(timestamp.toString()), "".concat(fingerprint.toString()), "".concat(appId.toString()), "".concat(token), "".concat(hash2)].join(";"))
 }
 
-function requireConfig() {
-  return new Promise<void>(resolve => {
-    console.log('开始获取配置文件\n')
-    const jdCookieNode = require('./jdCookie.js');
-    Object.keys(jdCookieNode).forEach((item) => {
-      if (jdCookieNode[item]) {
-        cookiesArr.push(jdCookieNode[item])
-      }
-    })
-    console.log(`共${cookiesArr.length}个京东账号\n`)
-    resolve()
-  })
-}
-
 function generateFp() {
   let e = "0123456789";
   let a = 13;
@@ -462,16 +454,4 @@ function getQueryString(url: string, name: string) {
   let r = url.split('?')[1].match(reg);
   if (r != null) return unescape(r[2]);
   return '';
-}
-
-function wait(t: number) {
-  return new Promise<void>(resolve => {
-    setTimeout(() => {
-      resolve()
-    }, t)
-  })
-}
-
-function getRandomNumberByRange(start: number, end: number): number {
-  return Math.floor(Math.random() * (end - start) + start)
 }
