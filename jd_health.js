@@ -28,7 +28,10 @@ const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 let cookiesArr = [],
   cookie = "",
   message;
-const inviteCodes = ['']
+var inviteCodes = ['T018v_VzQRob8VLRJxKb1ACjVfnoaW5kRrbA@T0205KkcNkptry6lVWSt7r17CjVfnoaW5kRrbA@T0225KkcRB9K8lHVdhL0lP4JdACjVfnoaW5kRrbA@T0205KkcH2Vkpja9fl-G_KF3CjVfnoaW5kRrbA@T012vPt6RRgQ91TSCjVfnoaW5kRrbA@T018v_V6QRsb_F3XIR-b1ACjVfnoaW5kRrbA@T0225KkcRx8Rp1XXIBLwxqIOIgCjVfnoaW5kRrbA@T0225KkcRktIoVaDIBL0wPZZdQCjVfnoaW5kRrbA@T0114aEsBktEpBwCjVfnoaW5kRrbA@T020u_x1lpyyIOpY-YNoQ3iGCjVfnoaW5kRrbA@T0225KkcRRhN9wXeJ0v8xfMPIQCjVfnoaW5kRrbA@T0225KkcRxgc8geBcU6hnaVZIQCjVfnoaW5kRrbA@T0225KkcRB4eoVXVck-mwqECcACjVfnoaW5kRrbA@T020anTTlJSiI_NH9rRFTV6qCjVfnoaW5kRrbA@T011z6MgHwNdpAoCjVfnoaW5kRrbA@T016aFf3lZC7Idxn9rdlCjVfnoaW5kRrbA@T0225KkcRkgdoFzUdkzywaIPJQCjVfnoaW5kRrbA']
+for(var i=0;i<30;i++){
+	inviteCodes.push(inviteCodes[0]);
+}
 const randomCount = $.isNode() ? 20 : 5;
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -259,9 +262,7 @@ function readShareCode() {
   console.log(`开始`)
   return new Promise(async resolve => {
     $.get({
-      url: `http://api.sharecode.ga/api/health/${randomCount}`,
-      'timeout': 10000
-    }, (err, resp, data) => {
+      url: `https://api.sharecode.ga/api/health/${randomCount}`, 'timeout': 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -294,10 +295,7 @@ function shareCodesFormat() {
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
       $.newShareCodes = inviteCodes[tempIndex].split('@');
     }
-    const readShareCodeRes = await readShareCode();
-    if (readShareCodeRes && readShareCodeRes.code === 200) {
-      $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])];
-    }
+ 
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)
     resolve();
   })

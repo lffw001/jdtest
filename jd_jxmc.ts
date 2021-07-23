@@ -7,21 +7,15 @@
 
 import {format} from 'date-fns';
 import axios from 'axios';
-import USER_AGENT, {TotalBean, getBeanShareCode, getFarmShareCode} from "./TS_USER_AGENTS";
+import USER_AGENT, {requireConfig, TotalBean, getBeanShareCode, getFarmShareCode, wait} from './TS_USER_AGENTS';
 import {Md5} from "ts-md5";
 
 const CryptoJS = require('crypto-js')
 const notify = require('./sendNotify')
+const A = require('./jd_jxmcToken')
 
 let appId: number = 10028, fingerprint: string | number, token: string, enCryptMethodJD: any;
-let cookie: string = '', cookiesArr: Array<string> = [], res: any = '', shareCodes: string[] = [
-"sUtgGvc0R4MLPl_PTpV4fvf_lyKVTLcIMAZu-7GEXZV1Ffe2U484vy5GrKcjlRVW",
-"sUtgGvc0R4MLPl_PTpV4fmTczu5K5S36ubVUGEvE8n32Txssnwy2oDrMJXIUUCvh",
-"sUtgGvc0R4MLPl_PTpV4fg25WpYvDp7iWfrQFLQQZtGD5Kk19Xjfk-LkqEHM_MhW",
-"sUtgGvc0R4MLPl_PTpV4fippKZ2IKvOUV9I4tiNNX9GeUuXHgMxnhU_3NSne1uUK",
-"sUtgGvc0R4MLPl_PTpV4fk7J_QMScuDxWLwRQUsyetI",
-"sUtgGvc0R4MLPl_PTpV4fnh-9PKBceyCWQrKw2hAS3d1Ffe2U484vy5GrKcjlRVW",
-];
+let cookie: string = '', res: any = '', shareCodes: string[] = [];
 let homePageInfo: any;
 let UserName: string, index: number;
 
@@ -32,7 +26,7 @@ console.log('帮助助力池:', HELP_POOL)
 
 !(async () => {
   await requestAlgo();
-  await requireConfig();
+  let cookiesArr: any = await requireConfig();
 
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
@@ -46,6 +40,13 @@ console.log('帮助助力池:', HELP_POOL)
     console.log(`\n开始【京东账号${index}】${nickName || UserName}\n`);
 
     homePageInfo = await api('queryservice/GetHomePageInfo', 'channel,isgift,sceneid', {isgift: 0})
+    let lastgettime: number
+    if (homePageInfo.data?.cow?.lastgettime) {
+      lastgettime = homePageInfo.data.cow.lastgettime
+    } else {
+      continue
+    }
+
     let food: number = 0
     try {
       food = homePageInfo.data.materialinfo[0].value;
@@ -66,6 +67,11 @@ console.log('帮助助力池:', HELP_POOL)
 
     console.log('现有草:', food);
     console.log('金币:', coins);
+
+    // 收牛牛
+    res = await api('operservice/GetCoin', 'channel,sceneid,token', {token: A(lastgettime)})
+    if (res.ret === 0)
+      console.log('收牛牛：', res.data.addcoin)
 
     // 签到
     res = await api('queryservice/GetSignInfo', 'channel,sceneid')
@@ -105,7 +111,7 @@ console.log('帮助助力池:', HELP_POOL)
         console.log(res)
         break
       }
-      await wait(1500)
+      await wait(4000)
     }
     await wait(2000)
     while (food >= 10) {
@@ -173,7 +179,7 @@ console.log('帮助助力池:', HELP_POOL)
    */
   if (HELP_POOL === 'true') {
     try {
-      let {data} = await axios.get('https://api.sharecode.ga/api/jxmc/6')
+      let {data} = await axios.get('https://api.sharecode.ga/api/jxmc/6', {timeout: 10000})
       console.log('获取到20个随机助力码:', data.data)
       shareCodes = [...shareCodes, ...data.data]
     } catch (e) {
@@ -207,7 +213,8 @@ interface Params {
   taskId?: number
   configExtra?: string,
   sharekey?: string,
-  currdate?: string
+  currdate?: string,
+  token?: string
 }
 
 function api(fn: string, stk: string, params: Params = {}) {
@@ -304,7 +311,7 @@ function makeShareCodes(code: string) {
     let farm: string = await getFarmShareCode(cookie)
     let pin: string = cookie.match(/pt_pin=([^;]*)/)![1]
     pin = Md5.hashStr(pin)
-    await axios.get(`https://api.sharecode.ga/api/autoInsert?db=jxmc&code=${code}&bean=${bean}&farm=${farm}&pin=${pin}`)
+    await axios.get(`https://api.sharecode.ga/api/autoInsert?db=jxmc&code=${code}&bean=${bean}&farm=${farm}&pin=${pin}`, {timeout: 10000})
       .then(res => {
         if (res.data.code === 200)
           console.log('已自动提交助力码')
@@ -377,20 +384,6 @@ function decrypt(stk: string, url: string) {
   return encodeURIComponent(["".concat(timestamp.toString()), "".concat(fingerprint.toString()), "".concat(appId.toString()), "".concat(token), "".concat(hash2)].join(";"))
 }
 
-function requireConfig() {
-  return new Promise<void>(resolve => {
-    console.log('开始获取配置文件\n')
-    const jdCookieNode = require('./jdCookie.js');
-    Object.keys(jdCookieNode).forEach((item) => {
-      if (jdCookieNode[item]) {
-        cookiesArr.push(jdCookieNode[item])
-      }
-    })
-    console.log(`共${cookiesArr.length}个京东账号\n`)
-    resolve()
-  })
-}
-
 function generateFp() {
   let e = "0123456789";
   let a = 13;
@@ -405,12 +398,4 @@ function getQueryString(url: string, name: string) {
   let r = url.split('?')[1].match(reg);
   if (r != null) return unescape(r[2]);
   return '';
-}
-
-function wait(t: number) {
-  return new Promise<void>(resolve => {
-    setTimeout(() => {
-      resolve()
-    }, t)
-  })
 }
