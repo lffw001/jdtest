@@ -10,7 +10,7 @@ TG学习交流群：https://t.me/cdles
 const $ = new Env("赚30元")
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const ua = `jdltapp;iPhone;3.1.0;${Math.ceil(Math.random()*4+10)}.${Math.ceil(Math.random()*4)};${randomString(40)}`
-var pins = process.env.earn30Pins ? process.env.earn30Pins : "['18014246678_p', 'jd_FdDjJBENiJzA','jd_41c752f800930','jd_oKMcRZnuBXfM','269569205']";
+var pins = process.env.earn30Pins ? process.env.earn30Pins : "['libinxwz']";
 let cookiesArr = [];
 var helps = [];
 var tools = [];
