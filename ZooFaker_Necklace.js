@@ -251,7 +251,7 @@ let utils = {
     atobPolyfill: function (e) {
         return function (e) {
             var t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-            if (e = String(e).replace(/[\t\n\f\r ]+/g, ""), !/^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$/.test(e)) throw new TypeError("瑙ｅ瘑閿欒");
+            if (e = String(e).replace(/[\t\n\f\r ]+/g, ""), !/^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$/.test(e)) throw new TypeError("解密错误");
             e += "==".slice(2 - (3 & e.length));
             for (var n, r, i, o = "", a = 0; a < e.length;) n = t.indexOf(e.charAt(a++)) << 18 | t.indexOf(e.charAt(a++)) << 12 | (r = t.indexOf(e.charAt(a++))) << 6 | (i = t.indexOf(e.charAt(a++))), o += 64 === r ? String.fromCharCode(n >> 16 & 255) : 64 === i ? String.fromCharCode(n >> 16 & 255, n >> 8 & 255) : String.fromCharCode(n >> 16 & 255, n >> 8 & 255, 255 & n);
             return o
@@ -527,7 +527,7 @@ let utils = {
             if ((c = s.charCodeAt(i)) < 0x80) r.push(c);
             else if (c < 0x800) r.push(0xC0 + (c >> 6 & 0x1F), 0x80 + (c & 0x3F));
         else {
-            if ((x = c ^ 0xD800) >> 10 == 0) //瀵瑰洓瀛楄妭UTF-16杞崲涓篣nicode
+            if ((x = c ^ 0xD800) >> 10 == 0) //对四字节UTF-16转换为Unicode
                 c = (x << 10) + (s.charCodeAt(++i) ^ 0xDC00) + 0x10000,
                 r.push(0xF0 + (c >> 18 & 0x7), 0x80 + (c >> 12 & 0x3F));
             else r.push(0xE0 + (c >> 12 & 0xF));
@@ -571,7 +571,7 @@ let utils = {
         var TouchSession = this.getTouchSession();
         if (!joyytoken || joyytoken_count > 18) {
             joyytoken = JSON.parse(await this.gettoken())["joyytoken"];
-            //console.log("绗竴娆¤姹俲oyytoken");
+            //console.log("第一次请求joyytoken");
             joyytoken_count = 0;
         }
         joyytoken_count++;
@@ -604,7 +604,7 @@ let utils = {
         var encrypt_id = this.decipherJoyToken(appid + joyytoken, appid)["encrypt_id"].split(",");
         var nonce_str = this.getRandomWord(10);
         // nonce_str="iY8uFBbYX7";
-        var key = this.getKey(encrypt_id[2], nonce_str, time);
+        var key = this.getKey(encrypt_id[2], nonce_str, time.toString());
 
         var str1 = `${senddata}&token=${joyytoken}&time=${time}&nonce_str=${nonce_str}&key=${key}&is_trust=1`;
         //console.log(str1);
@@ -624,7 +624,7 @@ let utils = {
             grn: 1,
             ioa: "fffffftt",
             jj: 1,
-            jk: "-a45046de9fbf-0a4fc8ec9548a7f9",
+            jk: "a",
             mj: [1, 0, 0],
             msg: "",
             nav: "88569",

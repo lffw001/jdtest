@@ -52,7 +52,6 @@ let UserName: string, index: number;
   });
 
   while (1) {
-
     for (let i = 0; i < cookiesArr.length; i++) {
       cookie = cookiesArr[i];
       UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)![1])
@@ -64,6 +63,13 @@ let UserName: string, index: number;
       }
       console.log(`\n开始【京东账号${index}】${nickName || UserName}\n`);
       try {
+<<<<<<< HEAD
+        res = await speedUp('_cfd_t,bizCode,dwEnv,ptag,source,strBuildIndex,strZone')
+        if (res.iRet === 0)
+          console.log('今日热气球:', res.dwTodaySpeedPeople ?? 500)
+        else
+          console.log(res)
+=======
         if (!balloon) {
           res = await speedUp('_cfd_t,bizCode,dwEnv,ptag,source,strBuildIndex,strZone')
           if (res.iRet !== 0) {
@@ -75,6 +81,7 @@ let UserName: string, index: number;
             balloon = true
           }
         }
+>>>>>>> d8a05241210d5f19232aa95ff27a71cd514e249a
 
         let shell: any = await speedUp('_cfd_t,bizCode,dwEnv,ptag,source,strZone')
         if (shell.Data.hasOwnProperty('NormShell')) {
@@ -94,7 +101,7 @@ let UserName: string, index: number;
         console.log(e)
       }
     }
-    let t: number = process.env.CFD_LOOP_DELAY ? parseInt(process.env.CFD_LOOP_DELAY) : getRandomNumberByRange(1000 * 10, 1000 * 30)
+    let t: number = process.env.CFD_LOOP_DELAY ? parseInt(process.env.CFD_LOOP_DELAY) : getRandomNumberByRange(1000 * 30, 1000 * 60)
     await wait(t)
   }
 })()

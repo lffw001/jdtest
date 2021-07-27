@@ -12,7 +12,14 @@
 
 import {format} from 'date-fns';
 import axios from 'axios';
-import USER_AGENT, {requireConfig, TotalBean, getBeanShareCode, getFarmShareCode, getRandomNumberByRange, wait} from './TS_USER_AGENTS';
+import USER_AGENT, {
+  requireConfig,
+  TotalBean,
+  getBeanShareCode,
+  getFarmShareCode,
+  getRandomNumberByRange,
+  wait
+} from './TS_USER_AGENTS';
 import {Md5} from 'ts-md5'
 import * as dotenv from 'dotenv';
 
@@ -97,8 +104,12 @@ let UserName: string, index: number;
         strPhoneID: token.strPhoneID,
         strPgUUNum: token.strPgUUNum
       })
+<<<<<<< HEAD
+    console.log('离线收益：',res.Business.ddwCoin)
+=======
     console.log('离线收益：', res.Business.ddwCoin)
     await wait(2000)
+>>>>>>> d8a05241210d5f19232aa95ff27a71cd514e249a
 
     // 珍珠
     res = await api('user/ComposeGameState', '', {dwFirst: 1})
@@ -130,6 +141,10 @@ let UserName: string, index: number;
           __t: Date.now(),
           dwCurStageEndCnt: stage.dwCurStageEndCnt
         })
+<<<<<<< HEAD
+        console.log(awardRes)
+=======
+>>>>>>> d8a05241210d5f19232aa95ff27a71cd514e249a
         console.log('珍珠领奖：', awardRes.ddwCoin, awardRes.addMonety)
         await wait(3000)
       }
@@ -182,6 +197,10 @@ let UserName: string, index: number;
           triggerType: 0,
           ddwTriggerDay: res.StoryInfo.StoryList[0].ddwTriggerDay
         })
+<<<<<<< HEAD
+        console.log(shipRes)
+=======
+>>>>>>> d8a05241210d5f19232aa95ff27a71cd514e249a
         console.log('正在下船，等待30s')
         await wait(30000)
         shipRes = await api('story/SpecialUserOper', '_cfd_t,bizCode,ddwTriggerDay,dwEnv,dwType,ptag,source,strStoryId,strZone,triggerType', {
@@ -235,6 +254,11 @@ let UserName: string, index: number;
     res = await api('story/QueryRubbishInfo', '_cfd_t,bizCode,dwEnv,ptag,source,strZone')
     if (res.Data.StoryInfo.StoryList.length !== 0) {
       console.log('有垃圾')
+<<<<<<< HEAD
+      console.log('TODO 倒垃圾翻车了')
+      /*
+=======
+>>>>>>> d8a05241210d5f19232aa95ff27a71cd514e249a
       await api('story/RubbishOper', '_cfd_t,bizCode,dwEnv,dwRewardType,dwType,ptag,source,strZone', {
         dwType: '1',
         dwRewardType: 0
@@ -250,6 +274,8 @@ let UserName: string, index: number;
         // console.log('垃圾分类：', res.Data.RubbishGame.AllRubbish.ddwCoin)
         await wait(1500)
       }
+
+       */
     }
     await wait(2000)
 
