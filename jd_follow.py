@@ -1,11 +1,12 @@
 #!/bin/env python3
 # -*- coding: utf-8 -*
 '''
-项目名称: JD-Script / jd_getFollowGift 
+项目名称: JD-Script / jd_follow 
 Author: Curtin
 功能：
 Date: 2021/6/6 上午7:57
-建议cron: 0 9 * * *  python3 jd_getFollowGift.py
+cron: 10 0,7 * * *
+建议cron: 0 9 * * *  python3 jd_follow.py
 new Env('关注有礼');
 '''
 ##################################
@@ -34,7 +35,7 @@ readmes = """
 ##  目录结构
     JD-Script/                  #主仓库
     |-- getFollowGifts                # 主目录
-    |   |-- jd_getFollowGift.py       # 主代码 （必要）
+    |   |-- jd_follow.py       # 主代码 （必要）
     |   |-- JDCookies.txt             # 存放JD cookie，一行一个ck
     |   |-- Readme.md                 # 说明书
     |   `-- start.sh                  # shell脚本（非必要）
@@ -49,7 +50,7 @@ readmes = """
     安装依赖模块 :
     pip3 install requests
     执行：
-    python3 jd_getFollowGift.py
+    python3 jd_follow.py
 
 
 ## `【更新记录】`
