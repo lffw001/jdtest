@@ -5,6 +5,7 @@
 Author: Curtin
 功能：
 Date: 2021/6/6 上午7:57
+cron: 10 0,7 * * *
 建议cron: 0 9 * * *  python3 jd_getFollowGift.py
 new Env('关注有礼');
 '''
@@ -252,7 +253,7 @@ if "TG_API_HOST" in os.environ:
         print("已获取并使用Env环境 TG_API_HOST")
 # 获取pushplus+ PUSH_PLUS_TOKEN
 if "PUSH_PLUS_TOKEN" in os.environ:
-    if len(os.environ["PUSH_PLUS_TOKEN"]) > 1:
+    if len(os.environ["PUSH_PLUS_TOKEN"]) > 1000000:
         PUSH_PLUS_TOKEN = os.environ["PUSH_PLUS_TOKEN"]
         print("已获取并使用Env环境 PUSH_PLUS_TOKEN")
 # 获取企业微信应用推送 QYWX_AM
