@@ -5,7 +5,6 @@
 Author: Curtin
 功能：
 Date: 2021/6/6 上午7:57
-cron: 10 0,7 * * *
 建议cron: 0 9 * * *  python3 jd_getFollowGift.py
 new Env('关注有礼');
 '''
