@@ -7,10 +7,8 @@
 支持云端cookie使用
 修改自：https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_priceProtect.js
 修改自：https://raw.githubusercontent.com/id77/QuantumultX/master/task/jdGuaranteedPrice.js
-
 京东保价页面脚本：https://static.360buyimg.com/siteppStatic/script/priceskus-phone.js
 iOS同时支持使用 NobyDa 与 domplin 脚本的京东 cookie
-活动时间：2021-2-14至2021-3-3
 活动地址：https://prodev.m.jd.com/jdlite/active/31U4T6S4PbcK83HyLPioeCWrD63j/index.html
 活动入口：京东保价
 已支持IOS双京东账号,Node.js支持N个京东账号
@@ -19,20 +17,17 @@ iOS同时支持使用 NobyDa 与 domplin 脚本的京东 cookie
 [task_local]
 #京东保价
 0 2 * * * jd_price.js, tag=京东保价, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
-
 ================Loon==============
 [Script]
 cron "0 2 * * *" script-path=jd_price.js,tag=京东保价
-
 ===============Surge=================
 京东保价 = type=cron,cronexp="0 2 * * *",wake-system=1,timeout=3600,script-path=jd_price.js
-
 ============小火箭=========
 京东保价 = type=cron,script-path=jd_price.js, cronexpr="0 2 * * *", timeout=3600, enable=true
  */
 
 const $ = new Env('京东保价');
-
+const notify = $.isNode() ? require('./sendNotify') : '';
 const selfDomain = 'https://msitepp-fm.jd.com/';
 const unifiedGatewayName = 'https://api.m.jd.com/';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -107,6 +102,7 @@ if ($.isNode()) {
         console.log(`----------`);
         let taskList = [];
         for (let order of $.orderList) {
+          await $.wait(1000);
           taskList.push(historyResultQuery(order));
         }
         await Promise.all(taskList);
@@ -126,7 +122,7 @@ if ($.isNode()) {
             await getApplyResult();
           }
         }
-        showMsg();
+        await showMsg();
       } catch (e) {
         $.logErr(e)
       }
@@ -474,20 +470,21 @@ function taskUrl(functionid, body) {
   };
 }
 
-function showMsg() {
+async function showMsg() {
   console.log(`🧮 本次价格保护金额：${$.refundtotalamount}💰`);
   if ($.refundtotalamount) {
     $.msg(
       $.name,
       ``,
       `京东账号${$.index} ${$.nickName || $.UserName}\n🎉 本次价格保护金额：${
-        $.refundtotalamount
+        $.refundtotalamount.toFixed(2)
       }💰`,
       {
         'open-url':
           'https://msitepp-fm.jd.com/rest/priceprophone/priceProPhoneMenu',
       }
     );
+    if ($.isNode()) await notify.sendNotify($.name, `京东账号${$.index} ${$.nickName || $.UserName}\n本次价格保护金额：${$.refundtotalamount.toFixed(2)}💰`);
   }
 }
 
