@@ -90,13 +90,13 @@ async function jdPlantBean() {
     $.myPlantUuid = getParam(shareUrl, 'plantUuid')
     console.log(`\n【您的${$.name}互助码】 ${$.myPlantUuid}\n`);
     roundList = $.plantBeanIndexResult.data.roundList;
-    currentRoundId = roundList[1].roundId;//本期的roundId
-    lastRoundId = roundList[0].roundId;//上期的roundId
-    awardState = roundList[0].awardState;
+    currentRoundId = roundList[2].roundId;//本期的roundId
+    lastRoundId = roundList[1].roundId;//上期的roundId
+    awardState = roundList[1].awardState;
     $.taskList = $.plantBeanIndexResult.data.taskList;
     subTitle = `【京东昵称】${$.plantBeanIndexResult.data.plantUserInfo.plantNickName}`;
-    message += `【上期时间】${roundList[0].dateDesc.replace('上期 ', '')}\n`;
-    message += `【上期成长值】${roundList[0].growth}\n`;
+    message += `【上期时间】${roundList[1].dateDesc.replace('上期 ', '')}\n`;
+    message += `【上期成长值】${roundList[1].growth}\n`;
     await receiveNutrients();//定时领取营养液
     await doHelp();//助力
     await doTask();//做日常任务
@@ -114,7 +114,7 @@ async function doGetReward() {
   console.log(`【上轮京豆】${awardState === '4' ? '采摘中' : awardState === '5' ? '可收获了' : '已领取'}`);
   if (awardState === '4') {
     //京豆采摘中...
-    message += `【上期状态】${roundList[0].tipBeanEndTitle}\n`;
+    message += `【上期状态】${roundList[1].tipBeanEndTitle}\n`;
   } else if (awardState === '5') {
     //收获
     await getReward();
@@ -131,16 +131,16 @@ async function doGetReward() {
     //京豆已领取
     message += `【上期兑换京豆】${roundList[0].awardBeans}个\n`;
   }
-  if (roundList[1].dateDesc.indexOf('本期 ') > -1) {
-    roundList[1].dateDesc = roundList[1].dateDesc.substr(roundList[1].dateDesc.indexOf('本期 ') + 3, roundList[1].dateDesc.length);
+  if (roundList[2].dateDesc.indexOf('本期 ') > -1) {
+    roundList[2].dateDesc = roundList[2].dateDesc.substr(roundList[2].dateDesc.indexOf('本期 ') + 3, roundList[2].dateDesc.length);
   }
-  message += `【本期时间】${roundList[1].dateDesc}\n`;
-  message += `【本期成长值】${roundList[1].growth}\n`;
+  message += `【本期时间】${roundList[2].dateDesc}\n`;
+  message += `【本期成长值】${roundList[2].growth}\n`;
 }
 async function doCultureBean() {
   await plantBeanIndex();
   if ($.plantBeanIndexResult.code === '0') {
-    const plantBeanRound = $.plantBeanIndexResult.data.roundList[1]
+    const plantBeanRound = $.plantBeanIndexResult.data.roundList[2]
     if (plantBeanRound.roundState === '2') {
       //收取营养液
       console.log(`开始收取营养液`)
