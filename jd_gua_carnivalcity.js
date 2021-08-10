@@ -46,6 +46,7 @@ if ($.isNode()) {
 }
 let inviteCodes = [];
 $.shareCodesArr = [
+'5d8e4bb4-83fa-476e-b097-850184ef241b@819c19fb-4307-4c37-b454-4f266a7c46d1@a934d88a-04ef-44c0-9f96-334eda5b1a95@22186e69-c88e-436a-86f3-95c287d46c44@bd9156aa-72fa-470b-8b60-6c31a13165a6@a954d365-6ffc-4add-951b-043059a5c0c4@2fdb9068-c8b9-4c58-9dac-dc2c9920e693',
 ];
 for(var i=0;i<30;i++){
 	$.shareCodesArr.push($.shareCodesArr[0])
