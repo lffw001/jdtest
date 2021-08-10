@@ -103,7 +103,7 @@ let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*
       }
       if ($.canHelp) {
         console.log(`\n\n如果有剩余助力机会，则给作者以及随机码助力`)
-        await doHelp();
+        //await doHelp();
       }
     }
   }
@@ -133,7 +133,7 @@ async function JD818() {
     await doHotProducttask();//做热销产品任务
     await doBrandTask();//做品牌手机任务
     await doBrowseshopTask();//逛好货街，做任务
-    // await doHelp();
+    await doHelp();
     await myRank();//领取往期排名奖励
     await getListRank();
     await getListIntegral();
