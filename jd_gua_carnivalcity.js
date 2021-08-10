@@ -45,7 +45,11 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 let inviteCodes = [];
-$.shareCodesArr = [];
+$.shareCodesArr = [
+];
+for(var i=0;i<30;i++){
+	$.shareCodesArr.push($.shareCodesArr[0])
+}
 const JD_API_HOST = 'https://api.m.jd.com/api';
 const activeEndTime = '2021/08/28 00:00:00+08:00';//活动结束时间
 let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000;
@@ -61,7 +65,7 @@ let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*
     if ($.isNode()) await notify.sendNotify($.name + '活动已结束', `请删除此脚本\n咱江湖再见`);
     return
   }
-  await updateShareCodesCDN();
+  //await updateShareCodesCDN();
   // await requireConfig();
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -93,21 +97,16 @@ let nowTime = new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*
         console.log(`\n先自己账号内部相互邀请助力\n`);
         for (let item of $.temp) {
           console.log(`\n${$.UserName} 去参助力 ${item}`);
-          const helpRes = await toHelp(item.trim());
-          if (helpRes.data.status === 5) {
-            console.log(`助力机会已耗尽，跳出助力`);
-            $.canHelp = false;
-            break;
-          }
+         
         }
       }
       if ($.canHelp) {
         console.log(`\n\n如果有剩余助力机会，则给作者以及随机码助力`)
-        //await doHelp();
+        await doHelp();
       }
     }
   }
-   console.log($.temp.join('@'))
+  // console.log(JSON.stringify($.temp))
   if (allMessage) {
     //NODE端,默认每月一日运行进行推送通知一次
     if ($.isNode()) {
@@ -519,7 +518,7 @@ function myRank() {
 //领取往期奖励API
 function saveJbean(date) {
   return new Promise(resolve => {
-    const body = "date=" + date;
+    const body = {"date":`${date}`};
     const options = taskPostUrl('/khc/rank/getRankJingBean', body)
     $.post(options, (err, resp, data) => {
       try {
@@ -734,7 +733,7 @@ function shareCodesFormat() {
       // console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
       const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
       $.newShareCodes = inviteCodes[tempIndex] && inviteCodes[tempIndex].split('@') || [];
-      if ($.updatePkActivityIdRes && $.updatePkActivityIdRes.length) $.newShareCodes = [...$.updatePkActivityIdRes, ...$.newShareCodes];
+     // if ($.updatePkActivityIdRes && $.updatePkActivityIdRes.length) $.newShareCodes = [...$.updatePkActivityIdRes, ...$.newShareCodes];
     }
     resolve();
   })
