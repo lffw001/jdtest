@@ -140,6 +140,7 @@ async function joyReward() {
         if (time >= 16 && time < 24) {
           giftSaleInfos = 'beanConfigs16';
         }
+		console.log(data[giftSaleInfos])
         console.log(`\ndebug场次:${giftSaleInfos}\n`)
         for (let item of data[giftSaleInfos]) {
           console.log(`${item['giftName']}当前库存:${item['leftStock']}，id：${item.id}`)
