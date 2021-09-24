@@ -9,78 +9,115 @@ Quantumuil X：添加远程重写
 https://gitee.com/curtinlv/qx/raw/master/rewrite/youth.conf, tag=中青 by Curtin, update-interval=172800, opt-parser=false, enabled=true
 
 中青分享一篇文章到自己的微信上，自己点击一下即触发会自动完成10好有阅读奖励 500青豆/次。
-
+重写 https://kd.youth.cn/WebApi/invite/openHourRed  https://raw.githubusercontent.com/liu269569205/jstest/master/zq_openHourRed.js
  */
-const $ = new Env("中青分享阅读-助力10次");
-
+const $ = new Env("中青定时宝箱");
+  function uuid2() {
+                    var s = [];
+                    var hexDigits = "0123456789abcdef";
+                    for (var i = 0; i < 32; i++) {
+                    s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+                    }
+                    s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+                    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+                    s[8] = s[13] = s[18] = s[23];
+                    var uuid = s.join("");
+                    return uuid;
+                }
 //let request = ""
-let $url = $.isNode() ? (process.env.JC_WECHATURL ? process.env.JC_WECHATURL : "") : ($.getdata('JC_WECHATURL') ? $.getdata('JC_WECHATURL') : "")
-//$url="https://script.xunsl.com/count2/callback?type=1&si=b615c4f88ff6b3ad430431a3fe25b3cf&referer=https%253A%252F%252Fmy.allcitysz.net%252Fhotshareap%252F20210908%253Fsid%253D33320942%2526uid%253D55032981%2526timestamp%253D1631174162%2526signature%253DM3YJXEvNgO8W5zRwpk4VLo8ZRUbR0q3a2mZ69xB0loAqGPQnLb%2526share_id%253D55032981333209421631174164391%2526scene_id%253Dfire_share%2526time%253D1631174164391&_=1631174195903&jsonpcallback=jsonp3"
-var urls=$url.split('@')
+let openHourRed = $.isNode() ? (process.env.zq_cookie ? process.env.zq_cookie : "") : ($.getdata('zq_cookie') ? $.getdata('zq_cookie') : "")
+//openHourRed="zqkey=MDAwMDAwMDAwMJCMpN-w09Wtg5-Bb36eh6CPqHualIejl7B1z2Kw3ZuzhHyp4LDPyGl9onqkj3ZqYJa8Y898najWsJupZLDdebOFspyYr7nMapqGcXY&zqkey_id=9666437e3f9bdce35a6de0ecc7ffb68a&uid=58943830"
+var urls=openHourRed.split('@')
 !(async () => {
-for(var k=0;k<urls.length;k++){
+	 if (typeof $request !== "undefined") {
+     await getopenboxbody()
+     $.done()
+ }else{
+	for(var k=0;k<urls.length;k++){
 	$url=urls[k]
+	bodyVal = urls[k].split('&uid=')[0];
+                var time1 = Date.parse( new Date() ).toString();
+                time1 = time1.substr(0,10);
+				var uuid=uuid2();
+				var uuid1=uuid2();
+                cookie = bodyVal.replace(/zqkey=/, "cookie=")
+                cookie_id = cookie.replace(/zqkey_id=/, "cookie_id=")
+					console.log(cookie_id)
+
+					var device_id=54565505+parseInt(Math.random()*10000)
+                $url= cookie_id  +'&access=WIFI&app-version=3.5.5&app_version=3.5.5&carrier=%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8&channel=c1002&device_brand=Xiaomi&device_id='+device_id+'&device_model=Mi%2B10%2BPro&device_platform=android&device_type=android&inner_version=202108181034&mi=1&os_api=30&os_version=RKQ1.200826.002%2Btest-keys&phone_network=WIFI&phone_sim=1&resolution=1080x2206&sim=1&sm_device_id=20210727214538d085a089f67431e3'+uuid1+'&subv=1.2.2&uid=58041470&uuid='+uuid+'&version_code=63&version_name=%E4%B8%AD%E9%9D%92%E7%9C%8B%E7%82%B9'+'&request_time=' + time1 +'&time=' + time1 +'&'+ bodyVal
+				console.log($url)
 	if ($url){ 
-	await getShareInfo();
+		console.log(`--------第 ${k + 1} 个账号开宝箱奖励执行中--------\n`)
+	await postShareInfoa("https://kd.youth.cn/WebApi/invite/openHourRed",$url)
 	}
 	else
 	{
 		$.msg("中青url获取失败", "", "️中青url获取失败");
 	}
+	}
 }
 
 })()
+String.prototype.getQueryString = function(name)//name 是URL的参数名字
+{
+var reg = new RegExp("(^|&|\\?)"+ name +"=([^&]*)(&|$)"), r;
+if (r=this.match(reg)) return unescape(r[2]); return null;
+}; 
+async function getopenboxbody() {
+if ($request.url.match(/kd.youth.cn\/WebApi\/invite\/openHourRed/)) {
+          bodyVal=$request.body
+			  zqkey_id=$request.body.getQueryString('zqkey_id')
+          await $.wait(1100);
+        if (openHourRed) {
+            if (openHourRed.indexOf(zqkey_id) > -1) {
+                $.log("此看开宝箱请求已存在，本次跳过")
+            } else if (openHourRed.indexOf(zqkey_id) == -1) {
+                openHourRed = openHourRed + "@" + bodyVal;
+                $.setdata(openHourRed, 'zq_openHourRed');
+                $.log(`${$.name}获取定时宝箱: 成功, openHourRed: ${bodyVal}`);
+                bodys = openHourRed.split("@")
+                $.msg($.name, "获取第" + bodys.length + "个定时宝箱任务请求: 成功🎉", ``)
+            }
+        } else {
+            $.setdata(bodyVal, 'zq_openHourRed');
+            $.log(`${$.name}获取看看赚任务: 成功, openHourRed: ${bodyVal}`);
+            $.msg($.name, `获取第一个个定时宝箱任务请求请求: 成功🎉`, ``)
+        }
+    }
 
-//分享数据获取
-async function getShareInfo() {
-  try {
-    if ($url.indexOf("script.xunsl.com/count2") > -1) {
-      var url = $url;
-	  console.log(url)
-      var s_si = url.match(/si=(.*?)&/)[1];
-      console.log("url:" + url);
-      console.log("s_si:" + s_si);
-      $.msg("中青分享", "", "数据获取成功");
-      for(let i=1;i<11;i++){
-		  await $.wait(8000+Math.floor(5000 * Math.random()));
-        await postShareInfoa(url,s_si, i)
-      }
-
-      } else {
-        $.notify("中青分享", "", "️据获取失败");
-      }
-    } catch (eor) {
-    $.msg("中青数据获取失败", "", "️中青数据获取失败");
   }
 
-  $.done();
-}
-async function postShareInfoa(o_url,o_si, num) {
+async function postShareInfoa(o_url,body) {
+	var time1 = Date.parse( new Date() ).toString();
+                time1 = time1.substr(0,10);
     return new Promise((resolve) => {
         setTimeout(() => {
         var desclist = ["㊙️这是秘密分享~", "😁不能外传哦~", "☺️猜猜我是谁~","😆别点击太猛，容易feng","适当分享哈哈哈~","🈶广告位招租~","🔍开天眼查会员找木白姐姐~","🎈TG https://t.me/topstyle996","☎️TG频道 https://t.me/TopStyle2021","😆差不多得了，要黑号了~"];
         var n_si = randomsi();
         var iosV = parseInt(Math.random() * (14 - 11 + 1) + 11, 10);
-        var n_url = o_url.replace(o_si, n_si);
+        //var n_url = o_url.replace(o_si, n_si);
         var header = {
             'Accept-Encoding': `gzip, deflate, br`,
             'Accept': `*/*`,
             'Connection': `keep-alive`,
-            'Referer': `https://my.allcitysz.net/`,
-            'Host': `script.xunsl.com`,
-            'User-Agent': `Mozilla/5.0 (iPhone; CPU iPhone OS ${iosV}_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.7(0x18000730) NetType/WIFI Language/zh_CN`,
-            'Accept-Language': `zh-cn`
+            'Referer': `https://kd.youth.cn/h5/20190410invitefriend/?`+body+'&request_time=' + time1+'&time=' + time1,
+            'Host': `kd.youth.cn`,
+				'Origin':'https://kd.youth.cn',
+            'User-Agent': `Mozilla/5.0 (Linux; Android 11; Mi 10 Pro Build/RKQ1.200826.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/90.0.4430.210 Mobile Safari/537.36`,
+            'Accept-Language': `zh-cn`,
         };
 
         let url = {
-                url: n_url,
+                url: o_url,
                 headers: header,
+				body : body
             };
-        $.get(url, async (err, resp, data) => {
+				console.log("sss")
+        $.post(url, async (err, resp, data) => {
             try {
-                // $.msg(`【中青】分享阅读${num}\n`, "", "si:" + n_si);
-                $.msg(`【中青】分享阅读${num}\n`, "", desclist[num-1]);
-                console.log(data)
+                const result = JSON.parse(data)
+                console.log(result.msg)
             } catch (e) {
                 $.logErr(e, resp);
             } finally {
@@ -89,7 +126,7 @@ async function postShareInfoa(o_url,o_si, num) {
         });
 
         return 0;
-        }, 3000)
+        }, 1000)
     })
 }
 
