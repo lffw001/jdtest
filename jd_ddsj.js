@@ -4,17 +4,17 @@ github：https://github.com/Ariszy/Private-Script
 boxjs：https://raw.githubusercontent.com/Ariszy/Private-Script/master/Ariszy.boxjs.json
 
 [task_local]
-#企有此礼
-30 0 * * * https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js, tag= 企有此礼
+#东东世界
+50 1 * * * https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddsj.js, tag= 东东世界
 ================Loon==============
 [Script]
-cron "30 0 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js,tag= 企有此礼
+cron "50 1 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddsj.js,tag= 东东世界
 ===============Surge=================
-企有此礼 = type=cron,cronexp="30 0 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js
+东东世界 = type=cron,cronexp="50 1 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddsj.js
 ============小火箭=========
-企有此礼 = type=cron,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_qycl.js, cronexpr="30 0 * * *", timeout=3600, enable=true
+东东世界 = type=cron,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddsj.js, cronexpr="50 1 * * *", timeout=3600, enable=true
 */
-const $ = new Env('企有此礼')
+const $ = new Env('东东世界')
 const notify = $.isNode() ?require('./sendNotify') : '';
 cookiesArr = []
 CodeArr = []
@@ -70,10 +70,11 @@ if ($.isNode()) {
                 }
                 continue
             }
-       await gethelpcode()
-       await getlist()
-       await Ariszy()
-       await zy()
+      await gethelpcode()
+      await getlist()
+      await Ariszy()
+      await zy()
+       
    }
 for(let i = 0; i < cookiesArr.length; i++){
       cookie = cookiesArr[i];
@@ -83,8 +84,8 @@ for(let i = 0; i < cookiesArr.length; i++){
       $.index = i + 1;
        console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}助力模块*********\n`);
      
-      await control()
-      await Lottery()
+      //await control()
+      //await Lottery()
       await userScore()
 }
 
@@ -94,33 +95,32 @@ for(let i = 0; i < cookiesArr.length; i++){
     
 
 function PostRequest(uri,body) {
-  const url = `https://api.m.jd.com/client.action`;
+  const url = `https://ddsj-dz.isvjcloud.com/dd-api/do_task`;
   const method = `POST`;
-  const headers = {"Accept": "application/json, text/plain, */*",
-"Accept-Encoding": "gzip, deflate, br",
-"Accept-Language": "zh-cn",
-"Connection": "keep-alive",
-"Content-Type": "application/x-www-form-urlencoded",
-"Cookie": cookie,
-"Host": "api.m.jd.com",
-"User-Agent": "jdapp;iPhone;10.0.6;14.4;0bcbcdb2a68f16cf9c9ad7c9b944fd141646a849;network/4g;model/iPhone12,1;addressid/2377723269;appBuild/167724;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"
-}
+  const headers = {"Accept": "application/json, text/plain, */*","Accept-Encoding": "gzip, deflate, br","Accept-Language": "zh-cn","Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODA4OFwvYXBpXC9qZC11c2VyLWluZm8iLCJpYXQiOjE2MzE4ODg5MjgsImV4cCI6MTYzMTkzMjEyOCwibmJmIjoxNjMxODg4OTI4LCJqdGkiOiJ2bjF1dVhTcW44QVJrN1FzIiwic3ViIjoiMF9BbHEtWmc3M2Q2ZXh0OEhrc09fQjRPLVdtQXFZeFV3eDNBYTRqNVFlZyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.9lYLh0Be3JaCIwY3kGniKidVq8TjYF7L1fElTtGASlg","Connection": "keep-alive","Content-Type": "application/x-www-form-urlencoded","Cookie": cookie,"Host": "ddsj-dz.isvjcloud.com","User-Agent": "jdapp;iPhone;10.1.4;14.4;0bcbcdb2a68f16cf9c9ad7c9b944fd141646a849;network/4g;model/iPhone12,1;addressid/5488734967;appBuild/167814;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"}
   return {url: url, method: method, headers: headers, body: body};
 }
 
+function GetRequest(uri) {
+  const url = `https://ddsj-dz.isvjcloud.com/dd-api/get_task`;
+  const method = `GET`;
+  const headers = {"Accept": "application/json, text/plain, */*","Accept-Encoding": "gzip, deflate, br","Accept-Language": "zh-cn","Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODA4OFwvYXBpXC9qZC11c2VyLWluZm8iLCJpYXQiOjE2MzE4ODg5MjgsImV4cCI6MTYzMTkzMjEyOCwibmJmIjoxNjMxODg4OTI4LCJqdGkiOiJ2bjF1dVhTcW44QVJrN1FzIiwic3ViIjoiMF9BbHEtWmc3M2Q2ZXh0OEhrc09fQjRPLVdtQXFZeFV3eDNBYTRqNVFlZyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.9lYLh0Be3JaCIwY3kGniKidVq8TjYF7L1fElTtGASlg","Connection": "keep-alive","Content-Type": "application/x-www-form-urlencoded","Cookie": cookie,"Host": "ddsj-dz.isvjcloud.com","User-Agent": "jdapp;iPhone;10.1.4;14.4;0bcbcdb2a68f16cf9c9ad7c9b944fd141646a849;network/4g;model/iPhone12,1;addressid/5488734967;appBuild/167814;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"}
+  return {url: url, method: method, headers: headers};
+}
+
 async function doTask(){
- const body = `functionId=harmony_collectScore&body=%7B%22appId%22:%221ElBTx6o%22,%22taskToken%22:%22${token}%22,%22taskId%22:${taskid},%22actionType%22:1%7D&client=wh5&clientVersion=1.0.0`
+ const body = `taskToken=${token}&task_id=${taskid}`
  const MyRequest = PostRequest(``,body)
  return new Promise((resolve) => {
    $.post(MyRequest,async(error, response, data) =>{
     try{
         const result = JSON.parse(data)
         if(logs)$.log(data)
-        if(result.code == 0){
-           console.log("\n"+result.data.bizMsg+"\n")
-   await $.wait(8000)
+        if(result.status_code){
+           console.log("\n"+result.message+"\n")
+           await $.wait(5000)
         }else{
-           $.log(result.data.bizMsg+"\n")
+           $.log("成功获得"+result.score+"金币\n")
         }
         }catch(e) {
           $.logErr(e, response);
@@ -131,7 +131,7 @@ async function doTask(){
    })
   }
 async function DoTask(){
- const body = `functionId=harmony_collectScore&body=%7B%22appId%22:%221ElBTx6o%22,%22taskToken%22:%22${token}%22,%22taskId%22:${taskid},%22actionType%22:0%7D&client=wh5&clientVersion=1.0.0`
+ const body = `functionId=harmony_collectScore&body=%7B%22appId%22:%221ElJYxqY%22,%22taskToken%22:%22${token}%22,%22taskId%22:${taskid},%22actionType%22:0%7D&client=wh5&clientVersion=1.0.0`
  const MyRequest = PostRequest(``,body)
  return new Promise((resolve) => {
    $.post(MyRequest,async(error, response, data) =>{
@@ -140,7 +140,7 @@ async function DoTask(){
         if(logs)$.log(data)
         if(result.data.bizCode == 0){
            console.log(result.data.bizMsg+"获得"+result.data.result.score+";共有"+result.data.result.userScore+"\n")
-   await $.wait(4000) 
+   await $.wait(6000) 
         }else{
            console.log(result.data.bizMsg+"\n")
         }
@@ -153,7 +153,7 @@ async function DoTask(){
    })
   }
 async function Lottery(){
- const body = `functionId=interact_template_getLotteryResult&body=%7B%22appId%22:%221ElBTx6o%22%7D&client=wh5&clientVersion=1.0.0`
+ const body = `functionId=interact_template_getLotteryResult&body=%7B%22appId%22:%221ElJYxqY%22%7D&client=wh5&clientVersion=1.0.0`
  const MyRequest = PostRequest(``,body)
  return new Promise((resolve) => {
    $.post(MyRequest,async(error, response, data) =>{
@@ -175,7 +175,7 @@ async function Lottery(){
    })
   }
 async function getLottery(){
- const body = `functionId=interact_template_getLotteryResult&body=%7B%22appId%22:%221ElBTx6o%22%7D&client=wh5&clientVersion=1.0.0`
+ const body = `functionId=interact_template_getLotteryResult&body=%7B%22appId%22:%221ElJYxqY%22%7D&client=wh5&clientVersion=1.0.0`
  const MyRequest = PostRequest(``,body)
  return new Promise((resolve) => {
    $.post(MyRequest,async(error, response, data) =>{
@@ -202,8 +202,9 @@ async function Ariszy(){
     taskid = listtokenArr[j].match(/\d+/)
     $.log("TaskId："+taskid)
     $.log("Token："+token)
+    
     await doTask()
-    await DoTask()
+    
   }
     
 }
@@ -239,7 +240,7 @@ async function control(){
 }
 }
 async function dosupport(){
-   const body = `functionId=harmony_collectScore&body=%7B%22appId%22:%221ElBTx6o%22,%22taskToken%22:%22${helpcode}%22,%22taskId%22:6,%22actionType%22:0%7D&client=wh5&clientVersion=1.0.0`
+   const body = `functionId=harmony_collectScore&body=%7B%22appId%22:%221ElJYxqY%22,%22taskToken%22:%22${helpcode}%22,%22taskId%22:6,%22actionType%22:0%7D&client=wh5&clientVersion=1.0.0`
  const MyRequest = PostRequest(``,body)
  return new Promise((resolve) => {
    $.post(MyRequest,async(error, response, data) =>{
@@ -261,56 +262,47 @@ async function dosupport(){
    })
   }
 async function getlist(){
- const MyRequest = PostRequest(``,`functionId=healthyDay_getHomeData&body=%7B%22appId%22:%221ElBTx6o%22,%22taskToken%22:%22%22,%22channelId%22:1%7D&client=wh5&clientVersion=1.0.0`)
+ const MyRequest = GetRequest(``)
  return new Promise((resolve) => {
-    $.post(MyRequest,async(error, response, data) =>{
+    $.get(MyRequest,async(error, response, data) =>{
     try{
         const result = JSON.parse(data)
         if(logs)$.log(data)
-        if(result.code == 0){
+        if(result.bizCode == 0){
        console.log("查看任务列表\n")
-       let list1 = result.data.result.taskVos.find(item => item.taskId == 1)
-       listtokenArr.push(1+list1.simpleRecordInfoVo.taskToken)
-list2tokenArr.push(list1.simpleRecordInfoVo.taskToken)
        
+       let list1 = result.result.taskVos.find(item => item.taskId == 1)
+       list0tokenArr.push(1+list1.simpleRecordInfoVo.taskToken)
+list1tokenArr.push(list1.simpleRecordInfoVo.taskToken)
        
-       let list2 = result.data.result.taskVos.find(item => item.taskId == 2)
-       for(let i = 0; i < list2.shoppingActivityVos.length; i ++){
-       listtokenArr.push(2+list2.shoppingActivityVos[i].taskToken)
-list2tokenArr.push(list2.shoppingActivityVos[i].taskToken)
+       let list2 = result.result.taskVos.find(item => item.taskId == 2)
+       for(let i = 0; i < list2.browseShopVo.length; i ++){
+       listtokenArr.push(2+list2.browseShopVo[i].taskToken)
+list2tokenArr.push(list2.browseShopVo[i].taskToken)
 
        }
        
-       let list3 = result.data.result.taskVos.find(item => item.taskId == 3)
-       for(let i = 0; i < list3.followShopVo.length; i ++){
-       listtokenArr.push(3+list3.followShopVo[i].taskToken)
-list2tokenArr.push(list3.followShopVo[i].taskToken)
+       let list3 = result.result.taskVos.find(item => item.taskId == 3)
+       for(let i = 0; i < list3.shoppingActivityVos.length; i ++){
+       listtokenArr.push(3+list3.shoppingActivityVos[i].taskToken)
+list2tokenArr.push(list3.shoppingActivityVos[i].taskToken)
        }
        
-       let list4 = result.data.result.taskVos.find(item => item.taskId == 4)
-       for(let i = 0; i < list4.shoppingActivityVos.length; i ++){
-       listtokenArr.push(4+list4.shoppingActivityVos[i].taskToken)
-list2tokenArr.push(list4.shoppingActivityVos[i].taskToken)
+       let list4 = result.result.taskVos.find(item => item.taskId == 4)
+       for(let i = 0; i < list4.productInfoVos.length; i ++){
+       listtokenArr.push(4+list4.productInfoVos[i].taskToken)
+list2tokenArr.push(list4.productInfoVos[i].taskToken)
 //$.log(list4.productInfoVos[i].taskToken)
        }
     
-       let list5 = result.data.result.taskVos.find(item => item.taskId == 5)
-       for(let i = 0; i < list5.productInfoVos.length; i ++){listtokenArr.push(5+list5.productInfoVos[i].taskToken)
-list2tokenArr.push(list5.productInfoVos[i].taskToken)
-//$.log(list5.followShopVo[i].taskToken)
-       }
        
-       let list8 = result.data.result.taskVos.find(item => item.taskId == 8)
-       for(let i = 0; i < list8.shoppingActivityVos.length; i ++){
-       listtokenArr.push(8+list8.shoppingActivityVos[i].taskToken)
-list2tokenArr.push(list8.shoppingActivityVos[i].taskToken)
-//$.log(list4.productInfoVos[i].taskToken)
-       }
+       
+       
        
        //$.log(JSON.stringify(listtokenArr))
       
         }else{
-           $.log(result.data.bizMsg+"\n")
+           $.log(result.bizMsg+"\n")
         }
         }catch(e) {
           $.logErr(e, response);
@@ -321,7 +313,7 @@ list2tokenArr.push(list8.shoppingActivityVos[i].taskToken)
    })
   }
 async function scan(){
- const MyRequest = PostRequest(``,`functionId=healthyDay_getHomeData&body=%7B%22appId%22:%221ElBTx6o%22,%22taskToken%22:%22%22,%22channelId%22:1%7D&client=wh5&clientVersion=1.0.0`)
+ const MyRequest = PostRequest(``,`functionId=healthyDay_getHomeData&body=%7B%22appId%22:%221ElJYxqY%22,%22taskToken%22:%22%22,%22channelId%22:1%7D&client=wh5&clientVersion=1.0.0`)
  return new Promise((resolve) => {
     $.post(MyRequest,async(error, response, data) =>{
     try{
@@ -347,20 +339,20 @@ list1tokenArr.push(list4.productInfoVos[i].taskToken)
    })
   }
 async function gethelpcode(){
- const MyRequest = PostRequest(``,`functionId=healthyDay_getHomeData&body=%7B%22appId%22%3A%221ElBTx6o%22%2C%22taskToken%22%3A%22%22%2C%22channelId%22%3A1%7D&client=wh5&clientVersion=1.0.0`)
+ const MyRequest = GetRequest(``)
  return new Promise((resolve) => {
-    $.post(MyRequest,async(error, response, data) =>{
+    $.get(MyRequest,async(error, response, data) =>{
     try{
         const result = JSON.parse(data)
         if(logs)$.log(data)
-        if(result.code == 0){
+        if(result.bizCode == 0){
 
-let list6 = result.data.result.taskVos.find(item => item.taskId == 6)
-       list0tokenArr.push(6+list6.assistTaskDetailVo.taskToken)
-list1tokenArr.push(list6.assistTaskDetailVo.taskToken)
+let list5 = result.result.taskVos.find(item => item.taskId == 5)
+       list0tokenArr.push(5+list5.assistTaskDetailVo.taskToken)
+list1tokenArr.push(list5.assistTaskDetailVo.taskToken)
         
         }else{
-           $.log(result.data.bizMsg+"\n")
+           $.log(result.bizMsg+"\n")
         }
         }catch(e) {
           $.logErr(e, response);
@@ -372,20 +364,22 @@ list1tokenArr.push(list6.assistTaskDetailVo.taskToken)
   }
 
 async function userScore(){
- const MyRequest = PostRequest(``,`functionId=healthyDay_getHomeData&body={"appId":"1ElBTx6o","taskToken":"","channelId":1}&client=wh5&clientVersion=1.0.0`)
+ const MyRequest = GetRequest(``)
  return new Promise((resolve) => {
-    $.post(MyRequest,async(error, response, data) =>{
+    $.get(MyRequest,async(error, response, data) =>{
     try{
         const result = JSON.parse(data)
         if(logs)$.log(data)
-        if(result.code == 0){
-        let userScore = result.data.result.userInfo.userScore
-        $.log("共有省心值："+userScore+";开始抽奖"+Math.floor(userScore/300)+"次")
-        for(let i = 0; i < Math.floor(userScore/300); i++){
-        await getLottery()
-        }
+        if(result.bizCode == 0){
+        let userScore = result.result.userScore
+        if(userScore < 200){
+         $.log("共有金币："+userScore+";不足以兑换")
+         }
+        else{
+         $.msg("共有金币："+userScore+";请立即兑换：https://ddsj-dz.isvjcloud.com/dd-world/load_app/load_app.html")
+         }
         }else{
-           $.log(result.data.bizMsg+"\n")
+           $.log(result.bizMsg+"\n")
         }
         }catch(e) {
           $.logErr(e, response);

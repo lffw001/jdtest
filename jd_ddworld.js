@@ -35,41 +35,52 @@ if ($.isNode()) {
 }
 const JD_API_HOST = 'https://ddsj-dz.isvjcloud.com/dd-api';
 let allMessage = '';
-$.shareCodes = [
-  {
-    use: 'jd_FdDjJBENiJzA',
-    taskToken: 'T0205KkcNkptry6lVWSt7r17CjRVmIaV5kRrbA',
-    code: 'W_lXYF3UohGvCpiESsy_2FNjbo0TyqGcxV6llFO8r8o',
+$.shareCodes = [{
+    use: 'libinxwz',
+    taskToken: 'T0114qQhGUBRsh4CjRVmIaV5kRrbA',
+    code: 'Wk50eK_EuwY2s-UoWGDGAB3S8fKioQN-OGX2m67nY-w',
     num: 0
   },
   {
-    use: '18915299015_p',
-    taskToken: 'T018v_V6QRsb_F3XIR-b1ACjRVmIaV5kRrbA',
-    code: 'xXWocS6ovW26raZmkTrg2qfBMgkm7lwJZnP-RCHRX_A',
-    num: 9
-  },
-  {
-    use: 'jd_41c752f800930',
-    taskToken: 'T0225KkcRB9K8lHVdhL0lP4JdACjRVmIaV5kRrbA',
-    code: 'TMuFIgjjThA9ym6Da8NYsJjhPaBbjxvjn6pl3DtePKE',
+    use: 'jd_61d5ffc77afbc',
+    taskToken: 'T0225KkcRh9N8AKBcx3zxaFYJwCjRVmIaV5kRrbA',
+    code: '8wRo5Qfz08meXTu2NH2jnpKYiSAeGbg88pbN8giEHcc',
     num: 0
   },
   {
-    use: 'jd_oKMcRZnuBXfM',
-    taskToken: 'T0205KkcH2Vkpja9fl-G_KF3CjRVmIaV5kRrbA',
-    code: 'U6s02b_5LGPhanEiOWR1mBk_O91NeXWQlN6jHydUDlI',
+    use: 'wdpcPPMuBenhKg',
+    taskToken: 'T019-akzE355iBGldUSs76ACjRVmIaV5kRrbA',
+    code: 'DtpFEClWSQ9pGekhAtxDQSNieac2voCSPLiNiQlA6tk',
     num: 0
   },
   {
-    use: '269569205',
-    taskToken: 'T012vPt6RRgQ91TSCjRVmIaV5kRrbA',
-    code: 'aZZW1h7l9Dz05JZdjlENW4E_BxGbfI5CFXkkyKvxMbU',
+    use: 'jd_70191d2deb1c2',
+    taskToken: 'T0225KkcRx4Y_FWDIk6hxvZZdgCjRVmIaV5kRrbA',
+    code: 'I-06iDfhtfiEB0C-CA4jMwvqMF46SmGJQVNwD0D7vbE',
     num: 0
   },
   {
-    use: 'jd_718b10084be4f',
-    taskToken: 'T0225KkcRx8Rp1XXIBLwxqIOIgCjRVmIaV5kRrbA',
-    code: 'x_8ylToGA1X5dO8nO0GL3Ufh16MjfDbellScVh1vdRs',
+    use: 'jd_639284c7e24f4',
+    taskToken: 'T0225KkcRh0Q91zTcx2hlvNccACjRVmIaV5kRrbA',
+    code: 'zCb_nOUW8lUs_fCoOQv-T1Vg2ByMzKT9CpHO2Sn2wmM',
+    num: 0
+  },
+  {
+    use: 'jd_53504250c5652',
+    taskToken: 'T0225KkcRR0c9VDVJRqnkfEPdgCjRVmIaV5kRrbA',
+    code: 'lgV74WdmDhqWI3wL6gnzeCiH2g_q9BDXpvWgTFkoy7k',
+    num: 0
+  },
+  {
+    use: 'jd_7055c4e7c917c',
+    taskToken: 'T0225KkcRx4c8AfTdR2nnfYNJwCjRVmIaV5kRrbA',
+    code: 'jF0sRF-lQbhb8WekgaT-5Zb0PNJS3CoBZjCaloe7FiE',
+    num: 0
+  },
+  {
+    use: 'jd_750fd4822f18b',
+    taskToken: 'T0225KkcRxsZowDTKBj2wvYCJgCjRVmIaV5kRrbA',
+    code: 'gvnpcqM5fRVOm63Xf3MNPx-k0xr7uNgjtpLAPB0gX-o',
     num: 0
   }]
 let tokenInfo = {}, hotInfo = {}
@@ -116,7 +127,6 @@ let tokenInfo = {}, hotInfo = {}
     $.access_token = tokenInfo[$.UserName]
     $.canHelp = true
     if (hotInfo[$.UserName]) continue
-		console.log($.shareCodes);
     if ($.shareCodes && $.shareCodes.length) {
       console.log(`\n自己账号内部循环互助\n`);
       for (let j = 0; j < $.shareCodes.length && $.canHelp; j++) {
