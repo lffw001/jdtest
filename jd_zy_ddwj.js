@@ -1,6 +1,6 @@
 
 /*
-cron "20 0 * * *" zy_ddwj_Mod.js, tag:东东玩家_Mod
+cron "20 0 * * *" jd_zy_ddwj.js, tag:东东玩家_Mod
  */
 
 //ccwav Mod，版权在Ariszy.我只是Fix功能性Bug.
@@ -11,22 +11,22 @@ github：https://github.com/Ariszy/Private-Script
 boxjs：https://raw.githubusercontent.com/Ariszy/Private-Script/master/Ariszy.boxjs.json
 [task_local]
 #东东玩家
-20 0 * * * https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddwj.js, tag= 东东玩家
+20 0 * * * https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/jd_zy_ddwj.js, tag= 东东玩家
 ================Loon==============
 [Script]
-cron "20 0 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddwj.js,tag= 东东玩家
+cron "20 0 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/jd_zy_ddwj.js,tag= 东东玩家
 ===============Surge=================
-东东玩家 = type=cron,cronexp="20 0 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddwj.js
+东东玩家 = type=cron,cronexp="20 0 * * *",wake-system=1,timeout=3600,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/jd_zy_ddwj.js
 ============小火箭=========
-东东玩家 = type=cron,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/zy_ddwj.js, cronexpr="20 0 * * *", timeout=3600, enable=true
+东东玩家 = type=cron,script-path= https://raw.githubusercontent.com/Ariszy/Private-Script/master/JD/jd_zy_ddwj.js, cronexpr="20 0 * * *", timeout=3600, enable=true
  */
 
 const $ = new Env('东东玩家')
-	const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 cookiesArr = []
 CodeArr = []
 cookie = ''
-	var list2tokenArr = [], list4tokenArr = [], list6tokenArr = [], list5tokenArr = [], list4tokenArr = [], list3tokenArr = [], list1tokenArr = [], list2tokenArr = [], listtokenArr = [], list0tokenArr = [], list1tokenArr = []
+var list2tokenArr = [], list4tokenArr = [], list6tokenArr = [], list5tokenArr = [], list4tokenArr = [], list3tokenArr = [], list1tokenArr = [], list2tokenArr = [], listtokenArr = [], list0tokenArr = [], list1tokenArr = []
 var taskid, token, helpcode, secretp, userUnlockedPlaceNum;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
