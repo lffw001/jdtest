@@ -29,6 +29,7 @@ let businessCircleJump = true;//小于对方300热力值自动更换商圈队伍
 let drawLotteryFlag = false;//是否用500蓝币去抽奖，true表示开启，false表示关闭。默认关闭
 let joinPkTeam = true;//是否自动加入PK队伍
 let message = '', subTitle;
+let nowShopId="";
 const JD_API_HOST = 'https://api.m.jd.com/api';
 
 //助力好友分享码
@@ -79,10 +80,18 @@ let shareCodes = []
 
 async function jdSuperMarket() {
   try {
+	  nowShopId="";
+	await smtg_newHome();//home,获取shopId
+	if(nowShopId!=""){
+		
+	
     await receiveGoldCoin();//收金币
     await businessCircleActivity();//商圈活动
     await receiveBlueCoin();//收蓝币（小费）
+	await receiveBlueCoinShop();//收营业额
+	}
     // await receiveLimitProductBlueCoin();//收限时商品的蓝币
+	
     await daySign();//每日签到
     await BeanSign()//
     await doDailyTask();//做日常任务，分享，关注店铺，
@@ -403,7 +412,7 @@ async function receiveLimitProductBlueCoin() {
 function receiveBlueCoin(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      $.get(taskUrl('smtg_receiveCoin', {"type": 2, "channel": "18"}), async (err, resp, data) => {
+      $.get(taskUrl('smtg_receiveCoin', {"type": 6,"shopId":nowShopId, "channel": "1"}), async (err, resp, data) => {
         try {
           if (err) {
             console.log('\n东东超市: API查询请求失败 ‼️‼️')
@@ -414,13 +423,13 @@ function receiveBlueCoin(timeout = 0) {
             if ($.data.data.bizCode !== 0 && $.data.data.bizCode !== 809) {
               $.coinerr = `${$.data.data.bizMsg}`;
               message += `【收取小费】${$.data.data.bizMsg}\n`;
-              console.log(`收取蓝币失败：${$.data.data.bizMsg}`)
+              console.log(`收取小费失败：${$.data.data.bizMsg}`)
               return
             }
             if ($.data.data.bizCode === 0) {
               $.coincount += $.data.data.result.receivedBlue;
               $.blueCionTimes++;
-              console.log(`【京东账号${$.index}】${$.nickName} 第${$.blueCionTimes}次领蓝币成功，获得${$.data.data.result.receivedBlue}个\n`)
+              console.log(`【京东账号${$.index}】${$.nickName} 第${$.blueCionTimes}次领收小费成功，获得${$.data.data.result.receivedBlue}个\n`)
               if (!$.data.data.result.isNextReceived) {
                 message += `【收取小费】${$.coincount}个\n`;
                 return
@@ -435,6 +444,42 @@ function receiveBlueCoin(timeout = 0) {
         }
       })
     }, timeout)
+  })
+}
+
+//领蓝币
+function receiveBlueCoinShop() {
+  return new Promise((resolve) => {
+      $.get(taskUrl('smtg_receiveCoin', {"type": 7,"shopId":nowShopId, "channel": "1"}), async (err, resp, data) => {
+        try {
+          if (err) {
+            console.log('\n东东超市: API查询请求失败 ‼️‼️')
+            console.log(JSON.stringify(err));
+          } else {
+            data = JSON.parse(data);
+            $.data = data;
+            if ($.data.data.bizCode !== 0 && $.data.data.bizCode !== 809) {
+              $.coinerr = `${$.data.data.bizMsg}`;
+              message += `【收取营业额】${$.data.data.bizMsg}\n`;
+              console.log(`收取营业额失败：${$.data.data.bizMsg}`)
+              return
+            }
+            if ($.data.data.bizCode === 0) {
+              $.coincount += $.data.data.result.receivedTurnover;
+              $.blueCionTimes++;
+              console.log(`【京东账号${$.index}】${$.nickName} 收取营业额成功，获得${$.data.data.result.receivedTurnover}个\n`)
+              if (!$.data.data.result.isNextReceived) {
+                message += `【收取营业额】${$.coincount}个\n`;
+                return
+              }
+            }
+          }
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+      })
   })
 }
 
@@ -461,10 +506,35 @@ async function daySign() {
 }
 
 async function BeanSign() {
-  const beanSignRes = await smtgSign({"channel": "1"});
+  const beanSignRes = await smtgSign({"projectId":"YD7bcjcYUkE5ryT5eo1pKgjw32Q","channel": "1"});
   if (beanSignRes && beanSignRes.data['bizCode'] === 0) {
     console.log(`每天从指定入口进入游戏,可获得额外奖励:${JSON.stringify(beanSignRes)}`)
   }
+}
+
+//首页
+function smtg_newHome() {
+  return new Promise((resolve) => {
+    $.get(taskUrl('smtg_newHome', {"shopType":1,"channel":"1"}), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log('\n东东超市: API查询请求失败 ‼️‼️')
+          console.log(JSON.stringify(err));
+        } else {
+          data = JSON.parse(data);
+		  if(data.data.result!=null&&data.data.result.currentShopId!=""){
+			  nowShopId=data.data.result.currentShopId;
+		  }
+		  
+          //console.log(data)
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve(data);
+      }
+    })
+  })
 }
 
 //每日签到
@@ -1087,6 +1157,7 @@ function smtgDoShopTask(taskId, itemId) {
   return new Promise((resolve) => {
     const body = {
       "taskId": taskId,
+	  "projectId":"YD7bcjcYUkE5ryT5eo1pKgjw32Q",
       "channel": "1"
     }
     if (itemId) {
@@ -1113,6 +1184,7 @@ function smtgObtainShopTaskPrize(taskId) {
   return new Promise((resolve) => {
     const body = {
       "taskId": taskId,
+	  "projectId":"YD7bcjcYUkE5ryT5eo1pKgjw32Q",
 	  "channel": "1"
     }
     $.get(taskUrl('smtg_obtainShopTaskPrize', body), (err, resp, data) => {
@@ -1412,7 +1484,7 @@ function smtg_businessCircleIndex() {
 
 function smtg_receivedPkTeamPrize() {
   return new Promise((resolve) => {
-    $.get(taskUrl('smtg_receivedPkTeamPrize', {"channel": "1"}), (err, resp, data) => {
+    $.get(taskUrl('smtg_receivedPkTeamPrize', {"projectId":"YD7bcjcYUkE5ryT5eo1pKgjw32Q","channel": "1"}), (err, resp, data) => {
       try {
         if (err) {
           console.log('\n东东超市: API查询请求失败 ‼️‼️')
