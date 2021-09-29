@@ -515,6 +515,7 @@ async function BeanSign() {
 //首页
 function smtg_newHome() {
   return new Promise((resolve) => {
+	  console.log(taskUrl('smtg_newHome', {"shopType":1,"channel":"1"}))
     $.get(taskUrl('smtg_newHome', {"shopType":1,"channel":"1"}), async (err, resp, data) => {
       try {
         if (err) {
@@ -1867,7 +1868,7 @@ function taskUrl(function_id, body = {}) {
   return {
     url: `${JD_API_HOST}?functionId=${function_id}&appid=jdsupermarket&clientVersion=8.0.0&client=m&body=${escape(JSON.stringify(body))}&t=${Date.now()}`,
     headers: {
-      'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;android;10.1.6;10;3673534326637316-2653664323531333;network/wifi;model/COL-AL10;addressid/915035656;aid/c754b67ab5f42513;oaid/d6fee66a-c19c-2600-732a-eebf58effcd3;osVer/29;appBuild/90532;partner/huawei;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 10; COL-AL10 Build/HUAWEICOL-AL10; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045714 Mobile Safari/537.36"),
       'Host': 'api.m.jd.com',
       'Cookie': cookie,
       'Referer': 'https://jdsupermarket.jd.com/game',
