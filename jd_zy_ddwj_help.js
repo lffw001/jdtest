@@ -22,11 +22,11 @@ cron "20 0 * * *" script-path= https://raw.githubusercontent.com/Ariszy/Private-
  */
 
 const $ = new Env('东东玩家互助')
-const notify = $.isNode() ? require('./sendNotify') : '';
+	const notify = $.isNode() ? require('./sendNotify') : '';
 cookiesArr = []
 CodeArr = []
 cookie = ''
-var list2tokenArr = [], list4tokenArr = [], list6tokenArr = [], list5tokenArr = [], list4tokenArr = [], list3tokenArr = [], list1tokenArr = [], list2tokenArr = [], listtokenArr = [], list0tokenArr = [], list1tokenArr = []
+	var list2tokenArr = [], list4tokenArr = [], list6tokenArr = [], list5tokenArr = [], list4tokenArr = [], list3tokenArr = [], list1tokenArr = [], list2tokenArr = [], listtokenArr = [], list0tokenArr = [], list1tokenArr = []
 var taskid, token, helpcode, secretp, userUnlockedPlaceNum;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
@@ -193,7 +193,7 @@ async function getsecretp() {
 							$.log(data)
 							secretp = result.data.result.homeMainInfo.secretp
 								userUnlockedPlaceNum = result.data.result.homeMainInfo.raiseInfo.userEarthInfo.userUnlockedPlaceNum
-								//$.log(userUnlockedPlaceNum)
+								$.log(userUnlockedPlaceNum)
 				} catch (e) {
 					$.logErr(e, response);
 				}
