@@ -1,7 +1,7 @@
 # 在这里输入青龙面板用户名密码，如果不填写，就自动从auth.json中读取
 username = ""
 password = ""
-port=getitem("JD_WSCK_PORT")
+port=5707
 
 import requests
 import time
