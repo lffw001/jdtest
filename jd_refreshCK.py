@@ -173,7 +173,6 @@ if __name__ == '__main__':
                         else:
                             print("第%s个wskey更新失败,pin为%s" % (count, wspin))
                     else:
-                        print(ptck)
                         if insert(ptck):
                             print("第%s个wskey添加成功" % count)
                         else:
