@@ -1,7 +1,6 @@
 # 在这里输入青龙面板用户名密码，如果不填写，就自动从auth.json中读取
 username = ""
 password = ""
-port=5707
 
 import requests
 import time
@@ -26,21 +25,21 @@ def gettimestamp():
 
 
 def login(username, password):
-    url = "http://127.0.0.1:"+port+"/api/login?t=%s" % gettimestamp()
+    url = "http://127.0.0.1:5707/api/login?t=%s" % gettimestamp()
     data = {"username": username, "password": password}
     r = s.post(url, data)
     s.headers.update({"authorization": "Bearer " + json.loads(r.text)["data"]["token"]})
 
 
 def getitem(key):
-    url = "http://127.0.0.1:"+port+"/api/envs?searchValue=%s&t=%s" % (key, gettimestamp())
+    url = "http://127.0.0.1:5707/api/envs?searchValue=%s&t=%s" % (key, gettimestamp())
     r = s.get(url)
     item = json.loads(r.text)["data"]
     return item
 
 
 def getckitem(key):
-    url = "http://127.0.0.1:"+port+"/api/envs?searchValue=JD_COOKIE&t=%s" % gettimestamp()
+    url = "http://127.0.0.1:5707/api/envs?searchValue=JD_COOKIE&t=%s" % gettimestamp()
     r = s.get(url)
     for i in json.loads(r.text)["data"]:
         if key in i["value"]:
@@ -117,7 +116,7 @@ def appjmp(token):
 
 
 def update(text, qlid):
-    url = "http://127.0.0.1:"+port+"/api/envs?t=%s" % gettimestamp()
+    url = "http://127.0.0.1:5707/api/envs?t=%s" % gettimestamp()
     s.headers.update({"Content-Type": "application/json;charset=UTF-8"})
     data = {
         "name": "JD_COOKIE",
@@ -132,7 +131,7 @@ def update(text, qlid):
 
 
 def insert(text):
-    url = "http://127.0.0.1:"+port+"/api/envs?t=%s" % gettimestamp()
+    url = "http://127.0.0.1:5707/api/envs?t=%s" % gettimestamp()
     s.headers.update({"Content-Type": "application/json;charset=UTF-8"})
     data = []
     data_json = {
