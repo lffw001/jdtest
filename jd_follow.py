@@ -1,12 +1,11 @@
 #!/bin/env python3
 # -*- coding: utf-8 -*
 '''
-项目名称: JD-Script / jd_follow 
+项目名称: JD-Script / jd_getFollowGift 
 Author: Curtin
 功能：
 Date: 2021/6/6 上午7:57
-cron: 10 0,7 * * *
-建议cron: 0 9 * * *  python3 jd_follow.py
+建议cron: 0 9 * * *  python3 jd_getFollowGift.py
 new Env('关注有礼');
 '''
 ##################################
@@ -35,7 +34,7 @@ readmes = """
 ##  目录结构
     JD-Script/                  #主仓库
     |-- getFollowGifts                # 主目录
-    |   |-- jd_follow.py       # 主代码 （必要）
+    |   |-- jd_getFollowGift.py       # 主代码 （必要）
     |   |-- JDCookies.txt             # 存放JD cookie，一行一个ck
     |   |-- Readme.md                 # 说明书
     |   `-- start.sh                  # shell脚本（非必要）
@@ -50,7 +49,7 @@ readmes = """
     安装依赖模块 :
     pip3 install requests
     执行：
-    python3 jd_follow.py
+    python3 jd_getFollowGift.py
 
 
 ## `【更新记录】`
@@ -253,7 +252,7 @@ if "TG_API_HOST" in os.environ:
         print("已获取并使用Env环境 TG_API_HOST")
 # 获取pushplus+ PUSH_PLUS_TOKEN
 if "PUSH_PLUS_TOKEN" in os.environ:
-    if len(os.environ["PUSH_PLUS_TOKEN"]) > 1000000:
+    if len(os.environ["PUSH_PLUS_TOKEN"]) > 1:
         PUSH_PLUS_TOKEN = os.environ["PUSH_PLUS_TOKEN"]
         print("已获取并使用Env环境 PUSH_PLUS_TOKEN")
 # 获取企业微信应用推送 QYWX_AM
@@ -577,7 +576,7 @@ def buildBody(data):
     venderId = data['venderId']
     activityId = data['activityId']
     signbody = data['signbody']
-    body = f'body=%7B%22follow%22%3A0%2C%22shopId%22%3A%22{shopid}%22%2C%22activityId%22%3A%22{activityId}%22%2C%22sourceRpc%22%3A%22shop_app_home_window%22%2C%22venderId%22%3A%22{venderId}%22%7D&client=apple&clientVersion=10.0.1&openudid=809409cbd5bb8a0fa8fff41378c1afe91b8075ad&{signbody}'
+    body = 'body={"follow":0,"shopId":"' + shopid + '","activityId":"' + activityId + '","sourceRpc":"shop_app_home_window","venderId":"'+ venderId + '"}&build=167863&client=apple&clientVersion=10.2.2&d_brand=apple&d_model=iPhone8,1&ef=1&eid=&ep={"ciphertype":5,"cipher":{"screen":"DzUmAtOzCzG=","area":"CJvpCJYmCV8zDtCzXzYzCtGz","wifiBssid":"","osVersion":"CJCkDm==","uuid":"aQf1ZRdxb2r4ovZ1EJZhcxYlVNZSZz09","adid":"","openudid":"Y2O2ZWS5CWO4ENrsZJG4EQYnEJHsEWG5CtO2Y2Y3CJPuZNPsCtSnYG=="},"ts":1636156765,"hdid":"","version":"","appname":"","ridx":-1}&' + signbody
     return body
 
 def drawShopGift(cookie, data):
@@ -585,6 +584,7 @@ def drawShopGift(cookie, data):
         url = 'https://api.m.jd.com/client.action?functionId=drawShopGift'
         body = data
         headers = {
+            'J-E-H' : '%7B%22ciphertype%22:5,%22cipher%22:%7B%22User-Agent%22:%22IuG0aVLeb25vBzO2Dzq2CyUyCMrfUQrlbwU7TJSmaU9JTJSmCJCkDzivCtLJY2PiZI8yBtKmAG==%22%7D,%22ts%22:1636156765,%22hdid%22:%22JM9F1ywUPwflvMIpYPok0tt5k9kW4ArJEU3lfLhxBqw=%22,%22version%22:%221.0.3%22,%22appname%22:%22com.360buy.jdmobile%22,%22ridx%22:-1%7D',
             'Accept-Encoding': 'gzip, deflate, br',
             'Cookie': cookie,
             'Connection': 'close',
@@ -593,6 +593,7 @@ def drawShopGift(cookie, data):
             'Host': 'api.m.jd.com',
             'User-Agent': 'JD4iPhone/167685 (iPhone; iOS 14.3; Scale/3.00)',
             'Referer': '',
+            'J-E-C' : '%7B%22ciphertype%22:5,%22cipher%22:%7B%22pin%22:%22TUU5TJuyTJvQTUU3TUOnTJu1TUU1TUSmTUSnTUU2TJu4TUPQTUU0TUS4TJrOTUU1TUSmTJq2TUU1TUSmTUSn%22%7D,%22ts%22:1636157606,%22hdid%22:%22JM9F1ywUPwflvMIpYPok0tt5k9kW4ArJEU3lfLhxBqw=%22,%22version%22:%221.0.3%22,%22appname%22:%22com.360buy.jdmobile%22,%22ridx%22:-1%7D',
             'Accept-Language': 'zh-Hans-CN;q=1'
         }
         response = requests.post(url, headers=headers, verify=False, data=body, timeout=60)
