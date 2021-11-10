@@ -113,8 +113,9 @@ if __name__ == '__main__':
                         if i["statusName"] != "活动结束" and i["statusName"] != "明日再来":
                             printf("开始做任务：" + i["taskName"])
                             uid, tt = saveTaskRecord(ck, i["taskId"], i["taskType"])
-                            time.sleep(10)
-                            saveTaskRecord1(ck, i["taskId"], uid, tt, i["taskType"])
+                            if uid!=None and tt!=None:
+                                time.sleep(10)
+                                saveTaskRecord1(ck, i["taskId"], uid, tt, i["taskType"])
                             break
         except:
             printf("发生异常错误")
