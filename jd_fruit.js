@@ -579,24 +579,29 @@ async function turntableFarm() {
 }
 //领取额外奖励水滴
 async function getExtraAward() {
-  await masterHelpTaskInitForFarm();
+  await farmAssistInit();
   if ($.masterHelpResult.code === '0') {
-    if ($.masterHelpResult.masterHelpPeoples && $.masterHelpResult.masterHelpPeoples.length >= 5) {
-      // 已有五人助力。领取助力后的奖励
-      if (!$.masterHelpResult.masterGotFinal) {
-        await masterGotFinishedTaskForFarm();
-        if ($.masterGotFinished.code === '0') {
-          console.log(`已成功领取好友助力奖励：【${$.masterGotFinished.amount}】g水`);
-          message += `【额外奖励】${$.masterGotFinished.amount}g水领取成功\n`;
-        }
-      } else {
-        console.log("已经领取过5好友助力额外奖励");
-        message += `【额外奖励】已被领取过\n`;
-      }
-    } else {
-      console.log("助力好友未达到5个");
-      message += `【额外奖励】领取失败,原因：给您助力的人未达5个\n`;
-    }
+	var lingCount=0;
+	for(var i=0;i<$.masterHelpResult.assistStageList.length;i++){
+		if($.masterHelpResult.assistStageList[i].percentage=="100%"&&$.masterHelpResult.assistStageList[i].stageStaus==2){
+			//每次领取一次额外奖励
+			await receiveStageEnergy();
+			lingCount++;
+			if ($.masterGotFinished.code === '0') {
+			  console.log(`已成功领取好友助力奖励：【${$.masterGotFinished.amount}】g水`);
+			  message += `【额外奖励】${$.masterGotFinished.amount}g水领取成功\n`;
+			}else{
+				console.log("已经领取过5好友助力额外奖励");
+				message += `【额外奖励】已被领取过\n`;
+			}
+		}
+		await $.wait(1000);
+		console.log('等待了1秒');
+	}
+	if(lingCount==0){
+		console.log("无可领取的额外奖励");
+		message += `【额外奖励】领取失败,原因：无可领取的额外奖励\n`;
+	}
     if ($.masterHelpResult.masterHelpPeoples && $.masterHelpResult.masterHelpPeoples.length > 0) {
       let str = '';
       $.masterHelpResult.masterHelpPeoples.map((item, index) => {
@@ -1048,12 +1053,12 @@ async function lotteryMasterHelp() {
 }
 
 //领取5人助力后的额外奖励API
-async function masterGotFinishedTaskForFarm() {
+async function receiveStageEnergy() {
   const functionId = arguments.callee.name.toString();
   $.masterGotFinished = await request(functionId);
 }
 //助力好友信息API
-async function masterHelpTaskInitForFarm() {
+async function farmAssistInit() {
   const functionId = arguments.callee.name.toString();
   $.masterHelpResult = await request(functionId);
 }
