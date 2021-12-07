@@ -50,7 +50,7 @@ if ($.isNode()) {
             $.ADID = getUUID('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 1);
             $.UUID = getUUID('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
             authorCodeList = [
-                'D9mcWgs0o4QqObaT2iGctVs/ye9oluZX4nOTK56TeMXbR7I2OlzZch4hTs22oCUS',
+                'tltK5f+OXXqiXSv33k5b+q9AMkY4oJ31vhy6nI5LWbOiIw7XUQOP/Btn03/M1TYH',
             ]
             $.appkey = "51B59BB805903DA4CE513D29EC448375"
             $.userId = "10299171"
