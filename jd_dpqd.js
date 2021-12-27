@@ -3,14 +3,14 @@
 ============Quantumultx===============
 [task_local]
 #店铺签到
-15 2,14 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.js, tag=店铺签到, enabled=true
+0 0 * * * https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js, tag=店铺签到, enabled=true
 ===========Loon============
 [Script]
-cron "15 2,14 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.js,tag=店铺签到
+cron "0 0 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js,tag=店铺签到
 ============Surge=============
-店铺签到 = type=cron,cronexp="15 2,14 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.js
+店铺签到 = type=cron,cronexp="0 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.js
 ===========小火箭========
-店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_shop_sign.jss, cronexpr="15 2,14 * * *", timeout=3600, enable=true
+店铺签到 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/JavaScript/master/Task/jd_shop_sign.jss, cronexpr="0 0 * * *", timeout=3600, enable=true
 */
 const $ = new Env('店铺签到');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -25,17 +25,29 @@ let vender=''
 let num=0
 let shopname=''
 const token = [
-"C718DA981DBB8CF73FAC7D5480733B43",
-"77A6C7B5C2BC9175521931ADE8E3B2E0",
-"5BEFC891C256D515C4F0F94F15989055",
-"BF2ACB3369C4AEEE6C9842A874FD7A51",
-"02A5827612D0B5364FD898D0F458CA10",
-"01B3D5EAB2AB6FCCA4A8B699D560A458",
-"9EA0257D7BA5312ED76E537813DA28A1",
-"D0DB6641A279674F401E52B867E595BC",
-"501105E4C2FAB2A9FF760A554063E769",
-"09B63A54599F85A17BACA9C81F50B1B8",
-"09E4730770FD2E15F9C60365F7FEA6E4"
+
+  "39415200CB5E286A4DB604A54C901A13",
+  "0BF55BE48940544DF131B825756973C0",
+  "678380AA2C2CEFF8F755E170840E0FCD",
+  "AB3EB4ED5DB4E48516230C858A1AEE52",
+  "09B63A54599F85A17BACA9C81F50B1B8",
+  "09E4730770FD2E15F9C60365F7FEA6E4",
+  "C718DA981DBB8CF73FAC7D5480733B43",
+  "77A6C7B5C2BC9175521931ADE8E3B2E0",
+  "5BEFC891C256D515C4F0F94F15989055",
+  "D0DB6641A279674F401E52B867E595BC",
+  "9E610DED3B2F61B9A745375A2BD0D094",
+  "2EF6607AEB21E43492923322B11ADC25",
+  "B1482DB6CB72FBF33FFC90B2AB53D32C",
+  "2B9F928FC8B52D8504E230CDA71F1C54",
+  "2C7846818F0216300CB6BEC38C04E7B4",
+  "C490E5EB6729345183A5900B275ED6BC",
+  "52F91C4B6735B9AA21B33BE55DC703BA",
+  "873C3CC1B8EC220D12D9EB2F0185731A",
+  "01B246C8A8B575023E686E3B52D54A6B",
+  "571AE9B735114EEF52E43F9CD83EA02F",
+  "958D52E3CA7D9558626739F0ECC88908"
+
 
 ]
 
@@ -81,7 +93,7 @@ if ($.isNode()) {
     }
   }
   if ($.isNode() && allMessage) {
-    await notify.sendNotify(`${$.name}`, `${allMessage}`)
+    //await notify.sendNotify(`${$.name}`, `${allMessage}`)
   }
 })()
     .catch((e) => {
