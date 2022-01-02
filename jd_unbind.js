@@ -77,13 +77,13 @@ async function unsubscribeCards() {
     let res = await unsubscribeCard(item.brandId);
     $.pushcardList.push(`去注销会员卡【${item.brandName}】`)
     $.pushcardList.push(`https://shopmember.m.jd.com/member/memberCloseAccount?venderId=${item.brandId}`)
-    if (res['success']) {
-      if (res['busiCode'] === '200') {
-        count++;
-        $.unsubscribeCount ++
-      }
-    }
-    await $.wait(1000)
+    // if (res['success']) {
+    //   if (res['busiCode'] === '200') {
+    //     count++;
+    //     $.unsubscribeCount ++
+    //   }
+    // }
+    // await $.wait(1000)
   }
   
   let push_len = $.pushcardList.length

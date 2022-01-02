@@ -35,17 +35,7 @@ const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 $.showLog = $.getdata("cfd_showLog") ? $.getdata("cfd_showLog") === "true" : false;
 $.notifyTime = $.getdata("cfd_notifyTime");
 $.result = [];
-$.shareCodes = [
-"F23226A0E168CB913AA69AAEFD2C5E678EB154AC03E9086890E68991ED6174B2",
-"078588C361509E29916CCDA9265D316D8C780FB83134C92B7266DFC4612F07CC",
-"C0028153A0BEBAFFF2CA8C8CBB71DFB17E2AC5D48F11FAC8DA3C0BCF3BD00674",
-"17F7E5B37B1EA804939C2C8BE3F35E1085C690FCBCF24A959F66355E2E64A87F",
-"E2618D1A71364A3E172E38194329EB3C47B22242D29B302092E24C8652E7DED5",
-"E2618D1A71364A3E172E38194329EB3C5C055E51ADBE8B77C80D890E92987B69",
-"F0CA50D50CE659E5A672C38F39A4C8124FD9AF9EA069DD5D9359A96B6D439C9A",
-"F0CA50D50CE659E5A672C38F39A4C8124FD9AF9EA069DD5D9359A96B6D439C9A",
-"9105AA37CA35BA769444D3F44F5F92C62CEEC37DFEE7FF0B0EFCAE7D8B73E7A6",
-];
+$.shareCodes = [];
 let cookiesArr = [], cookie = '', token = '';
 let UA, UAInfo = {};
 let nowTimes;
@@ -57,6 +47,9 @@ function oc(fn, defaultVal) {//optioanl chaining
   } catch (e) {
     return undefined
   }
+}
+function nc(val1, val2) {//nullish coalescing
+  return val1 != undefined ? val1 : val2
 }
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -181,11 +174,13 @@ async function cfd() {
     //小程序每日签到
     await $.wait(2000)
     await getTakeAggrPage('wxsign')
-
-    //使用道具
-    await $.wait(2000)
-    await GetPropCardCenterInfo()
-
+    
+    if (new Date().getHours() < 22){
+      //使用道具
+      await $.wait(2000)
+      await GetPropCardCenterInfo()
+    }
+    
     //助力奖励
     await $.wait(2000)
     await getTakeAggrPage('helpdraw')
@@ -1146,7 +1141,7 @@ function getUserInfo(showInvite = true) {
           console.log(`${$.name} QueryUserInfo API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data.replace(/\n/g, "").match(new RegExp(/jsonpCBK.?\((.*);*\)/))[1]);
-          $.showPp = oc(() => data.AreaAddr.dwIsSHowPp) || 0
+          $.showPp = nc(oc(() => data.AreaAddr.dwIsSHowPp), 0)
           const {
             buildInfo = {},
             ddwRichBalance,
@@ -1291,7 +1286,7 @@ function browserTask(taskType) {
     switch (taskType) {
       case 0://日常任务
         for (let i = 0; i < $.allTask.length; i++) {
-          const start = $.allTask[i].completedTimes, end = $.allTask[i].targetTimes, bizCode = oc(() => $.allTask[i].bizCode) || "jxbfd"
+          const start = $.allTask[i].completedTimes, end = $.allTask[i].targetTimes, bizCode = nc(oc(() => $.allTask[i].bizCode), "jxbfd")
           const taskinfo = $.allTask[i];
           console.log(`开始第${i + 1}个【📆日常任务】${taskinfo.taskName}\n`);
           for (let i = start; i < end; i++) {
@@ -1739,7 +1734,7 @@ async function requestAlgo() {
       "expandParams": ""
     })
   }
-  new Promise(async resolve => {
+  return new Promise(async resolve => {
     $.post(options, (err, resp, data) => {
       try {
         if (err) {

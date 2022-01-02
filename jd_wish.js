@@ -25,10 +25,59 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = ['1E1NXxq0', '1FFVQyqw','1F11Vx64'];
-let appNameArr = ['众筹许愿池', '1111点心动','冰雪闪耀季'];
+let appIdArr = ['1E1NXxq0', '1FFVQyqw', "1GVFUx6g"];
+let appNameArr = ['众筹许愿池', '1111点心动', "JOY年尾之旅"];
 let appId, appName;
-$.shareCode = [];
+$.shareCode = [{
+    code: 'T018v_VzQRob8VLRJxKb1ADjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: '18014246678_p'
+  },
+  {
+    code: 'T0205KkcNkptry6lVWSt7r17DjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: 'jd_FdDjJBENiJzA'
+  },
+  {
+    code: 'T018v_V6QRsb_F3XIR-b1ADjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: '18915299015_p'
+  },
+  {
+    code: 'T0225KkcRB9K8lHVdhL0lP4JdADjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: 'jd_41c752f800930'
+  },
+  {
+    code: 'T0205KkcH2Vkpja9fl-G_KF3DjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: 'jd_oKMcRZnuBXfM'
+  },
+  {
+    code: 'T012vPt6RRgQ91TSDjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: '269569205'
+  },
+  {
+    code: 'T0225KkcRx8Rp1XXIBLwxqIOIgDjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: 'jd_718b10084be4f'
+  },
+  {
+    code: 'T0225KkcRktIoVaDIBL0wPZZdQCTJQmq67yR55awQ',
+    appId: '1E1NXxq0',
+    use: 'jd_6ead2d080d1c1'
+  },
+  {
+    code: 'T0225KkcRktIoVaDIBL0wPZZdQDjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: 'jd_6ead2d080d1c1'
+  },
+  {
+    code: 'T011z6MgHwNdpAoCTJQmq67yR55awQ',
+    appId: '1E1NXxq0',
+    use: 'Anco-tan'
+  }];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -78,7 +127,12 @@ if ($.isNode()) {
     await $.wait(1000)
     res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/wish.json')
   }
-  //$.shareCode = [...$.shareCode, ...(res || [])]
+  let res2 = await getAuthorShareCode('https://raw.githubusercontent.com/zero205/updateTeam/main/shareCodes/wish.json')
+  if (!res2) {
+    await $.wait(1000)
+    res2 = await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/wish.json')
+  }
+  $.shareCode = [...$.shareCode, ...(res || []), ...(res2 || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -206,7 +260,6 @@ async function healthyDay_getHomeData(type = true) {
                       })
                     }
                   }
-				  console.log($.shareCode)
                 } else {
                   console.log(`【${vo.taskName}】已完成\n`)
                 }
