@@ -25,7 +25,7 @@ Special statement:
 const $ = new Env('清空购物车');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
-let cookiesArr = [], cookie = '', message = '';
+let cookiesArr = [], cookie = '', message = '',venderCart;
 let lz_cookie = {}
 
 if ($.isNode()) {
@@ -116,6 +116,7 @@ function getCart_xh(){
             },
         }
         $.get(option, async(err, resp, data) => {
+			console.
             try{
                 data = JSON.parse(getSubstr(data, "window.cartData = ", "window._PFM_TIMING"));
                 $.areaId = data.areaId;   // locationId的传值
