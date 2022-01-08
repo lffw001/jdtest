@@ -116,9 +116,15 @@ function getCart_xh(){
             },
         }
         $.get(option, async(err, resp, data) => {
-			console.
             try{
-                data = JSON.parse(getSubstr(data, "window.cartData = ", "window._PFM_TIMING"));
+				var aaa=getSubstr(data, "window.cartData = ", "window._PFM_TIMING");
+				aaa=aaa.replace(/\s*/g,"");
+				aaa=aaa.replace(/^\s*|\s*$/g,"");
+				aaa=aaa.replace(/^\s*/,"");
+				aaa=aaa.replace(/(\s*$)/g,"");
+				//aaa=JSON.stringify(aaa);
+                data = JSON.parse(aaa);
+				console.log(aaa);
                 $.areaId = data.areaId;   // locationId的传值
                 $.traceId = data.traceId; // traceid的传值
                 venderCart = data.cart.venderCart;
