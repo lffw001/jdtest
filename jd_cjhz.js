@@ -27,7 +27,14 @@ let cookiesArr = [],
     cookie = '',
     secretp = '',
     joyToken = "";
-$.shareCoseList = [];
+$.shareCoseList = [
+"mpHHKfeqPbLn9RjSToXvKw",
+"iv3pLKz5pP30xe8RHufMnQ",
+"EDII2nvGMW8ROp_k5dEIbw",
+"vW87PtOr4Pdb9N8LjzOErcEKAoZfZMf5KI79xuLmeCQ",
+"h2xIVsFiExn5y-VxQLK8Eg",
+"KJxJLws75XgXn0Np89TaNA",
+];
 if ($.isNode()) {
     Object.keys(jdCookieNode).forEach((item) => {
         cookiesArr.push(jdCookieNode[item])
