@@ -30,7 +30,12 @@ const $ = new Env('京喜牧场');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //京喜APP的UA。领取助力任务奖励需要京喜APP的UA,环境变量：JX_USER_AGENT，有能力的可以填上自己的UA
-$.inviteCodeList = [];
+$.inviteCodeList = ['g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcawEMZHsW3EAPRa2kifqlHt9XVnNYT6XvZ3yDHO_Mlt9w',
+  'g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcYrjpwp4nqQpCwqemc6sdXoc_P6h7emK8oH4WwZwBXaEg',
+  'g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHca7ozG88fJhtbH70WdleqZurW41LDaVsm9x1AbHCsDbUQ',
+  'g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcaEbCB_Sn4IBDxoj2iXbelU_iEKDoOY4i6lC2ldEYaHNA',
+  'g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcZrxM22OWUTUW0niA82XH8hPGUtMhnxzrdb2KoP8KrHVA',
+  'g_eiitD1h9-a-PX-GytKiGrfw77E3iG0LpMlIb2JHcYyfe2-FxerRS4jFEgA0loMlZ2h5TgyDKJcq4oLrSb0Ow'];
 let cookiesArr = [];
 let UA, token, UAInfo = {}
 $.appId = 10028;
@@ -110,14 +115,8 @@ if ($.isNode()) {
     await pasture();
     await $.wait(2000);
   }
-  $.res = await getAuthorShareCode('')
-  if (!$.res) {
-    $.http.get({url: ''}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
-    await $.wait(1000)
-    $.res = await getAuthorShareCode('')
-  }
-  $.res = [...($.res || []), ...(await getAuthorShareCode('') || [])]
-  await shareCodesFormat()
+  
+  //await shareCodesFormat()
   for (let i = 0; i < cookiesArr.length; i++) {
     $.cookie = cookiesArr[i];
     $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
@@ -165,26 +164,30 @@ async function pasture() {
         console.log(`\n温馨提示：${$.UserName} 请先手动完成【新手指导任务】再运行脚本再运行脚本\n`);
         return;
       }
-      $.currentStep = oc(() => $.homeInfo.finishedtaskId)
-      console.log(`打印新手流程进度：当前进度：${$.currentStep}，下一流程：${$.homeInfo.maintaskId}`)
-      if ($.homeInfo.maintaskId !== "pause" || isNew($.currentStep)) {
-        console.log(`开始初始化`)
-        $.step = isNew($.currentStep) ? isNew($.currentStep, true) : $.homeInfo.maintaskId
-        await takeGetRequest('DoMainTask');
-        for (let i = 0; i < 20; i++) {
-          if ($.DoMainTask.maintaskId !== "pause") {
-            await $.wait(2000)
-            $.currentStep = oc(() => $.DoMainTask.finishedtaskId)
-            $.step = $.DoMainTask.maintaskId
-            await takeGetRequest('DoMainTask');
-          } else if (isNew($.currentStep)) {
-            $.step = isNew($.currentStep, true)
-            await takeGetRequest('DoMainTask');
-          } else {
-            console.log(`初始化成功\n`)
-            break
+      try {
+        $.currentStep = oc(() => $.homeInfo.finishedtaskId)
+        console.log(`打印新手流程进度：当前进度：${$.currentStep}，下一流程：${$.homeInfo.maintaskId}`)
+        if ($.homeInfo.maintaskId !== "pause" || isNew($.currentStep)) {
+          console.log(`开始初始化`)
+          $.step = isNew($.currentStep) ? isNew($.currentStep, true) : $.homeInfo.maintaskId
+          await takeGetRequest('DoMainTask');
+          for (let i = 0; i < 20; i++) {
+            if ($.DoMainTask.maintaskId !== "pause") {
+              await $.wait(2000)
+              $.currentStep = oc(() => $.DoMainTask.finishedtaskId)
+              $.step = $.DoMainTask.maintaskId
+              await takeGetRequest('DoMainTask');
+            } else if (isNew($.currentStep)) {
+              $.step = isNew($.currentStep, true)
+              await takeGetRequest('DoMainTask');
+            } else {
+              console.log(`初始化成功\n`)
+              break
+            }
           }
         }
+      } catch (e) {
+        console.warn('活动初始化错误')
       }
       console.log('获取活动信息成功');
       console.log(`互助码：${$.homeInfo.sharekey}`);
@@ -200,6 +203,7 @@ async function pasture() {
             $.inviteCodeList.push($.homeInfo.sharekey);
             await $.wait(2000)
           }
+			console.log($.inviteCodeList);
         }
       }
       const petNum = (oc(() => $.homeInfo.petinfo) || []).length
