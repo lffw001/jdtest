@@ -1,7 +1,14 @@
-//0 * * * * 炸年兽 自动入会、签到、任务、升级、开宝箱、捡金币
-//半残品随便跑跑
-// 学习交流
-const $ = new Env('搞基大神-炸年兽');
+/*
+
+
+=================================Quantumultx=========================
+[task_local]
+#城城领现金
+0 0-23/5 * * * jd_zhanianshou.js, tag=城城领现金, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+
+ */
+const $ = new Env('炸年兽');
 
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 
@@ -51,7 +58,7 @@ $.shareCodesArr = [];
             message = '';
             console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
             //   await shareCodesFormat()
-            $.newShareCodes = []
+            $.newShareCodes = []//['m2BozEgvAENB7Qjzcb6GDkpQ9qY','m2Bozx8nUkMXvAj2I-vbULKgCdI','mm2Bozx8nUkMXvAj2I-vbULKgCdI','m2BoizBpUEw9jx2tdselFHxJrg','uTUPwU8pC1sNoRU']
             for (let i = 0; i < $.newShareCodes.length && true; ++i) {
                 console.log(`\n开始助力 【${$.newShareCodes[i]}】`)
                 let res = await getInfo($.newShareCodes[i])
@@ -175,7 +182,7 @@ $.shareCodesArr = [];
         }
     }
 })()
-    .catch((e) => {
+.catch((e) => {
         $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
     })
     .finally(() => {
@@ -186,8 +193,8 @@ function transform(str) {
     var REQUEST = new Object,
         data = str.slice(str.indexOf("?") + 1, str.length - 1),
         aParams = data.substr(1).split("&");
-    for (i = 0; i < aParams.length; i++) {
-        var aParam = aParams[i].split("=");
+    for (i = 0; i < aParams.length; i++) {　　
+        var aParam = aParams[i].split("=");　　
         REQUEST[aParam[0]] = aParam[1]
     }
     return REQUEST
@@ -209,8 +216,8 @@ function get_secretp() {
                             if (data.data && data.data.bizCode === 0) {
                                 secretp = data.data.result.homeMainInfo.secretp
                                 console.log(secretp)
-                            }
-                        } else
+                          }
+                        } else 
                         if (data.code != 0) {
                             //console.log(`\n\nsecretp失败:${JSON.stringify(data)}\n`)
                         }
