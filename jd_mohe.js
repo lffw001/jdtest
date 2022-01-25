@@ -37,22 +37,7 @@ if ($.isNode()) {
 
 const JD_API_HOST = 'https://api.m.jd.com/api';
 //邀请码一天一变化，已确定
-$.shareId = [ 'cb11148f-7218-4de2-becc-766bb8f5a2c6',
-  'bac5660a-1aaa-4d6b-8bee-f4feb933252a',
-  'd9f0ce1c-3c9d-4499-b404-6b8adde85bce',
-  '86d8389a-4623-4426-a7ac-6ea89ed439a1',
-  'bd28cc21-eafa-4685-84b0-1251e6ca0d77',
-  '005d05d7-ae9f-4922-9e76-8603538bdde4',
-  'e2d48f02-81f0-4b81-aea8-8ba0c44139ec',
-  'a839a6a1-0d1c-4d76-987c-65ae323949eb',
-  '8b1ada28-297f-42a0-9df4-fe0b61774f94',
-  '511c839b-1705-4735-b0e9-81b3f25875af',
-  '9620e64d-b75d-4040-b7f7-1a664798c9e5',
-  '63222eac-00aa-4c63-b56b-43e67d0d2f61',
-  '7c9c7fed-4a4b-4e50-b1c0-5f57b875a074',
-  'e10775f8-c538-4282-a82a-4c0483bbb7a9',
-  'b80532a7-0c26-4d94-b03a-e0d0f590cb61',
-  '48ba323d-38fa-4bf7-8e2e-148be34af525'];
+$.shareId = [ ];
 !(async () => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
