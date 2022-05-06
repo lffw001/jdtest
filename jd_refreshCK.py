@@ -156,6 +156,7 @@ if __name__ == '__main__':
     count = 1
     for i in wskeys:
         if i["status"] == 0:
+            time.sleep(10000)  # 休眠 10秒
             ptck = getToken(i["value"])
             try:
                 wspin = re.findall(r"pin=(.*?);", i["value"])[0]
