@@ -53,7 +53,7 @@ const cidsMap = {
 
 
 !(async () => {
-	if (!process.env.MY_TRY || process.env.MY_TRY!=true) {
+	if (null==process.env.MY_TRY || process.env.MY_TRY!=true) {
 		console.log("MY_TRY未设置,已结束");
 		return
 	}
