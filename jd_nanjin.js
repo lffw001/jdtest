@@ -45,14 +45,14 @@ var userInfos=[
 		id:"guotai=o1uqcne2l2d99t2l6i5rin8ukm;",//005
 		num:0
 	},
-	/*{
+	{
 		id:"guotai=p82ef0k81qn6eromtt659ut16a;",//006
 		num:0
 	},
 	{
 		id:"guotai=b98bpjqk2im9e4cpqmucbnp3fl;",//007
 		num:0
-	}*/
+	}
 ]
 var logInUrlList=[
 	"http://njzq.game.raysfly.com/index.php/api/public/user-info?data={%22openid%22:%22oH5oJuMWeyN3yw7Mw5xtR4cPqX04%22,%22nickname%22:%22Bonoa%22,%22sex%22:0,%22language%22:%22%22,%22city%22:%22%22,%22province%22:%22%22,%22country%22:%22%22,%22headimgurl%22:%22https:\/\/thirdwx.qlogo.cn\/mmopen\/vi_32\/deV2iazkryTpL6HqTlx3cT6aLkMVmEfgxheFwEWN7yRvwDpGNsU3D40JUTWgbdNMFZfnicnLF1SRiaZicStIv1hUcA\/132%22,%22privilege%22:[],%22unionid%22:%22oR8zfwju33sawR4duUpaHSSqDerM%22}",//bona
@@ -61,8 +61,8 @@ var logInUrlList=[
 	"http://njzq.game.raysfly.com/index.php/api/public/user-info?data={%22openid%22:%22oH5oJuHuaLfUkQwiCAp_jnZR_v7Y%22,%22nickname%22:%22\u5929\u916c%22,%22sex%22:0,%22language%22:%22%22,%22city%22:%22%22,%22province%22:%22%22,%22country%22:%22%22,%22headimgurl%22:%22https:\/\/thirdwx.qlogo.cn\/mmopen\/vi_32\/TVgjpue96Bwk0riaUalgqh9SfQY89MqKVzMqhqSNP1QhEXa5xNaIAunveHkoEAWeQOM7yJO2aX7b7LaQrmYVXnQ\/132%22,%22privilege%22:[],%22unionid%22:%22oR8zfwmUzf9NFeqsMZpYmjpYHT1Y%22}",//003
 	"http://njzq.game.raysfly.com/index.php/api/public/user-info?data={%22openid%22:%22oH5oJuGw4iUD1rY_N3BifJ8A-2Gc%22,%22nickname%22:%22sweety%22,%22sex%22:0,%22language%22:%22%22,%22city%22:%22%22,%22province%22:%22%22,%22country%22:%22%22,%22headimgurl%22:%22https:\/\/thirdwx.qlogo.cn\/mmopen\/vi_32\/jUrJ5NyTGTYatRomHNnPMNKHIQ7yMLsruCnm98hNc0BOLuqID1OFS7micaKUNSbguo28E7pySuicibUedEuxm8lYQ\/132%22,%22privilege%22:[],%22unionid%22:%22oR8zfwiwRy5jdez347nbO3H1Dt_Q%22}",//004
 	"http://njzq.game.raysfly.com/index.php/api/public/user-info?data={%22openid%22:%22oH5oJuOql_YpW86oO0V3M7Szd2wI%22,%22nickname%22:%22\u6210\u662f\u975e%22,%22sex%22:0,%22language%22:%22%22,%22city%22:%22%22,%22province%22:%22%22,%22country%22:%22%22,%22headimgurl%22:%22https:\/\/thirdwx.qlogo.cn\/mmopen\/vi_32\/msRmMzLXaxweoBG67WzHmveKJX4e01yvRp9icJGYHnvLaRbYiaFjxjFuZa1Sgfdqh6rkFmHXbemHjDeTQTFtBzlQ\/132%22,%22privilege%22:[],%22unionid%22:%22oR8zfwrjKXIRs_Rx1zSMFbzcVpVw%22}",//005
-	//"http://njzq.game.raysfly.com/index.php/api/public/user-info?data={%22openid%22:%22oH5oJuOVjiHlJe_LC8CjiLTlPJ9g%22,%22nickname%22:%22\u9ec4\u5c71\u4eba\u5bb6%22,%22sex%22:0,%22language%22:%22%22,%22city%22:%22%22,%22province%22:%22%22,%22country%22:%22%22,%22headimgurl%22:%22https:\/\/thirdwx.qlogo.cn\/mmopen\/vi_32\/1uQhUgz5gMetreoILSdRMX7FJibG2Gn0zmLsjEv2JhvYySICYP7WJ32puCpl6CjW7iaib4CA6pkb3GVJueyVWuzBQ\/132%22,%22privilege%22:[],%22unionid%22:%22oR8zfwucqu32nQLu5XL5NE7QzJsU%22}",//006
-	//"http://njzq.game.raysfly.com/index.php/api/public/user-info?data={%22openid%22:%22oH5oJuHkOcSqBJKH0kfqSJTixMic%22,%22nickname%22:%22\u7f8e\u7f57\u57f9\u5357%22,%22sex%22:0,%22language%22:%22%22,%22city%22:%22%22,%22province%22:%22%22,%22country%22:%22%22,%22headimgurl%22:%22https:\/\/thirdwx.qlogo.cn\/mmopen\/vi_32\/2bicqibaxw5xONBbJ9Fj3ZgK4I46klGic3gTrPTDc3IEefibgqZO5j1skBPo1MTq7HNpOxcNbEEtvkehLK3iake0K0A\/132%22,%22privilege%22:[],%22unionid%22:%22oR8zfwvLzN3Im8u4K_-AyepinMCo%22}",//007
+	"http://njzq.game.raysfly.com/index.php/api/public/user-info?data={%22openid%22:%22oH5oJuOVjiHlJe_LC8CjiLTlPJ9g%22,%22nickname%22:%22\u9ec4\u5c71\u4eba\u5bb6%22,%22sex%22:0,%22language%22:%22%22,%22city%22:%22%22,%22province%22:%22%22,%22country%22:%22%22,%22headimgurl%22:%22https:\/\/thirdwx.qlogo.cn\/mmopen\/vi_32\/1uQhUgz5gMetreoILSdRMX7FJibG2Gn0zmLsjEv2JhvYySICYP7WJ32puCpl6CjW7iaib4CA6pkb3GVJueyVWuzBQ\/132%22,%22privilege%22:[],%22unionid%22:%22oR8zfwucqu32nQLu5XL5NE7QzJsU%22}",//006
+	"http://njzq.game.raysfly.com/index.php/api/public/user-info?data={%22openid%22:%22oH5oJuHkOcSqBJKH0kfqSJTixMic%22,%22nickname%22:%22\u7f8e\u7f57\u57f9\u5357%22,%22sex%22:0,%22language%22:%22%22,%22city%22:%22%22,%22province%22:%22%22,%22country%22:%22%22,%22headimgurl%22:%22https:\/\/thirdwx.qlogo.cn\/mmopen\/vi_32\/2bicqibaxw5xONBbJ9Fj3ZgK4I46klGic3gTrPTDc3IEefibgqZO5j1skBPo1MTq7HNpOxcNbEEtvkehLK3iake0K0A\/132%22,%22privilege%22:[],%22unionid%22:%22oR8zfwvLzN3Im8u4K_-AyepinMCo%22}",//007
 ]
 !(async () => {
 	if (!process.env.MY_TRY) {
