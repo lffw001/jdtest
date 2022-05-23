@@ -1,25 +1,25 @@
 /*
-5.20~5.28 甜蜜派对 五月宠爱季
+5.20-5.27 婴家乐 会员日
 开卡脚本,一次性脚本
 
 
 第一个账号助力作者 其他依次助力CK1
 第一个CK失效会退出脚本
 ————————————————
-入口：[ 5.20~5.28 甜蜜派对 五月宠爱季 ]
+入口：[ 5.20-5.27 婴家乐 会员日 ]
 
 请求太频繁会被黑ip
 过10分钟再执行
 
-cron:32 1 21-28 5 *
+cron:50 15 23-27 5 *
 ============Quantumultx===============
 [task_local]
-#5.20~5.28 甜蜜派对 五月宠爱季
-32 12 21-28 5 * jd_opencardL151.js, tag=5.20~5.28 甜蜜派对 五月宠爱季, enabled=true
+#5.20-5.27 婴家乐 会员日
+50 15,16,20 23-27 5 * jd_opencardL153.js, tag=5.20-5.27 婴家乐 会员日, enabled=true
 
 */
 
-const $ = new Env('5.20~5.28 甜蜜派对 五月宠爱季')
+const $ = new Env('5.20-5.27 婴家乐 会员日')
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 
@@ -49,10 +49,10 @@ let activityCookie =''
     });
     return;
   }
-  $.activityId = "dzlhkk02f74bd4ac17f97a692c0268"
-  $.shareUuid = "7fcf84db52e342148c9ac78626c128a9"
+  $.activityId = "dzlhkk855a1b041832408dadaf77b8"
+  $.shareUuid = "00fa1fa38b724754aa25a9d9ab4051a1"
   console.log(`入口:\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/activity?activityId=${$.activityId}&shareUuid=${$.shareUuid}`)
-  let shareUuidArr = ["7fcf84db52e342148c9ac78626c128a9"]
+  let shareUuidArr = ["00fa1fa38b724754aa25a9d9ab4051a1"]
   let s = Math.floor((Math.random()*3))
   let n = 0
   n = Math.floor((Math.random()*shareUuidArr.length))
@@ -154,6 +154,7 @@ async function run() {
           for (let i = 0; i < Array(5).length; i++) {
             if (i > 0) console.log(`第${i}次 重新开卡`)
             await joinShop()
+			await $.wait(1000)
             if ($.errorJoinShop.indexOf('活动太火爆，请稍后再试') == -1) {
               break
             }
@@ -178,7 +179,7 @@ async function run() {
     if(!$.followShop && !$.outFlag){
       flag = true
       await takePostRequest('followShop');
-      await $.wait(parseInt(Math.random() * 2000 + 2000, 10))
+      await $.wait(parseInt(Math.random() * 2000 + 1000, 10))
     }
 
     $.yaoqing = false
@@ -190,7 +191,7 @@ async function run() {
     if(!$.addCart && !$.outFlag){
         flag = true
         await takePostRequest('addCart');
-        await $.wait(parseInt(Math.random() * 2000 + 2000, 10))
+        await $.wait(parseInt(Math.random() * 2000 + 1000, 10))
     }
     if(flag){
       await takePostRequest('activityContent');
@@ -204,7 +205,7 @@ async function run() {
         await takePostRequest('抽奖');
         if($.runFalag == false) break
         if(Number(count) <= 0) break
-        if(m >= 5){
+        if(m >= 2){
           console.log("抽奖太多次，多余的次数请再执行脚本")
           break
         }
@@ -212,8 +213,8 @@ async function run() {
       }
     
     await $.wait(parseInt(Math.random() * 1000 + 2000, 10))
-    await takePostRequest('getDrawRecordHasCoupon');
-    await takePostRequest('getShareRecord');
+    //await takePostRequest('getDrawRecordHasCoupon');
+    //await takePostRequest('getShareRecord');
     if($.outFlag){
       console.log('此ip已被限制，请过10分钟后再执行脚本\n')
       return
@@ -221,10 +222,10 @@ async function run() {
     console.log($.actorUuid)
     console.log(`当前助力:${$.shareUuid}`)
     if($.index == 1){
-     // $.shareUuid = $.actorUuid
+    //  $.shareUuid = $.actorUuid
       console.log(`后面的号都会助力:${$.shareUuid}`)
     }
-    await $.wait(parseInt(Math.random() * 1000 + 5000, 10))
+    await $.wait(parseInt(Math.random() * 1000 + 1000, 10))
       if($.index % 3 == 0) console.log('休息一下，别被黑ip了\n可持续发展')
       if($.index % 3 == 0) await $.wait(parseInt(Math.random() * 5000 + 20000, 10))
   } catch (e) {
@@ -610,10 +611,8 @@ async function dealReturn(type, data) {
             console.log('已经助力过')
           }else if(res.data.status == 104){
             console.log('已经助力其他人')
-          }else if(res.data.status == 103){
-            console.log('不是所有店铺会员，无法助力')
           }else if(res.data.status == 101){
-            console.log('不能助力自己')
+            // console.log('已经助力过')
           }else{
             console.log(data)
           }
