@@ -2,8 +2,6 @@
 5.16-5.23 情暖五月 以爱之名
 开卡脚本,一次性脚本
 
-每日前5名邀请才有奖励，自行调整
-
 第一个账号助力作者 其他依次助力CK1
 第一个CK失效会退出脚本
 ————————————————
@@ -16,7 +14,7 @@ cron:15 21 15-23 5 *
 ============Quantumultx===============
 [task_local]
 #5.16-5.23 情暖五月 以爱之名
-15 13,21 15-23 5 * jd_opencardL146.js, tag=5.16-5.23 情暖五月 以爱之名, enabled=true
+15 21,1 15-23 5 * jd_opencardL146.js, tag=5.16-5.23 情暖五月 以爱之名, enabled=true
 
 */
 
@@ -221,7 +219,7 @@ async function run() {
     console.log($.actorUuid)
     console.log(`当前助力:${$.shareUuid}`)
     if($.index == 1){
-    //  $.shareUuid = $.actorUuid
+     // $.shareUuid = $.actorUuid
       console.log(`后面的号都会助力:${$.shareUuid}`)
     }
     await $.wait(parseInt(Math.random() * 1000 + 5000, 10))

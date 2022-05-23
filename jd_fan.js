@@ -23,8 +23,7 @@ if ($.isNode()) {
         ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 let activityList = [
-    {'id':'3cdf134438974b13bbc05d82d350e424','endTime':1653062399000},//2022-05-09---2022-05-20 飞利浦（PHILIPS ）家电官方京东自营旗舰店
-    {'id':'fa71725b1a6f44bdb40a77d4743baa99','endTime':1652630400000},//2022-05-07---2022-05-16 乐而雅旗舰店
+    {'id':'456b02e0ad1442c3bf1cc981d64ca0f8','endTime':1653932176000},//
 ];
 !(async()=>{
 	activityList=getRandomArrayElements(activityList,activityList.length);
@@ -73,10 +72,10 @@ async function doInfo(){
 	for(let _0x32dca4=0;_0x32dca4<cookiesArr.length;_0x32dca4++){
 		let _0x3e263a=['yu7sDDcldBJVg53L5e1xVvA+83L/sWpkWyh/yXCX0UU=','hYYKRXiBsc/D9xrdJEaeuA==','CiCGftfyPYj6+NL6vvQ+DA==','Vl30/Mq7awAL+YJtVisq+w=='];
 		let _0x429f0a=getRandomArrayElements(_0x3e263a,1)[0];
-		await invite3(cookiesArr[_0x32dca4],_0x429f0a);
-		await invite4(cookiesArr[_0x32dca4],_0x429f0a);
-		await invite(cookiesArr[_0x32dca4],_0x429f0a);
-		await invite2(cookiesArr[_0x32dca4],_0x429f0a);
+		//await invite3(cookiesArr[_0x32dca4],_0x429f0a);
+		//await invite4(cookiesArr[_0x32dca4],_0x429f0a);
+		//await invite(cookiesArr[_0x32dca4],_0x429f0a);
+		//await invite2(cookiesArr[_0x32dca4],_0x429f0a);
 	}
 }
 async function invite(_0x8baf4c,_0x3fd6b4){
