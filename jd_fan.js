@@ -24,6 +24,8 @@ if ($.isNode()) {
 }
 let activityList = [
     {'id':'456b02e0ad1442c3bf1cc981d64ca0f8','endTime':1653932176000},//
+	{'id':'7ec61221978146358c0838c38e201d6b','endTime':1653932176000},//
+	{'id':'e0fd26e3c8174970a665b002cf4bf7d0','endTime':1653932176000},//
 ];
 !(async()=>{
 	activityList=getRandomArrayElements(activityList,activityList.length);
@@ -72,10 +74,10 @@ async function doInfo(){
 	for(let _0x32dca4=0;_0x32dca4<cookiesArr.length;_0x32dca4++){
 		let _0x3e263a=['yu7sDDcldBJVg53L5e1xVvA+83L/sWpkWyh/yXCX0UU=','hYYKRXiBsc/D9xrdJEaeuA==','CiCGftfyPYj6+NL6vvQ+DA==','Vl30/Mq7awAL+YJtVisq+w=='];
 		let _0x429f0a=getRandomArrayElements(_0x3e263a,1)[0];
-		//await invite3(cookiesArr[_0x32dca4],_0x429f0a);
-		//await invite4(cookiesArr[_0x32dca4],_0x429f0a);
-		//await invite(cookiesArr[_0x32dca4],_0x429f0a);
-		//await invite2(cookiesArr[_0x32dca4],_0x429f0a);
+		await invite3(cookiesArr[_0x32dca4],_0x429f0a);
+		await invite4(cookiesArr[_0x32dca4],_0x429f0a);
+		await invite(cookiesArr[_0x32dca4],_0x429f0a);
+		await invite2(cookiesArr[_0x32dca4],_0x429f0a);
 	}
 }
 async function invite(_0x8baf4c,_0x3fd6b4){

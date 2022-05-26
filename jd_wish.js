@@ -25,10 +25,77 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = ['1EFFSyqaC','1FFVQyqw','1EFRWxKuG', '1E1xZy6s'];
-let appNameArr = ['吃货嘉年华','1111点心动','许愿抽好礼', 'PLUS生活特权'];
+let appIdArr = ["1EFNUwqeO",'1EFNVyqeH','1FFVQyqw','1EFRWxKuG', '1E1xZy6s'];
+let appNameArr = ['互动抽豪礼','京东电器','1111点心动','许愿抽好礼', 'PLUS生活特权'];
 let appId, appName;
-$.shareCode = [];
+$.shareCode = 
+[
+  {
+    code: 'T018v_VzQRob8VLRJxKb1ACjJSlqSR5jIjeQOc',
+    appId: '1EFNVyqeH',
+    use: '18014246678_p'
+  },
+  {
+    code: 'T018v_VzQRob8VLRJxKb1ADjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: '18014246678_p'
+  },
+  {
+    code: 'T0205KkcH2Vkpja9fl-G_KF3CjJSlqSR5jIjeQOc',
+    appId: '1EFNVyqeH',
+    use: 'jd_oKMcRZnuBXfM'
+  },
+  {
+    code: 'T0205KkcH2Vkpja9fl-G_KF3DjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: 'jd_oKMcRZnuBXfM'
+  },
+  {
+    code: 'T0205KkcNkptry6lVWSt7r17CjJSlqSR5jIjeQOc',
+    appId: '1EFNVyqeH',
+    use: 'jd_FdDjJBENiJzA'
+  },
+  {
+    code: 'T0205KkcNkptry6lVWSt7r17DjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: 'jd_FdDjJBENiJzA'
+  },
+  {
+    code: 'T012vPt6RRgQ91TSCjJSlqSR5jIjeQOc',
+    appId: '1EFNVyqeH',
+    use: '269569205'
+  },
+  {
+    code: 'T012vPt6RRgQ91TSDjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: '269569205'
+  },
+  {
+    code: 'T018v_V6QRsb_F3XIR-b1ACjJSlqSR5jIjeQOc',
+    appId: '1EFNVyqeH',
+    use: '18915299015_p'
+  },
+  {
+    code: 'T018v_V6QRsb_F3XIR-b1ADjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: '18915299015_p'
+  },
+  {
+    code: 'T0225KkcRB9K8lHVdhL0lP4JdACjJSlqSR5jIjeQOc',
+    appId: '1EFNVyqeH',
+    use: 'jd_41c752f800930'
+  },
+  {
+    code: 'T0225KkcRB9K8lHVdhL0lP4JdADjRXlq-7zx55awQ',
+    appId: '1FFVQyqw',
+    use: 'jd_41c752f800930'
+  },
+  {
+    code: 'T020anTTlJSiI_NH9rRFTV6qCjJSlqSR5jIjeQOc',
+    appId: '1EFNVyqeH',
+    use: '乐事无极限'
+  }
+];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -73,7 +140,7 @@ if ($.isNode()) {
     $.msg($.name, '', allMessage)
   }
   let res = await getAuthorShareCode('https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/wish.json')
-//  $.shareCode = [...$.shareCode, ...(res || [])]
+ // $.shareCode = [...$.shareCode, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];

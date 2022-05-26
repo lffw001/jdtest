@@ -1,25 +1,25 @@
 /*
-5.20-5.27 婴家乐 会员日
+5.23-6.20 会员联合狂欢  618百万京豆大派送
 开卡脚本,一次性脚本
 
 
 第一个账号助力作者 其他依次助力CK1
 第一个CK失效会退出脚本
 ————————————————
-入口：[ 5.20-5.27 婴家乐 会员日 ]
+入口：[ 5.23-6.20 会员联合狂欢  618百万京豆大派送 ]
 
 请求太频繁会被黑ip
 过10分钟再执行
 
-cron:50 0,15,16,20 23-27 5 *
+cron:20 0,12,17,20 23-31,1-20 5,6 *
 ============Quantumultx===============
 [task_local]
-#5.20-5.27 婴家乐 会员日
-50 0,15,16,20 23-27 5 * jd_opencardL153.js, tag=5.20-5.27 婴家乐 会员日, enabled=true
+#5.23-6.20 会员联合狂欢  618百万京豆大派送
+20 0,12,17,20 23-31,1-20 5,6 * jd_opencardL155.js, tag=5.23-6.20 会员联合狂欢  618百万京豆大派送, enabled=true
 
 */
 
-const $ = new Env('5.20-5.27 婴家乐 会员日')
+const $ = new Env('5.23-6.20 会员联合狂欢  618百万京豆大派送')
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 
@@ -49,10 +49,10 @@ let activityCookie =''
     });
     return;
   }
-  $.activityId = "dzlhkk855a1b041832408dadaf77b8"
-  $.shareUuid = "00fa1fa38b724754aa25a9d9ab4051a1"
+  $.activityId = "unionkbblnt20220520dzlhkk"
+  $.shareUuid = "12324c5f97de465991c711263061721b"
   console.log(`入口:\nhttps://lzdz1-isv.isvjcloud.com/dingzhi/customized/common/activity?activityId=${$.activityId}&shareUuid=${$.shareUuid}`)
-  let shareUuidArr = ["00fa1fa38b724754aa25a9d9ab4051a1"]
+  let shareUuidArr = ["12324c5f97de465991c711263061721b"]
   let s = Math.floor((Math.random()*3))
   let n = 0
   n = Math.floor((Math.random()*shareUuidArr.length))
@@ -222,7 +222,7 @@ async function run() {
     console.log($.actorUuid)
     console.log(`当前助力:${$.shareUuid}`)
     if($.index == 1){
-    //  $.shareUuid = $.actorUuid
+     // $.shareUuid = $.actorUuid
       console.log(`后面的号都会助力:${$.shareUuid}`)
     }
     await $.wait(parseInt(Math.random() * 1000 + 1000, 10))
@@ -270,7 +270,7 @@ async function takePostRequest(type) {
         body = `activityId=${$.activityId}&pin=${encodeURIComponent($.Pin)}`
         break;
       case 'checkOpenCard':
-        url = `${domain}/dingzhi/linkgame/checkOpenCard`;
+        url = `${domain}/dingzhi/opencard/oly/checkopencard`;
         body = `activityId=${$.activityId}&pin=${encodeURIComponent($.Pin)}&shareUuid=${$.shareUuid}`
         break;
       case 'info':
@@ -282,7 +282,7 @@ async function takePostRequest(type) {
         body = `activityId=${$.activityId}&pin=${encodeURIComponent($.Pin)}&actorUuid=${$.actorUuid}&drawType=1`
         break;
       case 'followShop':
-        url = `${domain}/dingzhi/opencard/follow/shop`;
+        url = `${domain}/dingzhi/opencard/oly/follow/shop`;
         // url = `${domain}/dingzhi/dz/openCard/saveTask`;
         body = `activityId=${$.activityId}&pin=${encodeURIComponent($.Pin)}`
         break;
