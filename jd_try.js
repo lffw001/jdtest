@@ -6,16 +6,6 @@
  * 上一作者说了每天最多300个商店，总上限为500个，jd_unsubscribe.js我已更新为批量取关版
  * 请提前取关至少250个商店确保京东试用脚本正常运行
  * @Address: https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js
- 参考环境变量配置如下：
-export JD_TRY="true"
-export JD_TRY_PLOG="true" #是否打印输出到日志
-export JD_TRY_PASSZC="true" #过滤种草官类试用
-export JD_TRY_MAXLENGTH="50" #商品数组的最大长度
-export JD_TRY_APPLYINTERVAL="5000" #商品试用之间和获取商品之间的间隔
-export JD_TRY_APPLYNUMFILTER="100000" #过滤大于设定值的已申请人数
-export JD_TRY_MINSUPPLYNUM="1" #最小提供数量
-export JD_TRY_SENDNUM="10" #每隔多少账号发送一次通知，不需要可以不用设置
-export JD_TRY_UNIFIED="false" 默认采用不同试用组
 cron "4 1-22/8 * * *" jd_try.js, tag:京东试用
 
  */
@@ -130,7 +120,7 @@ let args_xh = {
      * 可设置环境变量：JD_TRY_APPLYINTERVAL
      * 默认为3000，也就是3秒
      * */
-    applyInterval: process.env.JD_TRY_APPLYINTERVAL * 1 || 5000,
+    applyInterval: process.env.JD_TRY_APPLYINTERVAL * 1 || 10000,
     /*
      * 商品数组的最大长度，通俗来说就是即将申请的商品队列长度
      * 例如设置为20，当第一次获取后获得12件，过滤后剩下5件，将会进行第二次获取，过滤后加上第一次剩余件数
@@ -145,7 +135,7 @@ let args_xh = {
      * 例如B商品是种草官专属试用商品，下面设置为true，即使你是种草官账号，A商品也不会被添加到待提交试用组
      * 可设置环境变量：JD_TRY_PASSZC，默认为true
      * */
-    passZhongCao: process.env.JD_TRY_PASSZC === 'true' || true,
+    passZhongCao: process.env.JD_TRY_PASSZC === 'false' || true,
     /*
      * 是否打印输出到日志，考虑到如果试用组长度过大，例如100以上，如果每个商品检测都打印一遍，日志长度会非常长
      * 打印的优点：清晰知道每个商品为什么会被过滤，哪个商品被添加到了待提交试用组
@@ -214,6 +204,8 @@ let args_xh = {
                 $.nowTabIdIndex = 0;
                 $.nowPage = 1;
                 $.nowItem = 1;
+
+
                 if (!args_xh.unified) {
                     trialActivityIdList = []
                     trialActivityTitleList = []
@@ -248,7 +240,7 @@ let args_xh = {
                         }
                         await try_apply(trialActivityTitleList[i], trialActivityIdList[i])
                         //console.log(`间隔等待中，请等待 ${args_xh.applyInterval} ms\n`)
-                        const waitTime = generateRandomInteger(5000, 8000);
+                        const waitTime = generateRandomInteger(args_xh.applyInterval, 13000);
                         console.log(`随机等待${waitTime}ms后继续`);
                         await $.wait(waitTime);
                     }
@@ -390,7 +382,7 @@ function try_feedsList(tabId, page) {
                 } else {
                     data = JSON.parse(data)
                     let tempKeyword = ``;
-                    if (data.success) {
+                    if (data.data) {
                         $.nowPage === args_xh.totalPages ? $.nowPage = 1 : $.nowPage++;
                         console.log(`第 ${size++} 次获取试用商品成功，tabId:${args_xh.tabId[$.nowTabIdIndex]} 的 第 ${page}/${args_xh.totalPages} 页`)
                         console.log(`获取到商品 ${data.data.feedList.length} 条`)
@@ -567,7 +559,7 @@ function try_MyTrials(page, selected) {
                         if (selected === 2) {
                             if (data.success && data.data) {
                                 for (let item of data.data.list) {
-                                    item.status === 4 || item.text.text.includes('已放弃') ? $.giveupNum += 1 : ''
+                                    item.status === 4 || item.text.text.includes('试用资格已过期') ? $.giveupNum += 1 : ''
                                     item.status === 2 && item.text.text.includes('试用资格将保留') ? $.successNum += 1 : ''
                                     item.status === 2 && item.text.text.includes('请收货后尽快提交报告') ? $.getNum += 1 : ''
                                     item.status === 2 && item.text.text.includes('试用已完成') ? $.completeNum += 1 : ''
