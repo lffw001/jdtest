@@ -31,7 +31,7 @@ const querystring = require('querystring');
 const exec = require('child_process').exec;
 const $ = new Env();
 const timeout = 15000; //超时时间(单位毫秒)
-console.log("加载sendNotify，当前版本: 20220302");
+console.log("加载sendNotify，当前版本: 20220504");
 // =======================================go-cqhttp通知设置区域===========================================
 //gobot_url 填写请求地址http://127.0.0.1/send_private_msg
 //gobot_token 填写在go-cqhttp文件设置的访问密钥
@@ -149,7 +149,18 @@ const {
     getEnvByPtPin
 } = require('./ql');
 const fs = require('fs');
-let strCKFile = '/ql/scripts/CKName_cache.json';
+let isnewql = fs.existsSync('/ql/data/config/auth.json');
+let strCKFile="";
+let strUidFile ="";
+if(isnewql){
+	strCKFile = '/ql/data/scripts/CKName_cache.json';
+	strUidFile = '/ql/data/scripts/CK_WxPusherUid.json';
+}else{
+	strCKFile = '/ql/scripts/CKName_cache.json';
+	strUidFile = '/ql/scripts/CK_WxPusherUid.json';
+}
+	
+
 let Fileexists = fs.existsSync(strCKFile);
 let TempCK = [];
 if (Fileexists) {
@@ -160,7 +171,7 @@ if (Fileexists) {
         TempCK = JSON.parse(TempCK);
     }
 }
-let strUidFile = '/ql/scripts/CK_WxPusherUid.json';
+
 let UidFileexists = fs.existsSync(strUidFile);
 let TempCKUid = [];
 if (UidFileexists) {
@@ -409,18 +420,9 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By ht
         }
         if (strtext.indexOf("cookie已失效") != -1 || strdesp.indexOf("重新登录获取") != -1 || strtext == "Ninja 运行通知") {
             if (Notify_NoCKFalse == "true" && text != "Ninja 运行通知") {
-				console.log(`检测到NOTIFY_NOCKFALSE变量为true,不发送ck失效通知...`);
+                console.log(`检测到NOTIFY_NOCKFALSE变量为true,不发送ck失效通知...`);
                 return;
             }
-        }
-
-        //检查黑名单屏蔽通知
-        const notifySkipList = process.env.NOTIFY_SKIP_LIST ? process.env.NOTIFY_SKIP_LIST.split('&') : [];
-        let titleIndex = notifySkipList.findIndex((item) => item === text);
-
-        if (titleIndex !== -1) {
-            console.log(`${text} 在推送黑名单中，已跳过推送`);
-            return;
         }
 
         if (text.indexOf("已可领取") != -1) {
@@ -473,7 +475,16 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By ht
         }
 
         console.log("通知标题: " + strTitle);
+		
+		//检查黑名单屏蔽通知
+        const notifySkipList = process.env.NOTIFY_SKIP_LIST ? process.env.NOTIFY_SKIP_LIST.split('&') : [];
+        let titleIndex = notifySkipList.findIndex((item) => item === strTitle);
 
+        if (titleIndex !== -1) {
+            console.log(`${strTitle} 在推送黑名单中，已跳过推送`);
+            return;
+        }
+		
         //检查脚本名称是否需要通知到Group2,Group2读取原环境配置的变量名后加2的值.例如: QYWX_AM2
         const notifyGroup2List = process.env.NOTIFY_GROUP2_LIST ? process.env.NOTIFY_GROUP2_LIST.split('&') : [];
         const titleIndex2 = notifyGroup2List.findIndex((item) => item === strTitle);
@@ -1455,11 +1466,13 @@ async function sendNotify(text, desp, params = {}, author = '\n\n本通知 By ht
                         try {
                             //额外处理1，nickName包含星号
                             $.nickName = $.nickName.replace(new RegExp(`[*]`, 'gm'), "[*]");
-
                             text = text.replace(new RegExp(`${$.UserName}|${$.nickName}`, 'gm'), $.Remark);
-
                             if (text == "京东资产变动" || text == "京东资产变动#2" || text == "京东资产变动#3" || text == "京东资产变动#4") {
-                                var Tempinfo = getQLinfo(cookie, envs[i].created, envs[i].timestamp, envs[i].remarks);
+                                var Tempinfo = "";
+								if(envs[i].created)
+									Tempinfo=getQLinfo(cookie, envs[i].created, envs[i].timestamp, envs[i].remarks);
+								else
+									Tempinfo=getQLinfo(cookie, envs[i].createdAt, envs[i].timestamp, envs[i].remarks);
                                 if (Tempinfo) {
                                     $.Remark += Tempinfo;
                                 }
@@ -1713,7 +1726,12 @@ async function sendNotifybyWxPucher(text, desp, PtPin, author = '\n\n本通知 B
                             //额外处理1，nickName包含星号
                             $.nickName = $.nickName.replace(new RegExp(`[*]`, 'gm'), "[*]");
 
-                            var Tempinfo = getQLinfo(cookie, tempEnv.created, tempEnv.timestamp, tempEnv.remarks);
+                            var Tempinfo = "";
+							if(tempEnv.created)
+								Tempinfo=getQLinfo(cookie, tempEnv.created, tempEnv.timestamp, tempEnv.remarks);
+							else
+								Tempinfo=getQLinfo(cookie, tempEnv.createdAt, tempEnv.timestamp, tempEnv.remarks);
+							
                             if (Tempinfo) {
                                 Tempinfo = $.nickName + Tempinfo;
                                 desp = desp.replace(new RegExp(`${$.UserName}|${$.nickName}`, 'gm'), Tempinfo);
@@ -1989,57 +2007,58 @@ function BarkNotify(text, desp, params = {}) {
 }
 
 function tgBotNotify(text, desp) {
-    return new Promise((resolve) => {
-        if (TG_BOT_TOKEN && TG_USER_ID) {
-            const options = {
-                url: `https://${TG_API_HOST}/bot${TG_BOT_TOKEN}/sendMessage`,
-                body: `chat_id=${TG_USER_ID}&text=${text}\n\n${desp}&disable_web_page_preview=true`,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                timeout,
-            };
-            if (TG_PROXY_HOST && TG_PROXY_PORT) {
-                const tunnel = require('tunnel');
-                const agent = {
-                    https: tunnel.httpsOverHttp({
-                        proxy: {
-                            host: TG_PROXY_HOST,
-                            port: TG_PROXY_PORT * 1,
-                            proxyAuth: TG_PROXY_AUTH,
-                        },
-                    }),
-                };
-                Object.assign(options, {
-                    agent
-                });
+  return new Promise(resolve => {
+    if (TG_BOT_TOKEN && TG_USER_ID) {
+      const options = {
+        url: `https://${TG_API_HOST}/bot${TG_BOT_TOKEN}/sendMessage`,
+        json: {
+            chat_id: `${TG_USER_ID}`,
+            text: `${text}\n\n${desp}`,
+            disable_web_page_preview:true,
+          },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        timeout
+      }
+      if (TG_PROXY_HOST && TG_PROXY_PORT) {
+        const tunnel = require("tunnel");
+        const agent = {
+          https: tunnel.httpsOverHttp({
+            proxy: {
+              host: TG_PROXY_HOST,
+              port: TG_PROXY_PORT * 1,
+              proxyAuth: TG_PROXY_AUTH
             }
-            $.post(options, (err, resp, data) => {
-                try {
-                    if (err) {
-                        console.log('telegram发送通知消息失败！！\n');
-                        console.log(err);
-                    } else {
-                        data = JSON.parse(data);
-                        if (data.ok) {
-                            console.log('Telegram发送通知消息成功🎉。\n');
-                        } else if (data.error_code === 400) {
-                            console.log('请主动给bot发送一条消息并检查接收用户ID是否正确。\n');
-                        } else if (data.error_code === 401) {
-                            console.log('Telegram bot token 填写错误。\n');
-                        }
-                    }
-                } catch (e) {
-                    $.logErr(e, resp);
-                }
-                finally {
-                    resolve(data);
-                }
-            });
-        } else {
-            resolve();
+          })
         }
-    });
+        Object.assign(options, {agent})
+      }
+      $.post(options, (err, resp, data) => {
+        try {
+          if (err) {
+            console.log('telegram发送通知消息失败！！\n')
+            console.log(err);
+          } else {
+            data = JSON.parse(data);
+            if (data.ok) {
+              console.log('Telegram发送通知消息成功�。\n')
+            } else if (data.error_code === 400) {
+              console.log('请主动给bot发送一条消息并检查接收用户ID是否正确。\n')
+            } else if (data.error_code === 401) {
+              console.log('Telegram bot token 填写错误。\n')
+            }
+          }
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve(data);
+        }
+      })
+    } else {     
+      resolve()
+    }
+  })
 }
 
 function ddBotNotify(text, desp) {
@@ -2185,7 +2204,7 @@ function ChangeUserId(desp) {
     }
 }
 
-function qywxamNotify(text, desp, strsummary="") {
+function qywxamNotify(text, desp, strsummary = "") {
     return new Promise((resolve) => {
         if (QYWX_AM) {
             const QYWX_AM_AY = QYWX_AM.split(',');
@@ -2203,7 +2222,7 @@ function qywxamNotify(text, desp, strsummary="") {
             $.post(options_accesstoken, (err, resp, data) => {
                 html = desp.replace(/\n/g, '<br/>');
                 html = `<font size="3">${html}</font>`;
-                if (strsummary=="") {
+                if (strsummary == "") {
                     strsummary = desp;
                 }
                 var json = JSON.parse(data);
@@ -2448,7 +2467,7 @@ function wxpusherNotifyByOne(text, desp, strsummary = "") {
             }
 
             if (strsummary.length > 96) {
-                strsummary = strsummary.substring(0, 95)+"...";
+                strsummary = strsummary.substring(0, 95) + "...";
             }
             let uids = [];
             for (let i of WP_UIDS_ONE.split(";")) {
