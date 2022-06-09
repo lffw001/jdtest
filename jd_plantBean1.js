@@ -388,6 +388,7 @@ async function doHelp() {
     } else {
       console.log(`助力好友失败: ${JSON.stringify($.helpResult)}`);
     }
+	await $.wait(3000);
   }
 }
 function showMsg() {
