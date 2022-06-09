@@ -76,6 +76,7 @@ let lnrun = 0;
       subTitle = '';
       option = {};
 	  lnrun++;	
+	  await shareCodesFormat();
       await jdPlantBean();
 	  if(lnrun == 3){
 		  console.log(`\n【访问接口次数达到3次，休息一分钟.....】\n`);
