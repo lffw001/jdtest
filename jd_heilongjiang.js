@@ -1,6 +1,7 @@
 var request = require('request');
 
 const $ = new Env('黑龙江');
+const notify = $.isNode() ? require('./sendNotify') : '';
 //以下用户登录信息
 let cookies=[
 
