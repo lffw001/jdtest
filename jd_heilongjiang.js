@@ -27,7 +27,7 @@ var isOK=true;
 
 		}
 	}while(!isOK)
-	
+	await notify.sendNotify(`${$.name}`, `黑龙江小程序答题完成！`)
 
 })()
   .catch((e) => {
