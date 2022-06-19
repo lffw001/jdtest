@@ -45,6 +45,7 @@ var isOK=true;
 
 		}
 	}while(!isOK)
+	totallMessage=``;
 	console.log("黑龙江小程序答题完成！");
 	totallMessage+=totallMessage+`黑龙江小程序答题完成！\n`;
 	if ($.isNode() && totallMessage) {
