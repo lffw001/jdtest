@@ -29,7 +29,7 @@ var isOK=true;
 		isOK=true;
 		totallMessage=``;
 		for(var i=0;i<cookies.length;i++){
-			totallMessage+=totallMessage+`开始第`+(i+1)+`个账号\n`;
+			totallMessage+=totallMessage+`开始第${i+1}个账号\n`;
 			cookie=cookies[i];
 			await startGame();
 			time=12+Math.floor(Math.random()*3);//0-3
@@ -46,7 +46,7 @@ var isOK=true;
 	}while(!isOK)
 	totallMessage+=totallMessage+`黑龙江小程序答题完成！\n`;
 	if ($.isNode() && totallMessage) {
-		await notify.sendNotify(`${$.name}`, `${totallMessage}`)
+		await notify.sendNotify(`${$.name}`, `${totallMessage}`);
 	}
 
 })()
