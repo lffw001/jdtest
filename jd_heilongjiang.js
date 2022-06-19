@@ -29,6 +29,7 @@ var isOK=true;
 		isOK=true;
 		totallMessage=``;
 		for(var i=0;i<cookies.length;i++){
+			console.log("开始第"+(i+1)+"个账号");
 			totallMessage+=totallMessage+`开始第${i+1}个账号\n`;
 			cookie=cookies[i];
 			await startGame();
