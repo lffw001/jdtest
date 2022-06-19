@@ -45,7 +45,7 @@ var isOK=true;
 		}
 	}while(!isOK)
 	totallMessage+=totallMessage+`黑龙江小程序答题完成！\n`;
-	if ($.isNode() && allMessage) {
+	if ($.isNode() && totallMessage) {
 		await notify.sendNotify(`${$.name}`, `${totallMessage}`)
 	}
 
