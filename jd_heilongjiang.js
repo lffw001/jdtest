@@ -32,7 +32,7 @@ var isOK=true;
 			totallMessage+=totallMessage+"开始第"+(i+1)+"个账号\n";
 			cookie=cookies[i];
 			await startGame();
-			time=13+Math.floor(Math.random()*3);//0-3
+			time=12+Math.floor(Math.random()*3);//0-3
 			if(options.length==10){
 				isOK=false;
 				console.log(`💩 答题时间:`+time);
