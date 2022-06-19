@@ -17,7 +17,7 @@ let cookies=[
 	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxOTk1IiwiYXVkIjoiIiwiZXhwIjoyNjYzNTIyMjcxLCJpYXQiOjE2NTU1MjIyNzEsImlzcyI6IiIsImp0aSI6IjIyNjU2Mjg2M2MzZWFjMTliM2FjNDZkYWE4ZTk5ZGE5IiwibmJmIjoxNjU1NTIyMjcxLCJzdWIiOiIifQ.-6yI4CuBy7V36vRlar5FlQY-kmRaSMJtMBULbUEOXdA',//圈圈2
 ]
 let cookie="";
-let options=[],totallMessage;
+let options=[],totallMessage='';
 let time=12;
 var isOK=true;
 !(async () => {
@@ -27,7 +27,7 @@ var isOK=true;
 	}
 	do{
 		isOK=true;
-		totallMessage="";
+		totallMessage='';
 		for(var i=0;i<cookies.length;i++){
 			totallMessage+=totallMessage+"开始第"+(i+1)+"个账号\n";
 			cookie=cookies[i];
