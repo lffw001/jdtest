@@ -4,20 +4,7 @@ const $ = new Env('黑龙江');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //以下用户登录信息
 let cookies=[
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEyNzIsImF1ZCI6IiIsImV4cCI6MjY2MzM4NzQ1MywiaWF0IjoxNjU1Mzg3NDUzLCJpc3MiOiIiLCJqdGkiOiIwZjU1NjY5MTZmMTBlOTQ3NWM1YjAwY2IxNDE5ZDNkMyIsIm5iZiI6MTY1NTM4NzQ1Mywic3ViIjoiIn0.FEh-n2Yi5m92ts6NLk0SePRruRkW0EunwLRo2vHrk5U',//leebear
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxNDIwIiwiYXVkIjoiIiwiZXhwIjoyNjYzMzk0NDg0LCJpYXQiOjE2NTUzOTQ0ODQsImlzcyI6IiIsImp0aSI6Ijg5NDNiMDI0NGE2NTQyM2Y5NTEwMDc4YTQzNDFhOGMzIiwibmJmIjoxNjU1Mzk0NDg0LCJzdWIiOiIifQ.KvuShnJ6qFPKXdi5-pCWUM8AmaT6Yzdzvczh7QmqcS8',//004
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxNDE2IiwiYXVkIjoiIiwiZXhwIjoyNjYzMzk0Mjg1LCJpYXQiOjE2NTUzOTQyODUsImlzcyI6IiIsImp0aSI6ImNlYTA2MmMwYzI5MDE0NDdhNmMyYTM4ZGM4Y2JiOTRiIiwibmJmIjoxNjU1Mzk0Mjg1LCJzdWIiOiIifQ.5H5JVWnVCqDWYACViDETxzSr_FltCvyfKOzYCR2V_Ug',//003
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxNDAyIiwiYXVkIjoiIiwiZXhwIjoyNjYzMzkzMzc0LCJpYXQiOjE2NTUzOTMzNzQsImlzcyI6IiIsImp0aSI6IjYxM2Y2MGJkOGNhODljNzFiMGY1MWY1MDM1MzNmM2VkIiwibmJmIjoxNjU1MzkzMzc0LCJzdWIiOiIifQ.YenfInLsGAYTuJ4psE8aZ4gWKZTxxXNftQRmUZc6dh0',//天天快乐
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxMzk0IiwiYXVkIjoiIiwiZXhwIjoyNjYzMzkyNzgwLCJpYXQiOjE2NTUzOTI3ODAsImlzcyI6IiIsImp0aSI6ImNlODA5NmUwMTBmZTJmZmY3YzMyNjBhMTZiNTBlMzAwIiwibmJmIjoxNjU1MzkyNzgwLCJzdWIiOiIifQ.j38Y7XT8M5XU6VL2WFvBl87i0dhFSZkVc6JLh4mlf1o',//刘淑芳
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxNDA5IiwiYXVkIjoiIiwiZXhwIjoyNjYzMzkzODcxLCJpYXQiOjE2NTUzOTM4NzEsImlzcyI6IiIsImp0aSI6Ijk4N2Q3YjQ2ZDNhNTRiZTczNmU2MGRjZWRlOTQ1MTU4IiwibmJmIjoxNjU1MzkzODcxLCJzdWIiOiIifQ.y9ygrC8_vIeSmOPP3opFl60oL4gdZT3ePbCLlRDqCVs',//001
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxNDEyIiwiYXVkIjoiIiwiZXhwIjoyNjYzMzk0MTA3LCJpYXQiOjE2NTUzOTQxMDcsImlzcyI6IiIsImp0aSI6IjE1NGRmMmJkNzE3YmNjNjY4ODk0ZjkwN2FiYTJlYjc5IiwibmJmIjoxNjU1Mzk0MTA3LCJzdWIiOiIifQ.Mg2Fz9yuEV9LyLGDo1hixQBTotDw4uZ7WythUTur8XA',//002
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEzOTEsImF1ZCI6IiIsImV4cCI6MjY2MzM5MzE4MiwiaWF0IjoxNjU1MzkzMTgyLCJpc3MiOiIiLCJqdGkiOiIwNDVlNmE1OWE1MjU2NGE1MzIwMzdiNzQ1NDc2ZGQ1OCIsIm5iZiI6MTY1NTM5MzE4Miwic3ViIjoiIn0.MNRjQP22g6BB-13nuCVxEaYfwnb_nU4mDLMQMlGHa_g',//bona
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxMzk3IiwiYXVkIjoiIiwiZXhwIjoyNjYzMzkyOTc3LCJpYXQiOjE2NTUzOTI5NzcsImlzcyI6IiIsImp0aSI6ImI1MDFhYjM1YTgxNzM0MWViMzIxNzI0YjdmZTE0YTVlIiwibmJmIjoxNjU1MzkyOTc3LCJzdWIiOiIifQ.mSenelcX0FFjcZ2HHxtPAhabhcw51jymTdnOcGlfMVE',//明涛
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjE4ODAsImF1ZCI6IiIsImV4cCI6MjY2MzUxNDk2NiwiaWF0IjoxNjU1NTE0OTY2LCJpc3MiOiIiLCJqdGkiOiJkNThkMTQxMmE3YmJlNDljZGQ2OTdiZGQyZDdmYjVlOCIsIm5iZiI6MTY1NTUxNDk2Niwic3ViIjoiIn0.uPMPbHvgAjJqAaVOT1obP8IETWIM5nCVYbFdJ9XpvIk',//圈圈
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxOTk1IiwiYXVkIjoiIiwiZXhwIjoyNjYzNTIyMjcxLCJpYXQiOjE2NTU1MjIyNzEsImlzcyI6IiIsImp0aSI6IjIyNjU2Mjg2M2MzZWFjMTliM2FjNDZkYWE4ZTk5ZGE5IiwibmJmIjoxNjU1NTIyMjcxLCJzdWIiOiIifQ.-6yI4CuBy7V36vRlar5FlQY-kmRaSMJtMBULbUEOXdA',//圈圈2
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIyMzk2IiwiYXVkIjoiIiwiZXhwIjoyNjYzODU4Mzg1LCJpYXQiOjE2NTU4NTgzODUsImlzcyI6IiIsImp0aSI6ImUzZDc3YWVkYzY3NWIyMWQ0ODVkOGFiMWFlY2E3N2I5IiwibmJmIjoxNjU1ODU4Mzg1LCJzdWIiOiIifQ.iEAlCTZxllhXqA5usE98rINzwowFCb8KCVdN4mn-INo',//qq3
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIyMzk0IiwiYXVkIjoiIiwiZXhwIjoyNjYzODU3NzY2LCJpYXQiOjE2NTU4NTc3NjYsImlzcyI6IiIsImp0aSI6IjdlNDMzODBkYjMzODkxZmUxM2JkZTgwYjJlZWRkMmVlIiwibmJmIjoxNjU1ODU3NzY2LCJzdWIiOiIifQ.PZOqXXLIK-lQvTRfvhcfdXJ-VoD-88usmDoRTAnU-Gw',//qq4
-	'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIyMzk3IiwiYXVkIjoiIiwiZXhwIjoyNjYzODU4ODk0LCJpYXQiOjE2NTU4NTg4OTQsImlzcyI6IiIsImp0aSI6IjJkZTU0NTQyZjFhZGIyNjBkM2MyYzlkMzYxM2FkOGIzIiwibmJmIjoxNjU1ODU4ODk0LCJzdWIiOiIifQ.jq3cHvMw2GRln6Hz_Dv6cttOXd2367iDqgR0vT-jvHM',//qq5
+
 ]
 let cookie="";
 let options=[],totallMessage=``;
@@ -28,6 +15,7 @@ var isOK=true;
 		console.log(`💩 未设置变量HLJ_COOKIE`);
 		return;
 	}
+	cookies=process.env.HLJ_COOKIE.split("@");
 	do{
 		isOK=true;
 		totallMessage=``;
@@ -36,7 +24,7 @@ var isOK=true;
 			totallMessage+=totallMessage+`开始第${i+1}个账号\n`;
 			cookie=cookies[i];
 			await startGame();
-			time=12+Math.floor(Math.random()*3);//0-3
+			time=11+Math.floor(Math.random()*3);//0-3
 			if(options.length==10){
 				isOK=false;
 				console.log(`💩 答题时间:`+time);
