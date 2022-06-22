@@ -31,7 +31,7 @@ var isOK=true;
 				await $.wait(time*1000);
 				await submitAnswer();
 				console.log(`💩 等待时间:10s`);
-				await $.wait(30000);
+				await $.wait(10000);
 			}
 
 		}
