@@ -35,7 +35,7 @@
     "zqkdFast_kkz": {
         "secret": "DgAbsmBCCGUapF1YChc",
         "blackId": "uid=1037638361&token=1IvDz8sOpqFrgOEXR%2F14ISbLVq0LcR%2FbUpZm9dm6wZBuHbpu0YUgRp%2B5zPwh7dk416F4Y3FHa4vQ5iwsgy1JPA&token_id=3e9014b01d5cc42f9a29803f6ef7a284",
-        "scanLimit": [10000,10500],
+        "scanLimit": [10000,10600],
         "extraTaskId": [],
         "waitTime": 7000,
         "GetTaskList" : "https://user.youth.cn/v1/Nameless/adlickstart.json",

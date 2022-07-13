@@ -4,7 +4,7 @@
 15 6,10,14,19,21 * * * Sami_jd_wwly.js
 由于程序频繁提交JDAPI，导致游戏出现“火爆”现象,本自用程序已经解决次问题。
  */
-const $ = new Env("Sami汪汪乐园1-20")
+const $ = new Env("Sami汪汪乐园60+")
 const Ver = '20220616';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const ua = `jdltapp;iPhone;3.1.0;${Math.ceil(Math.random()*4+10)}.${Math.ceil(Math.random()*4)};${randomString(40)}`
@@ -24,7 +24,7 @@ let shareCodes = [];
         $.Flag = false;
         $.UserName1 =encodeURIComponent($.UserName)
         console.log(`\n账号【${$.index}】${$.UserName} 汪汪乐园2022信息`);
-        if (i>=0 && i<20){
+        if (i>=60){
             let data2 = await getBodySign('startTask',$.UserName1)
             //console.log(data2)
             if(data2.code===101){
