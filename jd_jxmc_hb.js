@@ -46,7 +46,7 @@ let token ='';
     $.isLogin = true;
     $.nickName = '';
     $.UserName = decodeURIComponent($.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
-    await TotalBean();
+    //await TotalBean();
     console.log(`\n*****开始【京东账号${$.index}】${$.nickName || $.UserName}*****\n`);
     if (!$.isLogin) {
       $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -62,7 +62,7 @@ let token ='';
   }
   if (process.env.JXMC_RP != 'false' && flag_hb) {
   console.log('\n##################开始账号内互助(红包)#################\n');
- // await getShareCode('jxmc_hb.json')
+  await getShareCode('jxmc_hb.json')
   $.inviteCodeList_hb = [...($.inviteCodeList_hb || []), ...($.shareCode || [])]
   for(let i = 0;i<$.helpCkList.length;i++){
     $.can_help = true
@@ -82,7 +82,7 @@ let token ='';
   }
   console.log('\n##################开始账号内互助#################\n');
   $.shareCode = undefined
-//  await getShareCode('jxmc.json')
+  await getShareCode('jxmc.json')
   let newCookiesArr = [];
   for(let i = 0;i<$.helpCkList.length;i+=4){
     newCookiesArr.push($.helpCkList.slice(i,i+4))
@@ -100,7 +100,6 @@ let token ='';
             'code': $.inviteCodeList[k].code
           });
         }
-		console.log(codeList)
       }
     }
     if (codeList.length < 4) { codeList = [...(codeList || []), ...($.shareCode || [])] }

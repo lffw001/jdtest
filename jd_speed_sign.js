@@ -63,7 +63,7 @@ let llAPIError = false
       $.isLogin = true;
       $.nickName = '';
       message = '';
-      await TotalBean();
+      //await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
@@ -800,11 +800,12 @@ function taskGetUrl(function_id, body) {
 
 function invite2() {
   let inviterIdArr = [
-    "9vOskAagcMJ4EOWXPQSS9A==",
-    "9irilvenEupYF488TUrl19DLuKQ9zWnXYHf9anC0ujw=",
-    "0Iut/X6Fx833sGPARnxK0TEJAHhGl+YhaIQMI1735mE=",
-    "EX5edGJ14b70ZUglRq7IMmT3GewOP9IL/BN3k2dfrjw=",
-    "ty6iFSNMeLZfu/F1QvwzAnifpKIunqsG7am3vAp9rkc="
+       "ghNQyGlIWbUdlPK/1zsTFQ==",
+        "FrDZBDwlRNX/Fet29mBTjg==",
+        "dX0t80OyY6c/49K0DgQRRfA==",
+        "jl555FG2wDz4KjwztQvjww==",
+        "U6lCo5WEZMTUabR8RPhsmU5yrUVGTyQoPdAatEc+880=",
+        "E9cx6cIwwOksEkmNi4Mv6Q=="
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
@@ -831,11 +832,12 @@ function invite2() {
 function invite() {
   let t = +new Date()
   let inviterIdArr = [
-    "9vOskAagcMJ4EOWXPQSS9A==",
-    "9irilvenEupYF488TUrl19DLuKQ9zWnXYHf9anC0ujw=",
-    "0Iut/X6Fx833sGPARnxK0TEJAHhGl+YhaIQMI1735mE=",
-    "EX5edGJ14b70ZUglRq7IMmT3GewOP9IL/BN3k2dfrjw=",
-    "ty6iFSNMeLZfu/F1QvwzAnifpKIunqsG7am3vAp9rkc="
+       "ghNQyGlIWbUdlPK/1zsTFQ==",
+        "FrDZBDwlRNX/Fet29mBTjg==",
+        "dX0t80OyY6c/49K0DgQRRfA==",
+        "jl555FG2wDz4KjwztQvjww==",
+        "U6lCo5WEZMTUabR8RPhsmU5yrUVGTyQoPdAatEc+880=",
+        "E9cx6cIwwOksEkmNi4Mv6Q=="
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {

@@ -29,7 +29,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let rndtime = "" //毫秒
 let httpResult //global buffer
 
-let userCookie = ($.isNode() ? process.env.zqkdFastCookie : $.getdata('zqkdFastCookie')) || '';
+let userCookie = ($.isNode() ? process.env.zqkdFastCookie : $.getdata('zqkdFastCookie')) || 'uid=1038328092&token=1IvDz8sOpqFrgOEXR%2F14ISbLVq0LcR%2Fb3qAMipUC8nOXGtQvdTwjVdLbwY2Yj029brEHUD7g6v4bER%2FmQU4iSg%3D%3D&token_id=58496770297b868f0a8cd2ce06ee274f';
 let userCookieArr = []
 
 let notifyStr=''
@@ -130,6 +130,29 @@ async function getUserInfo() {
     } else {
         console.log(`查询账户${userIdx+1}信息失败：${result.msg}`)
     }
+}
+async function tasklist() {
+	https://user.youth.cn/v1/Nameless/getTaskBrowse.json?4ebe26678d22b250f9e2fe30a394290b
+	let tmpCk = userCookieArr[0];
+	let params =UrlParamHash(tmpCk)
+	let tmpstr=`access=wifi&active_channel=c6001&app_version=2.5.5&channel=c6001&device_brand=SMARTISAN&device_id=38191746&device_model=OD103&is_wxaccount=0&openudid=419291cb4e440d79&os_version=25&resolution=1080*1920&task_id=${taskid}&token_id=${params['token_id']}&uid=${params['uid']}`
+	let fakesign=await encodeStr(tmpstr);
+	let encodeBody="uid="+params["uid"]+"&token="+params["token"]+"&token_id="+params["token_id"]+"&app_version=2.5.7&openudid=eyjqlkgewgdmd2b&channel=c6002&device_id=38306209&device_model=vivoX21UD&device_brand=VIVO&resolution=1080*2340&os_version=30&is_wxaccount=1&active_channel=c6002&access=wifi&v=1658729632555&request_time=1658729632&f=1&sign="+fakesign;
+	let caller = printCaller()
+    let tmpCk = userCookieArr[userIdx]
+    tmpCk = tmpCk.replace(/zqkey/g,'cookie')
+    let url = 'https://user.youth.cn/v1/Nameless/getTaskBrowse.json?' +encodeBody+'&app_version=2.5.5'
+    let urlObject = PopulateGetUrl(url)
+    await HttpGet(urlObject,caller)
+    let result = httpResult;
+    if(!result) return
+    
+    if(result.success == true) {
+        console.log(result);
+    } else {
+        console.log(`获取任务列表信息失败：${result.msg}`)
+    }
+
 }
 //看看赚任务
 async function runLookStart() {
