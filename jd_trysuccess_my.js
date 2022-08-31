@@ -24,13 +24,13 @@ let allGoodList = []//获取的商品list
 let zcgGoodList = []//需要种草官才能申请的list
 let allmessage = ''
 // default params
-$.pageSize = 12
+$.pageSize = 10
 let cidsList = ["家用电器","手机数码","电脑办公","家居家装","美妆护肤","个人护理","家庭清洁","生鲜美食","食品饮料","更多惊喜"]
 let typeList = ["普通试用", "闪电试用"]
-let goodFilters = "牙刷头@小样@防晒@防摔@去死皮@手机卡@教学@仓库@会员卡@邮箱@学习卡@视频学习@延迟@看房@护栏@隐形@瘙痒@痔疮@损伤@口罩@眼线@减肥@身体乳@少女@肚腩@诱惑@胸部@滋补@狐臭@修护@假发@干扰素@睫毛@约会@挂件@推子@替换@电池@车位@保护套@数据线@老年@孕妇@口腔@术后@保健@成人@避孕@钢化膜@尺@教程后膜@贝尔思力@神皂@美少女@英语@俄语@四级@课程@六级@在线@阴道炎@宫颈@延时@糜烂@早早孕@延时喷剂@自慰@震动@振动@跳蛋@增长@增时@内衣@治疗@中药@情趣@生长@矫正@男女通用@训练@耐力@胶囊".split('@')
+let goodFilters = "手链@睫毛@牙刷头@小样@防晒@防摔@去死皮@手机卡@教学@仓库@会员卡@邮箱@学习卡@视频学习@延迟@看房@护栏@隐形@瘙痒@痔疮@损伤@口罩@眼线@减肥@身体乳@少女@肚腩@诱惑@胸部@滋补@狐臭@修护@假发@干扰素@睫毛@约会@挂件@推子@替换@电池@车位@保护套@数据线@老年@孕妇@口腔@术后@保健@成人@避孕@钢化膜@尺@教程后膜@贝尔思力@神皂@美少女@英语@俄语@四级@课程@六级@在线@阴道炎@宫颈@延时@糜烂@早早孕@延时喷剂@自慰@震动@振动@跳蛋@增长@增时@内衣@治疗@中药@情趣@生长@矫正@男女通用@训练@耐力@胶囊".split('@')
 let minPrice = 68//最高价格
 
-$.totalPages = 25//总页数
+$.totalPages = 10//总页数
 
 const cidsMap = {
 	"精选": "1",
@@ -183,7 +183,7 @@ function requireConfig() {
 			if ($.getdata('filter')) goodFilters = $.getdata('filter').split('&')
 			if ($.getdata('min_price')) minPrice = Number($.getdata('min_price'))
 			if ($.getdata('page_size')) $.pageSize = Number($.getdata('page_size'))
-			if ($.pageSize == 0) $.pageSize = 12
+			if ($.pageSize == 0) $.pageSize = 10
 		}
 		resolve()
 	})
@@ -245,7 +245,7 @@ async function getGoodList() {
 			
 			console.log(`⏰ 获取 ${cidsKey} 商品列表`)
 			for (let page = 1; page <= $.totalPages; page++) {
-				await $.wait(1000);
+				await $.wait(10000);
 				await getGoodListByCond(cidsMap[cidsKey], page)
 			}
 		//}
