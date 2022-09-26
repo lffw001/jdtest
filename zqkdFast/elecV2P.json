@@ -2,7 +2,7 @@
   "name": "elecV2P 定时任务订阅",
   "author": "留个名字",
   "note": "xx 导出的任务订阅。该订阅适用于 elecV2P，与其他软件并不兼容。相关说明参考：https://github.com/elecV2/elecV2P-dei/tree/master/docs/06-task.md",
-  "date": "2022-07-19 14:33:37",
+  "date": "2022-09-06 09:59:10",
   "type": "task",
   "list": [
     {
@@ -12,7 +12,7 @@
       "running": true,
       "job": {
         "type": "runjs",
-        "target": "https://ghproxy.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_read.js"
+        "target": "http://hk.rmysh.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_read.js"
       }
     },
     {
@@ -22,7 +22,7 @@
       "running": true,
       "job": {
         "type": "runjs",
-        "target": "https://ghproxy.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_kkz.js"
+        "target": "http://hk.rmysh.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_kkz.js"
       }
     },
     {
@@ -32,7 +32,7 @@
       "running": false,
       "job": {
         "type": "runjs",
-        "target": "https://ghproxy.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_daily.js"
+        "target": "http://hk.rmysh.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_daily.js"
       }
     },
     {
@@ -42,7 +42,7 @@
       "running": true,
       "job": {
         "type": "runjs",
-        "target": "https://ghproxy.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_reward.js"
+        "target": "http://hk.rmysh.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_reward.js"
       }
     },
     {
@@ -52,7 +52,7 @@
       "running": true,
       "job": {
         "type": "runjs",
-        "target": "https://ghproxy.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_shareRead.js"
+        "target": "http://hk.rmysh.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_shareRead.js"
       }
     },
     {
@@ -62,7 +62,7 @@
       "running": true,
       "job": {
         "type": "runjs",
-        "target": "https://ghproxy.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_reward_pro.js"
+        "target": "http://hk.rmysh.com/https://raw.githubusercontent.com/liu269569205/jstest/master/zqkdFast/zqkdFast_reward_pro.js"
       }
     },
     {
