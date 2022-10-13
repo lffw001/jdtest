@@ -58,7 +58,7 @@ var code=0;
 
 
 async function main1() {
-	var url='https://sxzy.yunzhi.co/cloud2.pointmall.api/goods/list.do?companyCode=&goodsType=61&sort=&pageSize=10&pageNum=1&userToken=6e7ab27924cd409ca7baa5b6d564d474'
+	var url='https://sxzy.yunzhi.co/cloud2.pointmall.api/goods/list.do?companyCode=&goodsType=61&sort=&pageSize=10&pageNum=1&userToken=0de63f62808d4f0ab64588ef6ba11e43'
   let myRequest = getGetRequest(url);
   return new Promise(async resolve => {
         $.post(myRequest, (err, resp, data) => {
@@ -77,7 +77,7 @@ async function main1() {
     })
 }
 async function main2() {
-	var url='https://sxzy.yunzhi.co/cloud2.pointmall.api/goods/list.do?companyCode=&goodsType=66&sort=&pageSize=10&pageNum=1&userToken=6e7ab27924cd409ca7baa5b6d564d474'
+	var url='https://sxzy.yunzhi.co/cloud2.pointmall.api/goods/list.do?companyCode=&goodsType=66&sort=&pageSize=10&pageNum=1&userToken=0de63f62808d4f0ab64588ef6ba11e43'
   let myRequest = getGetRequest(url);
   return new Promise(async resolve => {
         $.post(myRequest, (err, resp, data) => {
