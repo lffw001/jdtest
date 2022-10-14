@@ -300,6 +300,9 @@ def check_ck(ck):  # 方法 检查 Cookie有效性 使用变量传递 单次调�
                         logger.info(str(pin) + ";状态失效\n")
                         return False  # 返回 Bool类型 False
                 except Exception as err:  # 异常捕捉
+                    logger.debug(str(err))  # 调试日志输出
+                    logger.info("JD接口错误 请重试或者更换IP")  # 标准日志输出
+                    return False  # 返回 Bool类型 False
             else:  # 判断分支
                 logger.info("JD接口错误码: " + str(res.status_code))  # 标注日志输出
                 return False  # 返回 Bool类型 False
