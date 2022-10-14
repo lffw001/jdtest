@@ -290,7 +290,7 @@ def check_ck(ck):  # 方法 检查 Cookie有效性 使用变量传递 单次调�
             return False  # 返回 Bool类型 False
         else:  # 判断分支
             if res.status_code == 200:  # 判断 JD_API 接口是否为 200 [HTTP_OK]
-                logger.info(res.text)
+                # logger.info(res.text)
                 try:
                     code = int(json.loads(res.text)['retcode'])  # 使用 Json模块对返回数据取值 int([retcode])
                     if code == 0:  # 判断 code值
