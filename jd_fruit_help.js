@@ -34,18 +34,67 @@ let cookiesArr = [],
 //此此内容是IOS用户下载脚本到本地使用，填写互助码的地方，同一京东账号的好友互助码请使用@符号隔开。
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
 let shareCodes = [ // 这个列表填入你要助力的好友的shareCode
-    //     //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
+      //     //账号一的好友shareCode,不同好友的shareCode中间用@符号隔开
     //     '5853550f71014282912b76d95beb84c0@b58ddba3317b44ceb0ac86ea8952998c@8d724eb95e3847b6a1526587d1836f27@a80b7d1db41a4381b742232da9d22443@ce107b8f64d24f62a92292180f764018@c73ea563a77d4464b273503d3838fec1@0dd9a7fd1feb449fb1bf854a3ec0e801',
     //     //账号二的好友shareCode,不同好友的shareCode中间用@符号隔开
     //     '5853550f71014282912b76d95beb84c0@b58ddba3317b44ceb0ac86ea8952998c@8d724eb95e3847b6a1526587d1836f27@a80b7d1db41a4381b742232da9d22443@ce107b8f64d24f62a92292180f764018@c73ea563a77d4464b273503d3838fec1@0dd9a7fd1feb449fb1bf854a3ec0e801',
+	  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0@a03d49eeb79e44f79803efcfa9d0dc59',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0@a03d49eeb79e44f79803efcfa9d0dc59',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0@a03d49eeb79e44f79803efcfa9d0dc59',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0@a03d49eeb79e44f79803efcfa9d0dc59',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0@a03d49eeb79e44f79803efcfa9d0dc59',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0@a03d49eeb79e44f79803efcfa9d0dc59',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+    'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0@a03d49eeb79e44f79803efcfa9d0dc59',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0@a03d49eeb79e44f79803efcfa9d0dc59',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0@a03d49eeb79e44f79803efcfa9d0dc59',//账号一的好友shareCode，不同好友中间用@符号隔开
+  'a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@d8fd255379cc4b648e48b38b5dd382b4@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
+  'd8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@a03d49eeb79e44f79803efcfa9d0dc59@5b3475c11fbf4770ad5c80174aae6f62@1d6250353a4b446e9ff7a73920054ee0',//账号一的好友shareCode,不同好友中间用@符号隔开
 ]
-let newShareCodes=['d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0'];
+let newShareCodes=['a3389a65c654410daa81b45bfb026088',
+  '828333606f7646c59b10c3c51724853c',
+  'd8fd255379cc4b648e48b38b5dd382b4',
+  '5b3475c11fbf4770ad5c80174aae6f62',
+  '1d6250353a4b446e9ff7a73920054ee0',
+  'c93af3ba15a4498abaf15524dbe8136b',
+  '6df66cb825d142baa1dfe9f59cdae426',
+  'ab559d5975044b3e95fa87b02ee7fcd2',
+  'b124a94e55c24261b7c302a46426ecd4',
+  'a03d49eeb79e44f79803efcfa9d0dc59',
+  '87c5ff87f8e940fd8a2285ea1ce6c9fb',
+  'a0533ba2d07b4e19a4869b1515d00ea0',
+  'cffbb500222e4323a786142b3b4e6b0d'];
 let message = '',
     subTitle = '',
     option = {},
     isFruitFinished = false;
 const retainWater = $.isNode() ? (process.env.retainWater ? process.env.retainWater : 100) : ($.getdata('retainWater') ? $.getdata('retainWater') : 100); //保留水滴大于多少g,默认100g;
-let jdNotify = true; //是否关闭通知，false打开通知推送，true关闭通知推送
+let jdNotify = false; //是否关闭通知，false打开通知推送，true关闭通知推送
 let jdFruitBeanCard = false; //农场使用水滴换豆卡(如果出现限时活动时100g水换20豆,此时比浇水划算,推荐换豆),true表示换豆(不浇水),false表示不换豆(继续浇水),脚本默认是浇水
 let randomCount = $.isNode() ? 20 : 5;
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
@@ -83,7 +132,7 @@ let NoNeedCodes = [];
             $.index = i + 1;
             $.isLogin = true;
             $.nickName = '';
-            //await TotalBean();
+            await TotalBean();
             if (!$.isLogin) {
                 $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
 
@@ -129,7 +178,7 @@ let NoNeedCodes = [];
             $.index = i + 1;
             $.isLogin = true;
             $.nickName = '';
-            //await TotalBean();
+            await TotalBean();
             console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
             if (!$.isLogin) {
                 $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
@@ -173,7 +222,7 @@ async function jdFruit() {
             console.log(`\n【已成功兑换水果】${$.farmInfo.farmUserPro.winTimes}次\n`);
             //message += `【已兑换水果】${$.farmInfo.farmUserPro.winTimes}次\n`;
             await masterHelpShare(); //助力好友
-						await turntableFarm();//天天抽奖得好礼
+			await turntableFarm();//天天抽奖得好礼
             if ($.farmInfo.treeState === 2 || $.farmInfo.treeState === 3) {
                 option['open-url'] = urlSchema;
                 //$.msg($.name, ``, `【京东账号${$.index}】${$.nickName || $.UserName}\n【提醒⏰】${$.farmInfo.farmUserPro.name}已可领取\n请去京东APP或微信小程序查看\n点击弹窗即达`, option);
@@ -218,7 +267,6 @@ async function turntableFarm() {
         continue
       }
       await lotteryMasterHelp(code);
-		if ($.lotteryMasterHelpRes.helpResult) {
       if ($.lotteryMasterHelpRes.helpResult.code === '0') {
         console.log(`天天抽奖-助力${$.lotteryMasterHelpRes.helpResult.masterUserInfo.nickName}成功\n`)
       } else if ($.lotteryMasterHelpRes.helpResult.code === '11') {
@@ -228,7 +276,6 @@ async function turntableFarm() {
         break;
       }
     }
-		}
     console.log(`天天抽奖次数共-${remainLotteryTimes}次`)
     //抽奖
     if (remainLotteryTimes > 0) {
@@ -631,47 +678,45 @@ async function signForFarm() {
  * 初始化农场, 可获取果树及用户信息API
  */
 async function initForFarm() {
-  // const functionId = arguments.callee.name.toString();
-  // $.farmInfo = await request(functionId, {"babelChannel":"121","sid":"3c52b5f17ab2a42398939a27887eaf8w","un_area":"17_1381_0_0","version":18,"channel":1});
-  return new Promise(resolve => {
-    const option =  {
-      url: `${JD_API_HOST}?functionId=initForFarm`,
-      body: `body=${escape(JSON.stringify({"version":4}))}&appid=wh5&clientVersion=9.1.0`,
-      headers: {
-        "accept": "*/*",
-        "accept-encoding": "gzip, deflate, br",
-        "accept-language": "zh-CN,zh;q=0.9",
-        "cache-control": "no-cache",
-        "cookie": cookie,
-        "origin": "https://home.m.jd.com",
-        "pragma": "no-cache",
-        "referer": "https://home.m.jd.com/myJd/newhome.action",
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-site",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      timeout: 10000,
-    };
-    $.post(option, (err, resp, data) => {
-      try {
-        if (err) {
-          console.log('\n东东农场: API查询请求失败 ‼️‼️');
-          console.log(JSON.stringify(err));
-          $.logErr(err);
-        } else {
-          if (safeGet(data)) {
-            $.farmInfo = JSON.parse(data)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
+    return new Promise(resolve => {
+        const option = {
+            url: `${JD_API_HOST}?functionId=initForFarm`,
+      body: `body=${escape(JSON.stringify({ "version":14}))}&appid=wh5&clientVersion=9.1.0`,
+            headers: {
+                "accept": "*/*",
+                "accept-encoding": "gzip, deflate, br",
+                "accept-language": "zh-CN,zh;q=0.9",
+                "cache-control": "no-cache",
+                "cookie": cookie,
+                "origin": "https://home.m.jd.com",
+                "pragma": "no-cache",
+                "referer": "https://home.m.jd.com/myJd/newhome.action",
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "same-site",
+                "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            timeout: 10000,
+        };
+        $.post(option, (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log('\n东东农场: API查询请求失败 ‼️‼️');
+                    console.log(JSON.stringify(err));
+                    $.logErr(err);
+                } else {
+                    if (safeGet(data)) {
+                        $.farmInfo = JSON.parse(data)
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp)
+            } finally {
+                resolve();
+            }
+        })
     })
-  })
 }
 
 // 初始化任务列表API
