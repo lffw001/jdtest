@@ -1122,45 +1122,6 @@ async function initForFarm() {
   const functionId = arguments.callee.name.toString();
   $.farmInfo = await request1(functionId, {"babelChannel":"121","sid":"3c52b5f17ab2a42398939a27887eaf8w","un_area":"17_1381_0_0","version":18,"channel":1});
 	console.log($.farmInfo);
-   return new Promise(resolve => {
-     const option =  {
-       url: `${JD_API_HOST}?functionId=initForFarm`,
-       body: `body=${escape(JSON.stringify({"version":4}))}&appid=wh5&clientVersion=9.1.0`,
-       headers: {
-         "accept": "*/*",
-         "accept-encoding": "gzip, deflate, br",
-         "accept-language": "zh-CN,zh;q=0.9",
-         "cache-control": "no-cache",
-         "cookie": cookie,
-         "origin": "https://home.m.jd.com",
-         "pragma": "no-cache",
-         "referer": "https://home.m.jd.com/myJd/newhome.action",
-         "sec-fetch-dest": "empty",
-         "sec-fetch-mode": "cors",
-         "sec-fetch-site": "same-site",
-         "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-         "Content-Type": "application/x-www-form-urlencoded"
-       },
-       timeout: 10000,
-     };
-     $.post(option, (err, resp, data) => {
-       try {
-         if (err) {
-           console.log('\n东东农场: API查询请求失败 ‼️‼️');
-           console.log(JSON.stringify(err));
-           $.logErr(err);
-         } else {
-           if (safeGet(data)) {
-             $.farmInfo = JSON.parse(data)
-           }
-         }
-       } catch (e) {
-         $.logErr(e, resp)
-       } finally {
-         resolve();
-       }
-     })
-   })
 }
 
 // 初始化任务列表API
@@ -1344,6 +1305,7 @@ function taskUrl1(function_id, body = {}) {
     url: `${JD_API_HOST}?functionId=${function_id}&body=${encodeURIComponent(JSON.stringify(body))}&appid=wh5`,
     headers: {
       "Host": "api.m.jd.com",
+	  "Accept": "*/*",
       "Connection": "keep-alive",
       "Accept-Encoding": "gzip,compress,br,deflate",
       "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.26(0x18001a34) NetType/WIFI Language/zh_CN"),
