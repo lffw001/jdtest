@@ -1120,7 +1120,8 @@ async function signForFarm() {
  */
 async function initForFarm() {
   const functionId = arguments.callee.name.toString();
-  $.farmInfo = await request(functionId, {"babelChannel":"121","sid":"3c52b5f17ab2a42398939a27887eaf8w","un_area":"17_1381_0_0","version":18,"channel":1});
+  console.log(functionId);
+  $.farmInfo = await request(functionId, {"babelChannel":"10","sid":"3c52b5f17ab2a42398939a27887eaf8w","un_area":"17_1381_0_0","version":18,"channel":3});
   // return new Promise(resolve => {
   //   const option =  {
   //     url: `${JD_API_HOST}?functionId=initForFarm`,
@@ -1321,7 +1322,7 @@ function taskUrl(function_id, body = {}) {
       "Accept": "*/*",
       "Origin": "https://carry.m.jd.com",
       "Accept-Encoding": "gzip, deflate, br",
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "JD4iPhone/168271%20(iPhone;%20iOS;%20Scale/3.00)"),
       "Accept-Language": "zh-CN,zh-Hans;q=0.9",
       "Referer": "https://carry.m.jd.com/",
       "Cookie": cookie
