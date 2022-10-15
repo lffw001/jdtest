@@ -1344,12 +1344,11 @@ function taskUrl1(function_id, body = {}) {
     url: `${JD_API_HOST}?functionId=${function_id}&body=${encodeURIComponent(JSON.stringify(body))}&appid=wh5`,
     headers: {
       "Host": "api.m.jd.com",
-      "Accept": "*/*",
-      "Origin": "https://carry.m.jd.com",
-      "Accept-Encoding": "gzip, deflate, br",
+      "Connection": "keep-alive",
+      "Accept-Encoding": "gzip,compress,br,deflate",
       "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.26(0x18001a34) NetType/WIFI Language/zh_CN"),
-      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-      "Referer": "https://carry.m.jd.com/",
+      "content-type": "application/json",
+      "Referer": "https://servicewechat.com/wx91d27dbf599dff74/661/page-frame.html",
       "Cookie": cookie
     },
     timeout: 10000
