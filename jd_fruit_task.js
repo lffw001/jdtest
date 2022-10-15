@@ -1120,7 +1120,7 @@ async function signForFarm() {
  */
 async function initForFarm() {
   const functionId = arguments.callee.name.toString();
-  $.farmInfo = await request(functionId, {"babelChannel":"121","sid":"3c52b5f17ab2a42398939a27887eaf8w","un_area":"17_1381_0_0","version":18,"channel":1});
+  $.farmInfo = await request1(functionId, {"babelChannel":"121","sid":"3c52b5f17ab2a42398939a27887eaf8w","un_area":"17_1381_0_0","version":18,"channel":1});
 	console.log($.farmInfo);
   // return new Promise(resolve => {
   //   const option =  {
@@ -1274,6 +1274,32 @@ function TotalBean() {
                 resolve();
             }
         })
+    })
+}
+
+function request1(function_id, body = {}, timeout = 1000) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+			console.log(taskUrl(function_id, body));
+            $.get(taskUrl(function_id, body), (err, resp, data) => {
+                try {
+                    if (err) {
+                        console.log('\n东东农场: API查询请求失败 ‼️‼️')
+                        console.log(JSON.stringify(err));
+                        console.log(`function_id:${function_id}`)
+                        $.logErr(err);
+                    } else {
+                        if (safeGet(data)) {
+                            data = JSON.parse(data);
+                        }
+                    }
+                } catch (e) {
+                    $.logErr(e, resp);
+                } finally {
+                    resolve(data);
+                }
+            })
+        }, timeout)
     })
 }
 
