@@ -1308,7 +1308,7 @@ function taskUrl1(function_id, body = {}) {
 	  "Accept": "*/*",
       "Connection": "keep-alive",
       "Accept-Encoding": "gzip,compress,br,deflate",
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "Mozilla/5.0 (iPhone; CPU iPhone OS 15_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.26(0x18001a34) NetType/WIFI Language/zh_CN"),
+      "User-Agent": "jdapp;android;10.0.2;10;network/wifi;Mozilla/5.0 (Linux; Android 10; ONEPLUS A5010 Build/QKQ1.191014.012; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045230 Mobile Safari/537.36",
       "content-type": "application/json",
       "Referer": "https://servicewechat.com/wx91d27dbf599dff74/661/page-frame.html",
       "Cookie": cookie
