@@ -33,9 +33,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
 //助力好友分享码(最多3个,否则后面的助力失败)
 //此此内容是IOS用户下载脚本到本地使用，填写互助码的地方，同一京东账号的好友互助码请使用@符号隔开。
 //下面给出两个账号的填写示例（iOS只支持2个京东账号）
-let shareCodes = ['ppmjzfsnxeism4ifsn73te4bgu@olmijoxgmjutzdohyac3bq7kr6pyqg7bxm6nkby@vaxemtlhu2xwlgex2mozz7zmq7fhthbdlxk4xfi@mlrdw3aw26j3wcf4n7etx3nbvsqqdgfcwxutlya@4npkonnsy7xi3yblvabzv2vpcfd3yuw6djociba@h6lmj2pwgkzncpqrmeksbtupocphhxpk54mtw7i@mh5uulbrvnknkaui3nlu4kl2cxstw6ajxn5l3iq@4npkonnsy7xi3s6e7ctaxupeovawdgciofqee3a@olmijoxgmjutyvwjq7uyprdbsybgrzufjcgsyxi@o7eiltak46s2xrun4au23bbtctqlyye6lygaula',//账号一的好友shareCode, 不同好友中间用@符号隔开
-
-]
+let shareCodes = []
 let allMessage = ``;
 let currentRoundId = null;//本期活动id
 let lastRoundId = null;//上期id
@@ -43,7 +41,7 @@ let roundList = [];
 let awardState = '';//上期活动的京豆是否收取
 let randomCount = $.isNode() ? 20 : 5;
 let num;
-$.newShareCode = [];
+$.newShareCode =  ['ppmjzfsnxeism4ifsn73te4bgu', 'olmijoxgmjutzdohyac3bq7kr6pyqg7bxm6nkby', 'vaxemtlhu2xwlgex2mozz7zmq7fhthbdlxk4xfi', 'mlrdw3aw26j3wcf4n7etx3nbvsqqdgfcwxutlya', '4npkonnsy7xi3yblvabzv2vpcfd3yuw6djociba', 'h6lmj2pwgkzncpqrmeksbtupocphhxpk54mtw7i', 'mh5uulbrvnknkaui3nlu4kl2cxstw6ajxn5l3iq', '4npkonnsy7xi3s6e7ctaxupeovawdgciofqee3a', 'olmijoxgmjutyvwjq7uyprdbsybgrzufjcgsyxi', 'o7eiltak46s2xrun4au23bbtctqlyye6lygaula'];
 let llerror=false;
 let lnrun = 0;
 let lnruns = 0;
@@ -61,6 +59,7 @@ let lnruns = 0;
       $.isLogin = true;
       $.nickName = '';
       $.hotFlag = false; //是否火爆
+			$.UA = require('./USER_AGENTS').UARAM();
       //await TotalBean();
       console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
       if (!$.isLogin) {
@@ -135,7 +134,7 @@ async function doHelp() {
 
   console.log(`\n【开始账号内互助】\n`);
   $.newShareCode = [...(jdPlantBeanShareArr || [])]
-  
+  console.log($.newShareCode)
   for (let plantUuid of $.newShareCode) {
     console.log(`【${$.UserName}】开始助力: ${plantUuid}`);
     if (!plantUuid) continue;
@@ -318,7 +317,7 @@ async function plantBeanIndex() {
 }
 function requestGet(function_id, body = {}) {
   if (!body.version) {
-    body["version"] = "9.2.4.1";
+    body["version"] = "9.2.4.2";
   }
   body["monitor_source"] = "plant_app_plant_index";
   body["monitor_refer"] = "";
@@ -331,7 +330,7 @@ function requestGet(function_id, body = {}) {
         'Host': 'api.m.jd.com',
         'Accept': '*/*',
         'Connection': 'keep-alive',
-        'User-Agent': 'JD4iPhone/167283 (iPhone;iOS 13.6.1;Scale/3.00)',
+        'User-Agent': $.UA,
         'Accept-Language': 'zh-Hans-CN;q=1,en-CN;q=0.9',
         'Accept-Encoding': 'gzip, deflate, br',
         'Content-Type': "application/x-www-form-urlencoded"
@@ -405,7 +404,7 @@ function requireConfig() {
     notify = $.isNode() ? require('./sendNotify') : '';
     //Node.js用户请在jdCookie.js处填写京东ck;
     const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-    const jdPlantBeanShareCodes = $.isNode() ? require('./jdPlantBeanShareCodes.js') : '';
+    const jdPlantBeanShareCodes = '';
     //IOS等用户直接用NobyDa的jd cookie
     if ($.isNode()) {
       Object.keys(jdCookieNode).forEach((item) => {
@@ -429,8 +428,8 @@ function requireConfig() {
       if ($.getdata('jd_plantBean_help_inviter')) $.shareCodesArr = $.getdata('jd_plantBean_help_inviter').split('\n').filter(item => !!item);
       //console.log(`\nBoxJs设置的${$.name}好友邀请码:${$.getdata('jd_plantBean_help_inviter') ? $.getdata('jd_plantBean_help_inviter') : '暂无'}\n`);
     }
-     console.log(`\n种豆得豆助力码::${JSON.stringify($.shareCodesArr)}`);
-    console.log(`您提供了${$.shareCodesArr.length}个账号的种豆得豆助力码\n`);
+    // console.log(`\n种豆得豆助力码::${JSON.stringify($.shareCodesArr)}`);
+    //console.log(`您提供了${$.shareCodesArr.length}个账号的种豆得豆助力码\n`);
     resolve()
   })
 }
@@ -455,7 +454,7 @@ function request(function_id, body = {}) {
   })
 }
 function taskUrl(function_id, body) {
-  body["version"] = "9.2.4.1";
+  body["version"] = "9.2.4.2";
   body["monitor_source"] = "plant_app_plant_index";
   if (!body["monitor_refer"]){
   body["monitor_refer"] = "";
@@ -468,7 +467,7 @@ function taskUrl(function_id, body) {
       //"Host": "api.m.jd.com",
       "Accept": "*/*",
       //"Connection": "keep-alive",
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      "User-Agent": $.UA,
       "Accept-Language": "zh-Hans-CN;q=1,en-CN;q=0.9",
       "Accept-Encoding": "gzip, deflate, br",
       "Content-Type": "application/x-www-form-urlencoded"
