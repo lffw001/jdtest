@@ -271,7 +271,7 @@ async function getTreasureBoxAwardTask() {
     console.log(`正在进行任务：${treasureBox.taskMainTitle}`);
     await ddnc_getTreasureBoxAward(1);
     if ($.treasureResult.code == '0') {
-      await beanTaskList();
+      //await beanTaskList();
       await $.wait(1000);
       await ddnc_getTreasureBoxAward(2);
       if ($.treasureRwardResult.code == '0') {
@@ -1034,6 +1034,8 @@ async function masterGotFinishedTaskForFarm() {
 async function masterHelpTaskInitForFarm() {
     const functionId = arguments.callee.name.toString();
     $.masterHelpResult = await request(functionId);
+	console.log(111);
+	console.log($.masterHelpResult);
 }
 //新版助力好友信息API
 async function farmAssistInit() {
@@ -1155,8 +1157,9 @@ async function gotWaterGoalTaskForFarm() {
 }
 //签到API
 async function signForFarm() {
-    const functionId = arguments.callee.name.toString();
-    $.signResult = await request(functionId);
+    const functionId = "clockInForFarm";
+    $.signResult = await request(functionId,{"type":1,"version":18,"channel":1,"babelChannel":"121"});
+	//console.log($.signResult);
 }
 /**
  * 初始化农场, 可获取果树及用户信息API
@@ -1164,6 +1167,7 @@ async function signForFarm() {
 async function initForFarm() {
   const functionId = arguments.callee.name.toString();
   $.farmInfo = await request(functionId, {"babelChannel":"121","sid":"3c52b5f17ab2a42398939a27887eaf8w","version":18,"channel":1});
+  //console.log($.farmInfo);
   // return new Promise(resolve => {
   //   const option =  {
   //     url: `${JD_API_HOST}?functionId=initForFarm`,
@@ -1210,6 +1214,8 @@ async function taskInitForFarm() {
   console.log('\n初始化任务列表')
   const functionId = arguments.callee.name.toString();
   $.farmTask = await request(functionId, {"version":18,"channel":1,"babelChannel":"121"});
+  console.log(111);
+  console.log($.farmTask);
 }
 //获取好友列表API
 async function friendListInitForFarm() {
@@ -1322,6 +1328,7 @@ function TotalBean() {
 function request(function_id, body = {}, timeout = 1000) {
     return new Promise(resolve => {
         setTimeout(() => {
+			//console.log(taskUrl(function_id, body));
             $.get(taskUrl(function_id, body), (err, resp, data) => {
                 try {
                     if (err) {
