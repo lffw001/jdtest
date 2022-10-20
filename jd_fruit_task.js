@@ -1034,8 +1034,8 @@ async function masterGotFinishedTaskForFarm() {
 async function masterHelpTaskInitForFarm() {
     const functionId = arguments.callee.name.toString();
     $.masterHelpResult = await request(functionId);
-	console.log(111);
-	console.log($.masterHelpResult);
+	//console.log(111);
+	//console.log($.masterHelpResult);
 }
 //新版助力好友信息API
 async function farmAssistInit() {
@@ -1214,8 +1214,8 @@ async function taskInitForFarm() {
   console.log('\n初始化任务列表')
   const functionId = arguments.callee.name.toString();
   $.farmTask = await request(functionId, {"version":18,"channel":1,"babelChannel":"121"});
-  console.log(111);
-  console.log($.farmTask);
+  //console.log(111);
+  //console.log($.farmTask);
 }
 //获取好友列表API
 async function friendListInitForFarm() {
