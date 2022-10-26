@@ -1187,8 +1187,11 @@ async function gotWaterGoalTaskForFarm() {
 }
 //签到API
 async function signForFarm() {
-    const functionId = arguments.callee.name.toString();
-    $.signResult = await request(functionId);
+    //const functionId = arguments.callee.name.toString();
+    //$.signResult = await request(functionId);
+	const functionId = "clockInForFarm";
+    $.signResult = await request(functionId,{"type":1,"version":18,"channel":1,"babelChannel":"121"});
+	//console.log($.signResult);
 }
 /**
  * 初始化农场, 可获取果树及用户信息API
