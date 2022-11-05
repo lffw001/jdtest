@@ -4,7 +4,7 @@
 const $ = new Env('工会答题抽奖-session不过期');
 // index.js
 const fs = require('fs');
-const notify = $.isNode() ? require('./sendNotify1') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 const CryptoJS=require('crypto-js');
 
 let keys=[
