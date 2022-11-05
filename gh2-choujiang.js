@@ -59,6 +59,7 @@ let num=keys.length;
 
 !(async () => {
 	//do{
+		console.log("总共"+keys.length+"个账号");
 		for(var i=0;i<keys.length;i++){
 			console.log("【第"+(i+1)+"个账号】")
 			$.cookie=cookies[i];
