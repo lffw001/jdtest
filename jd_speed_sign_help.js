@@ -128,7 +128,7 @@ async function signInit() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-            //console.log(data)
+            console.log(data)
           }
         }
       } catch (e) {
@@ -679,28 +679,12 @@ function invite2() {
 //   let inviterId = ["a96OCbRRbeXixkMDj2uq6w==",
 // ][Math.floor((Math.random() * 1))]
   let inviterId = [
-    "a96OCbRRbeXixkMDj2uq6w==",
-    "MWvFNR+/AMsJ++oAkqu7oA==",
-    "iELfGhWPN4+qk6W8+9XflLqZAvuw65Su03th2p8LZ3s=",
-    "Ewo/ktC5uuFEV6NRDjEOuGN+ih64VaN6pr7ElX2B7qQ=",
-    "mWqydRbzpFZXtQLW8sNi4w==",
-    "WHOPxGHI5lHKJOXPcD9+6Q==",
-    "m0WX12woMy0LCKrikIOCvA==",
-    "on226vuYi7Q+ST7rHdHclg==",
-    "7VazsgDkMBeOHSxmTTHksg==",
-    "sRPKhdGZA5OvDLT3tJbmVx7hRm3dB2LVUbyU3AD3G84=",
-    "XckIfbn9Bti/8vMCb4/hxA==",
-    "JRApVe31I1a3pbY6PWR3Ug==",
-    "M+0VQW8GS+zNoKZYn1sz/qP1UfQwxYrjxf71ThzNACk=",
-    "LK8fgW9/PVVjkELGaMFppILytR7Sh7xK0R/e5dHmv2k=",
-    "wp4z/KBLdIs5u50rCL9YWDuR6siUKdPzqown6KlaTZc=",
-    "vnYEZJLL0kJkXW10neu11Q==",
-    "4nt9F3xRFD3fksDjaLkPKWNBQrAJMSOUKiqFVLo+o/o=",
-    "7hX64oby6aoRjobgL/LFKA==",
-    "BjQpbq2+v4T50/8YYehHw5oGe4H2vwaOeNsjeK/rSrk=",
-    "bG+W1LuefrhSJYV5iXS4JGL5kZiNXi2AturHhlpX5tA=",
-    "bSHg2t1EdBIyiJTd4rPOGCJHnSLMOu3HlW7vrog8qF8="
-  ][Math.floor((Math.random() * 21))]
+    "ghNQyGlIWbUdlPK/1zsTFQ==",
+	  "U6lCo5WEZMTUabR8RPhsmU5yrUVGTyQoPdAatEc+880=",
+	  "jl555FG2wDz4KjwztQvjww==",
+	  "FrDZBDwlRNX/Fet29mBTjg==",
+	  "X0t80OyY6c/49K0DgQRRfA==",
+  ][Math.floor((Math.random() * 5))]
   let headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',
@@ -730,28 +714,12 @@ function invite() {
 //   let inviterId = ["a96OCbRRbeXixkMDj2uq6w==",
 // ][Math.floor((Math.random() * 1))]
 let inviterId = [
-  "a96OCbRRbeXixkMDj2uq6w==",
-  "MWvFNR+/AMsJ++oAkqu7oA==",
-  "iELfGhWPN4+qk6W8+9XflLqZAvuw65Su03th2p8LZ3s=",
-  "Ewo/ktC5uuFEV6NRDjEOuGN+ih64VaN6pr7ElX2B7qQ=",
-  "mWqydRbzpFZXtQLW8sNi4w==",
-  "WHOPxGHI5lHKJOXPcD9+6Q==",
-  "m0WX12woMy0LCKrikIOCvA==",
-  "on226vuYi7Q+ST7rHdHclg==",
-  "7VazsgDkMBeOHSxmTTHksg==",
-  "sRPKhdGZA5OvDLT3tJbmVx7hRm3dB2LVUbyU3AD3G84=",
-  "XckIfbn9Bti/8vMCb4/hxA==",
-  "JRApVe31I1a3pbY6PWR3Ug==",
-  "M+0VQW8GS+zNoKZYn1sz/qP1UfQwxYrjxf71ThzNACk=",
-  "LK8fgW9/PVVjkELGaMFppILytR7Sh7xK0R/e5dHmv2k=",
-  "wp4z/KBLdIs5u50rCL9YWDuR6siUKdPzqown6KlaTZc=",
-  "vnYEZJLL0kJkXW10neu11Q==",
-  "4nt9F3xRFD3fksDjaLkPKWNBQrAJMSOUKiqFVLo+o/o=",
-  "7hX64oby6aoRjobgL/LFKA==",
-  "BjQpbq2+v4T50/8YYehHw5oGe4H2vwaOeNsjeK/rSrk=",
-  "bG+W1LuefrhSJYV5iXS4JGL5kZiNXi2AturHhlpX5tA=",
-  "bSHg2t1EdBIyiJTd4rPOGCJHnSLMOu3HlW7vrog8qF8="
-][Math.floor((Math.random() * 21))]
+   "ghNQyGlIWbUdlPK/1zsTFQ==",
+	  "U6lCo5WEZMTUabR8RPhsmU5yrUVGTyQoPdAatEc+880=",
+	  "jl555FG2wDz4KjwztQvjww==",
+	  "FrDZBDwlRNX/Fet29mBTjg==",
+	  "X0t80OyY6c/49K0DgQRRfA==",
+][Math.floor((Math.random() * 5))]
   var headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',
