@@ -105,8 +105,8 @@ function getQuestion(){
 		  try {
 			data = JSON.parse(data);
 			$corrNum=data.data.answer_count;
-			console.log("正确题数："+data.data.answer_count);
-			console.log("正确答案："+data.data.question.correctc_answer);
+			//console.log("正确题数："+data.data.answer_count);
+			//console.log("正确答案："+data.data.question.correctc_answer);
 			var corr=data.data.question.correctc_answer.split(';');
 			$.qid=data.data.question.id;
 			
@@ -129,7 +129,7 @@ function getQuestion(){
 				}
 			}
 			$.ans=a;
-			console.log("提交答案："+$.ans);
+			//console.log("提交答案："+$.ans);
 		  } catch (e) {
 			$.logErr(e, resp)
 		  } finally {
@@ -147,7 +147,7 @@ function answerQuestion(){
 		  try {
 			//console.log(data);
 			data = JSON.parse(data);
-			console.log(data.data);
+			//console.log(data.data);
 			
 		  } catch (e) {
 			$.logErr(e, resp)
