@@ -100,7 +100,7 @@ let weizhong=0;
 				await $.wait(3000);
 			}
 			await lottery();//抽奖----一轮
-			if(chou<xzCount&&zhong==0){//抽奖次数小于设置的次数
+			if(chou>0&&chou<xzCount&&zhong==0){//抽奖次数小于设置的次数
 				//第一次有效抽中未中奖
 				console.log("第"+chou+"次有效抽---【无水】【未中奖】");
 				//await $.wait(3000);//等待三秒
