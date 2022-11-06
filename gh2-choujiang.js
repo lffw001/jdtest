@@ -65,9 +65,10 @@ let isShui=true;
 
 let wujh=0;
 
+let weizhong=0;
+
 !(async () => {
-	console.log("等待三秒后开始！");
-	await $.wait(3000);//等待三秒
+	console.log("开始！");
 	do{
 		console.log("总共"+keys.length+"个账号");
 		for(var i=0;i<keys.length;i++){
@@ -87,15 +88,23 @@ let wujh=0;
 			await lottery();//抽奖----一轮
 			if(chou==1&&zhong==0){
 				//第一次有效抽中未中奖
-				console.log("第一次有效抽---【未中奖】");
-				await $.wait(3000);//等待三秒
+				console.log("第一次有效抽---【无水】【未中奖】【结束】");
+				//await $.wait(3000);//等待三秒
+				isShui=false;
+				break;
 			}
-			if(chou==2&&zhong==0){
+			if(isShui&&weizhong>2){
+				//有水后连续3次不中【无水】【结束】
+				//无水
+				isShui=false;
+				break;
+			}
+			/*if(chou==2&&zhong==0){
 				//第二次抽中未中奖无水
 				console.log("第二次抽中未中奖---【无水】【结束】！");
 				isShui=false;
 				break;
-			}
+			}*/
 			//进入抽奖页面，保证session不过期
 			
 			//await tolottery();
@@ -235,11 +244,13 @@ function lottery(){
 				//未中奖
 				wujh=0;
 				chou++;
+				weizhong++;
 			}else{
 				//中奖
 				wujh=0;
 				chou++;
 				zhong++;
+				weizhong=0;
 			}
 		  } catch (e) {
 			$.logErr(e, resp)
