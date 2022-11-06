@@ -94,7 +94,8 @@ let weizhong=0;
 				break;
 			}
 			if(isShui&&weizhong>2){
-				//有水后连续3次不中【无水】【结束】
+				//
+				console.log("有水后连续3次不中【无水】【结束】");
 				//无水
 				isShui=false;
 				break;
