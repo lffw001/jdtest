@@ -65,10 +65,17 @@ let isShui=true;
 
 let wujh=0;
 
+let xzCount=1;
+
 let weizhong=0;
 
 !(async () => {
 	console.log("开始！");
+	var now=new Date();
+	if(now.getHours()==0&&now.getMinutes()<5){
+		//凌晨12点
+		xzCount=4;//修改为4次有效答题未中才算无水。
+	}
 	do{
 		console.log("总共"+keys.length+"个账号");
 		for(var i=0;i<keys.length;i++){
@@ -78,18 +85,28 @@ let weizhong=0;
 			$.key=keys[i];
 			$.lotterycookie=lotterycookies[i];
 			$corrNum=0;
-			/*do{
-				await getQuestion();
-				await answerQuestion();
+			if(now.getHours()==0&&now.getMinutes()<5){
+				//凌晨12点，抽奖之前先进行答题
+				do{
+					await getQuestion();
+					await answerQuestion();
+					await $.wait(100);
+				}while($corrNum<9)
+				await endAsnswer();
 				await $.wait(100);
-			}while($corrNum<9)
-			await endAsnswer();
-			*/
-			await $.wait(3000);
+			}else{
+				await $.wait(3000);
+			}
 			await lottery();//抽奖----一轮
-			if(chou==1&&zhong==0){
+			if(chou<xzCount&&zhong==0){//抽奖次数小于设置的次数
 				//第一次有效抽中未中奖
-				console.log("第一次有效抽---【无水】【未中奖】【结束】");
+				console.log("第"+chou+"次有效抽---【无水】【未中奖】");
+				//await $.wait(3000);//等待三秒
+				isShui=false;
+				break;
+			}else if(chou==xzCount&&zhong==0){
+				//第一次有效抽中未中奖
+				console.log("第"+chou+"次有效抽---【无水】【未中奖】【结束】");
 				//await $.wait(3000);//等待三秒
 				isShui=false;
 				break;
