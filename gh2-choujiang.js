@@ -57,10 +57,20 @@ let lotterycookies=[
 
 let num=keys.length;
 
+let zhong=0;
+
+let chou=0;
+
+let isShui=true;
+
+let wujh=0;
+
 !(async () => {
-	//do{
+	
+	do{
 		console.log("总共"+keys.length+"个账号");
 		for(var i=0;i<keys.length;i++){
+			//var i=0;
 			console.log("【第"+(i+1)+"个账号】")
 			$.cookie=cookies[i];
 			$.key=keys[i];
@@ -74,13 +84,24 @@ let num=keys.length;
 			await endAsnswer();
 			await $.wait(100);
 			await lottery();//抽奖----一轮
+			if(chou==1&&zhong==0){
+				//第一次有效抽中未中奖
+				console.log("第一次有效抽---【未中奖】");
+				await $.wait(3000);//等待三秒
+			}
+			if(chou==2&&zhong==0){
+				//第二次抽中未中奖无水
+				console.log("第二次抽中未中奖---【无水】【结束】！");
+				isShui=false;
+				break;
+			}
 			//进入抽奖页面，保证session不过期
 			
 			//await tolottery();
 			//await $.wait(10000);
 			
 		}
-	//}while(num>0)
+	}while(isShui&&wujh<keys.length)
 	
 })()
   .catch((e) => {
@@ -204,8 +225,20 @@ function lottery(){
 		  try {
 			data = JSON.parse(data);
 			console.log(data);
-			if(data.code!=400){
-				num--;
+			if(data.code==500){
+				//次数用完
+				wujh++;
+				//chou=false;
+		
+			}else if(data.code==400){
+				//未中奖
+				wujh=0;
+				chou++;
+			}else{
+				//中奖
+				wujh=0;
+				chou++;
+				zhong++;
 			}
 		  } catch (e) {
 			$.logErr(e, resp)
