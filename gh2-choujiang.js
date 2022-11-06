@@ -66,7 +66,8 @@ let isShui=true;
 let wujh=0;
 
 !(async () => {
-	
+	console.log("等待三秒后开始！");
+	await $.wait(3000);//等待三秒
 	do{
 		console.log("总共"+keys.length+"个账号");
 		for(var i=0;i<keys.length;i++){
