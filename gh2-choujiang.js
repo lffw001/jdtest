@@ -104,8 +104,6 @@ let weizhong=0;
 				//第一次有效抽中未中奖
 				console.log("第"+chou+"次有效抽---【无水】【未中奖】");
 				//await $.wait(3000);//等待三秒
-				isShui=false;
-				break;
 			}else if(chou==xzCount&&zhong==0){
 				//第一次有效抽中未中奖
 				console.log("第"+chou+"次有效抽---【无水】【未中奖】【结束】");
