@@ -78,13 +78,14 @@ let weizhong=0;
 			$.key=keys[i];
 			$.lotterycookie=lotterycookies[i];
 			$corrNum=0;
-			do{
+			/*do{
 				await getQuestion();
 				await answerQuestion();
 				await $.wait(100);
 			}while($corrNum<9)
 			await endAsnswer();
-			await $.wait(100);
+			*/
+			await $.wait(3000);
 			await lottery();//抽奖----一轮
 			if(chou==1&&zhong==0){
 				//第一次有效抽中未中奖
