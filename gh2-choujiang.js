@@ -72,17 +72,18 @@ let xzCount=1;
 let weizhong=0;
 
 !(async () => {
-	console.log("开始！");
+	console.log(getNowFormatDate()+":等待3秒,开始！");
+	await $.wait(3000);
 	var now=new Date();
-	if(now.getHours()==0&&now.getMinutes()<5){
+	if((now.getHours()==0||now.getHours()==12)&&now.getMinutes()<10){
 		//凌晨12点
 		xzCount=4;//修改为4次有效答题未中才算无水。
 	}
 	do{
-		console.log("总共"+keys.length+"个账号");
+		console.log(getNowFormatDate()+":总共"+keys.length+"个账号");
 		for(var i=0;i<keys.length;i++){
 			//var i=0;
-			console.log("【第"+(i+1)+"个账号】")
+			console.log(getNowFormatDate()+":【第"+(i+1)+"个账号】")
 			$.cookie=cookies[i];
 			$.key=keys[i];
 			$.lotterycookie=lotterycookies[i];
@@ -96,38 +97,32 @@ let weizhong=0;
 				}while($corrNum<9)
 				await endAsnswer();
 				await $.wait(100);
-			}else{
-				await $.wait(3000);
 			}
+			await $.wait(3000);
 			await lottery();//抽奖----一轮
 			if(chou>0&&chou<xzCount&&zhong==0){//抽奖次数小于设置的次数
-				//第一次有效抽中未中奖
-				console.log("第"+chou+"次有效抽---【无水】【未中奖】");
-				//await $.wait(3000);//等待三秒
+				//有效抽，小于未中xzCount的限制数量，但未中奖
+				console.log(getNowFormatDate()+":第"+chou+"次有效抽---【无水】【未中奖】");
+				console.log(getNowFormatDate()+":等待15s");
+				await $.wait(15000);//等待三秒
 			}else if(chou==xzCount&&zhong==0){
-				//第一次有效抽中未中奖
-				console.log("第"+chou+"次有效抽---【无水】【未中奖】【结束】");
+				//有效抽，等于未中xzCount的限制数量 未中奖
+				console.log(getNowFormatDate()+":第"+chou+"次有效抽---【无水】【未中奖】【结束】");
 				//await $.wait(3000);//等待三秒
+				//await $.wait(3000);
 				isShui=false;
 				break;
+			}else{
+				await $.wait(1000);
 			}
-			if(isShui&&weizhong>2){
+			if(isShui&&weizhong>3){
 				//
-				console.log("有水后连续3次不中【无水】【结束】");
+				console.log(getNowFormatDate()+":有水后连续4次不中【无水】【结束】");
 				//无水
 				isShui=false;
 				break;
 			}
-			/*if(chou==2&&zhong==0){
-				//第二次抽中未中奖无水
-				console.log("第二次抽中未中奖---【无水】【结束】！");
-				isShui=false;
-				break;
-			}*/
-			//进入抽奖页面，保证session不过期
-			
-			//await tolottery();
-			//await $.wait(10000);
+
 			
 		}
 	}while(isShui&&wujh<keys.length)
@@ -152,8 +147,8 @@ function getQuestion(){
 		  try {
 			data = JSON.parse(data);
 			$corrNum=data.data.answer_count;
-			console.log("正确题数："+data.data.answer_count);
-			console.log("正确答案："+data.data.question.correctc_answer);
+			console.log(getNowFormatDate()+":正确题数："+data.data.answer_count);
+			console.log(getNowFormatDate()+":正确答案："+data.data.question.correctc_answer);
 			var corr=data.data.question.correctc_answer.split(';');
 			$.qid=data.data.question.id;
 			
@@ -176,7 +171,7 @@ function getQuestion(){
 				}
 			}
 			$.ans=a;
-			console.log("提交答案："+$.ans);
+			console.log(getNowFormatDate()+":提交答案："+$.ans);
 		  } catch (e) {
 			$.logErr(e, resp)
 		  } finally {
@@ -234,7 +229,7 @@ function tolottery(){
 			} else {
 				//data = JSON.parse(data)
 				//console.log(data);
-				console.log("进入抽奖页面，保证session不过期");
+				console.log(getNowFormatDate()+":进入抽奖页面，保证session不过期");
 			}
 		} catch (e) {
 			reject(`API返回结果解析出错\n${e}\n${JSON.stringify(data)}`)
