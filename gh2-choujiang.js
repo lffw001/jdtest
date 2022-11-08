@@ -103,6 +103,7 @@ let weizhong=0;
 				//有效抽，小于未中xzCount的限制数量，但未中奖
 				console.log(getNowFormatDate()+":第"+chou+"次有效抽---【无水】【未中奖】");
 				console.log(getNowFormatDate()+":等待15s");
+				isShui=false;
 				await $.wait(20000);//等待三秒
 			}else if(chou==xzCount&&zhong==0){
 				//有效抽，等于未中xzCount的限制数量 未中奖
@@ -262,12 +263,14 @@ function lottery(){
 				wujh=0;
 				chou++;
 				weizhong++;
+				isShui=false;
 			}else{
 				//中奖
 				wujh=0;
 				chou++;
 				zhong++;
 				weizhong=0;
+				isShui=true;
 			}
 		  } catch (e) {
 			$.logErr(e, resp)
