@@ -75,7 +75,7 @@ let weizhong=0;
 	console.log(getNowFormatDate()+":等待3秒,开始！");
 	await $.wait(3000);
 	var now=new Date();
-	if((now.getHours()==0||now.getHours()==12||||now.getHours()==20)&&now.getMinutes()<10){
+	if((now.getHours()==0||now.getHours()==12||now.getHours()==20)&&now.getMinutes()<10){
 		//凌晨12点
 		xzCount=10;//修改为4次有效答题未中才算无水。
 	}
