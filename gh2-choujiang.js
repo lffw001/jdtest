@@ -77,7 +77,7 @@ let weizhong=0;
 	var now=new Date();
 	if((now.getHours()==0||now.getHours()==12)&&now.getMinutes()<10){
 		//凌晨12点
-		xzCount=4;//修改为4次有效答题未中才算无水。
+		xzCount=7;//修改为4次有效答题未中才算无水。
 	}
 	do{
 		console.log(getNowFormatDate()+":总共"+keys.length+"个账号");
@@ -98,7 +98,6 @@ let weizhong=0;
 				await endAsnswer();
 				await $.wait(100);
 			}
-			await $.wait(3000);
 			await lottery();//抽奖----一轮
 			if(chou>0&&chou<xzCount&&zhong==0){//抽奖次数小于设置的次数
 				//有效抽，小于未中xzCount的限制数量，但未中奖
@@ -112,8 +111,13 @@ let weizhong=0;
 				//await $.wait(3000);
 				isShui=false;
 				break;
-			}else{
-				await $.wait(1000);
+			}else if(chou==0){
+				console.log(getNowFormatDate()+":【无效抽奖】");
+				await $.wait(100);
+			}else if(chou>0&&zhong>0){
+				//有效抽且中奖品
+				console.log(getNowFormatDate()+":有效抽---【中奖】");
+				await $.wait(3000);//等待3秒
 			}
 			if(isShui&&weizhong>3){
 				//
