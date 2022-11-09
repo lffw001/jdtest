@@ -67,17 +67,21 @@ let isShui=true;
 
 let wujh=0;
 
-let xzCount=1;
+let xzCount=0;
 
-let weizhong=0;
+let weizhong=1;
 
 !(async () => {
-	console.log(getNowFormatDate()+":等待3秒,开始！");
-	await $.wait(3000);
+	console.log(getNowFormatDate()+":开始！");
 	var now=new Date();
-	if((now.getHours()==0||now.getHours()==12||now.getHours()==20)&&now.getMinutes()<10){
+	if(now.getHours()==0&&now.getMinutes()<10){
 		//凌晨12点
-		xzCount=10;//修改为4次有效答题未中才算无水。
+		xzCount=3;//修改为4次有效答题未中才算无水。
+	}else if(now.getHours()==12&&now.getMinutes()<10){
+		//中午12点
+		xzCount=20;//修改为4次有效答题未中才算无水。
+	}else{
+		xzCount=20;//修改为4次有效答题未中才算无水。
 	}
 	do{
 		console.log(getNowFormatDate()+":总共"+keys.length+"个账号");
@@ -93,18 +97,18 @@ let weizhong=0;
 				do{
 					await getQuestion();
 					await answerQuestion();
-					await $.wait(100);
+					await $.wait(50);
 				}while($corrNum<9)
 				await endAsnswer();
-				await $.wait(100);
 			}
 			await lottery();//抽奖----一轮
-			if(chou>0&&chou<xzCount&&zhong==0){//抽奖次数小于设置的次数
+			await $.wait(200);
+			/*if(chou>0&&chou<xzCount&&zhong==0){//抽奖次数小于设置的次数
 				//有效抽，小于未中xzCount的限制数量，但未中奖
 				console.log(getNowFormatDate()+":第"+chou+"次有效抽---【无水】【未中奖】");
 				console.log(getNowFormatDate()+":等待15s");
 				isShui=false;
-				await $.wait(20000);//等待三秒
+				await $.wait(30000);//等待三秒
 			}else if(chou==xzCount&&zhong==0){
 				//有效抽，等于未中xzCount的限制数量 未中奖
 				console.log(getNowFormatDate()+":第"+chou+"次有效抽---【无水】【未中奖】【结束】");
@@ -113,15 +117,11 @@ let weizhong=0;
 				break;
 			}else if(chou==0){
 				console.log(getNowFormatDate()+":【无效抽奖】");
-				await $.wait(100);
-			}else if(chou>0&&zhong>0){
-				//有效抽且中奖品
-				console.log(getNowFormatDate()+":有效抽---【中奖】");
-				await $.wait(3000);//等待3秒
-			}
-			if(isShui&&weizhong>5){
+				await $.wait(50);
+			}*/
+			if(isShui&&weizhong>xzCount){
 				//
-				console.log(getNowFormatDate()+":有水后连续6次不中【无水】【结束】");
+				console.log(getNowFormatDate()+":连续b次不中【无水】【结束】");
 				//无水
 				isShui=false;
 				break;
@@ -263,7 +263,6 @@ function lottery(){
 				wujh=0;
 				chou++;
 				weizhong++;
-				isShui=false;
 			}else{
 				//中奖
 				wujh=0;
