@@ -34,6 +34,7 @@ let trialActivityIdList = []
 let trialActivityTitleList = []
 let notifyMsg = ''
 let size = 1;
+let errNumber=0;
 $.isPush = true;
 $.isLimit = false;
 $.isForbidden = false;
@@ -97,7 +98,7 @@ let args_xh = {
      * 可设置环境变量：JD_TRY_TABID，用@进行分隔
      * tabId不定期会变,获取不到商品，自行获取并修改tabId
      * */
-        tabId: process.env.JD_TRY_TABID && process.env.JD_TRY_TABID.split('@').map(Number) || [200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212,213,214,215,216,217,218,219,220,221,222,223,224,225],
+        tabId: process.env.JD_TRY_TABID && process.env.JD_TRY_TABID.split('@').map(Number) || [200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212,213,214,215,216,217,218,219,220,221,222,223,224,225,226],
     /*
      * 试用商品标题过滤，黑名单，当标题存在关键词时，则不加入试用组
      * 当白名单和黑名单共存时，黑名单会自动失效，优先匹配白名单，匹配完白名单后不会再匹配黑名单，望周知
@@ -241,6 +242,10 @@ let args_xh = {
                     console.log(`间隔等待中，请等待3秒 \n`)
                     await $.wait(3000);
                 }
+				if(errNumber>5){
+					console.log(`试用列表失败次数过多，不再获取商品\n`);
+                    break;
+				}
             }
             if ($.isForbidden === false && $.isLimit === false) {
                 console.log(`稍后将执行试用申请，请等待 2 秒\n`)
@@ -478,6 +483,7 @@ function try_feedsList(tabId, page) {
                         }
                         $.retrynum = 0
                     } else {
+						errNumber++;
                         console.log(`💩 获得试用列表失败: ${data.message}`)
                     }
                 }
