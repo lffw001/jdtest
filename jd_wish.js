@@ -25,8 +25,8 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = [];
-let appNameArr = [];
+let appIdArr = ["1FVRZxKiD"];
+let appNameArr = ["超级大转盘"];
 let appId, appName;
 $.shareCode = [{
     code: 'T018v_VzQRob8VLRJxKb1ACjJSlqSR5jIjeQOc',
@@ -141,7 +141,7 @@ if ($.isNode()) {
     if ($.isNode()) await notify.sendNotify($.name, allMessage);
     $.msg($.name, '', allMessage)
   }
-  ///let res = await getAuthorShareCode('https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/wish.json')
+  //let res = await getAuthorShareCode('https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/wish.json')
  // $.shareCode = [...$.shareCode, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -154,7 +154,7 @@ if ($.isNode()) {
         appName = appNameArr[v]
         console.log(`开始助力第${v + 1}个活动：${appName}\n`)
         for (let j = 0; j < $.shareCode.length && $.canHelp; j++) {
-          if ($.shareCode[j].appId === appId) {
+          //if ($.shareCode[j].appId === appId) {
             console.log(`${$.UserName} 去助力 ${$.shareCode[j].use} 的助力码 ${$.shareCode[j].code}`)
             if ($.UserName == $.shareCode[j].use) {
               console.log(`不能助力自己\n`)
@@ -168,7 +168,7 @@ if ($.isNode()) {
               j--
               continue
             }
-          }
+         // }
         }
       }
     }
@@ -182,7 +182,9 @@ if ($.isNode()) {
     })
 async function jd_wish() {
   try {
+		$.hasEnd = false;
     await healthyDay_getHomeData();
+		if($.hasEnd) return;
     await $.wait(2000)
 
     let getHomeDataRes = (await healthyDay_getHomeData(false)).data.result.userInfo
@@ -198,6 +200,10 @@ async function jd_wish() {
     $.canLottery = true
     for (let j = 0; j < forNum && $.canLottery; j++) {
       await interact_template_getLotteryResult()
+			if (j == 9 && $.canLottery) {
+        console.log('抽太多次了，下次再继续吧！');
+        break
+      }
       await $.wait(2000)
     }
 
@@ -218,6 +224,7 @@ async function healthyDay_getHomeData(type = true) {
           if (safeGet(data)) {
             data = JSON.parse(data);
             // console.log(data);
+						if(data.data.bizCode === 0) {
             if (type) {
               for (let key of Object.keys(data.data.result.hotTaskVos).reverse()) {
                 let vo = data.data.result.hotTaskVos[key]
@@ -228,8 +235,8 @@ async function healthyDay_getHomeData(type = true) {
                   } else {
                   console.log(`【${vo.taskName}】已完成\n`)
                 }
-				}	
-				}						
+							}	
+							}						
               for (let key of Object.keys(data.data.result.taskVos).reverse()) {
                 let vo = data.data.result.taskVos[key]
                 if (vo.status !== 2) {
@@ -261,7 +268,7 @@ async function healthyDay_getHomeData(type = true) {
                       }
                     }
                   } else if (vo.taskType === 3) {
-					for (let key of Object.keys(vo.shoppingActivityVos)) {
+							for (let key of Object.keys(vo.shoppingActivityVos)) {
                       let shoppingActivityVos = vo.shoppingActivityVos[key]
                       if (shoppingActivityVos.status !== 2) {
                         console.log(`【${vo.subTitleName}】`)
@@ -308,6 +315,10 @@ async function healthyDay_getHomeData(type = true) {
                 }
               }
             }
+					} else {
+              console.log(`黑号，火爆了\n`)
+							$.hasEnd = true;
+						}
           }
         }
       } catch (e) {
