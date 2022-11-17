@@ -239,10 +239,10 @@ let args_xh = {
                     await try_feedsList(args_xh.tabId[$.nowTabIdIndex], $.nowPage)  //获取对应tabId的试用页面
                 }
                 if (trialActivityIdList.length < args_xh.maxLength) {
-                    console.log(`间隔等待中，请等待3秒 \n`)
-                    await $.wait(3000);
+                    console.log(`间隔等待中，请等待4秒 \n`)
+                    await $.wait(4000);
                 }
-				if(errNumber>5){
+				if(errNumber>15){
 					console.log(`试用列表失败次数过多，不再获取商品\n`);
                     break;
 				}
@@ -481,7 +481,8 @@ function try_feedsList(tabId, page) {
                             $.nowPage = 1;
                             $.nowItem = 1;
                         }
-                        $.retrynum = 0
+                        $.retrynum = 0;
+						errNumber=0;
                     } else {
 						errNumber++;
                         console.log(`💩 获得试用列表失败: ${data.message}`)
