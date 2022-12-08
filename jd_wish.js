@@ -25,8 +25,8 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = ["1FVRZxKiD"];
-let appNameArr = ["超级大转盘"];
+let appIdArr = ["1EFVXyw"];
+let appNameArr = ["年终奖补贴"];
 let appId, appName;
 $.shareCode = [{
     code: 'T018v_VzQRob8VLRJxKb1ACjJSlqSR5jIjeQOc',
@@ -134,6 +134,7 @@ if ($.isNode()) {
         appName = appNameArr[j]
         console.log(`\n开始第${j + 1}个活动：${appName}\n`)
         await jd_wish();
+				await $.wait(2000)
       }
     }
   }
@@ -141,8 +142,8 @@ if ($.isNode()) {
     if ($.isNode()) await notify.sendNotify($.name, allMessage);
     $.msg($.name, '', allMessage)
   }
-  //let res = await getAuthorShareCode('https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/wish.json')
- // $.shareCode = [...$.shareCode, ...(res || [])]
+ // let res = await getAuthorShareCode('https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/wish.json')
+//  $.shareCode = [...$.shareCode, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -154,7 +155,7 @@ if ($.isNode()) {
         appName = appNameArr[v]
         console.log(`开始助力第${v + 1}个活动：${appName}\n`)
         for (let j = 0; j < $.shareCode.length && $.canHelp; j++) {
-          //if ($.shareCode[j].appId === appId) {
+          if ($.shareCode[j].appId === appId) {
             console.log(`${$.UserName} 去助力 ${$.shareCode[j].use} 的助力码 ${$.shareCode[j].code}`)
             if ($.UserName == $.shareCode[j].use) {
               console.log(`不能助力自己\n`)
@@ -168,7 +169,7 @@ if ($.isNode()) {
               j--
               continue
             }
-         // }
+          }
         }
       }
     }
@@ -204,7 +205,7 @@ async function jd_wish() {
         console.log('抽太多次了，下次再继续吧！');
         break
       }
-      await $.wait(2000)
+      await $.wait(3000)
     }
 
   } catch (e) {
@@ -232,6 +233,7 @@ async function healthyDay_getHomeData(type = true) {
                   if (vo.taskType === 13 || vo.taskType === 12) {
                     console.log(`点击热区`)
                     await harmony_collectScore({ "appId": appId, "taskToken": vo.simpleRecordInfoVo.taskToken, "taskId": vo.taskId, "actionType": "0" }, vo.taskType)
+										await $.wait(1500)
                   } else {
                   console.log(`【${vo.taskName}】已完成\n`)
                 }
@@ -243,12 +245,14 @@ async function healthyDay_getHomeData(type = true) {
                   if (vo.taskType === 13 || vo.taskType === 12) {
                     console.log(`签到`)
                     await harmony_collectScore({ "appId": appId, "taskToken": vo.simpleRecordInfoVo.taskToken, "taskId": vo.taskId, "actionType": "0" }, vo.taskType)
+										await $.wait(1500)
                   } else if (vo.taskType === 1) {
                     for (let key of Object.keys(vo.followShopVo)) {
                       let followShopVo = vo.followShopVo[key]
                       if (followShopVo.status !== 2) {
                         console.log(`【${followShopVo.shopName}】${vo.subTitleName}`)
                         await harmony_collectScore({ "appId": appId, "taskToken": followShopVo.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 5) {
@@ -257,6 +261,7 @@ async function healthyDay_getHomeData(type = true) {
                       if (browseShopVo.status !== 2) {
                         console.log(`【${browseShopVo.skuName}】${vo.subTitleName}`)
                         await harmony_collectScore({ "appId": appId, "taskToken": browseShopVo.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 15) {
@@ -265,6 +270,7 @@ async function healthyDay_getHomeData(type = true) {
                       if (productInfoVos.status !== 2) {
                         console.log(`【${productInfoVos.skuName}】${vo.subTitleName}`)
                         await harmony_collectScore({ "appId": appId, "taskToken": productInfoVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 3) {
@@ -273,6 +279,7 @@ async function healthyDay_getHomeData(type = true) {
                       if (shoppingActivityVos.status !== 2) {
                         console.log(`【${vo.subTitleName}】`)
                         await harmony_collectScore({ "appId": appId, "taskToken": shoppingActivityVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 8) {
@@ -283,6 +290,7 @@ async function healthyDay_getHomeData(type = true) {
                         await harmony_collectScore({ "appId": appId, "taskToken": productInfoVos.taskToken, "taskId": vo.taskId, "actionType": "1" })
                         await $.wait(vo.waitDuration * 1000)
                         await harmony_collectScore({ "appId": appId, "taskToken": productInfoVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 27 && vo.taskId === 18) {
@@ -298,6 +306,7 @@ async function healthyDay_getHomeData(type = true) {
                           await $.wait(vo.waitDuration * 1000)
                         }
                         await harmony_collectScore({ "appId": appId, "taskToken": shoppingActivityVos.taskToken, "taskId": vo.taskId, "actionType": "0" })
+												await $.wait(1500)
                       }
                     }
                   } else if (vo.taskType === 14) {

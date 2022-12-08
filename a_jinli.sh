@@ -10,14 +10,15 @@
 # export CK_START_INDEX="10"  #从第10个号开始助力,可选参数,可以不填
 # export JINLI_SUCCESS_COUNT="90" # 每个号要助力多少个自动切下一个号,可选参数,可以不填,默认助力满
 # export JINLI_USE_PROXY="true" #强制使用代理访问
+# export JINLI_ONLY_APPCK="true" #仅执行appck
 pwd
 _ftype=""
 use_get_arch=${BBK_ARCH}
+get_arch=`arch`
 if [ "$use_get_arch" != "" ]; then
   get_arch=$use_get_arch
   echo "指定运行$use_get_arch"
 fi
-get_arch=`arch`
 echo $get_arch
 if [[ $get_arch =~ "x86_64" ]];then
 	_ftype="linux-amd64"

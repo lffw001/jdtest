@@ -16,6 +16,7 @@ var code=0;
 	//await notify.sendNotify(``, "测试");return;
 		do{
 			await main1();
+			//console.log(data1)
 			if(data1.code==601){
 				await notify.sendNotify(``, data1.msg);
 				return;
@@ -58,10 +59,10 @@ var code=0;
 
 
 async function main1() {
-	var url='https://sxzy.yunzhi.co/cloud2.pointmall.api/goods/list.do?companyCode=&goodsType=61&sort=&pageSize=10&pageNum=1&userToken=0de63f62808d4f0ab64588ef6ba11e43'
+	var url='https://sxzy.yunzhi.co/cloud2.pointmall.api/goods/list.do?companyCode=&goodsType=61&sort=&pageSize=10&pageNum=1&userToken=ba813a65827442c380d720ec74e5b3b4'
   let myRequest = getGetRequest(url);
   return new Promise(async resolve => {
-        $.post(myRequest, (err, resp, data) => {
+        $.get(myRequest, (err, resp, data) => {
             try {
 				//console.log(data)
                 data = JSON.parse(data);
@@ -77,10 +78,10 @@ async function main1() {
     })
 }
 async function main2() {
-	var url='https://sxzy.yunzhi.co/cloud2.pointmall.api/goods/list.do?companyCode=&goodsType=66&sort=&pageSize=10&pageNum=1&userToken=0de63f62808d4f0ab64588ef6ba11e43'
+	var url='https://sxzy.yunzhi.co/cloud2.pointmall.api/goods/list.do?companyCode=&goodsType=66&sort=&pageSize=10&pageNum=1&userToken=ba813a65827442c380d720ec74e5b3b4'
   let myRequest = getGetRequest(url);
   return new Promise(async resolve => {
-        $.post(myRequest, (err, resp, data) => {
+        $.get(myRequest, (err, resp, data) => {
             try {
 				//console.log(data)
                 data = JSON.parse(data);
@@ -101,15 +102,16 @@ function getGetRequest(url) {
         'Host': 'sxzy.yunzhi.co',
         'Accept': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
-        'Referer': 'https://sxzy.yunzhi.co/pointmall/goods.html?&goodsType=5',
-        'User-Agent': 'Mozilla/5.0 (Linux; Android 11; Mi 10 Pro Build/RKQ1.200826.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045713 Mobile Safari/537.36 MMWEBID/4775 MicroMessenger/8.0.1.1841(0x28000151) Process/tools WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64',
+        'User-Agent': 'Mozilla/5.0 (Linux; Android 12; 2201123C Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/4365 MMWEBSDK/20221011 Mobile Safari/537.36 MMWEBID/4775 MicroMessenger/8.0.30.2260(0x28001E3B) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'Cookie': 'Hm_lvt_b2c43c6ebb9a45d9c48685989bd3602c=1638759865; Hm_lpvt_b2c43c6ebb9a45d9c48685989bd3602c=1638759994',
+        'Cookie': 'Hm_lvt_b2c43c6ebb9a45d9c48685989bd3602c=1670467531; Hm_lpvt_b2c43c6ebb9a45d9c48685989bd3602c=1670467974',
 			'Origin':'https://sxzy.yunzhi.co',
 			'Sec-Fetch-Dest':'empty',
 			'Sec-Fetch-Mode':'cors',
-			'Sec-Fetch-Site':'same-origin'
+			'Sec-Fetch-Site':'same-origin',
+			'Referer':'https://sxzy.yunzhi.co/pointmall/sc_goods.html?classType=61'
     }
+	//console.log(url)
     return  {url: url, method: `GET`, headers: headers};
 }
 
@@ -122,7 +124,7 @@ function getPostRequest(url,body) {
         'Referer': 'https://sxzy.yunzhi.co/pointmall/goods.html?&goodsType=5',
         'User-Agent': 'Mozilla/5.0 (Linux; Android 11; Mi 10 Pro Build/RKQ1.200826.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045713 Mobile Safari/537.36 MMWEBID/4775 MicroMessenger/8.0.1.1841(0x28000151) Process/tools WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'Cookie': 'Hm_lvt_b2c43c6ebb9a45d9c48685989bd3602c=1638759865; Hm_lpvt_b2c43c6ebb9a45d9c48685989bd3602c=1638759994',
+        'Cookie': 'Hm_lvt_b2c43c6ebb9a45d9c48685989bd3602c=1670467531; Hm_lpvt_b2c43c6ebb9a45d9c48685989bd3602c=1670467974',
 			'Origin':'https://sxzy.yunzhi.co',
 			'Sec-Fetch-Dest':'empty',
 			'Sec-Fetch-Mode':'cors',
