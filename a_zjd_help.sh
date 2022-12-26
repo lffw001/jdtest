@@ -5,9 +5,15 @@
 # export ZJD_HELP_PINS="jd_xxx&jd_xxx" #助力指定pin
 # export ZJD_DELAY="2" # 助力等待多少秒
 # export ZJD_HELP_STARTCK="10" #助力前10个ck，从第11个ck开始助力 可选参数
+# export ZJD_USE_PROXY="true" #强制使用代理
 pwd
 _ftype=""
 get_arch=`arch`
+use_get_arch=${BBK_ARCH}
+if [ "$use_get_arch" != "" ]; then
+  get_arch=$use_get_arch
+  echo "指定运行$use_get_arch"
+fi
 echo $get_arch
 if [[ $get_arch =~ "x86_64" ]];then
 	_ftype="linux-amd64"
