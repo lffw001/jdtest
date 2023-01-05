@@ -3,6 +3,8 @@
 # export JD_LOG_XYZ_TOKEN="从机器人获取的token"
 # export Proxy_Url="代理网址 例如：星空、熊猫 生成选择txt 一次一个"
 # export ECARD20_DELAY="2" #每个ck助力后等待2秒
+# export ECARD20_CK_START_INDEX="10" #从第10个号开始助力 可选参数,可以不填。
+# export ECARD20_NUM="30" #助力人数，默认30人 可选参数,可以不填。
 # 需要20ek_list.txt，一行一个助力链接
 pwd
 _ftype=""
