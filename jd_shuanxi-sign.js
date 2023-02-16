@@ -1,6 +1,6 @@
 /*
 
-cron "0-59/5 * * * *" jd_getScore-shuanxi-gq.js, tag:双喜活动
+cron "15 2 * * *" jd_shuanxi-sign.js, tag:双喜活动
  */
 const $ = new Env('双喜过期');
 
@@ -12,7 +12,6 @@ let isLogin=true;
 
 let cookies=[
 	"springSession=4e29dada-d2ff-402f-ab1f-f7e993849733",//leebear
-	"springSession=8cbb1c1c-847e-41d4-bcba-565b3e7e1d0c",//天天快乐
 
 ];
 let cookie='';
@@ -24,7 +23,7 @@ let cookie='';
 	for(var i=0;i<cookies.length;i++){
 		cookie=cookies[i];
 		$.index=i;
-		await getFirstScore();
+		await sign();
 		await $.wait(2000);
 	}
 
@@ -89,10 +88,10 @@ function endGame(){
 		})
     })
 }
-function getFirstScore(){
-	//获取第一名成绩
+function sign(){
+	//签到
 	return new Promise((resolve, reject) => {
-		let option = taskurl(`https://guangdong-tobacco.venubao.com/userwx/getUser`)
+		let option = taskurl(`https://guangdong-tobacco.venubao.com/mall/getApiReturns?key=apipersonalcenteroerkx&args={}`)
 		$.get(option, (err, resp, data) => {
 			try {
 				if (err) {
@@ -100,13 +99,13 @@ function getFirstScore(){
 				} else {
 					//console.log(data)
 					data = JSON.parse(data)
-					//console.log(data)
+					console.log(data)
 					if (data.code==0) {//成功
 						//$.firstScore = data.data.rankingList[0].grade;
 						//$.firstScore =200000;
-						console.log(getNowFormatDate()+`💩 获取成功`)
+						console.log(getNowFormatDate()+"第"+($.index+1)+"个账号获取排名成功")
 					} else {
-						console.log(getNowFormatDate()+`💩 获取失败: ${data.result}`)
+						console.log(getNowFormatDate()+`💩 获得列表失败: ${data.message}`)
 					}
 				}
 			} catch (e) {
