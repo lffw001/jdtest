@@ -1,8 +1,8 @@
 /*
 
-cron "15 2 * * *" jd_shuanxi-sign.js, tag:双喜活动
+cron "15 2 * * *" jd_shuanxi-sign.js, tag:双喜签到
  */
-const $ = new Env('双喜过期');
+const $ = new Env('双喜签到');
 
 const fs = require('fs');
 const CryptoJS=require('crypto-js');
@@ -12,6 +12,7 @@ let isLogin=true;
 
 let cookies=[
 	"springSession=4e29dada-d2ff-402f-ab1f-f7e993849733",//leebear
+	"springSession=8cbb1c1c-847e-41d4-bcba-565b3e7e1d0c",//天天快乐
 
 ];
 let cookie='';

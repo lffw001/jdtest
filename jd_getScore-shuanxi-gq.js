@@ -1,6 +1,6 @@
 /*
 
-cron "0-59/5 * * * *" jd_getScore-shuanxi-gq.js, tag:双喜活动
+cron "0-59/5 * * * *" jd_getScore-shuanxi-gq.js, tag:双喜过期
  */
 const $ = new Env('双喜过期');
 
