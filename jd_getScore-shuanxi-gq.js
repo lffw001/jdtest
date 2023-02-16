@@ -19,15 +19,14 @@ let cookie='';
 
 	
 	
-	do{
-		for(var i=0;i<cookies.length;i++){
-			cookie=cookies[i];
-			$.index=i;
-			await getFirstScore();
-			await $.wait(2000);
-		}
-		await $.wait(60000);
-	}while(isLogin)
+
+	for(var i=0;i<cookies.length;i++){
+		cookie=cookies[i];
+		$.index=i;
+		await getFirstScore();
+		await $.wait(2000);
+	}
+
 	console.log("\n游戏结束\n")
 })()
   .catch((e) => {
