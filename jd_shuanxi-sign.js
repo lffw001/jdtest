@@ -13,6 +13,8 @@ let isLogin=true;
 let cookies=[
 	"springSession=4e29dada-d2ff-402f-ab1f-f7e993849733",//leebear
 	"springSession=8cbb1c1c-847e-41d4-bcba-565b3e7e1d0c",//天天快乐
+	"springSession=47363a87-a307-4e02-afb6-68b4e5ae00c3",//bona
+	"springSession=4253e3f9-f918-475f-892e-3ffdd69b7f1c",//liushufang
 
 ];
 let cookie='';
