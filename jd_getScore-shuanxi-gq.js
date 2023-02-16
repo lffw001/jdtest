@@ -101,7 +101,7 @@ function getFirstScore(){
 					//console.log(data)
 					data = JSON.parse(data)
 					//console.log(data)
-					if (data.code==0) {//成功
+					if (data.return_code==0) {//成功
 						//$.firstScore = data.data.rankingList[0].grade;
 						//$.firstScore =200000;
 						console.log(getNowFormatDate()+`💩 获取成功`)
