@@ -15,6 +15,7 @@ let envSplitor = ['@', '\n']
 let httpResult, httpReq, httpResp
 let ckName = 'yuedufor'
 let userCookie = ($.isNode() ? process.env[ckName] : $.getdata(ckName)) || '';
+//userCookie="PHPSESSID=jd18sn48dg7anfcnvojkgagubd; udtauth16=33f9JtXRDHH9FqVwIZNk3nZWz8squkfQq5GYFOi%2FZJoCAxYnaBnhHORXOL%2FecQWXEluMQetRMN74qYYfDQ180tJGb5hyDzZ8F2UY721LOpiu0pJ5Gy%2BAMSQ5UZZauaj2MFQVpQ46SDFgu5wTbIzcU8RjuspnQWN6tRK8txps6PY";
 let userList = []
 let userIdx = 0
 let userCount = 0
@@ -30,7 +31,7 @@ class UserInfo {
     async getreadurl() {
         try {
             let t = Date.now()
-            this.ul = newurl+`/tuijian/do_read?for\u003d\u0026zs\u003d\u0026pageshow\u0026r\u003d0.016638941704032684`;
+            this.ul = newurl+`/tuijian/do_read?for=DkxLWiA`;
             let body = ``;
             let urlObject = popu(this.ul, body,this.ck)
             await httpRequest('get', urlObject)
