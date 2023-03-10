@@ -19,8 +19,7 @@ let userList = []
 let userIdx = 0
 let userCount = 0
 var msg = ''
-let ydurl = 'ydurl'
-let newurl = ($.isNode() ? process.env[ydurl] : $.getdata(ydurl)) || "http://m.xmrygnuv.shop"
+let newurl = "http://m.xmrygnuv.shop"
 ///////////////////////////////////////////////////////////////////
 class UserInfo {
     constructor(str) {
@@ -184,7 +183,7 @@ class UserInfo {
                 if (this.f >= 3) console.log(`\n可以提现 ${result.info.sum}金币 去提现 ${this.cash} 元\n`), await this.exchange()
                 */
                 if (this.f < 30) {
-                    console.log(`不满足0.3 提现门槛`)
+                    console.log(`不满足 提现门槛`)
                 } else {
                     console.log(`去提现${this.f/100}元。。。。。。`)
                     await this.doWithdraw(this.f)
@@ -198,6 +197,7 @@ class UserInfo {
     }
     async doWithdraw(tx) {
         try {
+            if (tx > 2000) tx = 2000
             let t = Date.now()
             let url = newurl+`/withdrawal/doWithdraw`;
             let body = `amount=` + tx;

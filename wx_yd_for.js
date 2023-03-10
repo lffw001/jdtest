@@ -15,13 +15,11 @@ let envSplitor = ['@', '\n']
 let httpResult, httpReq, httpResp
 let ckName = 'yuedufor'
 let userCookie = ($.isNode() ? process.env[ckName] : $.getdata(ckName)) || '';
-//userCookie="PHPSESSID=jd18sn48dg7anfcnvojkgagubd; udtauth16=33f9JtXRDHH9FqVwIZNk3nZWz8squkfQq5GYFOi%2FZJoCAxYnaBnhHORXOL%2FecQWXEluMQetRMN74qYYfDQ180tJGb5hyDzZ8F2UY721LOpiu0pJ5Gy%2BAMSQ5UZZauaj2MFQVpQ46SDFgu5wTbIzcU8RjuspnQWN6tRK8txps6PY";
 let userList = []
 let userIdx = 0
 let userCount = 0
 var msg = ''
-let ydurl = 'ydurl'
-let newurl = ($.isNode() ? process.env[ydurl] : $.getdata(ydurl)) || "http://m.xmrygnuv.shop"
+let newurl = "http://m.xmrygnuv.shop"
 ///////////////////////////////////////////////////////////////////
 class UserInfo {
     constructor(str) {
@@ -32,7 +30,7 @@ class UserInfo {
     async getreadurl() {
         try {
             let t = Date.now()
-            this.ul = newurl+`/tuijian/do_read?for=DkxLWiA`;
+            this.ul = newurl+`/tuijian/do_read?for\u003d\u0026zs\u003d\u0026pageshow\u0026r\u003d0.016638941704032684`;
             let body = ``;
             let urlObject = popu(this.ul, body,this.ck)
             await httpRequest('get', urlObject)
@@ -185,7 +183,7 @@ class UserInfo {
                 if (this.f >= 3) console.log(`\n可以提现 ${result.info.sum}金币 去提现 ${this.cash} 元\n`), await this.exchange()
                 */
                 if (this.f < 30) {
-                    console.log(`不满足0.3 提现门槛`)
+                    console.log(`不满足 提现门槛`)
                 } else {
                     console.log(`去提现${this.f/100}元。。。。。。`)
                     await this.doWithdraw(this.f)
@@ -199,6 +197,7 @@ class UserInfo {
     }
     async doWithdraw(tx) {
         try {
+            if (tx > 2000) tx = 2000
             let t = Date.now()
             let url = newurl+`/withdrawal/doWithdraw`;
             let body = `amount=` + tx;
