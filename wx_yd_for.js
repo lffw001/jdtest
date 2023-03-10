@@ -30,7 +30,7 @@ class UserInfo {
     async getreadurl() {
         try {
             let t = Date.now()
-            this.ul = newurl+`/tuijian/do_read?for\u003d\u0026zs\u003d\u0026pageshow\u0026r\u003d0.016638941704032684`;
+            this.ul = newurl+`/tuijian/do_read?for=DkxLWiA&zs=&pageshow&r=0.016638941704032684`;
             let body = ``;
             let urlObject = popu(this.ul, body,this.ck)
             await httpRequest('get', urlObject)
