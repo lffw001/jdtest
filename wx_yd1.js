@@ -56,7 +56,7 @@ class UserInfo {
         try {
             let t = Date.now()
             readurl = decodeURIComponent(readurl);
-            var sj = Math.random() * (8000 - 6000) + 6000
+            var sj = Math.random() * (8000 - 6000) + 6100
 
             if (readurl.indexOf("jump")==-1){
 
