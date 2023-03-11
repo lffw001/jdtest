@@ -14,7 +14,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let envSplitor = ['@', '\n']
 let httpResult, httpReq, httpResp
 let ckName = 'yuedufor'
-let userCookie = ($.isNode() ? process.env[ckName] : $.getdata(ckName)) || 'PHPSESSID=ql9l4dvu6lp4bfeuv9fk0ujiki; udtauth16=06eewjh6U6RXrihjDK1c0LnBhNru6fr2OoIhCFZjpQpepi3ypiW%2BaH6DsQmha4ixnquFZI3kVdJ1U%2FMoJUdjg1FSgdLrkMVfget%2Fde%2Bq0BteQV7nM3P17Pc%2F6GsDIfHpEsVY2pUaePUMfFaOt9ssfp50qtYWs6yet6nO23FvoSU@PHPSESSID=eq4m7i3tmd18lpm3j9len8e5ka; udtauth16=5ba1owYjzdck6JVOluEvbLqg5fd%2BGGqPn48%2BqMmK%2Fmn461UlthshXLts8y5c8pwkCHfvNTkAOcv035eY%2BMBBl54eVoAm9odUQxEDsoKq2KhF%2BI9lA6T5DbN%2FmbjNpfxkOGAzk2h13X3CzsIuPtfBuAN0k1OB01gzo%2BPBAVWKtKY';
+let userCookie = ($.isNode() ? process.env[ckName] : $.getdata(ckName)) || '';
 let userList = []
 let userIdx = 0
 let userCount = 0
@@ -56,7 +56,7 @@ class UserInfo {
         try {
             let t = Date.now()
             readurl = decodeURIComponent(readurl);
-            var sj = Math.random() * (8000 - 6000) + 6100
+            var sj = Math.random() * (8000 - 6000) + 6000
 
             if (readurl.indexOf("jump")==-1){
 
@@ -128,7 +128,7 @@ class UserInfo {
             //console.log()
             await httpRequest('get', urlObject)
             let result = httpResult;
-            console.log(result)
+            //console.log(result)
             
 
             if (result && result.data) {
