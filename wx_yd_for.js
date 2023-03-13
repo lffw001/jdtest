@@ -19,7 +19,7 @@ let userList = []
 let userIdx = 0
 let userCount = 0
 var msg = ''
-let newurl = "http://m.xmrygnuv.shop"
+let newurl = ($.isNode() ? process.env["newurl"] : $.getdata("newurl")) || 'http://m.uywpbfv.work/';
 ///////////////////////////////////////////////////////////////////
 class UserInfo {
     constructor(str) {
