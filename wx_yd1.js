@@ -17,6 +17,8 @@ let httpResult, httpReq, httpResp
 let ckName = 'yuedu1'
 let userCookie = ($.isNode() ? process.env[ckName] : $.getdata(ckName)) || '';
 let ua = process.env['ydua1']  || '';
+	ua=ua?ua:require('./WX_USER_AGENTS').USER_AGENT;
+	console.log(ua);
 let userList = []
 let userIdx = 0
 let userCount = 0
