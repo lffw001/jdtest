@@ -17,7 +17,7 @@ let httpResult, httpReq, httpResp
 let ckName = 'yuedufor'
 let userCookie = ($.isNode() ? process.env[ckName] : $.getdata(ckName)) || '';
 let ua = process.env['yduafor']  || '';
-	ua=ua?ua:require('./WX_USER_AGENTS').USER_AGENT;
+	ua=ua?ua:require('./WX_USER_AGENTS').UARAM();
 let userList = []
 let userIdx = 0
 let userCount = 0
@@ -224,7 +224,7 @@ class UserInfo {
             
             let abc = [...new Array(15).keys()]
             console.log(`\n=========== ${this.idx} 开始阅读文章 ===========\n`)
-			ua=require('./WX_USER_AGENTS').USER_AGENT;
+			ua=require('./WX_USER_AGENTS').UARAM();
 			console.log(ua);
             await this.getreadinfo()
             //console.log(this.fb)
