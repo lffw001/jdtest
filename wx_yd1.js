@@ -18,7 +18,6 @@ let ckName = 'yuedu1'
 let userCookie = ($.isNode() ? process.env[ckName] : $.getdata(ckName)) || '';
 let ua = process.env['ydua1']  || '';
 	ua=ua?ua:require('./WX_USER_AGENTS').USER_AGENT;
-	console.log(ua);
 let userList = []
 let userIdx = 0
 let userCount = 0
@@ -261,6 +260,8 @@ class UserInfo {
             await gethost()
             console.log('获取到newurl：'+newurl)
             for (let user of userList) {
+				ua=require('./WX_USER_AGENTS').USER_AGENT;
+				console.log(ua);
                 await user.task()
             }
             if (msg) await notify.sendNotify('微信阅读检测文章',msg)
