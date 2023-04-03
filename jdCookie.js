@@ -12,6 +12,69 @@
  */
 //此处填写京东账号cookie。
 let CookieJDs = [
+'pt_key=app_openAAJkKcT5ADCsU2mPdE8kdnrkdK66Fb9Pn1wrO0z_4yQmmY8KqH585-9Wv2rmRz2cl2eYCTZvirE;pt_pin=libinxwz;',
+
+
+'pt_key=app_openAAJkKajwADB6ksfI1ynnc_sx6d9ZK6wN9dgyzz526bNBnWS2c6SOP4W7ADjTTCTOXcsk0sSmcV4;pt_pin=jd_61d5ffc77afbc;',
+
+
+'pt_key=app_openAAJkKT-NADCofM9MmcFX9eX7xviO4sPBjEM8ZYkCM98V2-dI_UUwg0R3VVZa1b3RuBmyWotvCm0;pt_pin=wdpcPPMuBenhKg;',
+
+
+'pt_key=app_openAAJkKalJADBjzslL1P4uP_7V1MeZ0GMjSCzWoEYUQuvZteVdlC4GxsMjR6fsavVovCt0227y5k4;pt_pin=jd_53504250c5652;',
+
+
+'pt_key=app_openAAJkKakzADChm4z5t3Frr3JyAIRCdOiKmrwhJC7XkLD0mvmZI_PiBPu1TKnsG1qvxqLX2Vem9ng;pt_pin=jd_70b6936fd65a9;',
+
+
+'pt_key=app_openAAJkKbB8ADBCMFHLmnlMBhxT0ikMiQBBTE1wYIAnabtDzaGfYtETDaHWuPw2oC8jfzq6JvqD_tQ;pt_pin=jd_uhQrHvOnkruH;',
+
+
+'pt_key=app_openAAJkKakcADBp6VaW0p0QkfZ6GfNOxhK9KEPGFN6c2wKscFIVw6yyt6eVYIZ_E-DrsUcqHZSamzw;pt_pin=wdFulrsXNvpcbf;',
+
+
+'pt_key=app_openAAJkKamjADBQrEbpehG9rCJda920oqkeu26vYIXIjfNPD1EIFHvzx8FiKF2QmznWjZXk7IidOZY;pt_pin=jd_70191d2deb1c2;',
+
+
+'pt_key=app_openAAJkKbC_ADC0MRRm9ignJjgMbqg7ZZWNltn80JUuyOohFZ-xmMJ8DchmK--5V54h8-35tl-WpZk;pt_pin=jd_639284c7e24f4;',
+
+
+'pt_key=app_openAAJkKalgADD1ZNQT6ZIuRmZAbQyPZ-Sn0X1cSnDkhidqPW7slTt3ZlZVdyxX77bTBBxDcxRYO9g;pt_pin=jd_gHCmJCNYacVx;',
+
+
+'pt_key=app_openAAJkKbCTAECdHgCYBts02zB3i7jff-XKS9FE67gQll-DAfcoRY_kbuY_YenQ8sda5UQT4ay2OsKNvHk8U59fHGdLNB6tBg4O;pt_pin=%E4%BC%9A%E8%B7%B3%E8%88%9E%E7%9A%84%E5%B0%8F%E8%9A%82%E8%9A%81;',
+
+
+'pt_key=app_openAAJkKabRADDGGQ2AoVSliip5r1trvjaYoM3l3c4t4vhbx2FTXmdGSkS29Qe-PCAI9Ho3igfnAHU;pt_pin=412208798_m;',
+
+
+'pt_key=app_openAAJkKWRHADBE4rlkO64o7KZJsKVLTCry3ApH23LyaybdkEuUumPC0yDqYSGuqhKuZEBbY7O_K8s;pt_pin=jd_bVxiAmQBpUij;',
+
+
+'pt_key=app_openAAJkKa1oADCOmUkXiq75msFr0nP0j_d-9OsBE75D3gwwuBH2ncC0VhW7pvwhN7N-cgSggJTSW5I;pt_pin=jd_750fd4822f18b;',
+
+
+'pt_key=app_openAAJkKanQADAThJhv_CbTNrnWDzP6aPQDyXF__eYZvIPeo6N52miWb5zggus2eBuKGoWIB0h9AF4;pt_pin=jd_7055c4e7c917c;',
+
+
+'pt_key=app_openAAJkKiwlADBM8foGlSglizyjMQaQOCf3cyKIAkSs6hXQDOxfjJeSHHDb13hhfuzMZaLhVVW57rU;pt_pin=jd_69960e01dbda3;',
+
+
+'pt_key=app_openAAJkKaa7ADBRsQrqb9nfswvMSVT-_zIwBUHAwLtBtZyR-ayXkcDKHG_eK-zNzM8du5pVCc8dkcs;pt_pin=%E9%BB%9B%E8%89%B293;',
+
+
+'pt_key=app_openAAJkKaptADC-MJofasw4ob72qILyKkyKsANfA3D0Qoozxr_pxvTJSIe5BatYnAfu_V5C9qgwO4k;pt_pin=jd_68be6ce4ab227;',
+
+
+'pt_key=app_openAAJkKaqDADB5YHZXUyYdF_7ui6tPQighLnELbje23MBJXOo7um-rC7tNuNfpN1CrbiPX-p1sPYI;pt_pin=jd_57f964f4b0e6e;',
+
+
+'pt_key=app_openAAJkKPdiADDzRsRwdg3HjWnYuHobacP7rbA80DxaMajJS0uNXEwhiaJX84bQFAZrki_ISW_3p0A;pt_pin=18661231724_p;',
+
+
+'pt_key=app_openAAJkKPd5ADAYjMmR53Yjb-1BIAWOaoDHWkAOWeeREZyELKRnVpr22z5nBv4qSXTnDbJLK-BxXsA;pt_pin=jd_54982f63f9d7f;',
+
+
 ]
 // 判断环境变量里面是否有京东ck
 if (process.env.JD_COOKIE) {
@@ -99,4 +162,5 @@ if (nameChinese && nameConfig && envName) {
   SetShareCodesEnv(nameChinese, nameConfig, envName)
 } else {
     console.debug(`KingRan 频道通知：https://t.me/KingRan521\n`)
+		console.debug(`云服务器IP须知：域名前缀为 'lzdz' 的禁用勿跑容易黑号\n`)
 }
