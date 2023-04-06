@@ -21,18 +21,9 @@ let logger = new console.Console(stderr);
 let isLogin=true;
 
 let cookies=[
-	"springSession=4e29dada-d2ff-402f-ab1f-f7e993849733",//leebear
+	"springSession=05d7ff51-f468-47c0-b128-494cd429e6df; Hm_lvt_679f3c84261a92be9496a7c89f95bb64=1680768366; Hm_lpvt_679f3c84261a92be9496a7c89f95bb64=1680769639",//leebear
 	"springSession=8cbb1c1c-847e-41d4-bcba-565b3e7e1d0c",//天天快乐
 	"springSession=47363a87-a307-4e02-afb6-68b4e5ae00c3",//bona
-	"springSession=4253e3f9-f918-475f-892e-3ffdd69b7f1c",//liushufang
-	"springSession=5e96ee89-6667-4f42-93af-68eddcae3d34",//001
-	"springSession=1f4ef42f-142b-4684-b208-83f0f30ce4b5",//002
-	"springSession=87bf7971-6fe3-4a07-ad99-9f0a57484690",//003
-	"springSession=d1c3d3d5-fed9-443a-876e-7381406ebb4e",//004
-	"springSession=f12ce144-73ae-4a96-a0a5-f926cb9b2031",//006
-	"springSession=740ed466-970b-4e17-aa7a-31f88f8544ac",//009
-	"springSession=977678d8-4b45-46bf-9c83-bda4be20f317",//010
-	"springSession=7902e332-2151-4b34-948a-75dec794722f",//慢慢
 
 ];
 let cookie='';
