@@ -22,8 +22,8 @@ let isLogin=true;
 
 let cookies=[
 	"springSession=05d7ff51-f468-47c0-b128-494cd429e6df; Hm_lvt_679f3c84261a92be9496a7c89f95bb64=1680768366; Hm_lpvt_679f3c84261a92be9496a7c89f95bb64=1680769639",//leebear
-	"springSession=8cbb1c1c-847e-41d4-bcba-565b3e7e1d0c",//天天快乐
-	"springSession=47363a87-a307-4e02-afb6-68b4e5ae00c3",//bona
+	"springSession=3da6bfe3-eda8-4f19-8c86-652ab5a24bd0",//天天快乐
+	"springSession=b8165e60-7b5c-4b97-9478-160b9cef9f2f",//bona
 
 ];
 let cookie='';
