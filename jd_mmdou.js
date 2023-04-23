@@ -11,8 +11,8 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 
 const jdVersion = '11.6.2'
-const iphoneVersion = [Math.ceil(Math.random()*2+12),Math.ceil(Math.random()*4)]
-const UA = `jdapp;iPhone;${jdVersion};${Math.ceil(Math.random()*2+12)}.${Math.ceil(Math.random()*4)};${randomString(40)};network/wifi;model/iPhone12,1;addressid/0;appBuild/167802;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS ${iphoneVersion[0]}_${iphoneVersion[1]} like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`
+const iphoneVersion = [Math.ceil(Math.random()*2+12),Math.ceil(Math.random()*6),Math.ceil(Math.random()*6)]
+const UA = `jdapp;iPhone;${jdVersion};${Math.ceil(Math.random()*2+12)}.${Math.ceil(Math.random()*4)};${randomString(40)};network/wifi;model/iPhone12,1;addressid/0;appBuild/168500;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS ${iphoneVersion[0]}_${iphoneVersion[1]}_${iphoneVersion[2]} like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`
 const UUID = UA.split(';') && UA.split(';')[4] || ''
 function randomString(e) {
   e = e || 32;
@@ -222,7 +222,7 @@ async function dealReturn(type, res) {
   }
 }
 async function getGetRequest(type, body) {
-  let url = `https://api.m.jd.com/client.action?functionId=${type}&body=${body}&appid=ld&client=apple&clientVersion=${jdVersion}&networkType=wifi&osVersion=${iphoneVersion[0]}.${iphoneVersion[1]}&uuid=${UUID}&openudid=${UUID}`;
+  let url = `https://api.m.jd.com/client.action?functionId=${type}&body=${body}&appid=ld&client=apple&clientVersion=${jdVersion}&networkType=wifi&osVersion=${iphoneVersion[0]}.${iphoneVersion[1]}.${iphoneVersion[2]}&uuid=${UUID}&openudid=${UUID}`;
   const method = `GET`;
   const headers = {
     "Accept": "*/*",
