@@ -148,6 +148,7 @@ class Env {
                 }
             }
         }
+		console.log(1);
         let once = false;
         for (let i = 0; i <= this.cookies.length; i++) {
             if (this.cookies[i] && !this.expire) {
@@ -163,7 +164,8 @@ class Env {
                 $.defaults.headers['Cookie'] = this.cookie;
                 this.index = i + 1;
                 try {
-                    await this.logic()
+					console.log(2);
+                    await this.logic();
                     if (data?.o2o) {
                         await this.send();
                         testMode ? this.log(this.msg.join("\n")) : ''
@@ -392,9 +394,6 @@ class Env {
         return Array.from(new Set(arr))
     }
 
-    async logic() {
-        console.log("default logic")
-    }
 
     async before() {
         return -1;

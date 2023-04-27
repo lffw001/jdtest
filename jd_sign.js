@@ -26,7 +26,8 @@ async function signBeanIndex() {
         'Referer': `https://api.m.jd.com`,
         'Cookie': $.cookie
     }
-    let body = "functionId=signBeanAct&appid=ld"
+    let body = "functionId=signBeanAct&appid=ld";
+	console.log("post");
     let data = await $.post(url, body, headers)
     let title = data.data?.dailyAward?.title
         || data.data?.continuityAward?.title;
