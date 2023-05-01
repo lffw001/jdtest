@@ -92,13 +92,13 @@ let llAPIError = false
 async function jdGlobal() {
   try {
     //await richManIndex()
-    await wheelsHome()
-    await apTaskList()
-    await wheelsHome()
-    if ($.canhelp) {
-      await invite()
-      await invite2()
-    }
+    // await wheelsHome()
+    // await apTaskList()
+    // await wheelsHome()
+    // if ($.canhelp) {
+       await invite()
+       await invite2()
+    // }
     $.score = 0
     $.total = 0
     await taskList()
@@ -800,18 +800,17 @@ function taskGetUrl(function_id, body) {
 
 function invite2() {
   let inviterIdArr = [
-          "ghNQyGlIWbUdlPK/1zsTFQ==",
+     "ghNQyGlIWbUdlPK/1zsTFQ==",
 	  "U6lCo5WEZMTUabR8RPhsmU5yrUVGTyQoPdAatEc+880=",
 	  "jl555FG2wDz4KjwztQvjww==",
 	  "FrDZBDwlRNX/Fet29mBTjg==",
 	  "X0t80OyY6c/49K0DgQRRfA==",
 	  "E9cx6cIwwOksEkmNi4Mv6Q=="
-    
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
     url: "https://api.m.jd.com/",
-    body: `functionId=TaskInviteService&body=${JSON.stringify({"method":"participateInviteTask","data":{"channel":"1","encryptionInviterPin":encodeURIComponent(inviterId),"type":1}})}&appid=market-task-h5&uuid=&_t=${Date.now()}`,
+    body: `functionId=TaskInviteServiceNew&body=${JSON.stringify({"method":"participateInviteTask","data":{"channel":"1","encryptionInviterPin":encodeURIComponent(inviterId),"type":1}})}&appid=jx_h5&uuid=&_t=${Date.now()}`,
     headers: {
       "Host": "api.m.jd.com",
       "Accept": "application/json, text/plain, */*",
@@ -833,12 +832,12 @@ function invite2() {
 function invite() {
   let t = +new Date()
   let inviterIdArr = [
-         "ghNQyGlIWbUdlPK/1zsTFQ==",
+     "ghNQyGlIWbUdlPK/1zsTFQ==",
 	  "U6lCo5WEZMTUabR8RPhsmU5yrUVGTyQoPdAatEc+880=",
 	  "jl555FG2wDz4KjwztQvjww==",
 	  "FrDZBDwlRNX/Fet29mBTjg==",
 	  "X0t80OyY6c/49K0DgQRRfA==",
-	   "E9cx6cIwwOksEkmNi4Mv6Q=="
+	  "E9cx6cIwwOksEkmNi4Mv6Q=="
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
