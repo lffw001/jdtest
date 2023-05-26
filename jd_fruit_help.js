@@ -52,7 +52,8 @@ let newShareCodes=['a3389a65c654410daa81b45bfb026088',
   '18fd81fdee594417a9fae692342df15d',
   '87c5ff87f8e940fd8a2285ea1ce6c9fb',
   'a0533ba2d07b4e19a4869b1515d00ea0',
-  'cffbb500222e4323a786142b3b4e6b0d'];
+  'cffbb500222e4323a786142b3b4e6b0d',
+  '0a8e776fe4314f0f9026de1c33e3f50d'];
 let message = '',
     subTitle = '',
     option = {},
