@@ -237,7 +237,7 @@ function submitAnswer() {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-			//console.log(data);
+			console.log(data);
 			var data=JSON.parse(data);
 			$.token11=data.token;
 			if(data.status==1){
@@ -291,7 +291,10 @@ async function choujiang(){//抽奖
         } else {
           if (data) {
 			data=JSON.parse(data);
-			if(data.status==1){
+			if(data.status==0){
+				submitAnswer();
+			}
+			else if(data.status==1){
 				console.log(data);
 				//logger.log(data);
 				zhong=true;
