@@ -67,7 +67,7 @@ var count=0;
 			if(sec==54||sec==55){
 				await submitAnswer();
 			}
-			if(sec>s){
+			if(m==min&&sec>s){
 				iswait=false;
 			}
 		}
