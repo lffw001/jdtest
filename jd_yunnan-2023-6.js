@@ -17,23 +17,13 @@ const JD_API_HOST = 'https://webapp.yunnan.cn/new/index.php';
 var userInfos=[
 
 	{
-		"token":"48bc5630f75383da1be090d565b4f31598202951",
-		"userName":"黄山",//咖啡
-		"phone":"18068603568",
-		"isZhong":"0"
-	},
-	{
-		"token":"d8ed2d1c19b06c5853a89e967abdd60c9d811b2b",
-		"userName":"黄山",//晨光
+		"token":"0bc7604e9fff6dcd73314f59b09fa69d53eed0cb",
+		"openId":"o9Su_jgMrVF3L108fgD3RkfQKpbg",
+		"userName":"黄山",//006
 		"phone":"18068603568",
 		"isZhong":"0"
 	},
 
-	
-	
-	
-	
-	
 	
 	
 ]
