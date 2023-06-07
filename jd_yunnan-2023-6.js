@@ -56,6 +56,7 @@ var count=0;
 		if(hour==8||hour==13){
 			if(sec==54||sec==55){
 				await submitAnswer();
+				await choujiang();
 			}
 			if(m==min&&sec>s){
 				iswait=false;
@@ -86,7 +87,7 @@ var count=0;
 			console.log(now1.toLocaleTimeString());
 			choujiang();
 			var ns=now1.getSeconds();
-			if(zhong==true||(ns==10||ns==11)){
+			if(zhong==true||(ns==30||ns==31)){
 				clearInterval(id);
 			}
 			
