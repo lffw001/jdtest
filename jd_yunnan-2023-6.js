@@ -14,11 +14,12 @@ let questionJson={"q1":{"type":"单选题","ques":"小宝、小贝、小花一�
 // 创建logger
 //let logger = new console.Console(stderr);
 const JD_API_HOST = 'https://webapp.yunnan.cn/new/index.php';
+let isDebuggr=process.env.YUNNAN_DEBUGGER??"false";
 var userInfos=[
 
 
 	{
-		"token":"0bc7604e9fff6dcd73314f59b09fa69d53eed0cb",
+		"token":process.env.YUNNAN_TOKEN??"0bc7604e9fff6dcd73314f59b09fa69d53eed0cb",
 		"openId":"o9Su_jgMrVF3L108fgD3RkfQKpbg",
 		"userName":"黄山",//006
 		"phone":"18068603568",
@@ -59,6 +60,9 @@ var count=0;
 		await $.wait(time);
 		await submitAnswer();
 		await choujiang();
+		if(isDebuggr=="true"){
+			iswait=false;
+		}
 		if(hour==8||hour==13){
 			if(min==m){
 				time=1000;
