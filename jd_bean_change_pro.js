@@ -1363,6 +1363,7 @@ function getSignfromNolan(functionId, body) {
 		    },
 		    timeout: 30000
         }
+		console.log(url);
         $.post(url, async(err, resp, data) => {
             try {		
 				console.log(111);
