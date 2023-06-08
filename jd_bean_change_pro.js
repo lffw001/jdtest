@@ -1364,7 +1364,9 @@ function getSignfromNolan(functionId, body) {
 		    timeout: 30000
         }
         $.post(url, async(err, resp, data) => {
-            try {				
+            try {		
+				console.log(111);
+				console.log(data);
                 data = JSON.parse(data);
                 if (data && data.body) {                    
                     if (data.body)
