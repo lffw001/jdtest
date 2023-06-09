@@ -95,7 +95,7 @@ var count=0;
 			var now1=new Date();
 			console.log(now1.toLocaleTimeString());
 			choujiang();
-			if(zhong==true||now.getMinutes()==1){
+			if(zhong==true||now1.getMinutes()==1){
 				clearInterval(id);
 			}
 			
