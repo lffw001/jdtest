@@ -64,11 +64,11 @@ var count=0;
 		if(isDebuggr=="true"){
 			iswait=false;
 		}
-		if(1==1||hour==8||hour==13){
+		if(hour==8||hour==13){
 			if(min==m){
 				time=1000;
 			}
-			if(1==1||min==m&&sec>s){
+			if(min==m&&sec>s){
 				iswait=false;
 			}
 		}
