@@ -19,7 +19,7 @@ var userInfos=[
 
 
 	{
-		"token":process.env.YUNNAN_TOKEN?process.env.YUNNAN_TOKEN:"0bc7604e9fff6dcd73314f59b09fa69d53eed0cb",
+		"token":process.env.YUNNAN_TOKEN?process.env.YUNNAN_TOKEN:"1bc7604e9fff6dcd73314f59b09fa69d13eed0cb",
 		"openId":"o9Su_jgMrVF3L108fgD3RkfQKpbg",
 		"userName":"黄山",//006
 		"phone":"18068603568",
@@ -37,7 +37,7 @@ var userInfos=[
 let zhong=false;
 let iswait=true;
 let m=59;//设置
-let s=56;
+let s=55;
 var count=0;
 !(async () => {
 	
@@ -51,6 +51,7 @@ var count=0;
 	console.log("开始账号"+(i+1)+"--------------------------")
 
 	$.wx_tk=userInfos[i].token;
+	
 	do{
 		var now=new Date();
 		console.log(now.toLocaleTimeString());
@@ -63,11 +64,11 @@ var count=0;
 		if(isDebuggr=="true"){
 			iswait=false;
 		}
-		if(hour==8||hour==13){
+		if(1==1||hour==8||hour==13){
 			if(min==m){
 				time=1000;
 			}
-			if(min==m&&sec>s){
+			if(1==1||min==m&&sec>s){
 				iswait=false;
 			}
 		}
@@ -95,11 +96,11 @@ var count=0;
 			var now1=new Date();
 			console.log(now1.toLocaleTimeString());
 			choujiang();
-			if(zhong==true||now1.getMinutes()==1){
+			if(zhong==true||now1.getMinutes()==2){
 				clearInterval(id);
 			}
 			
-		}, 140);
+		}, 50);
 		
 		//await $.wait(200);
 		//await submitAnswer();
@@ -120,37 +121,19 @@ var count=0;
   })
 function getOpenid() {
 	
-	let url = "https://webapp-ali.ynurl.cn/s/2023/dqq/pfqjhddt2/index.html?c=1&wx_tk="+$.wx_tk;
-	const options = {
-      "url": url,
-      "headers": {
-		  'Host': 'webapp-ali.ynurl.cn',
-		  'Connection': 'keep-alive',
-		  'Upgrade-Insecure-Requests': '1',
-		  'User-Agent': 'Mozilla/5.0 (Linux; Android 10; YAL-AL10 Build/HUAWEIYAL-AL10; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/3211 MMWEBSDK/20220303 Mobile Safari/537.36 MMWEBID/916 MicroMessenger/8.0.21.2120(0x2800153F) Process/toolsmp WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64',
-		  'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/wxpic,image/tpg,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-		  'X-Requested-With':'com.tencent.mm',
-		  'Sec-Fetch-Site':'none',
-		  'Sec-Fetch-Mode':'navigate',
-		  'Sec-Fetch-User':'?1',
-		  'Sec-Fetch-Dest':'document',
-		  'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
-		  'Cookie':'',
-		},
-    }
+	let body = "nova_p=Vnp3c3VYSEtUdjVOTEdHcElZNHdKd1BnY0NpL3RuTS8xV1ZpRFovRUpuSTFtVzFaN3hSZjZNZG9rUGtweHFTWg@@&wx_tk="+$.wx_tk;
 	return new Promise(resolve => {
-	$.get(options, (err, resp, data) => {
+	$.get(taskUrl(body), (err, resp, data) => {
 	  try {
 		if (err) {
 		  console.log(`${JSON.stringify(err)}`)
 		  console.log(`API请求失败，请检查网路重试`)
 		} else {
-			console.log("页面");
-			//console.log(data);
-		  //if (safeGet(data)) {
+			console.log(data)
+		  if (safeGet(data)) {
 			//data = JSON.parse(data);
 			
-		  //}
+		  }
 		}
 	  } catch (e) {
 		$.logErr(e, resp)
@@ -310,7 +293,8 @@ async function choujiang(){//抽奖
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-			
+			count++;
+			console.log(count);
 			data=JSON.parse(data);
 			if(!zhong){
 				console.log(data);
@@ -333,7 +317,7 @@ async function choujiang(){//抽奖
 					},10)
 					setTimeout(() => {
 						choujiang1();
-					},90)
+					},30)
 				}
 			}
           } else {
@@ -386,7 +370,8 @@ async function choujiang1(){//抽奖
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-			
+			count++;
+			console.log(count);
 			data=JSON.parse(data);
 			if(!zhong){
 				console.log(data);
