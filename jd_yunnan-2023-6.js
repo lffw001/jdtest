@@ -19,7 +19,7 @@ var userInfos=[
 
 
 	{
-		"token":process.env.YUNNAN_TOKEN?process.env.YUNNAN_TOKEN:"1bc7604e9fff6dcd73314f59b09fa69d13eed0cb",
+		"token":process.env.YUNNAN_TOKEN?process.env.YUNNAN_TOKEN:"0bc7614e9fff6dcd73314f59b09fa69d53eed0cb",
 		"openId":"o9Su_jgMrVF3L108fgD3RkfQKpbg",
 		"userName":"黄山",//006
 		"phone":"18068603568",
@@ -51,15 +51,30 @@ var count=0;
 	console.log("开始账号"+(i+1)+"--------------------------")
 
 	$.wx_tk=userInfos[i].token;
-	
+	var now22=new Date();
+	console.log("当前时间："+now22);
+	var strattime='2022-12-31 00:00:00'
+	if(now22.getHours()==8){
+		//9点场次
+		strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ "09:00:00";
+	}else if(now22.getHours()==13){
+		//14点场次
+		strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ "14:00:00";
+	}
+	else{
+		console.log("不在抽奖时间范围内");
+		return
+	}
+	console.log("开始时间："+strattime);
+	await submitAnswer();
 	do{
 		var now=new Date();
+		
 		console.log(now.toLocaleTimeString());
 		hour=now.getHours();
 		min=now.getMinutes();
 		sec=now.getSeconds();
 		await $.wait(time);
-		await submitAnswer();
 		await choujiang();
 		if(isDebuggr=="true"){
 			iswait=false;
@@ -74,44 +89,20 @@ var count=0;
 		}
 	
 	}while(iswait)
-	//for(var i=0;i<userInfos.length;i++){
-	
-	//if(userInfos[i].isZhong!=1){
+	var timeTemp=new Date(strattime).getTime()-new Date().getTime();//判断到时间点的时间差距。
+	console.log("距离"+strattime+"还差："+timeTemp+"毫秒,提前1秒开始提交");
+	await $.wait(timeTemp-200);
 		
-		//await getOpenid();
-		//var AllkeyList=Object.keys(questionJson);//获取键
+	var id=setInterval(() => {
+		var now1=new Date();
+		console.log(now1.toLocaleTimeString());
+		choujiang();
+		if(zhong==true||now1.getMinutes()==2){
+			clearInterval(id);
+		}
 		
-		
-		//console.log($.keyList);
-		//for(var k=0;k<$.keyList.length;k++){
-		//	await answer($.keyList[k],questionJson[$.keyList[k]]);
-		//	await $.wait(300);
-		//}
-		//await answer();
-		//await $.wait(200);
-		
-		//await $.wait(200);
-		
-		var id=setInterval(() => {
-			var now1=new Date();
-			console.log(now1.toLocaleTimeString());
-			choujiang();
-			if(zhong==true||now1.getMinutes()==2){
-				clearInterval(id);
-			}
-			
-		}, 50);
-		
-		//await $.wait(200);
-		//await submitAnswer();
-		console.log("结束账号"+(i+1)+"--------------------------")
-	//}
-	//}
-		
-	
-	
-
-	
+	}, 10);
+	console.log("结束账号"+(i+1)+"--------------------------")
 })()
   .catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -311,7 +302,7 @@ async function choujiang(){//抽奖
 				zhong=true;
 				//logger.log("中奖："+new Date());
 			}else{
-				if(now.getMinutes==59||now.getMinutes==0){
+				if(!iswait){
 					setTimeout(() => {
 						choujiang1();
 					},10)
