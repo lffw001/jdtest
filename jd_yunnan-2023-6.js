@@ -101,7 +101,7 @@ var count=0;
 			clearInterval(id);
 		}
 		
-	}, 10);
+	}, 20);
 	console.log("结束账号"+(i+1)+"--------------------------")
 })()
   .catch((e) => {
