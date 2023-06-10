@@ -17,7 +17,7 @@ cron "5 6-18/6 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_s
 */
 
 let name = '东东农场';
-const retainWater = 100;//保留水滴大于多少g,默认100g;
+const retainWater = 50000;//保留水滴大于多少g,默认100g;
 const $ = new Env(name);
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -31,10 +31,19 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let jdNotify = $.getdata('jdFruitNotify');
 //助力好友分享码(最多4个,否则后面的助力失败),原因:京东农场每人每天只有四次助力机会
 let shareCodes = [ // 这个列表填入你要助力的好友的shareCode
-  '0a74407df5df4fa99672a037eec61f7e',
-  'dbb21614667246fabcfd9685b6f448f3',
-  '6fbd26cc27ac44d6a7fed34092453f77',
-  '61ff5c624949454aa88561f2cd721bf6',
+  'a3389a65c654410daa81b45bfb026088',
+  '828333606f7646c59b10c3c51724853c',
+  'd8fd255379cc4b648e48b38b5dd382b4',
+  '5b3475c11fbf4770ad5c80174aae6f62',
+  '1d6250353a4b446e9ff7a73920054ee0',
+  'c93af3ba15a4498abaf15524dbe8136b',
+  '6df66cb825d142baa1dfe9f59cdae426',
+  'ab559d5975044b3e95fa87b02ee7fcd2',
+  'b124a94e55c24261b7c302a46426ecd4',
+  'a03d49eeb79e44f79803efcfa9d0dc59',
+  '87c5ff87f8e940fd8a2285ea1ce6c9fb',
+  'a0533ba2d07b4e19a4869b1515d00ea0',
+  'cffbb500222e4323a786142b3b4e6b0d'
 ]
 // 添加box功能
 // 【用box订阅的好处】
