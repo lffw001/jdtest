@@ -19,7 +19,7 @@ var userInfos=[
 
 
 	{
-		"token":process.env.YUNNAN_TOKEN?process.env.YUNNAN_TOKEN:"48bc5630f75383da1be090d565b4f31598202951",
+		"token":process.env.YUNNAN_TOKEN?process.env.YUNNAN_TOKEN:"48bc5630f75383da1be090d565b4f31598202952",
 		"openId":"o9Su_jgMrVF3L108fgD3RkfQKpbg",
 		"userName":"黄山",//006
 		"phone":"18068603568",
@@ -90,6 +90,7 @@ let isAnswer=false;
 		}
 	
 	}while(iswait)
+	await submitAnswer();//跳出等待循环后答题1次，准备无限抽
 	var timeTemp=new Date(strattime).getTime()-new Date().getTime();//判断到时间点的时间差距。
 	console.log("距离"+strattime+"还差："+timeTemp+"毫秒,提前1秒开始提交");
 	count=0;
@@ -252,7 +253,7 @@ function submitAnswer() {
 }
 
 
-async function choujiang(){//抽奖
+function choujiang(){//抽奖
 	//count++;
 	//console.log(count);
 	//console.log("抽奖");
