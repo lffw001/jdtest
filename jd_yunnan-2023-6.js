@@ -19,7 +19,7 @@ var userInfos=[
 
 
 	{
-		"token":process.env.YUNNAN_TOKEN?process.env.YUNNAN_TOKEN:"0bc7614e9fff6dcd73314f59b09fa69d53eed0cb",
+		"token":process.env.YUNNAN_TOKEN?process.env.YUNNAN_TOKEN:"48bc5630f75383da1be090d565b4f31598202951",
 		"openId":"o9Su_jgMrVF3L108fgD3RkfQKpbg",
 		"userName":"黄山",//006
 		"phone":"18068603568",
@@ -39,6 +39,7 @@ let iswait=true;
 let m=59;//设置
 let s=55;
 var count=0;
+let isAnswer=false;
 !(async () => {
 	
 	var hour=0;
@@ -91,12 +92,15 @@ var count=0;
 	}while(iswait)
 	var timeTemp=new Date(strattime).getTime()-new Date().getTime();//判断到时间点的时间差距。
 	console.log("距离"+strattime+"还差："+timeTemp+"毫秒,提前1秒开始提交");
+	count=0;
 	await $.wait(timeTemp-300);
 		
 	var id=setInterval(() => {
 		var now1=new Date();
 		console.log(now1.toLocaleTimeString());
-		choujiang();
+		if(isAnswer){
+			choujiang();
+		}
 		if(zhong==true||now1.getMinutes()==2){
 			clearInterval(id);
 		}
@@ -229,6 +233,7 @@ function submitAnswer() {
           if (data) {
 			console.log(data);
 			var data=JSON.parse(data);
+			isAnswer=true;
 			//$.token11=data.token;
 			if(data.status==1){
 				//choujiang();
@@ -291,6 +296,7 @@ async function choujiang(){//抽奖
 				console.log(data);
 			}
 			if(data.status==0){
+				isAnswer=false;
 				submitAnswer();
 			}
 			else if(data.status==1){
