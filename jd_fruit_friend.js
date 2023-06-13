@@ -29,7 +29,7 @@ let cookiesArr = [], cookie = '', isBox = false, notify,allMessage = '';
 let newShareCodes=['d8fd255379cc4b648e48b38b5dd382b4@a3389a65c654410daa81b45bfb026088@828333606f7646c59b10c3c51724853c@6df66cb825d142baa1dfe9f59cdae426@ab559d5975044b3e95fa87b02ee7fcd2@5b3475c11fbf4770ad5c80174aae6f62@a03d49eeb79e44f79803efcfa9d0dc59@1d6250353a4b446e9ff7a73920054ee0'];
 
 let message = '', subTitle = '', option = {}, isFruitFinished = false;
-const retainWater = $.isNode() ? (process.env.retainWater ? process.env.retainWater : 100) : ($.getdata('retainWater') ? $.getdata('retainWater') : 100);//保留水滴大于多少g,默认100g;
+const retainWater = $.isNode() ? (process.env.retainWater ? process.env.retainWater : 50000) : ($.getdata('retainWater') ? $.getdata('retainWater') : 50000);//保留水滴大于多少g,默认100g;
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 let jdFruitBeanCard = false;//农场使用水滴换豆卡(如果出现限时活动时100g水换20豆,此时比浇水划算,推荐换豆),true表示换豆(不浇水),false表示不换豆(继续浇水),脚本默认是浇水
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
