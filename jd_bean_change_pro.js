@@ -1363,11 +1363,8 @@ function getSignfromNolan(functionId, body) {
 		    },
 		    timeout: 30000
         }
-		console.log(url);
         $.post(url, async(err, resp, data) => {
-            try {		
-				console.log(111);
-				console.log(data);
+            try {				
                 data = JSON.parse(data);
                 if (data && data.body) {                    
                     if (data.body)
@@ -1686,7 +1683,7 @@ function jdfruitRequest(function_id, body = {}, timeout = 1000) {
 								llgeterror = true;
 							}
 							else
-								$.JDwaterEveryDayT = data.firstWaterInit.totalWaterTimes;
+								$.JDwaterEveryDayT = data?.firstWaterInit?.totalWaterTimes;
 						}
 					}
 				} catch (e) {
