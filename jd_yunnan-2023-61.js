@@ -19,7 +19,7 @@ var userInfos=[
 
 
 	{
-		"token":process.env.YUNNAN_TOKEN?process.env.YUNNAN_TOKEN:"1344e8dbbbeca4b455bae4a8ed161b3c6d9f64f3",
+		"token":process.env.YUNNAN_TOKEN1?process.env.YUNNAN_TOKEN1:"1344e8dbbbeca4b455bae4a8ed161b3c6d9f64f1",
 		"openId":"o9Su_jgMrVF3L108fgD3RkfQKpbg",
 		"userName":"黄山",//006
 		"phone":"18068603568",
