@@ -66,7 +66,7 @@ let isAnswer=false;
 	}
 	else{
 		console.log("不在抽奖时间范围内");
-		return
+		//return
 	}
 	console.log("开始时间："+strattime);
 	await submitAnswer();
