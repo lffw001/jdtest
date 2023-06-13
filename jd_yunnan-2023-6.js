@@ -92,11 +92,11 @@ let isAnswer=false;
 		}
 	
 	}while(iswait)
-	await submitAnswer();//跳出等待循环后答题1次，准备无限抽
-	var timeTemp=new Date(strattime).getTime()-new Date().getTime();//判断到时间点的时间差距。
-	console.log("距离"+strattime+"还差："+timeTemp+"毫秒,提前1秒开始提交");
+	//await submitAnswer();//跳出等待循环后答题1次，准备无限抽
+	//var timeTemp=new Date(strattime).getTime()-new Date().getTime();//判断到时间点的时间差距。
+	//console.log("距离"+strattime+"还差："+timeTemp+"毫秒,提前1秒开始提交");
+	//await $.wait(timeTemp-300);
 	count=0;
-	await $.wait(timeTemp-300);
 		
 	/*var id=setInterval(() => {
 		var now1=new Date();
