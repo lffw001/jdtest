@@ -87,12 +87,12 @@ let isAnswer=false;
 				time=1000;
 			}
 			if(min==m&&sec>s){
+				await submitAnswer();//跳出等待循环后答题1次，准备无限抽
 				iswait=false;
 			}
 		}
 	
 	}while(iswait)
-	await submitAnswer();//跳出等待循环后答题1次，准备无限抽
 	var timeTemp=new Date(strattime).getTime()-new Date().getTime();//判断到时间点的时间差距。
 	console.log("距离"+strattime+"还差："+timeTemp+"毫秒,提前1秒开始提交");
 	count=0;
@@ -238,7 +238,9 @@ function submitAnswer() {
 			isAnswer=true;
 			//$.token11=data.token;
 			if(data.status==1){
-				choujiang();
+				if(!iswait&&!zhong){
+					choujiang();
+				}
 			}
           } else {
             console.log(`服务器返回空数据`)
