@@ -238,17 +238,24 @@ function submitAnswer() {
 			isAnswer=true;
 			//$.token11=data.token;
 			if(data.status==1){
-				choujiang();
+				setTimeout(function{
+				  choujiang();
+				},5)
 			}
           } else {
             console.log(`服务器返回空数据`)
           }
         }
       } catch (e) {
-		  choujiang();
+		  setTimeout(function{
+				  choujiang();
+				},5)
         $.logErr(e, resp)
       } finally {
 		  //choujiang();
+		  setTimeout(function{
+			  choujiang1();
+		  },5)
         resolve();
       }
     })
