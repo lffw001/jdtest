@@ -248,7 +248,7 @@ function submitAnswer() {
 		  choujiang();
         $.logErr(e, resp)
       } finally {
-		  choujiang();
+		  //choujiang();
         resolve();
       }
     })
