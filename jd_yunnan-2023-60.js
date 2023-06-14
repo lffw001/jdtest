@@ -238,24 +238,18 @@ function submitAnswer() {
 			isAnswer=true;
 			//$.token11=data.token;
 			if(data.status==1){
-				setTimeout(function{
-				  choujiang();
-				},5)
+				choujiang();
 			}
           } else {
             console.log(`服务器返回空数据`)
           }
         }
       } catch (e) {
-		  setTimeout(function{
-				  choujiang();
-				},5)
+		  choujiang();
         $.logErr(e, resp)
       } finally {
 		  //choujiang();
-		  setTimeout(function{
-			  choujiang1();
-		  },5)
+		 choujiang1();
         resolve();
       }
     })
@@ -330,10 +324,10 @@ function choujiang(){//抽奖
 					},5)
 					setTimeout(() => {
 						choujiang1();
-					},15)
+					},10)
 					setTimeout(() => {
 						choujiang1();
-					},25)
+					},15)
 					choujiang();
 				}
 			}
