@@ -37,7 +37,7 @@ var userInfos=[
 let zhong=false;
 let iswait=true;
 let m=59;//设置
-let s=50;
+let s=55;
 var count=0;
 let isAnswer=false;
 !(async () => {
@@ -79,20 +79,17 @@ let isAnswer=false;
 		sec=now.getSeconds();
 		await $.wait(time);
 		await choujiang();
-		if(isDebuggr=="true"){
-			iswait=false;
-		}
 		if(hour==8||hour==13){
 			if(min==m){
 				time=1000;
 			}
 			if(min==m&&sec>s){
-				await submitAnswer();//跳出等待循环后答题1次，准备无限抽
 				iswait=false;
 			}
 		}
 	
 	}while(iswait)
+	await submitAnswer();//跳出等待循环后答题1次，准备无限抽
 	var timeTemp=new Date(strattime).getTime()-new Date().getTime();//判断到时间点的时间差距。
 	console.log("距离"+strattime+"还差："+timeTemp+"毫秒,提前1秒开始提交");
 	count=0;
@@ -251,7 +248,7 @@ function submitAnswer() {
         $.logErr(e, resp)
       } finally {
 		  //choujiang();
-		 choujiang1();
+		  choujiang1();
         resolve();
       }
     })
