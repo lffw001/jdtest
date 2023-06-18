@@ -57,13 +57,14 @@ let isAnswer=false;
 	var now22=new Date();
 	console.log("当前时间："+now22);
 	var strattime='2022-12-31 00:00:00'
-	if(now22.getHours()==8){
+	//if(now22.getHours()==8){
 		//9点场次
-		strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ "08:59:50";
-	}else if(now22.getHours()==13){
+	//	strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ "08:59:50";
+	//}else if(now22.getHours()==13){
 		//14点场次
-		strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ "13:59:50";
-	}
+	//	strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ "13:59:50";
+	//}
+	strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ now22.getHours()+":59:50";
 	else{
 		console.log("不在抽奖时间范围内");
 		return
@@ -79,14 +80,14 @@ let isAnswer=false;
 		sec=now.getSeconds();
 		await $.wait(time);
 		await choujiang();
-		if(hour==8||hour==13){
+		//if(hour==8||hour==13){
 			if(min==m){
 				time=1000;
 			}
 			if(min==m&&sec>s){
 				iswait=false;
 			}
-		}
+		//}
 	
 	}while(iswait)
 	await submitAnswer();//跳出等待循环后答题1次，准备无限抽
