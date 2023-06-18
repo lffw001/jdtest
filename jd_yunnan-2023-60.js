@@ -50,7 +50,7 @@ let isAnswer=false;
 	$.keyList=getRandomArrayElements($.AllkeyList,5);//随机抽5题
 	var i=0;
 
-	var time=8000;
+	var time=1000;
 	console.log("开始账号"+(i+1)+"--------------------------")
 
 	$.wx_tk=userInfos[i].token;
