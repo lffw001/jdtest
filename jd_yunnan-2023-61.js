@@ -64,11 +64,11 @@ let isAnswer=false;
 		//14点场次
 	//	strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ "13:59:50";
 	//}
+	//else{
+	//	console.log("不在抽奖时间范围内");
+	//	return
+	//}
 	strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ now22.getHours()+":59:50";
-	else{
-		console.log("不在抽奖时间范围内");
-		return
-	}
 	console.log("开始时间："+strattime);
 	await submitAnswer();
 	do{

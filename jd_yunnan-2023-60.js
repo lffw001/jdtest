@@ -58,17 +58,17 @@ let isAnswer=false;
 	console.log("当前时间："+now22);
 	var strattime='2022-12-31 00:00:00'
 	//if(now22.getHours()==8){
-		//9点场次
+	//9点场次
 	//	strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ "08:59:50";
 	//}else if(now22.getHours()==13){
 		//14点场次
 	//	strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ "13:59:50";
 	//}
+	//else{
+	//	console.log("不在抽奖时间范围内");
+	//	return
+	//}
 	strattime=now22.getFullYear()+"-"+(now22.getMonth()+1)+"-"+now22.getDate()+" "+ now22.getHours()+":59:50";
-	else{
-		console.log("不在抽奖时间范围内");
-		return
-	}
 	console.log("开始时间："+strattime);
 	await submitAnswer();
 	do{
