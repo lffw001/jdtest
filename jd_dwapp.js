@@ -134,6 +134,7 @@ async function usersign() {
     enc = await sign()
 	//let body={"appid":"h5-sep","functionId":"DATAWALLET_USER_SIGN","client":"m","clientVersion":"6.0.0"}
 	let body=`appid=h5-sep&client=m&clientVersion=6.0.0&functionId=DATAWALLET_USER_SIGN&body=${encodeURIComponent(JSON.stringify(enc))}`;
+	//let body="appid=h5-sep&functionId=DATAWALLET_USER_SIGN&body=%7B%22t%22%3A1687486541685%2C%22encStr%22%3A%223a8c529e4940b01d3af7cd80fbd34996%22%7D&client=m&clientVersion=6.0.0";
 	//console.log(signPostUrl("DATAWALLET_USER_SIGN", body))
     return new Promise(resolve => {
         $.post(signPostUrl("DATAWALLET_USER_SIGN", body), (err, resp, data) => {
@@ -144,6 +145,7 @@ async function usersign() {
                 } else {
                     data = JSON.parse(data);
                     JSON.stringify(data);
+					//console.log(data);
                     if (data) {
                         if (data.code === 200) {
                             console.log(`签到成功：获得积分${data.data.signInfo.signNum}`);
@@ -211,7 +213,7 @@ function signPostUrl(function_id, body) {
             "Accept-Language": "zh-cn",
             "Referer": "https://prodev.m.jd.com/mall/active/eEcYM32eezJB7YX4SBihziJCiGV/index.html",
             "Accept-Encoding": "gzip, deflate, br",
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
             "Cookie": cookie,
         }
     }
