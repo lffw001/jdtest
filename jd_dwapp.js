@@ -131,9 +131,12 @@ async function taskreceive(id) {
 }
 
 async function usersign() {
-    body = await sign()
+    enc = await sign()
+	//let body={"appid":"h5-sep","functionId":"DATAWALLET_USER_SIGN","client":"m","clientVersion":"6.0.0"}
+	let body=`appid=h5-sep&client=m&clientVersion=6.0.0&functionId=DATAWALLET_USER_SIGN&body=${encodeURIComponent(JSON.stringify(enc))}`;
+	//console.log(signPostUrl("DATAWALLET_USER_SIGN", body))
     return new Promise(resolve => {
-        $.post(taskPostUrl("dwSignInfo", body), (err, resp, data) => {
+        $.post(signPostUrl("DATAWALLET_USER_SIGN", body), (err, resp, data) => {
             try {
                 if (err) {
                     console.log(`${err}`)
@@ -193,6 +196,25 @@ async function tasklist() {
             }
         })
     })
+}
+
+function signPostUrl(function_id, body) {
+    return {
+        url: `https://api.m.jd.com/api?functionId=${function_id}`,
+        body: body,
+        headers: {
+            "Host": "api.m.jd.com",
+            "Origin": "https://prodev.m.jd.com",
+            "Connection": "keep-alive",
+            "Accept": "*/*",
+            "User-Agent": `jdapp;iPhone;10.1.0;13.5;${$.UUID};network/wifi;model/iPhone11,6;addressid/4596882376;appBuild/167774;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1`,
+            "Accept-Language": "zh-cn",
+            "Referer": "https://prodev.m.jd.com/mall/active/eEcYM32eezJB7YX4SBihziJCiGV/index.html",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Content-Type": "application/json",
+            "Cookie": cookie,
+        }
+    }
 }
 
 function taskPostUrl(function_id, body) {
