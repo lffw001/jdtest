@@ -137,7 +137,7 @@ function choujiang(){//抽奖
 	return new Promise(async resolve => {
 	
 	var now=new Date()
-	//console.log(now.toLocaleTimeString());
+	console.log(now.toLocaleTimeString());
 	var data=$.data;
 	//var data={"name":"张三","age":23};
 	var dataStr = "";
