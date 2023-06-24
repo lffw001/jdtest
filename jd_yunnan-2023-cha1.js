@@ -160,6 +160,7 @@ function choujiang(){//抽奖
 		  'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
 		  'Cookie':$.data.cookie,
 		},
+	   "timeout": 1000,
 	  'body':dataStr
     }
 	//console.log(options);
