@@ -174,7 +174,7 @@ function choujiang(){//抽奖
 			//console.log(count);
 			data=JSON.parse(data);
 			//logger.log("中奖："+new Date());
-			//console.log(data);
+			console.log(data);
 			if(data.status!='failure'){
 				console.log(data);
 			}
