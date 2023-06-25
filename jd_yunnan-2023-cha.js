@@ -96,11 +96,13 @@ let m=59;//设置
 let s=55;
 var count=0;
 let isAnswer=false;
+let end=false;
 !(async () => {
 	//setInterval(function(){
 		
 	//},200)
 	do{
+		var now=new Date();
 		for(var i=0;i<userInfos.length;i++){
 			$.data=userInfos[i];
 			$.data.name=getName();
@@ -108,7 +110,10 @@ let isAnswer=false;
 			await choujiang();
 			//await $.wait(200);
 		}
-	}while(1==1)
+		if(now.getMinutes()==1){
+			end=true;
+		}
+	}while(!end)
 
 
 })().catch((e) => {
