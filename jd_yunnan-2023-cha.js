@@ -21,7 +21,10 @@ var userInfos=[
 		"name":"李斌",//leebear
 		"phone":"18651306657",
 		"isZhong":"0"
-	},	
+	},
+
+	
+	
 ]
 let zhong=false;
 let iswait=true;
@@ -30,18 +33,25 @@ let s=55;
 var count=0;
 let isAnswer=false;
 var i=0;
+var end=false;
 !(async () => {
-	var id=setInterval(() => {
-		var now=new Date();
-		$.data=userInfos[i];
-		$.data.name=getName();
-		$.data.phone=getMoble();
-		choujiang();
-		if(now.getMinutes()==1){
-			clearInterval(id);
-		}
+	//setInterval(function(){
 		
-	}, 100);
+	//},200)
+	do{
+		var now=new Date();
+		if(now.getMinutes()==1){
+			end=true;
+		}
+		//for(var i=0;i<userInfos.length;i++){
+			$.data=userInfos[i];
+			$.data.name=getName();
+			$.data.phone=getMoble();
+			await choujiang();
+			//await $.wait(200);
+		//}
+	}while(!end)
+
 
 })().catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -63,7 +73,7 @@ function getRandomArrayElements(arr, count) {
 }
 
 
-async function choujiang(){//抽奖
+function choujiang(){//抽奖
 	//console.log("抽奖");
 	
 	return new Promise(async resolve => {
