@@ -21,74 +21,7 @@ var userInfos=[
 		"name":"李斌",//leebear
 		"phone":"18651306657",
 		"isZhong":"0"
-	},
-	{
-		"cookie":"__jsluid_s=e381c94336f9c5d98639264b9a3dff0b",
-		"name":"李飞",//leebear
-		"phone":"18012225989",
-		"isZhong":"0"
-	},
-	{
-		"cookie":"__jsluid_s=0347c6b8dfebecf65d67362812993452",
-		"name":"李强大",//leebear
-		"phone":"13382348802",
-		"isZhong":"0"
-	},
-		{
-		"cookie":"__jsluid_s=7a516480825deaa9006fcc7d8491c69b",
-		"name":"李建",//leebear
-		"phone":"13584640176",
-		"isZhong":"0"
-	},
-	
-	{
-		"cookie":"__jsluid_s=0347c6b8dfebecf65d67362812993452",
-		"name":"李杰",//leebear
-		"phone":"18068603568",
-		"isZhong":"0"
-	},
-
-	{
-		"cookie":"__jsluid_s=0347c6b8dfebecf65d67362812993452",
-		"name":"任佳莹",//leebear
-		"phone":"17802595869",
-		"isZhong":"0"
-	},
-		{
-		"cookie":"__jsluid_s=7a516480825deaa9006fcc7d8491c69b",
-		"name":"任建",//leebear
-		"phone":"13814742156",
-		"isZhong":"0"
-	},
-	
-
-	{
-		"cookie":"__jsluid_s=0347c6b8dfebecf65d67362812993452",
-		"name":"张霞",//leebear
-		"phone":"18068603469",
-		"isZhong":"0"
-	},
-		{
-		"cookie":"__jsluid_s=7a516480825deaa9006fcc7d8491c69b",
-		"name":"刘淑芳",//leebear
-		"phone":"13382341414",
-		"isZhong":"0"
-	},
-	
-
-	{
-		"cookie":"__jsluid_s=0347c6b8dfebecf65d67362812993452",
-		"name":"刘丫",//leebear
-		"phone":"13801484782",
-		"isZhong":"0"
-	},
-	
-	
-	
-	
-	
-	
-	
+	},	
 ]
 let zhong=false;
 let iswait=true;
@@ -96,25 +29,19 @@ let m=59;//设置
 let s=55;
 var count=0;
 let isAnswer=false;
-let end=false;
+var i=0;
 !(async () => {
-	//setInterval(function(){
-		
-	//},200)
-	do{
+	var id=setInterval(() => {
 		var now=new Date();
-		for(var i=0;i<userInfos.length;i++){
-			$.data=userInfos[i];
-			$.data.name=getName();
-			$.data.phone=getMoble();
-			await choujiang();
-			//await $.wait(200);
-		}
+		$.data=userInfos[i];
+		$.data.name=getName();
+		$.data.phone=getMoble();
+		choujiang();
 		if(now.getMinutes()==1){
-			end=true;
+			clearInterval(id);
 		}
-	}while(!end)
-
+		
+	}, 60);
 
 })().catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
