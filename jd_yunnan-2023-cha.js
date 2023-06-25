@@ -41,7 +41,7 @@ var i=0;
 			clearInterval(id);
 		}
 		
-	}, 60);
+	}, 80);
 
 })().catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -63,7 +63,7 @@ function getRandomArrayElements(arr, count) {
 }
 
 
-function choujiang(){//抽奖
+async function choujiang(){//抽奖
 	//console.log("抽奖");
 	
 	return new Promise(async resolve => {
