@@ -149,7 +149,8 @@ function getRandomArrayElements(arr, count) {
         shuffled[index] = shuffled[i];
         shuffled[i] = temp;
     }
-    return shuffled.slice(min);
+    //return shuffled.slice(min);
+	return [ 'q206', 'q207', 'q208', 'q209', 'q210' ]
 }
 
 function answer(key,que) {
