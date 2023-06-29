@@ -2,6 +2,7 @@
 云南活动
  */
 const $ = new Env('云南茶');
+var request = require('request')
 // index.js
 //const fs = require('fs');
 /*
@@ -26,6 +27,7 @@ var userInfos=[
 	
 	
 ]
+let dailiUrl=process.env.YUNNAN_DAILI?process.env.YUNNAN_DAILI:"http://pandavip.xiongmaodaili.com/xiongmao-web/apiPlus/vgl?secret=3f2238b23bc67753025d0a71137f9cab&orderNo=VGL2023062920573300s8bPbH&count=1&isTxt=1&proxyType=1&validTime=0&removal=0&cityIds=320100,320300,320400,320500,320600,320700,320800,320900,321000,321100,321200,321300,210100,210200,210300,210400,210700,210800,211000,211200,211400,130100,130200,130800,131100,370300,370500,370600,370800,371000,371100,371500,510100,100000";
 let zhong=false;
 let iswait=true;
 let m=59;//设置
@@ -33,24 +35,40 @@ let s=55;
 var count=0;
 let isAnswer=false;
 var i=0;
-var end=false;
+let proIp="";
+let isGetDL=false;
+var xunghuan=0;
 !(async () => {
-	//setInterval(function(){
-		
-	//},200)
+	let start=true;
 	do{
-		var now=new Date();
-		if(now.getMinutes()==1){
-			end=true;
+		await getDL();//获取代理
+		var startTime=new Date();
+		await $.wait(200);
+		if(proIp==""){
+			await $.wait(100);
 		}
-		//for(var i=0;i<userInfos.length;i++){
+		if(proIp==""){
+			await $.wait(100);
+		}
+		console.log("正在准备请求...");
+		for(var k=0;proIp!=""&&proIp!=null&&isGetDL&&xunghuan<200;k++){//isGetDL=true,循环抽奖。直到代理过期isGetDL=false
+			xunghuan++;
+			var now=new Date();
+			console.log(now.toLocaleTimeString());
 			$.data=userInfos[i];
 			$.data.name=getName();
 			$.data.phone=getMoble();
-			await choujiang();
-			//await $.wait(200);
-		//}
-	}while(!end)
+			await choujiangDl();
+			await $.wait(120)
+		}
+		xunghuan=0;
+		await $.wait(200);
+		var end=new Date();
+		var temTime=end.getTime()-startTime.getTime();
+		if(temTime<1200){
+			await $.wait(1200-temTime)
+		}
+	}while(start)
 
 
 })().catch((e) => {
@@ -71,6 +89,95 @@ function getRandomArrayElements(arr, count) {
     }
     return shuffled.slice(min);
 }
+
+async function choujiangDl(){//抽奖
+	//console.log("抽奖");
+	var data=$.data;
+	//var data={"name":"张三","age":23};
+	var dataStr = "";
+    for (var i in data) {
+    //i就是key data[key]就是他的值
+        var tmpData=data[i]?data[i]:"";
+        dataStr += i + "=" + tmpData+ "&";
+    }
+
+	var options = {
+	  'method': 'POST',
+	  'url': 'https://webapp.yunnan.cn/new/index.php?nova_p2=WL7c-1VazsFAZGfQRYiq55YRgNp9m4zVHxQtCc-vCvQ@',
+	  'proxy': 'http://'+proIp, // 格式为：http://username:password@hotname:port
+	  'headers': {
+		'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+		'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+		'Connection': 'keep-alive',
+		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+		'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 Edg/104.0.1293.70'
+	  },
+	  "timeout": 1200,
+	  json: true,
+	  strictSSL: false,
+	  'body':dataStr
+	};
+	try{
+		request(options, function (error, response) {
+			if (error) {
+				//异常重新获取代理
+				//getDL();
+				if(xunghuan>0){
+					isGetDL=false;
+				}
+				
+			} else {
+			  //console.log(response.body)
+			  if(response.body.status=="success"){
+					//成功
+					console.log(response.body);
+					console.log(response.body);
+					//刷新代理
+					//getDL();
+					if(xunghuan>0){
+						isGetDL=false;
+					}
+			  }else if(response.body.status=="failure"){
+				  
+			  }else{
+				if(xunghuan>0){
+					isGetDL=false;
+				}
+			  }
+			}
+		});
+	}catch(e){
+		console.log(e);
+	}
+	
+}
+
+
+async function getDL(){
+	const options = {
+		//星空代理
+      "url": `http://pandavip.xiongmaodaili.com/xiongmao-web/apiPlus/vgl?secret=3f2238b23bc67753025d0a71137f9cab&orderNo=VGL2023062920573300s8bPbH&count=1&isTxt=1&proxyType=1&validTime=0&removal=0&cityIds=320100,320300,320400,320500,320600,320700,320800,320900,321000,321100,321200,321300,210100,210200,210300,210400,210700,210800,211000,211200,211400,130100,130200,130800,131100,370300,370500,370600,370800,371000,371100,371500,510100,100000`,
+      "headers": {
+		  "Host": "pandavip.xiongmaodaili.com",
+		  'User-Agent': 'Mozilla/5.0 (Linux; Android 10; YAL-AL10 Build/HUAWEIYAL-AL10; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/3211 MMWEBSDK/20220303 Mobile Safari/537.36 MMWEBID/916 MicroMessenger/8.0.21.2120(0x2800153F) Process/toolsmp WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64',
+		},
+	  "timeout": 3000,
+    }
+	//console.log(options);
+    $.get(options, (err, resp, data) => {
+      try {
+        console.log("获取代理成功："+data)
+		isGetDL=true;
+		proIp=data;
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+
+      }
+    })
+	
+}
+
 
 
 function choujiang(){//抽奖
