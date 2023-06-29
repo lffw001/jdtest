@@ -1,33 +1,30 @@
 /*
 云南活动
  */
-const $ = new Env('云南茶');
-var request = require('request')
+const $ = new Env('云南');
 // index.js
 //const fs = require('fs');
-/*
+var request = require('request')
+ /*
 let options = {
  flags: 'a', // 
  encoding: 'utf8', // utf8编码
 }
-let stderr = fs.createWriteStream('F:/jd/jd_scripts-master/cha.log', options);
+let stderr = fs.createWriteStream('./cha.log', options);
 // 创建logger
-let logger = new console.Console(stderr);
-*/
+let logger = new console.Console(stderr);*/
 const JD_API_HOST = 'https://webapp.yunnan.cn/new/index.php';
 var userInfos=[
 
 	{
-		"cookie":"__jsluid_s=7a516480825deaa9006fcc7d8491c69b",
 		"name":"李斌",//leebear
 		"phone":"18651306657",
-		"isZhong":"0"
 	},
 
 	
 	
+	
 ]
-let dailiUrl=process.env.YUNNAN_DAILI?process.env.YUNNAN_DAILI:"http://pandavip.xiongmaodaili.com/xiongmao-web/apiPlus/vgl?secret=3f2238b23bc67753025d0a71137f9cab&orderNo=VGL2023062920573300s8bPbH&count=1&isTxt=1&proxyType=1&validTime=0&removal=0&cityIds=320100,320300,320400,320500,320600,320700,320800,320900,321000,321100,321200,321300,210100,210200,210300,210400,210700,210800,211000,211200,211400,130100,130200,130800,131100,370300,370500,370600,370800,371000,371100,371500,510100,100000";
 let zhong=false;
 let iswait=true;
 let m=59;//设置
@@ -39,11 +36,37 @@ let proIp="";
 let isGetDL=false;
 var xunghuan=0;
 !(async () => {
+	//setInterval(function(){
+		
+	//},200)
+	/*setInterval(function(){
+		$.data=userInfos[i];
+			$.data.name=getName();
+			$.data.phone=getMoble();
+			choujiang();
+	},100)*/
+	/*do{
+		$.data=userInfos[i];
+		$.data.name=getName();
+		$.data.phone=getMoble();
+		await choujiang();
+	}while(1==1)
+	*/
+	//let go=true;
+	/*do{
+		await $.wait(1000)
+		var now=new Date();
+		console.log(now.toLocaleTimeString());
+		if((now.getMinutes()==59&&now.getSeconds()>58)||(now.getMinutes()==0||now.getMinutes()==1)){
+			go=true;
+		}
+	}while(!go)*/
 	let start=true;
+
 	do{
 		await getDL();//获取代理
 		var startTime=new Date();
-		await $.wait(200);
+		await $.wait(400);
 		if(proIp==""){
 			await $.wait(100);
 		}
@@ -51,6 +74,8 @@ var xunghuan=0;
 			await $.wait(100);
 		}
 		console.log("正在准备请求...");
+		console.log(proIp);
+		console.log(isGetDL);
 		for(var k=0;proIp!=""&&proIp!=null&&isGetDL&&xunghuan<200;k++){//isGetDL=true,循环抽奖。直到代理过期isGetDL=false
 			xunghuan++;
 			var now=new Date();
@@ -59,7 +84,7 @@ var xunghuan=0;
 			$.data.name=getName();
 			$.data.phone=getMoble();
 			await choujiangDl();
-			await $.wait(120)
+			await $.wait(250)
 		}
 		xunghuan=0;
 		await $.wait(200);
@@ -69,6 +94,8 @@ var xunghuan=0;
 			await $.wait(1200-temTime)
 		}
 	}while(start)
+	
+
 
 
 })().catch((e) => {
@@ -77,6 +104,7 @@ var xunghuan=0;
 	$.done();
 })
   
+
 
 
 function getRandomArrayElements(arr, count) {
@@ -89,6 +117,7 @@ function getRandomArrayElements(arr, count) {
     }
     return shuffled.slice(min);
 }
+
 
 async function choujiangDl(){//抽奖
 	//console.log("抽奖");
@@ -127,10 +156,10 @@ async function choujiangDl(){//抽奖
 				}
 				
 			} else {
-			  //console.log(response.body)
+			  console.log(response.body)
 			  if(response.body.status=="success"){
 					//成功
-					console.log(response.body);
+					//logger.log(response.body);
 					console.log(response.body);
 					//刷新代理
 					//getDL();
@@ -179,8 +208,7 @@ async function getDL(){
 }
 
 
-
-function choujiang(){//抽奖
+async function choujiang(){//抽奖
 	//console.log("抽奖");
 	
 	return new Promise(async resolve => {
@@ -226,7 +254,7 @@ function choujiang(){//抽奖
 			//logger.log("中奖："+new Date());
 			console.log(data);
 			if(data.status!='failure'){
-				console.log(data);
+				logger.log(data);
 			}
 			
           } else {
@@ -242,6 +270,7 @@ function choujiang(){//抽奖
   })
 }
 
+
 // 生成随机姓名
 function getName(){
 	var familyNames = new Array(
@@ -254,9 +283,19 @@ function getName(){
 		"酆",  "鲍",  "史",  "唐",  "费",  "廉",  "岑",  "薛",  "雷",  "贺",  
 		"倪",  "汤",  "滕",  "殷",  "罗",  "毕",  "郝",  "邬",  "安",  "常",
 		"乐",  "于",  "时",  "傅",  "皮",  "卞",  "齐",  "康",  "伍",  "余",  
-		"元",  "卜",  "顾",  "孟",  "平",  "黄",  "和",  "穆",  "萧",  "尹"
+		"元",  "卜",  "顾",  "孟",  "平",  "黄",  "和",  "穆",  "萧",  "尹",
+		"欧阳","太史","端木","上官","司马","东方","独孤","南宫","万俟","闻人",
+		"夏侯","诸葛","尉迟","公羊","赫连","澹台","皇甫","宗政","濮阳","公冶",
+		"太叔","申屠","公孙","慕容","仲孙","钟离","长孙","宇文","司徒","鲜于",
+		"司空","闾丘","子车","亓官","司寇","巫马","公西","颛孙","壤驷","公良",
+		"漆雕","乐正","宰父","谷梁","拓跋","夹谷","轩辕","令狐","段干","百里",
+		"呼延","东郭","南门","羊舌","微生","公户","公玉","公仪","梁丘","公仲",
+		"公上","公门","公山","公坚","左丘","公伯","西门","公祖","第五","公乘",
+		"贯丘","公皙","南荣","东里","东宫","仲长","子书","子桑","即墨","达奚",
+		"褚师"
 		);
 	var givenNames = new Array(
+		"杰", "兵", "斌", "建", "峰", "刚", "田", "一", "晶", "近平", "明涛", 
 		"子璇", "淼", "国栋", "夫子", "瑞堂", "甜", "敏", "尚", "国贤", "贺祥", "晨涛", 
 		"昊轩", "易轩", "益辰", "益帆", "益冉", "瑾春", "瑾昆", "春齐", "杨", "文昊", 
 		"东东", "雄霖", "浩晨", "熙涵", "溶溶", "冰枫", "欣欣", "宜豪", "欣慧", "建政", 
@@ -289,7 +328,7 @@ function getName(){
 }
 
 function getMoble() {
-	var prefixArray = new Array("130", "131", "132", "133", "135", "137", "138", "170", "187", "189");
+	var prefixArray = new Array("130", "131", "132", "133", "135", "137", "138", "139", "147", "153", "158", "159", "170", "178", "182", "183","180", "187", "189");
 	var i = parseInt(10 * Math.random());
 	var prefix = prefixArray[i];
 	for (var j = 0; j < 8; j++) {
