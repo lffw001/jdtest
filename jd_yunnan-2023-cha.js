@@ -35,34 +35,14 @@ var i=0;
 let proIp="";
 let isGetDL=false;
 var xunghuan=0;
+let daili=process.env.YUNNAN_DAILI?process.env.YUNNAN_DAILI:""
 !(async () => {
-	//setInterval(function(){
-		
-	//},200)
-	/*setInterval(function(){
-		$.data=userInfos[i];
-			$.data.name=getName();
-			$.data.phone=getMoble();
-			choujiang();
-	},100)*/
-	/*do{
-		$.data=userInfos[i];
-		$.data.name=getName();
-		$.data.phone=getMoble();
-		await choujiang();
-	}while(1==1)
-	*/
-	//let go=true;
-	/*do{
-		await $.wait(1000)
-		var now=new Date();
-		console.log(now.toLocaleTimeString());
-		if((now.getMinutes()==59&&now.getSeconds()>58)||(now.getMinutes()==0||now.getMinutes()==1)){
-			go=true;
-		}
-	}while(!go)*/
-	let start=true;
 
+	let start=true;
+	if(daili==null||daili==""){
+		console.log("未设置代理获取地址，结束！")
+		return
+	}
 	do{
 		await getDL();//获取代理
 		var startTime=new Date();
@@ -179,7 +159,7 @@ async function choujiangDl(){//抽奖
 async function getDL(){
 	const options = {
 		//星空代理
-      "url": `http://pandavip.xiongmaodaili.com/xiongmao-web/apiPlus/vgl?secret=3f2238b23bc67753025d0a71137f9cab&orderNo=VGL2023062920573300s8bPbH&count=1&isTxt=1&proxyType=1&validTime=0&removal=0&cityIds=320100,320300,320400,320500,320600,320700,320800,320900,321000,321100,321200,321300,210100,210200,210300,210400,210700,210800,211000,211200,211400,130100,130200,130800,131100,370300,370500,370600,370800,371000,371100,371500,510100,100000`,
+      "url": daili,
       "headers": {
 		  "Host": "pandavip.xiongmaodaili.com",
 		  'User-Agent': 'Mozilla/5.0 (Linux; Android 10; YAL-AL10 Build/HUAWEIYAL-AL10; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/3211 MMWEBSDK/20220303 Mobile Safari/537.36 MMWEBID/916 MicroMessenger/8.0.21.2120(0x2800153F) Process/toolsmp WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64',
