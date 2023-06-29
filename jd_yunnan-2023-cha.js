@@ -66,13 +66,7 @@ var xunghuan=0;
 	do{
 		await getDL();//获取代理
 		var startTime=new Date();
-		await $.wait(400);
-		if(proIp==""){
-			await $.wait(100);
-		}
-		if(proIp==""){
-			await $.wait(100);
-		}
+		await $.wait(2000);
 		console.log("正在准备请求...");
 		console.log(proIp);
 		console.log(isGetDL);
