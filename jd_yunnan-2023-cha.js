@@ -50,7 +50,7 @@ let daili=process.env.YUNNAN_DAILI?process.env.YUNNAN_DAILI:""
 		console.log("正在准备请求...");
 		console.log(proIp);
 		console.log(isGetDL);
-		for(var k=0;proIp!=""&&proIp!=null&&isGetDL&&xunghuan<50;k++){//isGetDL=true,循环抽奖。直到代理过期isGetDL=false
+		for(var k=0;proIp!=""&&proIp!=null&&isGetDL&&xunghuan<100;k++){//isGetDL=true,循环抽奖。直到代理过期isGetDL=false
 			xunghuan++;
 			var now=new Date();
 			console.log(now.toLocaleTimeString());
@@ -58,14 +58,14 @@ let daili=process.env.YUNNAN_DAILI?process.env.YUNNAN_DAILI:""
 			$.data.name=getName();
 			$.data.phone=getMoble();
 			await choujiangDl();
-			await $.wait(250)
+			await $.wait(200)
 		}
 		xunghuan=0;
 		await $.wait(200);
 		var end=new Date();
 		var temTime=end.getTime()-startTime.getTime();
-		if(temTime<1200){
-			await $.wait(1200-temTime)
+		if(temTime<12000){
+			await $.wait(12000-temTime)
 		}
 	}while(start)
 	
