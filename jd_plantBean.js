@@ -831,12 +831,13 @@ function TotalBean() {
   });
 }
 
+
 function request(lli1l, Iili1 = {}) {
   return new Promise(async IiIIi1 => {
     let I11Iil = "";
 
     if (!appidMap[lli1l]) {
-      I11Iil = JD_API_HOST + "?functionId=" + lli1l + "&body=" + encodeURIComponent(JSON.stringify(Iili1)) + "&appid=ld&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=9.3.2";
+      I11Iil = JD_API_HOST + "?functionId=" + lli1l + "&body=" + encodeURIComponent(JSON.stringify(Iili1)) + "&appid=signed_wh5&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=11.6.2";
     } else {
       Iili1.version = "9.2.4.3";
       Iili1.monitor_source = "plant_m_plant_index";
