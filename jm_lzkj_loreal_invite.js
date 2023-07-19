@@ -1,24 +1,6 @@
-/**
-活动名称：邀请入会有礼（lzkj_loreal）
-环境变量：jd_lzkj_loreal_invite_url // 活动链接
-			jd_lzkj_loreal_invite_myhelpnum // 自定义邀请人数
-			
-			该活动基本只能领取一次奖励,建议手动领取
-			
-			支持下方链接：
-			https://lzkj-isv.isvjcloud.com/prod/cc/interactsaas/index?activityType=10006&activityId=xxxxxx&templateId=xxxxx&nodeId=xxxxx&prd=cjwx
-			https://lzkj-isv.isvjcloud.com/prod/cc/interactsaas/index?activityType=10070&activityId=xxxxxx&templateId=xxxxx&nodeId=xxxxx&prd=cjwx
-			https://lorealjdcampaign-rc.isvjcloud.com/interact/index?activityType=10006&activityId=xxxxxx&templateId=xxxxx&nodeId=xxxxx&prd=crm
-			
-			1.1更新：优化
-			1.11更新：优先领取最高奖励，未设置变量默认全部奖励领取
-
-cron:11 11 11 11 **
-============Quantumultx===============
-[task_local]
-#lzkj_loreal邀请入会有礼
-11 11 11 11 ** jd_lzkj_loreal_invite.js, tag=lzkj_loreal邀请入会有礼, enabled=true
-*/
+/*
+cron "11 11 11 11 *" jm_lzkj_loreal_invite.js, tag:lzkj_loreal邀请入会有礼
+ */
 
 const $ = new Env("邀请入会有礼（lzkj_loreal）");
 
