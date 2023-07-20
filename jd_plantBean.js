@@ -56,11 +56,11 @@ let lnrun = 0;
     return;
   }
 
-  for (let IIlIil = 0; IIlIil < cookiesArr.length; IIlIil++) {
-    if (cookiesArr[IIlIil]) {
-      cookie = cookiesArr[IIlIil];
+  for (let iI1iI1 = 0; iI1iI1 < cookiesArr.length; iI1iI1++) {
+    if (cookiesArr[iI1iI1]) {
+      cookie = cookiesArr[iI1iI1];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
-      $.index = IIlIil + 1;
+      $.index = iI1iI1 + 1;
       $.isLogin = true;
       $.nickName = "";
       console.log("\n开始【京东账号" + $.index + "】" + ($.nickName || $.UserName) + "\n");
@@ -84,8 +84,8 @@ let lnrun = 0;
   }
 
   $.isNode() && allMessage && (await notify.sendNotify("" + $.name, "" + allMessage));
-})().catch(i1IlIl => {
-  $.log("", "❌ " + $.name + ", 失败! 原因: " + i1IlIl + "!", "");
+})().catch(lI1i11 => {
+  $.log("", "❌ " + $.name + ", 失败! 原因: " + lI1i11 + "!", "");
 }).finally(() => {
   $.done();
 });
@@ -101,15 +101,15 @@ async function jdPlantBean() {
     }
 
     if ($.plantBeanIndexResult && $.plantBeanIndexResult.code === "0" && $.plantBeanIndexResult.data) {
-      for (let IiIII1 = 0; IiIII1 < $.plantBeanIndexResult.data.roundList.length; IiIII1++) {
-        if ($.plantBeanIndexResult.data.roundList[IiIII1].roundState === "2") {
-          num = IiIII1;
+      for (let I1IIl = 0; I1IIl < $.plantBeanIndexResult.data.roundList.length; I1IIl++) {
+        if ($.plantBeanIndexResult.data.roundList[I1IIl].roundState === "2") {
+          num = I1IIl;
           break;
         }
       }
 
-      const l111II = $.plantBeanIndexResult.data.jwordShareInfo.shareUrl;
-      $.myPlantUuid = getParam(l111II, "plantUuid");
+      const i1IIl1 = $.plantBeanIndexResult.data.jwordShareInfo.shareUrl;
+      $.myPlantUuid = getParam(i1IIl1, "plantUuid");
       console.log("\n【京东账号" + $.index + "（" + $.UserName + "）的" + $.name + "好友互助码】" + $.myPlantUuid + "\n");
       roundList = $.plantBeanIndexResult.data.roundList;
       currentRoundId = roundList[num].roundId;
@@ -121,9 +121,9 @@ async function jdPlantBean() {
       message += "【上期成长值】" + roundList[num - 1].growth + "\n";
       await $.wait(1000);
       await receiveNutrients();
-      await $.wait(2000);
-	  await doHelp();//助力
 	  await $.wait(2000);
+	  await doHelp();//助力
+      await $.wait(2000);
       await doTask();
       await $.wait(5000);
       await stealFriendWater();
@@ -137,10 +137,10 @@ async function jdPlantBean() {
       await plantShareSupportList();
       await $.wait(1000);
     } else console.log("种豆得豆-初始失败:  " + JSON.stringify($.plantBeanIndexResult));
-  } catch (lIil1l) {
-    $.logErr(lIil1l);
-    const l1II1i = "京东账号" + $.index + " " + ($.nickName || $.UserName) + "\n任务执行异常，请检查执行日志 ‼️‼️";
-    $.msg($.name, "", "" + l1II1i);
+  } catch (iiliII) {
+    $.logErr(iiliII);
+    const i1iiIl = "京东账号" + $.index + " " + ($.nickName || $.UserName) + "\n任务执行异常，请检查执行日志 ‼️‼️";
+    $.msg($.name, "", "" + i1iiIl);
   }
 }
 
@@ -151,11 +151,7 @@ async function doGetReward() {
       await getReward();
       console.log("开始领取京豆");
       $.getReward && $.getReward.code === "0" ? (console.log("京豆领取成功"), message += "【上期兑换京豆】" + $.getReward.data.awardBean + "个\n", $.msg($.name, subTitle, message), allMessage += "京东账号" + $.index + " " + $.nickName + "\n" + message + ($.index !== cookiesArr.length ? "\n\n" : "")) : console.log("$.getReward 异常：" + JSON.stringify($.getReward));
-    } else {
-      if (awardState === "6") {
-        message += "【上期兑换京豆】" + roundList[num - 1].awardBeans + "个\n";
-      }
-    }
+    } else awardState === "6" && (message += "【上期兑换京豆】" + roundList[num - 1].awardBeans + "个\n");
   }
   roundList[num].dateDesc.indexOf("本期 ") > -1 && (roundList[num].dateDesc = roundList[num].dateDesc.substr(roundList[num].dateDesc.indexOf("本期 ") + 3, roundList[num].dateDesc.length));
   message += "【本期时间】" + roundList[num].dateDesc + "\n";
@@ -166,18 +162,20 @@ async function doCultureBean() {
   await plantBeanIndex();
 
   if ($.plantBeanIndexResult && $.plantBeanIndexResult.code === "0" && $.plantBeanIndexResult.data) {
-    const iIi11I = $.plantBeanIndexResult.data.roundList[num];
+    const li1lil = $.plantBeanIndexResult.data.roundList[num];
 
-    if (iIi11I.roundState === "2") {
-      if (iIi11I.bubbleInfos && iIi11I.bubbleInfos.length) console.log("开始收取营养液");
+    if (li1lil.roundState === "2") {
+      if (li1lil.bubbleInfos && li1lil.bubbleInfos.length) console.log("开始收取营养液");
 
-      for (let iiii11 of iIi11I.bubbleInfos) {
-        console.log("收取-" + iiii11.name + "-的营养液");
-        await cultureBean(iIi11I.roundId, iiii11.nutrientsType);
+      for (let li1lii of li1lil.bubbleInfos) {
+        console.log("收取-" + li1lii.name + "-的营养液");
+        await cultureBean(li1lil.roundId, li1lii.nutrientsType);
         console.log("收取营养液结果:" + JSON.stringify($.cultureBeanRes));
       }
     }
-  } else console.log("plantBeanIndexResult:" + JSON.stringify($.plantBeanIndexResult));
+  } else {
+    console.log("plantBeanIndexResult:" + JSON.stringify($.plantBeanIndexResult));
+  }
 }
 
 async function stealFriendWater() {
@@ -190,18 +188,10 @@ async function stealFriendWater() {
     }
 
     if ($.stealFriendList.data && $.stealFriendList.data.friendInfoList && $.stealFriendList.data.friendInfoList.length > 0) {
-      let lIl111 = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000);
+      let lili1i = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000);
 
-      for (let Ilil of $.stealFriendList.data.friendInfoList) {
-        if (new Date(lIl111).getHours() === 20) {
-          if (Ilil.nutrCount >= 2) {
-            console.log("可以偷的好友的信息paradiseUuid::" + JSON.stringify(Ilil.paradiseUuid));
-            await collectUserNutr(Ilil.paradiseUuid);
-            console.log("偷取好友营养液情况:" + JSON.stringify($.stealFriendRes));
-            $.stealFriendRes && $.stealFriendRes.code === "0" && console.log("偷取好友营养液成功");
-          }
-        } else Ilil.nutrCount >= 3 && (console.log("可以偷的好友的信息paradiseUuid::" + JSON.stringify(Ilil.paradiseUuid)), await collectUserNutr(Ilil.paradiseUuid), console.log("偷取好友营养液情况:" + JSON.stringify($.stealFriendRes)), $.stealFriendRes && $.stealFriendRes.code === "0" && console.log("偷取好友营养液成功"));
-
+      for (let iI1Ii of $.stealFriendList.data.friendInfoList) {
+        new Date(lili1i).getHours() === 20 ? iI1Ii.nutrCount >= 2 && (console.log("可以偷的好友的信息paradiseUuid::" + JSON.stringify(iI1Ii.paradiseUuid)), await collectUserNutr(iI1Ii.paradiseUuid), console.log("偷取好友营养液情况:" + JSON.stringify($.stealFriendRes)), $.stealFriendRes && $.stealFriendRes.code === "0" && console.log("偷取好友营养液成功")) : iI1Ii.nutrCount >= 3 && (console.log("可以偷的好友的信息paradiseUuid::" + JSON.stringify(iI1Ii.paradiseUuid)), await collectUserNutr(iI1Ii.paradiseUuid), console.log("偷取好友营养液情况:" + JSON.stringify($.stealFriendRes)), $.stealFriendRes && $.stealFriendRes.code === "0" && console.log("偷取好友营养液成功"));
         await $.wait(1000);
       }
     }
@@ -213,26 +203,24 @@ async function doEgg() {
 
   if ($.plantEggLotteryRes && $.plantEggLotteryRes.code === "0") {
     if ($.plantEggLotteryRes.data.restLotteryNum > 0) {
-      const IliI = new Array($.plantEggLotteryRes.data.restLotteryNum).fill("");
-      console.log("目前共有" + IliI.length + "次扭蛋的机会");
+      const lI1i1l = new Array($.plantEggLotteryRes.data.restLotteryNum).fill("");
+      console.log("目前共有" + lI1i1l.length + "次扭蛋的机会");
 
-      for (let I1l1l = 0; I1l1l < IliI.length; I1l1l++) {
-        console.log("开始第" + (I1l1l + 1) + "次扭蛋");
+      for (let li1ll1 = 0; li1ll1 < lI1i1l.length; li1ll1++) {
+        console.log("开始第" + (li1ll1 + 1) + "次扭蛋");
         await plantEggDoLottery();
         console.log("天天扭蛋成功：" + JSON.stringify($.plantEggDoLotteryResult));
       }
     } else console.log("暂无扭蛋机会");
-  } else {
-    console.log("查询天天扭蛋的机会失败" + JSON.stringify($.plantEggLotteryRes));
-  }
+  } else console.log("查询天天扭蛋的机会失败" + JSON.stringify($.plantEggLotteryRes));
 }
 
 async function doTask() {
-  if ($.taskList && $.taskList.length > 0) for (let lI1i1l of $.taskList) {
-    if (lI1i1l.isFinished === 1) {
-      console.log(lI1i1l.taskName + " 任务已完成\n");
+  if ($.taskList && $.taskList.length > 0) for (let iiil of $.taskList) {
+    if (iiil.isFinished === 1) {
+      console.log(iiil.taskName + " 任务已完成\n");
       continue;
-    } else switch (lI1i1l.taskType) {
+    } else switch (iiil.taskType) {
       case 92:
         await farmtask();
         continue;
@@ -253,57 +241,44 @@ async function doTask() {
         continue;
 
       case 3:
-        console.log("开始做 " + lI1i1l.taskName + "任务");
-        let iI1II = lI1i1l.totalNum - lI1i1l.gainedNum;
-
-        if (iI1II === 0) {
-          continue;
-        }
-
+        console.log("开始做 " + iiil.taskName + "任务");
+        let iiIIil = iiil.totalNum - iiil.gainedNum;
+        if (iiIIil === 0) continue;
         await shopTaskList();
         const {
-          data: lIil1I
+          data: iiIIii
         } = $.shopTaskListRes;
-        let IiIIII = [],
-            i111iI = [],
-            lIllII = [];
+        let i1liIi = [],
+            i1liIl = [],
+            IiIill = [];
         const {
-          goodShopList: IIilIl,
-          moreShopList: IIilIi
-        } = lIil1I;
-
-        if (IIilIl) {
-          for (let Illi of IIilIl) {
-            if (Illi.taskState === "2") {
-              IiIIII.push(Illi);
-            }
-          }
+          goodShopList: li1Iii,
+          moreShopList: lIII1
+        } = iiIIii;
+        if (li1Iii) for (let Ili1li of li1Iii) {
+          Ili1li.taskState === "2" && i1liIi.push(Ili1li);
         }
-
-        if (IIilIi) {
-          for (let il11Il of IIilIi) {
-            il11Il.taskState === "2" && i111iI.push(il11Il);
-          }
+        if (lIII1) for (let lIlIil of lIII1) {
+          lIlIil.taskState === "2" && i1liIl.push(lIlIil);
         }
+        IiIill = i1liIi.concat(i1liIl);
 
-        lIllII = IiIIII.concat(i111iI);
-
-        for (let II1iII of lIllII) {
+        for (let li1Ill of IiIill) {
           const {
-            shopId: il11Ii,
-            shopTaskId: li1Ii1
-          } = II1iII,
-                i1ii11 = {
+            shopId: Ili1ll,
+            shopTaskId: IIl1Il
+          } = li1Ill,
+                l1Iili = {
             "monitor_refer": "plant_shopNutrientsTask",
-            "shopId": il11Ii,
-            "shopTaskId": li1Ii1
+            "shopId": Ili1ll,
+            "shopTaskId": IIl1Il
           },
-                iii1 = await requestGet("shopNutrientsTask", i1ii11);
-          console.log("shopRes结果:" + JSON.stringify(iii1));
-          iii1 && iii1.code === "0" && iii1.data && iii1.data.nutrState && iii1.data.nutrState === "1" && iI1II--;
+                IIi11l = await requestGet("shopNutrientsTask", l1Iili);
+          console.log("shopRes结果:" + JSON.stringify(IIi11l));
+          IIi11l && IIi11l.code === "0" && IIi11l.data && IIi11l.data.nutrState && IIi11l.data.nutrState === "1" && iiIIil--;
 
-          if (iI1II <= 0) {
-            console.log(lI1i1l.taskName + "任务已做完\n");
+          if (iiIIil <= 0) {
+            console.log(iiil.taskName + "任务已做完\n");
             break;
           }
         }
@@ -311,41 +286,46 @@ async function doTask() {
         continue;
 
       case 5:
-        console.log("开始做 " + lI1i1l.taskName + "任务");
-        let l1Iiii = lI1i1l.totalNum - lI1i1l.gainedNum;
-        if (l1Iiii === 0) continue;
+        console.log("开始做 " + iiil.taskName + "任务");
+        let llIi11 = iiil.totalNum - iiil.gainedNum;
+        if (llIi11 === 0) continue;
         await productTaskList();
-        let l1Iiil = [],
-            I1li1I = [];
+        let IIi11I = [],
+            iiIIlI = [];
         const {
-          productInfoList: IIiII
+          productInfoList: IIl1II
         } = $.productTaskList.data;
 
-        for (let i1liI1 = 0; i1liI1 < IIiII.length; i1liI1++) {
-          for (let l1IilI = 0; l1IilI < IIiII[i1liI1].length; l1IilI++) {
-            l1Iiil.push(IIiII[i1liI1][l1IilI]);
+        for (let iiiiIl = 0; iiiiIl < IIl1II.length; iiiiIl++) {
+          for (let IIi11i = 0; IIi11i < IIl1II[iiiiIl].length; IIi11i++) {
+            IIi11I.push(IIl1II[iiiiIl][IIi11i]);
           }
         }
 
-        for (let iiiiII of l1Iiil) {
-          iiiiII.taskState === "2" && I1li1I.push(iiiiII);
+        for (let iili of IIi11I) {
+          iili.taskState === "2" && iiIIlI.push(iili);
         }
 
-        for (let ll1I1l of I1li1I) {
+        for (let IIl1Ii of iiIIlI) {
           const {
-            skuId: iilI,
-            productTaskId: IIilI1
-          } = ll1I1l,
-                li1Il1 = {
+            skuId: ilIIl,
+            productTaskId: I11ll1
+          } = IIl1Ii,
+                lIIII = {
             "monitor_refer": "plant_productNutrientsTask",
-            "productTaskId": IIilI1,
-            "skuId": iilI
+            "productTaskId": I11ll1,
+            "skuId": ilIIl
           },
-                i1ii1I = await requestGet("productNutrientsTask", li1Il1);
-          i1ii1I && i1ii1I.code === "0" && i1ii1I.data && i1ii1I.data.nutrState && i1ii1I.data.nutrState === "1" && l1Iiii--;
+                li1IlI = await requestGet("productNutrientsTask", lIIII);
 
-          if (l1Iiii <= 0) {
-            console.log(lI1i1l.taskName + "任务已做完\n");
+          if (li1IlI && li1IlI.code === "0") {
+            if (li1IlI.data && li1IlI.data.nutrState && li1IlI.data.nutrState === "1") {
+              llIi11--;
+            }
+          }
+
+          if (llIi11 <= 0) {
+            console.log(iiil.taskName + "任务已做完\n");
             break;
           }
         }
@@ -353,43 +333,45 @@ async function doTask() {
         continue;
 
       case 10:
-        console.log("开始做 " + lI1i1l.taskName + "任务");
-        let iiiI = lI1i1l.totalNum - lI1i1l.gainedNum;
-        if (iiiI === 0) continue;
+        console.log("开始做 " + iiil.taskName + "任务");
+        let iill = iiil.totalNum - iiil.gainedNum;
+        if (iill === 0) continue;
         await plantChannelTaskList();
-        let I1li11 = [],
-            II1iIl = [],
-            II1iIi = [];
+        let iiIIl1 = [],
+            llIi1I = [],
+            lIlIii = [];
         const {
-          goodChannelList: iI1iI,
-          normalChannelList: Ii11I1
+          goodChannelList: li1Ili,
+          normalChannelList: I11lil
         } = $.plantChannelTaskList.data;
 
-        for (let ilII1i of iI1iI) {
-          ilII1i.taskState === "2" && I1li11.push(ilII1i);
+        for (let IiII1l of li1Ili) {
+          if (IiII1l.taskState === "2") {
+            iiIIl1.push(IiII1l);
+          }
         }
 
-        for (let ilII1l of Ii11I1) {
-          ilII1l.taskState === "2" && II1iIl.push(ilII1l);
+        for (let Ii11Il of I11lil) {
+          Ii11Il.taskState === "2" && llIi1I.push(Ii11Il);
         }
 
-        II1iIi = I1li11.concat(II1iIl);
+        lIlIii = iiIIl1.concat(llIi1I);
 
-        for (let IIilII of II1iIi) {
+        for (let lIlIlI of lIlIii) {
           const {
-            channelId: l1Iil1,
-            channelTaskId: IIiIl
-          } = IIilII,
-                iiiiI1 = {
-            "channelId": l1Iil1,
-            "channelTaskId": IIiIl
+            channelId: iiIIll,
+            channelTaskId: I1li1l
+          } = lIlIlI,
+                I11li1 = {
+            "channelId": iiIIll,
+            "channelTaskId": I1li1l
           },
-                IIiIi = await requestGet("plantChannelNutrientsTask", iiiiI1);
-          console.log("channelRes结果:" + JSON.stringify(IIiIi));
-          IIiIi && IIiIi.code === "0" && IIiIi.data && IIiIi.data.nutrState && IIiIi.data.nutrState === "1" && iiiI--;
+                lIIIi = await requestGet("plantChannelNutrientsTask", I11li1);
+          console.log("channelRes结果:" + JSON.stringify(lIIIi));
+          lIIIi && lIIIi.code === "0" && lIIIi.data && lIIIi.data.nutrState && lIIIi.data.nutrState === "1" && iill--;
 
-          if (iiiI <= 0) {
-            console.log(lI1i1l.taskName + "任务已做完\n");
+          if (iill <= 0) {
+            console.log(iiil.taskName + "任务已做完\n");
             break;
           }
         }
@@ -397,16 +379,16 @@ async function doTask() {
         continue;
 
       default:
-        console.log("\n开始做 " + lI1i1l.taskName + "任务");
-        await receiveNutrientsTask(lI1i1l.taskType);
-        console.log("做 " + lI1i1l.taskName + "任务结果:" + JSON.stringify($.receiveNutrientsTaskRes) + "\n");
+        console.log("\n开始做 " + iiil.taskName + "任务");
+        await receiveNutrientsTask(iiil.taskType);
+        console.log("做 " + iiil.taskName + "任务结果:" + JSON.stringify($.receiveNutrientsTaskRes) + "\n");
         continue;
     }
   }
 }
 
 function showTaskProcess() {
-  return new Promise(async iiIIil => {
+  return new Promise(async lIlIli => {
     await plantBeanIndex();
 
     if ($.plantBeanIndexResult && $.plantBeanIndexResult.code === "0" && $.plantBeanIndexResult.data) {
@@ -415,13 +397,13 @@ function showTaskProcess() {
       if ($.taskList && $.taskList.length > 0) {
         console.log("     任务   进度");
 
-        for (let iiIIii of $.taskList) {
-          console.log("[" + iiIIii.taskName + "]  " + iiIIii.gainedNum + "/" + iiIIii.totalNum + "   " + iiIIii.isFinished);
+        for (let IiII11 of $.taskList) {
+          console.log("[" + IiII11.taskName + "]  " + IiII11.gainedNum + "/" + IiII11.totalNum + "   " + IiII11.isFinished);
         }
       }
     } else console.log("plantBeanIndexResult:" + JSON.stringify($.plantBeanIndexResult));
 
-    iiIIil();
+    lIlIli();
   });
 }
 
@@ -447,24 +429,24 @@ async function farmtask() {
 }
 
 async function receivefruit() {
-  const Ili1li = {
+  const I111II = {
     "monitor_refer": "plant_receiveNutrientsTask",
     "monitor_source": "plant_app_plant_index",
     "awardType": "92",
     "version": "9.2.4.3"
   };
-  await request("receiveNutrientsTask", Ili1li);
+  await request("receiveNutrientsTask", I111II);
 }
 
-async function dofarm(Ili1ll) {
-  let l1Iili = {
+async function dofarm(lII1) {
+  let lIl11 = {
     "version": 17,
     "channel": 1,
     "babelChannel": "45"
   };
-  return Ili1ll == "gotConfigDataForBrand" && (l1Iili.type = "json", l1Iili.k = "farmShareConfig"), new Promise(async iiiiIl => {
-    const iili = {
-      "url": JD_API_HOST + "?functionId=" + Ili1ll + "&body=" + encodeURIComponent(JSON.stringify(l1Iili)) + "&appid=wh5",
+  return lII1 == "gotConfigDataForBrand" && (lIl11.type = "json", lIl11.k = "farmShareConfig"), new Promise(async IIlllI => {
+    const IIlli1 = {
+      "url": JD_API_HOST + "?functionId=" + lII1 + "&body=" + encodeURIComponent(JSON.stringify(lIl11)) + "&appid=wh5",
       "headers": {
         "Cookie": cookie,
         "Host": "api.m.jd.com",
@@ -476,21 +458,21 @@ async function dofarm(Ili1ll) {
       },
       "timeout": 20000
     };
-    $.get(iili, (IIl1Ii, ilIIl, I11ll1) => {
+    $.get(IIlli1, (ilIiii, ilIiil, iII) => {
       try {
-        IIl1Ii && (console.log("\n API查询请求失败 ‼️‼️"), $.logErr(IIl1Ii));
-      } catch (lIIII) {
-        $.logErr(lIIII, ilIIl);
+        ilIiii && (console.log("\n API查询请求失败 ‼️‼️"), $.logErr(ilIiii));
+      } catch (IIiIli) {
+        $.logErr(IIiIli, ilIiil);
       } finally {
-        iiiiIl();
+        IIlllI();
       }
     });
   });
 }
 
-function jxdoublesign1(iiI1i) {
-  let Ili1lI = {
-    "url": iiI1i,
+function jxdoublesign1(lIi111) {
+  let IIiIll = {
+    "url": lIi111,
     "headers": {
       "accept": "application/json",
       "referer": "https://st.jingxi.com/",
@@ -498,28 +480,28 @@ function jxdoublesign1(iiI1i) {
       "Cookie": "cid=4;" + cookie
     }
   };
-  return new Promise(async l111I1 => {
-    $.get(Ili1lI, (Il1l1i, I1II11, iI1) => {
+  return new Promise(async iIl => {
+    $.get(IIiIll, (lIi11I, iiili, iIlIiI) => {
       try {
-        if (Il1l1i) {
-          console.log("" + JSON.stringify(Il1l1i));
+        if (lIi11I) {
+          console.log("" + JSON.stringify(lIi11I));
           console.log($.name + " API请求失败，请检查网路重试");
         } else {
-          if (iI1) {}
+          if (iIlIiI) {}
         }
-      } catch (I111Ii) {
-        $.logErr(I111Ii, I1II11);
+      } catch (IIiIil) {
+        $.logErr(IIiIil, iiili);
       } finally {
-        l111I1(iI1);
+        iIl(iIlIiI);
       }
     });
-    l111I1();
+    iIl();
   });
 }
 
-function tjdoublesign(Iili1l) {
-  let l11Il1 = {
-    "url": Iili1l,
+function tjdoublesign(lli1ll) {
+  let liIill = {
+    "url": lli1ll,
     "headers": {
       "Accept": "application/json",
       "Referer": "https://wqs.jd.com/",
@@ -527,55 +509,55 @@ function tjdoublesign(Iili1l) {
       "Cookie": cookie
     }
   };
-  return new Promise(async lIl1l => {
-    $.get(l11Il1, (iIlIii, iiI111, lIi111) => {
+  return new Promise(async ll11 => {
+    $.get(liIill, (liIilI, Ii1li1, iiil1) => {
       try {
-        if (iIlIii) {
-          console.log("" + JSON.stringify(iIlIii));
+        if (liIilI) {
+          console.log("" + JSON.stringify(liIilI));
           console.log("tjdoublesign 请求失败，请检查网路重试");
         } else {
-          if (lIi111) {}
+          if (iiil1) {}
         }
-      } catch (IIiIll) {
-        $.logErr(IIiIll, iiI111);
+      } catch (IIiIi1) {
+        $.logErr(IIiIi1, Ii1li1);
       } finally {
-        lIl1l(lIi111);
+        ll11(iiil1);
       }
     });
   });
 }
 
 async function getReward() {
-  const iI1i = {
+  const iiiil = {
     "roundId": lastRoundId
   };
-  $.getReward = await request("receivedBean", iI1i);
+  $.getReward = await request("receivedBean", iiiil);
 }
 
-async function cultureBean(liIiii, l11Ill) {
-  let ilIil1 = arguments.callee.name.toString(),
-      iI1l = {
-    "roundId": liIiii,
-    "nutrientsType": l11Ill
+async function cultureBean(l11lI, Il1l11) {
+  let lli1ii = arguments.callee.name.toString(),
+      I1II1i = {
+    "roundId": l11lI,
+    "nutrientsType": Il1l11
   };
-  $.cultureBeanRes = await request(ilIil1, iI1l);
+  $.cultureBeanRes = await request(lli1ii, I1II1i);
 }
 
 async function stealFriendList() {
-  const l11Ili = {
+  const ll1i = {
     "pageNum": "1"
   };
-  $.stealFriendList = await krrequestGet("plantFriendList", l11Ili);
+  $.stealFriendList = await krrequestGet("plantFriendList", ll1i);
 }
 
-async function collectUserNutr(llIi1l) {
+async function collectUserNutr(lliII) {
   console.log("开始偷好友");
-  let lIi11I = arguments.callee.name.toString();
-  const iiili = {
-    "paradiseUuid": llIi1l,
+  let iiIlIl = arguments.callee.name.toString();
+  const iiIlIi = {
+    "paradiseUuid": lliII,
     "roundId": currentRoundId
   };
-  $.stealFriendRes = await request(lIi11I, iiili);
+  $.stealFriendRes = await request(iiIlIl, iiIlIi);
 }
 
 async function receiveNutrients() {
@@ -594,31 +576,31 @@ async function egg() {
 }
 
 async function productTaskList() {
-  let liIili = arguments.callee.name.toString();
-  $.productTaskList = await requestGet(liIili, {
+  let i11llI = arguments.callee.name.toString();
+  $.productTaskList = await requestGet(i11llI, {
     "monitor_refer": "plant_productTaskList"
   });
 }
 
 async function plantChannelTaskList() {
-  let iiI11i = arguments.callee.name.toString();
-  $.plantChannelTaskList = await krrequestGet(iiI11i);
+  let iiI1I1 = arguments.callee.name.toString();
+  $.plantChannelTaskList = await krrequestGet(iiI1I1);
 }
 
 async function shopTaskList() {
-  let IIiIl1 = arguments.callee.name.toString();
-  $.shopTaskListRes = await krrequestGet(IIiIl1, {
+  let iI1i11 = arguments.callee.name.toString();
+  $.shopTaskListRes = await krrequestGet(iI1i11, {
     "monitor_refer": "plant_receiveNutrients"
   });
 }
 
-async function receiveNutrientsTask(l11il) {
-  const Ii1liI = arguments.callee.name.toString(),
-        liIilI = {
+async function receiveNutrientsTask(iIiIII) {
+  const iIlIl = arguments.callee.name.toString(),
+        iIlIi = {
     "monitor_refer": "plant_receiveNutrientsTask",
-    "awardType": "" + l11il
+    "awardType": "" + iIiIII
   };
-  $.receiveNutrientsTaskRes = await requestGet(Ii1liI, liIilI);
+  $.receiveNutrientsTaskRes = await requestGet(iIlIl, iIlIi);
 }
 
 async function plantShareSupportList() {
@@ -628,17 +610,18 @@ async function plantShareSupportList() {
 
   if ($.shareSupportList && $.shareSupportList.code === "0") {
     const {
-      data: I1II1i
+      data: ll1iii
     } = $.shareSupportList,
-          lli1il = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000,
-          lii1I = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000 + 24 * 60 * 60 * 1000;
-    let IIiIiI = [];
-    I1II1i.map(ll1l => {
-      lli1il <= ll1l.createTime && ll1l.createTime < lii1I && IIiIiI.push(ll1l);
+          ll1iil = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000,
+          lIIlli = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000 + 24 * 60 * 60 * 1000;
+    let I1Iill = [];
+    ll1iii.map(iilI1i => {
+      ll1iil <= iilI1i.createTime && iilI1i.createTime < lIIlli && I1Iill.push(iilI1i);
     });
-    message += "【助力您的好友】共" + IIiIiI.length + "人";
+    message += "【助力您的好友】共" + I1Iill.length + "人";
   } else console.log("异常情况：" + JSON.stringify($.shareSupportList));
 }
+
 //助力好友
 async function doHelp() {
   for (let plantUuid of $.newShareCode) {
@@ -673,15 +656,16 @@ async function doHelp() {
 	await $.wait(3000);
   }
 }
-async function helpShare(iiiiI) {
-  console.log("\n开始助力好友: " + iiiiI);
-  const iiIlIl = {
-    "plantUuid": iiiiI,
+
+async function helpShare(IiIlI1) {
+  console.log("\n开始助力好友: " + IiIlI1);
+  const iI11I = {
+    "plantUuid": IiIlI1,
     "wxHeadImgUrl": "",
     "shareUuid": "",
     "followType": "1"
   };
-  $.helpResult = await request("plantBeanIndex", iiIlIl);
+  $.helpResult = await request("plantBeanIndex", iI11I);
   console.log("助力结果的code:" + ($.helpResult && $.helpResult.code));
 }
 
@@ -690,33 +674,33 @@ async function plantBeanIndex() {
 }
 
 function requireConfig() {
-  return new Promise(iIl11i => {
+  return new Promise(lli11 => {
     notify = $.isNode() ? require("./sendNotify") : "";
-    const iIiIII = $.isNode() ? require("./jdCookie.js") : "",
-          I1lI = "";
+    const l1I111 = $.isNode() ? require("./jdCookie.js") : "",
+          lIIlii = "";
 
     if ($.isNode()) {
-      Object.keys(iIiIII).forEach(i11lil => {
-        iIiIII[i11lil] && cookiesArr.push(iIiIII[i11lil]);
+      Object.keys(l1I111).forEach(iI111 => {
+        l1I111[iI111] && cookiesArr.push(l1I111[iI111]);
       });
       if (process.env.JD_DEBUG && process.env.JD_DEBUG === "false") console.log = () => {};
-    } else cookiesArr = [$.getdata("CookieJD"), $.getdata("CookieJD2"), ...jsonParse($.getdata("CookiesJD") || "[]").map(iilI1I => iilI1I.cookie)].filter(i11lii => !!i11lii);
+    } else cookiesArr = [$.getdata("CookieJD"), $.getdata("CookieJD2"), ...jsonParse($.getdata("CookiesJD") || "[]").map(iIil1I => iIil1I.cookie)].filter(iI1i1l => !!iI1i1l);
 
     console.log("共" + cookiesArr.length + "个京东账号\n");
     $.shareCodesArr = [];
-    if ($.isNode()) Object.keys(I1lI).forEach(iiI1II => {
-      I1lI[iiI1II] && $.shareCodesArr.push(I1lI[iiI1II]);
+    if ($.isNode()) Object.keys(lIIlii).forEach(ll1ili => {
+      lIIlii[ll1ili] && $.shareCodesArr.push(lIIlii[ll1ili]);
     });else {
-      if ($.getdata("jd_plantbean_inviter")) $.shareCodesArr = $.getdata("jd_plantbean_inviter").split("\n").filter(iIiII1 => !!iIiII1);
+      if ($.getdata("jd_plantbean_inviter")) $.shareCodesArr = $.getdata("jd_plantbean_inviter").split("\n").filter(llilll => !!llilll);
     }
-    iIl11i();
+    lli11();
   });
 }
 
-function krrequestGet(I1l1, Il11I1 = {}) {
-  return new Promise(async Il1i1 => {
-    const IlIiii = {
-      "url": JD_API_HOST + "?functionId=" + I1l1 + "&body=" + encodeURIComponent(JSON.stringify(Il11I1)) + "&appid=signed_wh5&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=9.3.2",
+function krrequestGet(ll1ill, l1liI = {}) {
+  return new Promise(async li1111 => {
+    const Il1l1 = {
+      "url": JD_API_HOST + "?functionId=" + ll1ill + "&body=" + encodeURIComponent(JSON.stringify(l1liI)) + "&appid=signed_wh5&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=9.3.2",
       "headers": {
         "Accept": "*/*",
         "Origin": "https://h5.m.jd.com",
@@ -729,38 +713,38 @@ function krrequestGet(I1l1, Il11I1 = {}) {
       },
       "timeout": 10000
     };
-    $.get(IlIiii, (IiIlII, iI11i, I1Iili) => {
+    $.get(Il1l1, (IiiiIl, i1IIII, l1ii11) => {
       try {
-        IiIlII ? (console.log("\n种豆得豆: API查询请求失败 ‼️‼️"), $.logErr(IiIlII)) : I1Iili = JSON.parse(I1Iili);
-      } catch (I1li) {
-        $.logErr(I1li, iI11i);
+        IiiiIl ? (console.log("\n种豆得豆: API查询请求失败 ‼️‼️"), $.logErr(IiiiIl)) : l1ii11 = JSON.parse(l1ii11);
+      } catch (I11Iii) {
+        $.logErr(I11Iii, i1IIII);
       } finally {
-        Il1i1(I1Iili);
+        li1111(l1ii11);
       }
     });
   });
 }
 
-function requestGet(iI11l, IlIiiI = {}) {
-  return new Promise(async lli1I => {
-    let iI1i1I = "";
-    if (!appidMap[iI11l]) iI1i1I = JD_API_HOST + "?functionId=" + iI11l + "&body=" + encodeURIComponent(JSON.stringify(IlIiiI)) + "&appid=ld&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=9.3.2";else {
-      !IlIiiI.version && (IlIiiI.version = "9.2.4.3");
-      IlIiiI.monitor_source = "plant_m_plant_index";
-      appidMap[iI11l] == "shopNutrientsTask" && (headers.referer = "https://plantearth.m.jd.com/", headers["x-requested-with"] = "https://plantearth.m.jd.com/");
+function requestGet(llill1, Iill1 = {}) {
+  return new Promise(async il1lil => {
+    let iilii1 = "";
+    if (!appidMap[llill1]) iilii1 = JD_API_HOST + "?functionId=" + llill1 + "&body=" + encodeURIComponent(JSON.stringify(Iill1)) + "&appid=ld&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=9.3.2";else {
+      !Iill1.version && (Iill1.version = "9.2.4.3");
+      Iill1.monitor_source = "plant_app_plant_index";
+      appidMap[llill1] == "shopNutrientsTask" && (headers.referer = "https://plantearth.m.jd.com/", headers["x-requested-with"] = "https://plantearth.m.jd.com/");
       await $.wait(5000);
-      const iIil1l = {
+      const il1lii = {
         "appid": "signed_wh5",
         "client": "android",
         "clientVersion": "10.1.0",
-        "functionId": iI11l,
-        "body": IlIiiI
+        "functionId": llill1,
+        "body": Iill1
       };
-      let iIil11 = await getH5st(appidMap[iI11l], iIil1l);
-      iI1i1I = JD_API_HOST + "?" + iIil11;
+      let illi1i = await getH5st(appidMap[llill1], il1lii);
+      iilii1 = JD_API_HOST + "?" + illi1i;
     }
-    const iIil1i = {
-      "url": iI1i1I,
+    const llilil = {
+      "url": iilii1,
       "headers": {
         "Accept": "*/*",
         "Accept-Encoding": "gzip,deflate,br",
@@ -771,27 +755,21 @@ function requestGet(iI11l, IlIiiI = {}) {
       },
       "timeout": 20000
     };
-    $.get(iIil1i, (l1li1, IIllll, I1Iil1) => {
+    $.get(llilil, (lll1ll, illi1l, l1llI) => {
       try {
-        if (l1li1) {
-          console.log("\n种豆得豆: API查询请求失败 ‼️‼️");
-          console.log(l1li1);
-          $.logErr(l1li1);
-        } else {
-          I1Iil1 = JSON.parse(I1Iil1);
-        }
-      } catch (IiI11I) {
-        $.logErr(IiI11I, IIllll);
+        lll1ll ? (console.log("\n种豆得豆: API查询请求失败 ‼️‼️"), console.log(lll1ll), $.logErr(lll1ll)) : l1llI = JSON.parse(l1llI);
+      } catch (l1liIi) {
+        $.logErr(l1liIi, illi1l);
       } finally {
-        lli1I(I1Iil1);
+        il1lil(l1llI);
       }
     });
   });
 }
 
 function TotalBean() {
-  return new Promise(async l1ii1i => {
-    const l1liII = {
+  return new Promise(async Il1li => {
+    const lIiI11 = {
       "url": "https://wq.jd.com/user/info/QueryJDUserInfo?sceneval=2",
       "headers": {
         "Accept": "application/json,text/plain, */*",
@@ -805,57 +783,56 @@ function TotalBean() {
       },
       "timeout": 20000
     };
-    $.post(l1liII, (I1ii1, li1111, IiliI) => {
+    $.post(lIiI11, (li111I, IiIlIi, I1ili) => {
       try {
-        if (I1ii1) {
-          console.log("" + JSON.stringify(I1ii1));
+        if (li111I) {
+          console.log("" + JSON.stringify(li111I));
           console.log($.name + " API请求失败，请检查网路重试");
         } else {
-          if (IiliI) {
-            IiliI = JSON.parse(IiliI);
+          if (I1ili) {
+            I1ili = JSON.parse(I1ili);
 
-            if (IiliI.retcode === 13) {
+            if (I1ili.retcode === 13) {
               $.isLogin = false;
               return;
             }
 
-            IiliI.retcode === 0 ? $.nickName = IiliI.base && IiliI.base.nickname || $.UserName : $.nickName = $.UserName;
+            I1ili.retcode === 0 ? $.nickName = I1ili.base && I1ili.base.nickname || $.UserName : $.nickName = $.UserName;
           } else console.log("京东服务器返回空数据");
         }
-      } catch (l111il) {
-        $.logErr(l111il, li1111);
+      } catch (il1lll) {
+        $.logErr(il1lll, IiIlIi);
       } finally {
-        l1ii1i();
+        Il1li();
       }
     });
   });
 }
 
+function request(li1lI1, ll1I11 = {}) {
+  return new Promise(async lIiiii => {
+    let i111Il = "";
+    if (!appidMap[li1lI1]) i111Il = JD_API_HOST + "?functionId=" + li1lI1 + "&body=" + encodeURIComponent(JSON.stringify(ll1I11)) + "&appid=ld&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=9.3.2";else {
+      ll1I11.version = "9.2.4.3";
+      ll1I11.monitor_source = "plant_app_plant_index";
 
-function request(lli1l, Iili1 = {}) {
-  return new Promise(async IiIIi1 => {
-    let I11Iil = "";
+      if (!ll1I11.monitor_refer) {
+        ll1I11.monitor_refer = "";
+      }
 
-    if (!appidMap[lli1l]) {
-      I11Iil = JD_API_HOST + "?functionId=" + lli1l + "&body=" + encodeURIComponent(JSON.stringify(Iili1)) + "&appid=signed_wh5&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=11.6.2";
-    } else {
-      Iili1.version = "9.2.4.3";
-      Iili1.monitor_source = "plant_m_plant_index";
-      !Iili1.monitor_refer && (Iili1.monitor_refer = "");
-      const I1iiI = {
+      const IlII1I = {
         "appid": "signed_wh5",
         "client": "android",
         "clientVersion": "10.1.0",
-        "functionId": lli1l,
-        "body": Iili1
+        "functionId": li1lI1,
+        "body": ll1I11
       };
-      let l111l1 = await getH5st(appidMap[lli1l], I1iiI);
-      I11Iil = JD_API_HOST + "?" + l111l1;
+      let IillI = await getH5st(appidMap[li1lI1], IlII1I);
+      i111Il = JD_API_HOST + "?" + IillI;
     }
-
     await $.wait(5000);
-    let l1liI1 = {
-      "url": I11Iil,
+    let i111Ii = {
+      "url": i111Il,
       "headers": {
         "Accept": "*/*",
         "Accept-Encoding": "gzip,deflate,br",
@@ -866,17 +843,17 @@ function request(lli1l, Iili1 = {}) {
       },
       "timeout": 10000
     };
-    $.get(l1liI1, async (llill1, Iill1, ll1il1) => {
+    $.get(i111Ii, async (lIiil1, i1Il1l, I11IlI) => {
       try {
-        if (llill1) {
+        if (lIiil1) {
           console.log("\n种豆得豆: API查询请求失败 ‼️‼️");
-          console.log("function_id:" + lli1l);
-          $.logErr(llill1);
-        } else ll1il1.indexOf("data") > -1 ? ll1il1 = JSON.parse(ll1il1) : (ll1il1 = JSON.parse(ll1il1), console.log(ll1il1.errorMessage));
-      } catch (illi11) {
-        $.logErr(illi11, Iill1);
+          console.log("function_id:" + li1lI1);
+          $.logErr(lIiil1);
+        } else I11IlI.indexOf("data") > -1 ? I11IlI = JSON.parse(I11IlI) : (I11IlI = JSON.parse(I11IlI), console.log(I11IlI.errorMessage));
+      } catch (i111II) {
+        $.logErr(i111II, i1Il1l);
       } finally {
-        IiIIi1(ll1il1);
+        lIiiii(I11IlI);
       }
     });
   });
@@ -891,21 +868,22 @@ const appidMap = {
   "shopNutrientsTask": "19c88",
   "productTaskList": "7351b",
   "productNutrientsTask": "a4e2d",
+  "receivedBean": "d4a66",
   "collectUserNutr": "14357"
 };
 
-async function taskUrl(il1lil, I1iil) {
-  I1iil.version = "9.2.4.3";
-  I1iil.monitor_source = "plant_app_plant_index";
-  !I1iil.monitor_refer && (I1iil.monitor_refer = "");
+async function taskUrl(IiIIl1, IiiiI1) {
+  IiiiI1.version = "9.2.4.3";
+  IiiiI1.monitor_source = "plant_app_plant_index";
+  !IiiiI1.monitor_refer && (IiiiI1.monitor_refer = "");
 
-  if (!appidMap[il1lil]) {} else {
-    const I1iii = {
+  if (!appidMap[IiIIl1]) {} else {
+    const li1lIi = {
       "appid": "signed_wh5",
       "client": "android",
       "clientVersion": "10.1.0",
-      "functionId": il1lil,
-      "body": I1iil
+      "functionId": IiIIl1,
+      "body": IiiiI1
     };
   }
 
@@ -923,137 +901,129 @@ async function taskUrl(il1lil, I1iil) {
   };
 }
 
-function getH5st(ll1ilI, I1ilI) {
-  let llilil = {
-    "appId": ll1ilI,
-    ...I1ilI,
+function getH5st(iilill, IiIIii) {
+  let lIiill = {
+    "appId": iilill,
+    ...IiIIii,
     "ua": $.UA,
     "pin": $.UserName
   },
-      il1lii = {
+      iilili = {
     "url": "http://kr.kingran.cf/h5st",
-    "body": JSON.stringify(llilil),
+    "body": JSON.stringify(lIiill),
     "headers": {
       "Content-Type": "application/json"
     },
     "timeout": 30000
   };
-  return new Promise(async li111I => {
-    $.post(il1lii, (i111Il, i111Ii, IlII1I) => {
-      let i1Il1i = "";
+  return new Promise(async llllli => {
+    $.post(iilili, (i1II11, l1Ill, lllllI) => {
+      let iII1lI = "";
 
       try {
-        if (i111Il) {
-          console.log("" + JSON.stringify(i111Il));
+        if (i1II11) {
+          console.log("" + JSON.stringify(i1II11));
           console.log($.name + " getH5st API请求失败，请检查网路重试");
         } else {
-          IlII1I = JSON.parse(IlII1I);
+          lllllI = JSON.parse(lllllI);
 
-          if (typeof IlII1I === "object" && IlII1I && IlII1I.body) {
-            if (IlII1I.body) i1Il1i = IlII1I.body || "";
-          } else {
-            if (IlII1I.code == 400) {
-              console.log("\n" + IlII1I.msg);
-            } else console.log("\n可能连接不上接口，请检查网络");
-          }
+          if (typeof lllllI === "object" && lllllI && lllllI.body) {
+            if (lllllI.body) iII1lI = lllllI.body || "";
+          } else lllllI.code == 400 ? console.log("\n" + lllllI.msg) : console.log("\n可能连接不上接口，请检查网络");
         }
-      } catch (lIll1I) {
-        $.logErr(lIll1I, i111Ii);
+      } catch (iII1) {
+        $.logErr(iII1, l1Ill);
       } finally {
-        li111I(i1Il1i);
+        llllli(iII1lI);
       }
     });
   });
 }
 
-function randomString(iII1l1, I1I1I = "qwertyuiopasdfghjklzxcvbnm") {
-  let IIillI = "";
+function randomString(lIll1l, Il1lIl = "qwertyuiopasdfghjklzxcvbnm") {
+  let I1111I = "";
 
-  for (let Iiii1l = 0; Iiii1l < iII1l1; Iiii1l++) {
-    IIillI += I1I1I[Math.floor(Math.random() * I1I1I.length)];
+  for (let I1I11 = 0; I1I11 < lIll1l; I1I11++) {
+    I1111I += Il1lIl[Math.floor(Math.random() * Il1lIl.length)];
   }
 
-  return IIillI;
+  return I1111I;
 }
 
-function json2str(IiliIi, Iiii1i = {}) {
-  let II1iil = [],
-      lllll1 = Iiii1i.connector || "&",
-      II1iii = Object.keys(IiliIi);
-  if (Iiii1i.sort) II1iii = II1iii.sort();
+function json2str(il11l1, I1I1l = {}) {
+  let IIiliI = [],
+      I1I1i = I1I1l.connector || "&",
+      iiiiii = Object.keys(il11l1);
+  if (I1I1l.sort) iiiiii = iiiiii.sort();
 
-  for (let Ii11i1 of II1iii) {
-    let lIll1l = IiliIi[Ii11i1];
-    if (lIll1l && typeof lIll1l === "object") lIll1l = JSON.stringify(lIll1l);
-    if (lIll1l && Iiii1i.encode) lIll1l = encodeURIComponent(lIll1l);
-    II1iil.push(Ii11i1 + "=" + lIll1l);
+  for (let IiliIl of iiiiii) {
+    let ilii1l = il11l1[IiliIl];
+    if (ilii1l && typeof ilii1l === "object") ilii1l = JSON.stringify(ilii1l);
+    if (ilii1l && I1I1l.encode) ilii1l = encodeURIComponent(ilii1l);
+    IIiliI.push(IiliIl + "=" + ilii1l);
   }
 
-  return II1iil.join(lllll1);
+  return IIiliI.join(I1I1i);
 }
 
-function randomList(Il1lIl) {
-  return Il1lIl[Math.floor(Math.random() * Il1lIl.length)];
+function randomList(llllii) {
+  return llllii[Math.floor(Math.random() * llllii.length)];
 }
 
-function randomUuid(I1111I = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", I1I11 = "0123456789abcdef") {
-  let I1I1l = "";
+function randomUuid(llllil = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", II1ill = "0123456789abcdef") {
+  let iII1iI = "";
 
-  for (let IIl1lI of I1111I) {
-    if (IIl1lI == "x") I1I1l += I1I11.charAt(Math.floor(Math.random() * I1I11.length));else IIl1lI == "X" ? I1I1l += I1I11.charAt(Math.floor(Math.random() * I1I11.length)).toUpperCase() : I1I1l += IIl1lI;
+  for (let lIii1 of llllil) {
+    if (lIii1 == "x") iII1iI += II1ill.charAt(Math.floor(Math.random() * II1ill.length));else lIii1 == "X" ? iII1iI += II1ill.charAt(Math.floor(Math.random() * II1ill.length)).toUpperCase() : iII1iI += lIii1;
   }
 
-  return I1I1l;
+  return iII1iI;
 }
 
-function _utf8_encode(ilii1l) {
-  ilii1l = ilii1l.replace(/rn/g, "n");
-  var l11l = "";
+function _utf8_encode(l1Il1l) {
+  l1Il1l = l1Il1l.replace(/rn/g, "n");
+  var IIl1ii = "";
 
-  for (var illiII = 0; illiII < ilii1l.length; illiII++) {
-    var li1IIl = ilii1l.charCodeAt(illiII);
-    if (li1IIl < 128) l11l += String.fromCharCode(li1IIl);else li1IIl > 127 && li1IIl < 2048 ? (l11l += String.fromCharCode(li1IIl >> 6 | 192), l11l += String.fromCharCode(li1IIl & 63 | 128)) : (l11l += String.fromCharCode(li1IIl >> 12 | 224), l11l += String.fromCharCode(li1IIl >> 6 & 63 | 128), l11l += String.fromCharCode(li1IIl & 63 | 128));
+  for (var il1l = 0; il1l < l1Il1l.length; il1l++) {
+    var Ii11ll = l1Il1l.charCodeAt(il1l);
+    if (Ii11ll < 128) IIl1ii += String.fromCharCode(Ii11ll);else Ii11ll > 127 && Ii11ll < 2048 ? (IIl1ii += String.fromCharCode(Ii11ll >> 6 | 192), IIl1ii += String.fromCharCode(Ii11ll & 63 | 128)) : (IIl1ii += String.fromCharCode(Ii11ll >> 12 | 224), IIl1ii += String.fromCharCode(Ii11ll >> 6 & 63 | 128), IIl1ii += String.fromCharCode(Ii11ll & 63 | 128));
   }
 
-  return l11l;
+  return IIl1ii;
 }
 
-function base64_mod_encode(iII1il, Il1Ii1) {
-  Il1Ii1 = Il1Ii1 || base64_mod_charset;
-  var II1ilI = "",
-      iII1ii,
-      li1III,
-      lIii1,
-      IIl1il,
-      l1Il1i,
-      lIlII1,
-      Il111I,
-      l1Il1l = 0;
-  iII1il = _utf8_encode(iII1il);
+function base64_mod_encode(iiiilI, lIlIIi) {
+  lIlIIi = lIlIIi || base64_mod_charset;
+  var llI1 = "",
+      I11lIl,
+      iliii,
+      lIlIIl,
+      I11lIi,
+      lII1i1,
+      IIl1i1,
+      Ii11lI,
+      II1ii1 = 0;
+  iiiilI = _utf8_encode(iiiilI);
 
-  while (l1Il1l < iII1il.length) {
-    iII1ii = iII1il.charCodeAt(l1Il1l++);
-    li1III = iII1il.charCodeAt(l1Il1l++);
-    lIii1 = iII1il.charCodeAt(l1Il1l++);
-    IIl1il = iII1ii >> 2;
-    l1Il1i = (iII1ii & 3) << 4 | li1III >> 4;
-    lIlII1 = (li1III & 15) << 2 | lIii1 >> 6;
-    Il111I = lIii1 & 63;
-    if (isNaN(li1III)) lIlII1 = Il111I = 64;else {
-      if (isNaN(lIii1)) {
-        Il111I = 64;
-      }
-    }
-    II1ilI = II1ilI + Il1Ii1.charAt(IIl1il) + Il1Ii1.charAt(l1Il1i) + Il1Ii1.charAt(lIlII1) + Il1Ii1.charAt(Il111I);
+  while (II1ii1 < iiiilI.length) {
+    I11lIl = iiiilI.charCodeAt(II1ii1++);
+    iliii = iiiilI.charCodeAt(II1ii1++);
+    lIlIIl = iiiilI.charCodeAt(II1ii1++);
+    I11lIi = I11lIl >> 2;
+    lII1i1 = (I11lIl & 3) << 4 | iliii >> 4;
+    IIl1i1 = (iliii & 15) << 2 | lIlIIl >> 6;
+    Ii11lI = lIlIIl & 63;
+    if (isNaN(iliii)) IIl1i1 = Ii11lI = 64;else isNaN(lIlIIl) && (Ii11lI = 64);
+    llI1 = llI1 + lIlIIi.charAt(I11lIi) + lIlIIi.charAt(lII1i1) + lIlIIi.charAt(IIl1i1) + lIlIIi.charAt(Ii11lI);
   }
 
-  while (II1ilI.length % 4 > 1) II1ilI += "=";
+  while (llI1.length % 4 > 1) llI1 += "=";
 
-  return II1ilI;
+  return llI1;
 }
 
-function get_ep(I11lIi = {}) {
-  let IIl1i1 = {
+function get_ep(ilii1 = {}) {
+  let li1l1I = {
     "ciphertype": 5,
     "cipher": {
       "ud": base64_mod_encode(cryptoJS.SHA1($.UserName).toString()),
@@ -1066,11 +1036,11 @@ function get_ep(I11lIi = {}) {
     "appname": "com.360buy.jdmobile",
     "ridx": -1
   };
-  $.ep = JSON.stringify(IIl1i1);
+  $.ep = JSON.stringify(li1l1I);
 }
 
-function get_ua(iII1li, lIiii = {}) {
-  const l111i1 = {
+function get_ua(iIlIIl, ilIl11 = {}) {
+  const lIii = {
     "jd": {
       "app": "jdapp",
       "appBuild": "168392",
@@ -1084,38 +1054,42 @@ function get_ua(iII1li, lIiii = {}) {
       "clientVersion": "6.0.0"
     }
   },
-        li1l1l = ["15.1.1", "14.5.1", "14.4", "14.3", "14.2", "14.1", "14.0.1", "13.2"];
-  $.os_ver = randomList(li1l1l);
-  let li1l1i = iII1li || "jd",
-      lIiil = lIiii?.["ep"] ? lIiii?.["ep"] : true;
+        ii1 = ["15.1.1", "14.5.1", "14.4", "14.3", "14.2", "14.1", "14.0.1", "13.2"];
+  $.os_ver = randomList(ii1);
+  let lII1li = iIlIIl || "jd",
+      lII1ll = ilIl11?.["ep"] ? ilIl11?.["ep"] : true;
 
-  if (!l111i1[li1l1i]) {
-    console.log("获取[" + li1l1i + "]UA失败");
+  if (!lIii[lII1li]) {
+    console.log("获取[" + lII1li + "]UA失败");
     return;
   }
 
-  $.client = lIiii?.["client"] ? lIiii?.["client"] : l111i1[li1l1i].client;
-  $.clientVersion = lIiii?.["clientVersion"] ? lIiii?.["clientVersion"] : l111i1[li1l1i].clientVersion;
+  $.client = ilIl11?.["client"] ? ilIl11?.["client"] : lIii[lII1li].client;
+  $.clientVersion = ilIl11?.["clientVersion"] ? ilIl11?.["clientVersion"] : lIii[lII1li].clientVersion;
   $.sua = "iPhone; CPU iPhone OS " + $.os_ver.replace(".", "_") + " like Mac OS X";
-  let iII1ll = "android";
-  $.client == "apple" && (iII1ll = "iPhone");
+  let lIilI = "android";
+
+  if ($.client == "apple") {
+    lIilI = "iPhone";
+  }
+
   get_ep();
-  let I1111i = [l111i1[li1l1i].app, iII1ll, $.clientVersion, "", "rn/" + randomUuid(), "M/5.0", "hasUPPay/0", "pushNoticeIsOpen/0", "lang/zh_CN", "hasOCPay/0", "appBuild/" + l111i1[li1l1i].appBuild, "supportBestPay/0", "jdSupportDarkMode/0", "ef/1", lIiil ? "ep/" + encodeURIComponent($.ep) : "", "Mozilla/5.0 (" + $.sua + ") AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148", "supportJDSHWK/1", ""];
-  $.UA = I1111i.join(";");
+  let lli1I1 = [lIii[lII1li].app, lIilI, $.clientVersion, "", "rn/" + randomUuid(), "M/5.0", "hasUPPay/0", "pushNoticeIsOpen/0", "lang/zh_CN", "hasOCPay/0", "appBuild/" + lIii[lII1li].appBuild, "supportBestPay/0", "jdSupportDarkMode/0", "ef/1", lII1ll ? "ep/" + encodeURIComponent($.ep) : "", "Mozilla/5.0 (" + $.sua + ") AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148", "supportJDSHWK/1", ""];
+  $.UA = lli1I1.join(";");
 }
 
-function getParam(llllll, llIl) {
-  const llIi = new RegExp("(^|&)" + llIl + "=([^&]*)(&|$)", "i"),
-        Ii11il = llllll.match(llIi);
-  if (Ii11il != null) return unescape(Ii11il[2]);
+function getParam(ilIl1i, ilIIIi) {
+  const IIi1l = new RegExp("(^|&)" + ilIIIi + "=([^&]*)(&|$)", "i"),
+        IIi1i = ilIl1i.match(IIi1l);
+  if (IIi1i != null) return unescape(IIi1i[2]);
   return null;
 }
 
-function jsonParse(ilIl11) {
-  if (typeof ilIl11 == "string") try {
-    return JSON.parse(ilIl11);
-  } catch (lII1li) {
-    return console.log(lII1li), $.msg($.name, "", "请勿随意在BoxJs输入框修改内容\n建议通过脚本去获取cookie"), [];
+function jsonParse(IlIii1) {
+  if (typeof IlIii1 == "string") try {
+    return JSON.parse(IlIii1);
+  } catch (lII1l1) {
+    return console.log(lII1l1), $.msg($.name, "", "请勿随意在BoxJs输入框修改内容\n建议通过脚本去获取cookie"), [];
   }
 }
 function Env(t, e) { "undefined" != typeof process && JSON.stringify(process.env).indexOf("GITHUB") > -1 && process.exit(0); class s { constructor(t) { this.env = t } send(t, e = "GET") { t = "string" == typeof t ? { url: t } : t; let s = this.get; return "POST" === e && (s = this.post), new Promise((e, i) => { s.call(this, t, (t, s, r) => { t ? i(t) : e(s) }) }) } get(t) { return this.send.call(this.env, t) } post(t) { return this.send.call(this.env, t, "POST") } } return new class { constructor(t, e) { this.name = t, this.http = new s(this), this.data = null, this.dataFile = "box.dat", this.logs = [], this.isMute = !1, this.isNeedRewrite = !1, this.logSeparator = "\n", this.startTime = (new Date).getTime(), Object.assign(this, e), this.log("", `🔔${this.name}, 开始!`) } isNode() { return "undefined" != typeof module && !!module.exports } isQuanX() { return "undefined" != typeof $task } isSurge() { return "undefined" != typeof $httpClient && "undefined" == typeof $loon } isLoon() { return "undefined" != typeof $loon } toObj(t, e = null) { try { return JSON.parse(t) } catch { return e } } toStr(t, e = null) { try { return JSON.stringify(t) } catch { return e } } getjson(t, e) { let s = e; const i = this.getdata(t); if (i) try { s = JSON.parse(this.getdata(t)) } catch { } return s } setjson(t, e) { try { return this.setdata(JSON.stringify(t), e) } catch { return !1 } } getScript(t) { return new Promise(e => { this.get({ url: t }, (t, s, i) => e(i)) }) } runScript(t, e) { return new Promise(s => { let i = this.getdata("@chavy_boxjs_userCfgs.httpapi"); i = i ? i.replace(/\n/g, "").trim() : i; let r = this.getdata("@chavy_boxjs_userCfgs.httpapi_timeout"); r = r ? 1 * r : 20, r = e && e.timeout ? e.timeout : r; const [o, h] = i.split("@"), n = { url: `http://${h}/v1/scripting/evaluate`, body: { script_text: t, mock_type: "cron", timeout: r }, headers: { "X-Key": o, Accept: "*/*" } }; this.post(n, (t, e, i) => s(i)) }).catch(t => this.logErr(t)) } loaddata() { if (!this.isNode()) return {}; { this.fs = this.fs ? this.fs : require("fs"), this.path = this.path ? this.path : require("path"); const t = this.path.resolve(this.dataFile), e = this.path.resolve(process.cwd(), this.dataFile), s = this.fs.existsSync(t), i = !s && this.fs.existsSync(e); if (!s && !i) return {}; { const i = s ? t : e; try { return JSON.parse(this.fs.readFileSync(i)) } catch (t) { return {} } } } } writedata() { if (this.isNode()) { this.fs = this.fs ? this.fs : require("fs"), this.path = this.path ? this.path : require("path"); const t = this.path.resolve(this.dataFile), e = this.path.resolve(process.cwd(), this.dataFile), s = this.fs.existsSync(t), i = !s && this.fs.existsSync(e), r = JSON.stringify(this.data); s ? this.fs.writeFileSync(t, r) : i ? this.fs.writeFileSync(e, r) : this.fs.writeFileSync(t, r) } } lodash_get(t, e, s) { const i = e.replace(/\[(\d+)\]/g, ".$1").split("."); let r = t; for (const t of i) if (r = Object(r)[t], void 0 === r) return s; return r } lodash_set(t, e, s) { return Object(t) !== t ? t : (Array.isArray(e) || (e = e.toString().match(/[^.[\]]+/g) || []), e.slice(0, -1).reduce((t, s, i) => Object(t[s]) === t[s] ? t[s] : t[s] = Math.abs(e[i + 1]) >> 0 == +e[i + 1] ? [] : {}, t)[e[e.length - 1]] = s, t) } getdata(t) { let e = this.getval(t); if (/^@/.test(t)) { const [, s, i] = /^@(.*?)\.(.*?)$/.exec(t), r = s ? this.getval(s) : ""; if (r) try { const t = JSON.parse(r); e = t ? this.lodash_get(t, i, "") : e } catch (t) { e = "" } } return e } setdata(t, e) { let s = !1; if (/^@/.test(e)) { const [, i, r] = /^@(.*?)\.(.*?)$/.exec(e), o = this.getval(i), h = i ? "null" === o ? null : o || "{}" : "{}"; try { const e = JSON.parse(h); this.lodash_set(e, r, t), s = this.setval(JSON.stringify(e), i) } catch (e) { const o = {}; this.lodash_set(o, r, t), s = this.setval(JSON.stringify(o), i) } } else s = this.setval(t, e); return s } getval(t) { return this.isSurge() || this.isLoon() ? $persistentStore.read(t) : this.isQuanX() ? $prefs.valueForKey(t) : this.isNode() ? (this.data = this.loaddata(), this.data[t]) : this.data && this.data[t] || null } setval(t, e) { return this.isSurge() || this.isLoon() ? $persistentStore.write(t, e) : this.isQuanX() ? $prefs.setValueForKey(t, e) : this.isNode() ? (this.data = this.loaddata(), this.data[e] = t, this.writedata(), !0) : this.data && this.data[e] || null } initGotEnv(t) { this.got = this.got ? this.got : require("got"), this.cktough = this.cktough ? this.cktough : require("tough-cookie"), this.ckjar = this.ckjar ? this.ckjar : new this.cktough.CookieJar, t && (t.headers = t.headers ? t.headers : {}, void 0 === t.headers.Cookie && void 0 === t.cookieJar && (t.cookieJar = this.ckjar)) } get(t, e = (() => { })) { t.headers && (delete t.headers["Content-Type"], delete t.headers["Content-Length"]), this.isSurge() || this.isLoon() ? (this.isSurge() && this.isNeedRewrite && (t.headers = t.headers || {}, Object.assign(t.headers, { "X-Surge-Skip-Scripting": !1 })), $httpClient.get(t, (t, s, i) => { !t && s && (s.body = i, s.statusCode = s.status), e(t, s, i) })) : this.isQuanX() ? (this.isNeedRewrite && (t.opts = t.opts || {}, Object.assign(t.opts, { hints: !1 })), $task.fetch(t).then(t => { const { statusCode: s, statusCode: i, headers: r, body: o } = t; e(null, { status: s, statusCode: i, headers: r, body: o }, o) }, t => e(t))) : this.isNode() && (this.initGotEnv(t), this.got(t).on("redirect", (t, e) => { try { if (t.headers["set-cookie"]) { const s = t.headers["set-cookie"].map(this.cktough.Cookie.parse).toString(); s && this.ckjar.setCookieSync(s, null), e.cookieJar = this.ckjar } } catch (t) { this.logErr(t) } }).then(t => { const { statusCode: s, statusCode: i, headers: r, body: o } = t; e(null, { status: s, statusCode: i, headers: r, body: o }, o) }, t => { const { message: s, response: i } = t; e(s, i, i && i.body) })) } post(t, e = (() => { })) { if (t.body && t.headers && !t.headers["Content-Type"] && (t.headers["Content-Type"] = "application/x-www-form-urlencoded"), t.headers && delete t.headers["Content-Length"], this.isSurge() || this.isLoon()) this.isSurge() && this.isNeedRewrite && (t.headers = t.headers || {}, Object.assign(t.headers, { "X-Surge-Skip-Scripting": !1 })), $httpClient.post(t, (t, s, i) => { !t && s && (s.body = i, s.statusCode = s.status), e(t, s, i) }); else if (this.isQuanX()) t.method = "POST", this.isNeedRewrite && (t.opts = t.opts || {}, Object.assign(t.opts, { hints: !1 })), $task.fetch(t).then(t => { const { statusCode: s, statusCode: i, headers: r, body: o } = t; e(null, { status: s, statusCode: i, headers: r, body: o }, o) }, t => e(t)); else if (this.isNode()) { this.initGotEnv(t); const { url: s, ...i } = t; this.got.post(s, i).then(t => { const { statusCode: s, statusCode: i, headers: r, body: o } = t; e(null, { status: s, statusCode: i, headers: r, body: o }, o) }, t => { const { message: s, response: i } = t; e(s, i, i && i.body) }) } } time(t, e = null) { const s = e ? new Date(e) : new Date; let i = { "M+": s.getMonth() + 1, "d+": s.getDate(), "H+": s.getHours(), "m+": s.getMinutes(), "s+": s.getSeconds(), "q+": Math.floor((s.getMonth() + 3) / 3), S: s.getMilliseconds() }; /(y+)/.test(t) && (t = t.replace(RegExp.$1, (s.getFullYear() + "").substr(4 - RegExp.$1.length))); for (let e in i) new RegExp("(" + e + ")").test(t) && (t = t.replace(RegExp.$1, 1 == RegExp.$1.length ? i[e] : ("00" + i[e]).substr(("" + i[e]).length))); return t } msg(e = t, s = "", i = "", r) { const o = t => { if (!t) return t; if ("string" == typeof t) return this.isLoon() ? t : this.isQuanX() ? { "open-url": t } : this.isSurge() ? { url: t } : void 0; if ("object" == typeof t) { if (this.isLoon()) { let e = t.openUrl || t.url || t["open-url"], s = t.mediaUrl || t["media-url"]; return { openUrl: e, mediaUrl: s } } if (this.isQuanX()) { let e = t["open-url"] || t.url || t.openUrl, s = t["media-url"] || t.mediaUrl; return { "open-url": e, "media-url": s } } if (this.isSurge()) { let e = t.url || t.openUrl || t["open-url"]; return { url: e } } } }; if (this.isMute || (this.isSurge() || this.isLoon() ? $notification.post(e, s, i, o(r)) : this.isQuanX() && $notify(e, s, i, o(r))), !this.isMuteLog) { let t = ["", "==============📣系统通知📣=============="]; t.push(e), s && t.push(s), i && t.push(i), console.log(t.join("\n")), this.logs = this.logs.concat(t) } } log(...t) { t.length > 0 && (this.logs = [...this.logs, ...t]), console.log(t.join(this.logSeparator)) } logErr(t, e) { const s = !this.isSurge() && !this.isQuanX() && !this.isLoon(); s ? this.log("", `❗️${this.name}, 错误!`, t.stack) : this.log("", `❗️${this.name}, 错误!`, t) } wait(t) { return new Promise(e => setTimeout(e, t)) } done(t = {}) { const e = (new Date).getTime(), s = (e - this.startTime) / 1e3; this.log("", `🔔${this.name}, 结束! 🕛 ${s} 秒`), this.log(), (this.isSurge() || this.isQuanX() || this.isLoon()) && $done(t) } }(t, e) }
