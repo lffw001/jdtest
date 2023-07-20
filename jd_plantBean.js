@@ -716,7 +716,7 @@ function requireConfig() {
 function krrequestGet(I1l1, Il11I1 = {}) {
   return new Promise(async Il1i1 => {
     const IlIiii = {
-      "url": JD_API_HOST + "?functionId=" + I1l1 + "&body=" + encodeURIComponent(JSON.stringify(Il11I1)) + "&appid=signed_wh5&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=9.3.2",
+      "url": JD_API_HOST + "?functionId=" + I1l1 + "&body=" + encodeURIComponent(JSON.stringify(Il11I1)) + "&appid=signed_wh5&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=11.6.2",
       "headers": {
         "Accept": "*/*",
         "Origin": "https://h5.m.jd.com",
@@ -744,7 +744,7 @@ function krrequestGet(I1l1, Il11I1 = {}) {
 function requestGet(iI11l, IlIiiI = {}) {
   return new Promise(async lli1I => {
     let iI1i1I = "";
-    if (!appidMap[iI11l]) iI1i1I = JD_API_HOST + "?functionId=" + iI11l + "&body=" + encodeURIComponent(JSON.stringify(IlIiiI)) + "&appid=ld&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=9.3.2";else {
+    if (!appidMap[iI11l]) iI1i1I = JD_API_HOST + "?functionId=" + iI11l + "&body=" + encodeURIComponent(JSON.stringify(IlIiiI)) + "&appid=ld&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=11.6.2";else {
       !IlIiiI.version && (IlIiiI.version = "9.2.4.3");
       IlIiiI.monitor_source = "plant_m_plant_index";
       appidMap[iI11l] == "shopNutrientsTask" && (headers.referer = "https://plantearth.m.jd.com/", headers["x-requested-with"] = "https://plantearth.m.jd.com/");
@@ -752,7 +752,7 @@ function requestGet(iI11l, IlIiiI = {}) {
       const iIil1l = {
         "appid": "signed_wh5",
         "client": "android",
-        "clientVersion": "10.1.0",
+        "clientVersion": "11.6.2",
         "functionId": iI11l,
         "body": IlIiiI
       };
@@ -833,7 +833,6 @@ function TotalBean() {
 
 
 function request(lli1l, Iili1 = {}) {
-	console.log(lli1l);
   return new Promise(async IiIIi1 => {
     let I11Iil = "";
 
@@ -846,7 +845,7 @@ function request(lli1l, Iili1 = {}) {
       const I1iiI = {
         "appid": "signed_wh5",
         "client": "android",
-        "clientVersion": "10.1.0",
+        "clientVersion": "11.6.2",
         "functionId": lli1l,
         "body": Iili1
       };
@@ -904,7 +903,7 @@ async function taskUrl(il1lil, I1iil) {
     const I1iii = {
       "appid": "signed_wh5",
       "client": "android",
-      "clientVersion": "10.1.0",
+      "clientVersion": "11.6.2",
       "functionId": il1lil,
       "body": I1iil
     };
@@ -1076,7 +1075,7 @@ function get_ua(iII1li, lIiii = {}) {
       "app": "jdapp",
       "appBuild": "168392",
       "client": "android",
-      "clientVersion": "10.1.0"
+      "clientVersion": "11.6.2"
     },
     "lite": {
       "app": "jdltapp",
