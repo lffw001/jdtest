@@ -250,7 +250,7 @@ if(DisableIndex!=-1){
 }
 
 //查优惠券
-let EnableChaQuan=true;
+let EnableChaQuan=false;
 DisableIndex=strDisableList.findIndex((item) => item === "查优惠券");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭优惠券查询");
@@ -2019,11 +2019,11 @@ function GetDateTime(date) {
 async function queryScores() {
     let res = ''
     let url = {
-      url: `https://rsp.jd.com/windControl/queryScore/v1?lt=m&an=plus.mobile&stamp=${Date.now()}`,
+      url: `https://api.m.jd.com/api?functionId=windControl_queryScore_v1&appid=plus_business&loginType=2&loginWQBiz=plus&scval=&body=%7B%7D`,
       headers: {
         'Cookie': cookie,
         'User-Agent': 'Mozilla/5.0 (Linux; Android 10; Redmi Note 8 Pro Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045715 Mobile Safari/537.36',
-        'Referer': 'https://plus.m.jd.com/rights/windControl'
+        'Referer': 'https://plus.m.jd.com/user/home'
       }
     };
 	
@@ -2157,7 +2157,7 @@ function dwappexpire() {
                     if (data.code == 200) {
                         data = data.data.userOperateList.length !== 0 ? new Date(data.data.userOperateList[0].time).toLocaleDateString() : '';
                     } else {
-                        console.log(data.msg);
+                        //console.log(data.msg);
 						data = '';
                     }
                 }
