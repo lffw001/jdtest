@@ -264,69 +264,75 @@ async function doDailyTask() {
       // message += `【被水滴砸中】获得${$.goalResult.addEnergy}g💧\n`
     }
   }
-  console.log(`签到结束,开始广告浏览任务`);
-  if ($.farmTask.gotBrowseTaskAdInit.f) {
-    console.log(`今天已经做过浏览广告任务\n`);
-  } else {
-    let adverts = $.farmTask.gotBrowseTaskAdInit.userBrowseTaskAds
-    let browseReward = 0
-    let browseSuccess = 0
-    let browseFail = 0
-    for (let advert of adverts) { //开始浏览广告
-      if (advert.limit <= advert.hadFinishedTimes) {
-        // browseReward+=advert.reward
-        console.log(`${advert.mainTitle}+ ' 已完成`);//,获得${advert.reward}g
-        continue;
-      }
-      console.log('正在进行广告浏览任务: ' + advert.mainTitle);
-      await browseAdTaskForFarm(advert.advertId, 0);
-      if ($.browseResult.code === '0') {
-        console.log(`${advert.mainTitle}浏览任务完成`);
-        //领取奖励
-        await browseAdTaskForFarm(advert.advertId, 1);
-        if ($.browseRwardResult.code === '0') {
-          console.log(`领取浏览${advert.mainTitle}广告奖励成功,获得${$.browseRwardResult.amount}g`)
-          browseReward += $.browseRwardResult.amount
-          browseSuccess++
-        } else {
-          browseFail++
-          console.log(`领取浏览广告奖励结果:  ${JSON.stringify($.browseRwardResult)}`)
+      console.log(`签到结束,开始浏览任务`);
+    if (1) {
+        let adverts = $.farmTask.gotBrowseTaskAdInit.userBrowseTaskAds
+        let browseReward = 0
+        let browseSuccess = 0
+        let browseFail = 0
+        for (let advert of adverts) { //开始浏览广告
+            if (advert.limit <= advert.hadFinishedTimes) {
+                // browseReward+=advert.reward
+                console.log(`${advert.mainTitle}+ ' 已完成`);//,获得${advert.reward}g
+                continue;
+            }
+            console.log('正在进行广告浏览任务: ' + advert.mainTitle);
+            await browseAdTaskForFarm(advert.advertId, 0);
+            if ($.browseResult.code === '0') {
+                console.log(`${advert.mainTitle}浏览任务完成`);
+                //领取奖励
+                await browseAdTaskForFarm(advert.advertId, 1);
+                if ($.browseRwardResult.code === '0') {
+                    console.log(`领取浏览${advert.mainTitle}广告奖励成功,获得${$.browseRwardResult.amount}g`)
+                    browseReward += $.browseRwardResult.amount
+                    browseSuccess++
+                } else {
+                    browseFail++
+                    console.log(`领取浏览广告奖励结果:  ${JSON.stringify($.browseRwardResult)}`)
+                }
+            } else {
+                browseFail++
+                console.log(`广告浏览任务结果:   ${JSON.stringify($.browseResult)}`);
+            }
         }
-      } else {
-        browseFail++
-        console.log(`广告浏览任务结果:   ${JSON.stringify($.browseResult)}`);
-      }
-    }
-    if (browseFail > 0) {
-      console.log(`【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\\n`);
-      // message += `【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\n`;
+        if (browseFail > 0) {
+            console.log(`【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\\n`);
+            // message += `【广告浏览】完成${browseSuccess}个,失败${browseFail},获得${browseReward}g💧\n`;
+        } else {
+            console.log(`【广告浏览】完成${browseSuccess}个,获得${browseReward}g💧\n`);
+            // message += `【广告浏览】完成${browseSuccess}个,获得${browseReward}g💧\n`;
+        }
     } else {
-      console.log(`【广告浏览】完成${browseSuccess}个,获得${browseReward}g💧\n`);
-      // message += `【广告浏览】完成${browseSuccess}个,获得${browseReward}g💧\n`;
+        console.log(`今天已经做过浏览广告任务\n`);
     }
-  }
-  //定时领水
-  if (!$.farmTask.gotThreeMealInit.f) {
-    //
-    await gotThreeMealForFarm();
-    if ($.threeMeal.code === "0") {
-      console.log(`【定时领水】获得${$.threeMeal.amount}g💧\n`);
-      // message += `【定时领水】获得${$.threeMeal.amount}g💧\n`;
+    //定时领水
+    if (!$.farmTask.gotThreeMealInit.f) {
+        //
+        await gotThreeMealForFarm();
+        if ($.threeMeal.code === "0") {
+            console.log(`【定时领水】获得${$.threeMeal.amount}g💧\n`);
+            // message += `【定时领水】获得${$.threeMeal.amount}g💧\n`;
+        } else {
+            // message += `【定时领水】失败,详询日志\n`;
+            console.log(`定时领水成功结果:  ${JSON.stringify($.threeMeal)}`);
+        }
     } else {
-      // message += `【定时领水】失败,详询日志\n`;
-      console.log(`定时领水成功结果:  ${JSON.stringify($.threeMeal)}`);
+        console.log('当前不在定时领水时间断或者已经领过\n')
     }
-  } else {
-    console.log('当前不在定时领水时间断或者已经领过\n')
-  }
-  //给好友浇水
-  if (!$.farmTask.waterFriendTaskInit.f) {
-    if ($.farmTask.waterFriendTaskInit.waterFriendCountKey < $.farmTask.waterFriendTaskInit.waterFriendMax) {
-      await doFriendsWater();
+    //给好友浇水
+    if (!$.farmTask.waterFriendTaskInit.f) {
+        if ($.farmTask.waterFriendTaskInit.waterFriendCountKey < $.farmTask.waterFriendTaskInit.waterFriendMax) {
+            await doFriendsWater();
+        }
+    } else {
+        console.log(`给${$.farmTask.waterFriendTaskInit.waterFriendMax}个好友浇水任务已完成\n`)
     }
-  } else {
-    console.log(`给${$.farmTask.waterFriendTaskInit.waterFriendMax}个好友浇水任务已完成\n`)
-  }
+    if ($.farmTask['treasureBoxInit-getBean'] && !$.farmTask['treasureBoxInit-getBean'].f) {
+        console.log(`${$.farmTask['treasureBoxInit-getBean'].taskMainTitle}`);
+        await ddnc_getTreasureBoxAward();
+    } else {
+        console.log(`逛领京豆任务已完成\n`)
+    }
   
   await getAwardInviteFriend();
   await clockInIn();//打卡领水
