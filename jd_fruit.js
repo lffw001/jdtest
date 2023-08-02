@@ -225,7 +225,7 @@ async function jdFruit() {
       await getTenWaterAward();//领取10浇水奖励
       await getWaterFriendGotAward();//领取为2好友浇水奖励
       await duck();
-      await doTenWaterAgain();//再次浇水
+      //await doTenWaterAgain();//再次浇水
       await predictionFruit();//预测水果成熟时间
     } else {
       console.log(`初始化农场数据异常, 请登录京东 app查看农场功能是否正常`); 
@@ -464,6 +464,7 @@ async function doTenWaterAgain() {
   await initForFarm();
   let totalEnergy = $.farmInfo.farmUserPro.totalEnergy;
   console.log(`剩余水滴${totalEnergy}g\n`);
+  console.log('保留水滴:'+retainWater+'g');
   if (totalEnergy < retainWater) {
 	console.log('保留水滴不足'+retainWater+'g,停止继续浇水')
 	return
