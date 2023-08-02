@@ -464,6 +464,10 @@ async function doTenWaterAgain() {
   await initForFarm();
   let totalEnergy = $.farmInfo.farmUserPro.totalEnergy;
   console.log(`剩余水滴${totalEnergy}g\n`);
+  if (totalEnergy < retainWater) {
+	console.log('保留水滴不足'+retainWater+'g,停止继续浇水')
+	return
+  }
   await myCardInfoForFarm();
   const { fastCard, doubleCard, beanCard, signCard } = $.myCardInfoRes;
   console.log(`背包已有道具:\n快速浇水卡:${fastCard === -1 ? '未解锁' : fastCard + '张'}\n水滴翻倍卡:${doubleCard === -1 ? '未解锁' : doubleCard + '张'}\n水滴换京豆卡:${beanCard === -1 ? '未解锁' : beanCard + '张'}\n加签卡:${signCard === -1 ? '未解锁' : signCard + '张'}\n`)
