@@ -28,7 +28,7 @@ let dailyPersonalAnswerNum=0;
 		do{
 			await intGame();
 			if(dailyPersonalAnswerNum>0){
-				var time=15000+Math.floor(Math.random()*3000);
+				var time=16000+Math.floor(Math.random()*3000);
 				//获取题目
 				await getQuestion();
 				await $.wait(time);
