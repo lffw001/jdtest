@@ -1,28 +1,23 @@
 /*
-云南活动
+杭州
  */
 const $ = new Env('test');
-// index.js
 const fs = require('fs');
 const CryptoJS=require('crypto-js');
 
  
-
-
-// 创建logger
-//let logger = new console.Console(stderr);
 let cookies=[
-"sessionId=64df9513f5d598000160ce09&accountId=64df9513f5d598000160ce08&mobile=17802595869",
-"sessionId=64df8f96bb5a4c000184527f&accountId=64df7a1c34b95700015e88f3&mobile=18012225989",
-"sessionId=64df828a6f50ed00011f6ee7&accountId=64df828a6f50ed00011f6ee6&mobile=18651306657",
-"sessionId=64df959c34b95700015e8a77&accountId=64df8e0d4a5f69000166c23b&mobile=13584640176",
-"sessionId=64df907c34b95700015e8a4d&accountId=64df907c34b95700015e8a4c&mobile=13382348802",
-"sessionId=64df91654a5f69000166c26e&accountId=64df91654a5f69000166c26d&mobile=13382341414",
-"sessionId=64df92324d848c000101c38e&accountId=64df92324d848c000101c38d&mobile=13801484782",
-"sessionId=64df943d6f50ed00011f6fba&accountId=64df943d6f50ed00011f6fb9&mobile=18068603568",
+	"sessionId=64df9513f5d598000160ce09&accountId=64df9513f5d598000160ce08&mobile=17802595869",
+	"sessionId=64df8f96bb5a4c000184527f&accountId=64df7a1c34b95700015e88f3&mobile=18012225989",
+	"sessionId=64df828a6f50ed00011f6ee7&accountId=64df828a6f50ed00011f6ee6&mobile=18651306657",
+	"sessionId=64df959c34b95700015e8a77&accountId=64df8e0d4a5f69000166c23b&mobile=13584640176",
+	"sessionId=64df907c34b95700015e8a4d&accountId=64df907c34b95700015e8a4c&mobile=13382348802",
+	"sessionId=64df91654a5f69000166c26e&accountId=64df91654a5f69000166c26d&mobile=13382341414",
+	"sessionId=64df92324d848c000101c38e&accountId=64df92324d848c000101c38d&mobile=13801484782",
+	"sessionId=64df943d6f50ed00011f6fba&accountId=64df943d6f50ed00011f6fb9&mobile=18068603568",
+	"sessionId=64e611eae44edb00019679a2&accountId=64e611eae44edb00019679a1&mobile=13914467362",
 ]
-//朱张杰
-//let cookie="sessionId=64df7a1c34b95700015e88f1&accountId=64df7a1c34b95700015e88f3&mobile=18012225989";//
+
 let cookie="";//
 let ques=[];
 let dailyPersonalAnswerNum=0;
@@ -33,7 +28,7 @@ let dailyPersonalAnswerNum=0;
 		do{
 			await intGame();
 			if(dailyPersonalAnswerNum>0){
-				var time=16000+Math.floor(Math.random()*4000);
+				var time=15000+Math.floor(Math.random()*3000);
 				//获取题目
 				await getQuestion();
 				await $.wait(time);
@@ -44,14 +39,11 @@ let dailyPersonalAnswerNum=0;
 			
 	}
 
-	//await finish();
-})()
-  .catch((e) => {
+})().catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-  })
-  .finally(() => {
+}).finally(() => {
     $.done();
-  })
+})
   
   
 function intGame(){
