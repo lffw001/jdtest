@@ -7,6 +7,13 @@ const CryptoJS=require('crypto-js');
 
  
 let cookies=[
+	"sessionId=64e8bd7968f9480001bdb634&accountId=5e3e28f23791f10001e4496d&mobile=15061019998",
+	"sessionId=64e8b84868f9480001bdb5f7&accountId=64e8b723a3c9de00013333b0&mobile=13815962198",
+	"sessionId=64e8b9c055c1e300012db069&accountId=64e56405cde8ff0001052ed3&mobile=18952612430",
+	"sessionId=64e8bb09a0911c0001daeeb6&accountId=5e3e2a5abe8739000193a76d&mobile=18952612439",
+	"sessionId=64e8bc24cde8ff000105ab26&accountId=64e8b064cb87460001408528&mobile=13775660776",
+	"sessionId=64e611eae44edb00019679a2&accountId=64e611eae44edb00019679a1&mobile=13914467362",
+	"sessionId=64e8b0eba3c9de000133335d&accountId=64e8b0eba3c9de000133335c&mobile=13914469324",
 	"sessionId=64df9513f5d598000160ce09&accountId=64df9513f5d598000160ce08&mobile=17802595869",
 	"sessionId=64df8f96bb5a4c000184527f&accountId=64df7a1c34b95700015e88f3&mobile=18012225989",
 	"sessionId=64df828a6f50ed00011f6ee7&accountId=64df828a6f50ed00011f6ee6&mobile=18651306657",
@@ -15,13 +22,16 @@ let cookies=[
 	"sessionId=64df91654a5f69000166c26e&accountId=64df91654a5f69000166c26d&mobile=13382341414",
 	"sessionId=64df92324d848c000101c38e&accountId=64df92324d848c000101c38d&mobile=13801484782",
 	"sessionId=64df943d6f50ed00011f6fba&accountId=64df943d6f50ed00011f6fb9&mobile=18068603568",
-	"sessionId=64e611eae44edb00019679a2&accountId=64e611eae44edb00019679a1&mobile=13914467362",
+
 ]
 
 let cookie="";//
 let ques=[];
 let dailyPersonalAnswerNum=0;
 !(async () => {
+	let radomTime=1000+Math.floor(Math.random()*100000);
+	console.log("随机延迟"+radomTime+"毫秒");
+	await $.wait(radomTime);//开始时间随机延迟100s
 	for(var i=0;i<cookies.length;i++){
 		cookie=cookies[i];
 		console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
@@ -33,10 +43,15 @@ let dailyPersonalAnswerNum=0;
 				await getQuestion();
 				await $.wait(time);
 				await submitAnswer();
+				radomTime=3000+Math.floor(Math.random()*5000);
+				console.log("随机延迟"+radomTime+"毫秒");
+				await $.wait(radomTime);
 			}
-			await $.wait(3000);
+
 		}while(dailyPersonalAnswerNum>0)
-			
+		radomTime=3000+Math.floor(Math.random()*20000);
+		console.log("随机延迟"+radomTime+"毫秒");
+		await $.wait(radomTime);
 	}
 
 })().catch((e) => {
