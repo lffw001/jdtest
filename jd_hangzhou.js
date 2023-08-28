@@ -41,7 +41,7 @@ let cookie="";//
 let ques=[];
 let dailyPersonalAnswerNum=0;
 !(async () => {
-	let radomTime=1000+Math.floor(Math.random()*100000);
+	let radomTime=1000+Math.floor(Math.random()*10000);
 	console.log("随机延迟"+radomTime+"毫秒");
 	await $.wait(radomTime);//开始时间随机延迟100s
 	for(var i=0;i<cookies.length;i++){
@@ -55,13 +55,13 @@ let dailyPersonalAnswerNum=0;
 				await getQuestion();
 				await $.wait(time);
 				await submitAnswer();
-				radomTime=3000+Math.floor(Math.random()*5000);
+				radomTime=2000+Math.floor(Math.random()*5000);
 				console.log("随机延迟"+radomTime+"毫秒");
 				await $.wait(radomTime);
 			}
 
 		}while(dailyPersonalAnswerNum>0)
-		radomTime=3000+Math.floor(Math.random()*20000);
+		radomTime=1000+Math.floor(Math.random()*5000);
 		console.log("随机延迟"+radomTime+"毫秒");
 		await $.wait(radomTime);
 	}

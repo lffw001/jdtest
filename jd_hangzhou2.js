@@ -36,7 +36,13 @@ let dailyPersonalAnswerNum=0;
 				await $.wait(time);
 				await submitAnswer();
 				radomTime=3000+Math.floor(Math.random()*5000);
-				console.log("随机延迟"+radomTime+"毫秒");
+				if(d==31||d==7||d==14){
+					radomTime=1000+Math.floor(Math.random()*500);
+					console.log("每期最后一天延迟"+radomTime+"毫秒");
+				}else{
+					console.log("随机延迟"+radomTime+"毫秒");
+				}
+
 				await $.wait(radomTime);
 			}
 
