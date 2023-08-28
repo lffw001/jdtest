@@ -13,74 +13,47 @@
 //此处填写京东账号cookie。
 let CookieJDs = [
 
-'pt_key=app_openAAJkiJhiADCTKMJ_KE1ZyVYO2XbcpQUbc5CFFuMm838B3mRKVKFd1m4j1TPT-M0EjUYiN3-Tv30;pt_pin=libinxwz;',
+
+'pt_key=AAJk54JbADBbmPCeD35vds7UKsBqey1-dUIqf2GsfZRpGPDfEk_4me6TGSsN5zVBqjyB1h6hB8Q;pt_pin=libinxwz;',
 
 
-'pt_key=app_openAAJkiJh5ADAlopY7fXzqXMfT5GzpeM2ee-FH9ggV0sCUxUqmjA1AUVDoBHiEaGKiKTOZkZv6kGs;pt_pin=jd_61d5ffc77afbc;',
+'pt_pin=jd_61d5ffc77afbc;pt_key=AAJk6ELlADDeUBL2jl55e6SYFUtjadqanL6rDcsg9fFrvPZE-NpZeB_P9sWircWkkUDWaOKJM8w;',
 
 
-'pt_key=app_openAAJkh3E9ADC4rLcTIe27QQPJeSRAwFdiusGGYzAQFOvgx-VZQ511b4G9mNLosFnZrCxEPmOrqMI;pt_pin=wdpcPPMuBenhKg;',
+'pt_pin=wdpcPPMuBenhKg;pt_key=app_openAAJk6NO0ADD1MyIKknhISpWUMJRcoO0imkzLMlFyJirtqlUFJ0-nzKkawtYaf39tuJoKcg28rRM;',
 
 
-'pt_key=app_openAAJkiJjVADB1jTVjBe6arueR-Pabh8Za5mEnJJhH2wFsrL-MnzX0sQBcBW-3gj7_vAKiVbuDE_E;pt_pin=jd_53504250c5652;',
+'pt_key=AAJk54LbADBRrKNEWrZnWEL71zxdXPDINUbzsUEiOS_JemioWF1p0P46-VPypCYeiYUCkk9T8Ec;pt_pin=jd_53504250c5652;',
 
 
-'pt_key=app_openAAJkiJU8ADBzcD_jYwUCX3O5pPjsIV2zL86U7q6xIUorwss2NssQSyWlBSCEoKnWsXmoe1BA0q8;pt_pin=jd_70b6936fd65a9;',
+'pt_key=app_openAAJk6XNDADAMunLg0AE2LWhcP2cNdQUGdk8p8lnyQ7Qt6gyy12kMeAiUO19lKGroHng8flY0pHA;pt_pin=jd_70b6936fd65a9;',
 
 
-'pt_key=app_openAAJkiJWCADDnteXk9vGFm5ZGNaVjXBgxAUE3iSUrWqLDJyEU-rlTCBMskjhoRYYzt4mEG1KBCSg;pt_pin=jd_uhQrHvOnkruH;',
+'pt_pin=jd_uhQrHvOnkruH;pt_key=app_openAAJk6NQmADA37GiJNzyCZe_myRp3GWstw8q5TjnZtOcvF6t3RyRooaCiZE3T6mQdEcM_dBVLXj4;',
 
 
-'pt_key=app_openAAJkiJinADAnQtDwM6dYe7KKLKHKErbDyxaPLntNVJRU9X23DF7C8CKg_q93GoLUxkaO_wqGr9g;pt_pin=wdFulrsXNvpcbf;',
+'pt_key=AAJk53TdADDChRy5n964woCUgPBokDfWoeYMwLSYcjjzpPybEF0rF9uFkN50CJhqCTc-GDsJ_qg;pt_pin=wdFulrsXNvpcbf;',
 
 
-'pt_key=app_openAAJkiJkwADB_Z7y8lI3nSWK5qQ46HLpki9KxrO0aRTi3OA_B81N4UWO_RluCD3BZfkkp7uPJ4AE;pt_pin=jd_70191d2deb1c2;',
+'pt_pin=jd_70191d2deb1c2;pt_key=AAJk6XVwADCWX9assm53OcP4R-q5-MDvMlniQPB0_pQi5IKDhO3AdYgcxu59etHLNwxqwsIrgaY;',
 
 
-'pt_key=app_openAAJkiJlHADD98gwFVcOWHUQuIxzRc4URmvnJrAN-gLHDaPgc6oqpwiayZ_NJpCIt8WKRDparr0Y;pt_pin=jd_639284c7e24f4;',
+'pt_key=AAJk6XZxADDSOxSlVdoKH-imvKiCLmjidiXrC5izip6HR3zE75GdkFOIqsoRQAM1RW0WSPQ9aD4;pt_pin=jd_639284c7e24f4;',
 
 
-'pt_key=app_openAAJkh_GSADAazQpAST9JVObhsjvgi2p-IgZjd9ebtcUmTwH2AjUGNf-AOO5KlRu4L190PgVUNwE;pt_pin=jd_SrCzReVimwxM;',
+'pt_key=app_openAAJk6Xo2ADA44pOn0FQ-1IlRVqqJFMS5Uyu9lgxJr-PBgCkzP0czAwKMdAz7XfXLbUsSmOZ5xAo;pt_pin=jd_SrCzReVimwxM;',
 
 
-'pt_key=app_openAAJkiJVqADDT19BPKaKeqNm_QbbaeKvBgLsHtZf_5trtrJbm1ru-Dwy94eWYI61bH6s4NWh57Lo;pt_pin=jd_gHCmJCNYacVx;',
+'pt_key=AAJk6XK7AEBElWq1x0OgyN66opI0UME24UhQ7k4v2A3WCREynRd9SAMF3PcQmbX4v2uOb9zo69ncHMsp3h5vQUZ8JXrqD5OE;pt_pin=%E4%BC%9A%E8%B7%B3%E8%88%9E%E7%9A%84%E5%B0%8F%E8%9A%82%E8%9A%81;',
 
 
-'pt_key=app_openAAJkiJWZAEDvkpGwXKdQsU6E-B0-t3UHmTj5Upn91BWbyUBrFDHtRSGkHs-JWe9_dX4wJZHe9s5iYrl5bl0LUkd-8pkrOke2;pt_pin=%E4%BC%9A%E8%B7%B3%E8%88%9E%E7%9A%84%E5%B0%8F%E8%9A%82%E8%9A%81;',
+'pt_key=app_openAAJk6XSjADDQb6kYnNRFIlfF_bEqLWqAwGqwOd0m0FG_x1_JEnE8ZWixO3tvN8qD06bPgr_PeHY;pt_pin=jd_bVxiAmQBpUij;',
 
 
-'pt_key=app_openAAJkiJnVADBYAw0e5XpJLpm7AHMUlgqu7Ksi5KXJKLUTItqKtvEwa4q4mtGWNbEl96p0jv-u0XI;pt_pin=412208798_m;',
+'pt_key=AAJk6gpWADAXXT5-oWhBj_xaMWEgV0DpvWqiG6FpB-vfPeZ_08Cl0zbT9EllFcxOU3NQKrEjxFE;pt_pin=%E9%BB%9B%E8%89%B293;',
 
 
-'pt_key=app_openAAJkiJaXADCZBiOfNGzO_KvutkW2yjA3fmWe8Br2oNs3Y00gMTcfWeLHKvh13D3a-5DzN24zMVQ;pt_pin=jd_bVxiAmQBpUij;',
-
-
-'pt_key=app_openAAJkiJX0ADA3pUWEQ-YhFgwUIXUOUy0fu2W1jA_srpwhTS4K8s8UFYp2NFmSTn6IpBpMO_3s2sY;pt_pin=jd_750fd4822f18b;',
-
-
-'pt_key=app_openAAJkiJXdADDxqbnWHbsOVJcS0zd2C1ZIaLRiGOt_6jU6dxWZU4E3gxbk7Rppoc9z6tbh6joIAdo;pt_pin=jd_7055c4e7c917c;',
-
-
-'pt_key=app_openAAJkiJmMADCEdKTpPZm5oxfEZShC53ib13W_Y4GZ9HrbVI8QEYNEqvFeDSnoKhS1POLEmaIiPZI;pt_pin=jd_69960e01dbda3;',
-
-
-'pt_key=app_openAAJkiJm9ADAsI1CjxWNIGMMZy-GkgXItKoZULHDleeu-V2gSXOMslZxfXBp7j9DU1JgHeqSzPYg;pt_pin=%E9%BB%9B%E8%89%B293;',
-
-
-'pt_key=app_openAAJkiJmmADA0JyuOAbJoe7ELM9sRMzKR_tX0P_2Icx5hTxItt5yYQ6Dg4tKDj-0q3B7hzLl_1cw;pt_pin=jd_639f931f0cc10;',
-
-
-'pt_key=app_openAAJkiJZpADB7c7MEsWNX_KzkO5elqoNQtJzlt2NPab7GRuu4nxuJzGwB2BDLTqH1yipGQSS3928;pt_pin=jd_68be6ce4ab227;',
-
-
-'pt_key=app_openAAJkiJaAADBPsPKxev7KMHgswy63pIVUHI1jkOdGv9EmTvlPZuzjZPJkfYZk7jlhC6mhlo_VWl8;pt_pin=jd_57f964f4b0e6e;',
-
-
-'pt_key=app_openAAJkiEzKADBvCOaGAgvXMdWNKRfeP0qu6Ty1ROJ9vlZb3Q4MFEXxTur-t8Scu4gz6_7gtAs6SIU;pt_pin=18661231724_p;',
-
-
-'pt_key=app_openAAJkh-TdADA2ICnVzYaziefeKCgB7dW4ckVToiIjbn1yFJKCxQeo5WnKd5hKdpo-7pDbwSPxfew;pt_pin=jd_54982f63f9d7f;',
-
+'pt_key=AAJk6HZwADDIfqtM9TRHqiWOCfyeV6Njxs8l2FvOW0ICp0BReFw5sQKXIYekotzOmW4RtCK4_Os;pt_pin=jd_54982f63f9d7f;',
 ]
 // 判断环境变量里面是否有京东ck
 if (process.env.JD_COOKIE) {

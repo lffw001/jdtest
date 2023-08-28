@@ -55,7 +55,7 @@ let dailyPersonalAnswerNum=0;
 				await getQuestion();
 				await $.wait(time);
 				await submitAnswer();
-				radomTime=2000+Math.floor(Math.random()*5000);
+				radomTime=2000+Math.floor(Math.random()*2000);
 				console.log("随机延迟"+radomTime+"毫秒");
 				await $.wait(radomTime);
 			}
