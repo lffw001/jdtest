@@ -15,7 +15,13 @@ let cookie="";//
 let ques=[];
 let dailyPersonalAnswerNum=0;
 !(async () => {
-	let radomTime=1000+Math.floor(Math.random()*100000);
+	var now=new Date();
+	var d=now.getDate();
+	let radomTime=1000+Math.floor(Math.random()*10000);
+	if(d==31||d==7||d==14){
+		radomTime=500;
+		console.log("每期最后一天延迟500毫秒");
+	}
 	console.log("随机延迟"+radomTime+"毫秒");
 	await $.wait(radomTime);//开始时间随机延迟100s
 	for(var i=0;i<cookies.length;i++){
