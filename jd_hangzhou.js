@@ -43,6 +43,9 @@ let ques=[];
 let dailyPersonalAnswerNum=0;
 let answerObjList=[];
 !(async () => {
+	//把cookies顺序打乱
+	cookies=cookies.sort(()=>Math.random()-0.5);
+	console.log("开始----随机账号顺序");
 	var now=new Date();
 	var d=now.getDate();
 	let radomTime=1000+Math.floor(Math.random()*10000);
