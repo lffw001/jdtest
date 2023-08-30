@@ -50,7 +50,7 @@ let answerObjList=[];
 		radomTime=200;
 		console.log("每期最后一天延迟200毫秒");
 	}else{
-		radomTime=200;
+		//radomTime=200;
 		console.log("随机延迟"+radomTime+"毫秒");
 	}
 	await $.wait(radomTime);//开始时间随机延迟100s
