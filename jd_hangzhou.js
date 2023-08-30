@@ -7,6 +7,7 @@ const CryptoJS=require('crypto-js');
 
  
 let cookies=[
+	
 	//李斌
 	"sessionId=64df8f96bb5a4c000184527f&accountId=64df7a1c34b95700015e88f3&mobile=18012225989",
 	"sessionId=64df828a6f50ed00011f6ee7&accountId=64df828a6f50ed00011f6ee6&mobile=18651306657",
@@ -18,21 +19,21 @@ let cookies=[
 	"sessionId=64e8c61072be3400017f7db8&accountId=64e8c61072be3400017f7db7&mobile=18068603469",
 	"sessionId=64e8c755cde8ff000105abb5&accountId=64e8c755cde8ff000105abb4&mobile=13814742156",
 	"sessionId=64df9513f5d598000160ce09&accountId=64df9513f5d598000160ce08&mobile=17802595869",
+	
 	//李晶
 	"sessionId=64e611eae44edb00019679a2&accountId=64e611eae44edb00019679a1&mobile=13914467362",
 	"sessionId=64e8b0eba3c9de000133335d&accountId=64e8b0eba3c9de000133335c&mobile=13914469324",
-
-	//"sessionId=64eb4244cde8ff000105e08b&accountId=64eb4244cde8ff000105e08a&mobile=18360007968",
-	//"sessionId=64eb434855c1e300012de682&accountId=64eb434855c1e300012de681&mobile=13218237976",
-	//"sessionId=64eb4434a3c9de0001336995&accountId=64eb4434a3c9de0001336994&mobile=18533225140",
+	
+	"sessionId=64eb4244cde8ff000105e08b&accountId=64eb4244cde8ff000105e08a&mobile=18360007968",
+	"sessionId=64eb434855c1e300012de682&accountId=64eb434855c1e300012de681&mobile=13218237976",
+	"sessionId=64eb4434a3c9de0001336995&accountId=64eb4434a3c9de0001336994&mobile=18533225140",
+	
 	//圈圈
 	"sessionId=64e8bd7968f9480001bdb634&accountId=5e3e28f23791f10001e4496d&mobile=15061019998",
 	"sessionId=64e8b84868f9480001bdb5f7&accountId=64e8b723a3c9de00013333b0&mobile=13815962198",
 	"sessionId=64e8b9c055c1e300012db069&accountId=64e56405cde8ff0001052ed3&mobile=18952612430",
 	"sessionId=64e8bb09a0911c0001daeeb6&accountId=5e3e2a5abe8739000193a76d&mobile=18952612439",
 	"sessionId=64e8bc24cde8ff000105ab26&accountId=64e8b064cb87460001408528&mobile=13775660776",
-	
-
 
 
 ]
@@ -40,6 +41,7 @@ let cookies=[
 let cookie="";//
 let ques=[];
 let dailyPersonalAnswerNum=0;
+let answerObjList=[];
 !(async () => {
 	var now=new Date();
 	var d=now.getDate();
@@ -48,30 +50,42 @@ let dailyPersonalAnswerNum=0;
 		radomTime=200;
 		console.log("每期最后一天延迟200毫秒");
 	}else{
+		radomTime=200;
 		console.log("随机延迟"+radomTime+"毫秒");
 	}
 	await $.wait(radomTime);//开始时间随机延迟100s
-	for(var i=0;i<cookies.length;i++){
-		cookie=cookies[i];
-		console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
-		do{
+	do{
+		answerObjList=[];//置空
+		for(var i=0;i<cookies.length;i++){
+			cookie=cookies[i];
+			console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
 			await intGame();
 			if(dailyPersonalAnswerNum>0){
-				var time=16000+Math.floor(Math.random()*3000);
-				//获取题目
+				//获取题目，并且塞入answerObjList
 				await getQuestion();
-				await $.wait(time);
-				await submitAnswer();
-				radomTime=1800+Math.floor(Math.random()*1000);
-				console.log("随机延迟"+radomTime+"毫秒");
-				await $.wait(radomTime);
 			}
+		}
+		if(answerObjList.length>0){
+			var time=16000+Math.floor(Math.random()*3000);
+			console.log("随机延迟"+time+"毫秒");
+			await $.wait(time);
+		}
 
-		}while(dailyPersonalAnswerNum>0)
-		radomTime=1000+Math.floor(Math.random()*5000);
-		console.log("随机延迟"+radomTime+"毫秒");
-		await $.wait(radomTime);
-	}
+		for(var i=0;i<answerObjList.length;i++){
+			cookie=answerObjList[i]["cookie"];
+			ques=answerObjList[i]["ques"];
+			console.log(cookie);
+			//console.log(ques);
+			await submitAnswer();
+			await $.wait(100);
+		}
+		if(answerObjList.length>0){
+			var time=2000+Math.floor(Math.random()*600);
+			console.log("随机延迟"+time+"毫秒");
+			await $.wait(time);
+		}
+	}while(answerObjList.length>0)
+	
 
 })().catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -122,6 +136,10 @@ function getQuestion(){
 					if (data.code==200) {//成功
 						console.log("😊 获取题目成功");
 						ques=data.data;
+						var answerObj={};
+						answerObj["cookie"]=cookie;
+						answerObj["ques"]=ques;
+						answerObjList.push(answerObj);
 					} else {
 						console.log("💩 获得列表失败:"+JSON.stringify(data));
 					}
