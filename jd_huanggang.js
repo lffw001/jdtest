@@ -32,12 +32,13 @@ var cookieList=[
 
 
 !(async () => {
-
+	cookieList=cookieList.sort(()=>Math.random()-0.5);
+	console.log("开始----随机账号顺序");
 	for(var i=0;i<cookieList.length;i++){
 	
 		$.id="";
 		$.times=0;
-		console.log("第"+(i+1)+"个账号==>>>>")
+		console.log("====>>>>第"+(i+1)+"个账号")
 		$.cookie=cookieList[i];
 		await getCiShu();	
 		if($.times>1){
