@@ -31,7 +31,11 @@ let dailyPersonalAnswerNum=0;
 		do{
 			await intGame();
 			if(dailyPersonalAnswerNum>0){
-				var time=14500+Math.floor(Math.random()*3000);
+				var time=16500+Math.floor(Math.random()*2000);
+				if(d==31||d==7||d==14){
+					time=time-1500;
+					console.log("每期最后一天答题加速1s");
+				}
 				//获取题目
 				await getQuestion();
 				await $.wait(time);

@@ -11,7 +11,7 @@ let cookies=[
 	//李斌
 	"sessionId=64df8f96bb5a4c000184527f&accountId=64df7a1c34b95700015e88f3&mobile=18012225989",
 	"sessionId=64df828a6f50ed00011f6ee7&accountId=64df828a6f50ed00011f6ee6&mobile=18651306657",
-	//"sessionId=64df959c34b95700015e8a77&accountId=64df8e0d4a5f69000166c23b&mobile=13584640176",
+	"sessionId=64eb4a8372be3400017fb34c&accountId=64eb4a8372be3400017fb34b&mobile=13776960525",
 	"sessionId=64df907c34b95700015e8a4d&accountId=64df907c34b95700015e8a4c&mobile=13382348802",
 	"sessionId=64df91654a5f69000166c26e&accountId=64df91654a5f69000166c26d&mobile=13382341414",
 	"sessionId=64df92324d848c000101c38e&accountId=64df92324d848c000101c38d&mobile=13801484782",
@@ -83,7 +83,7 @@ let answerObjList=[];
 			await $.wait(100);
 		}
 		if(answerObjList.length>0){
-			var time=2000+Math.floor(Math.random()*600);
+			var time=1000+Math.floor(Math.random()*1000);
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
 		}
