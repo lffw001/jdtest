@@ -19,10 +19,11 @@ let dailyPersonalAnswerNum=0;
 	var d=now.getDate();
 	let radomTime=1000+Math.floor(Math.random()*10000);
 	if(d==31||d==7||d==14){
-		radomTime=500;
-		console.log("每期最后一天延迟500毫秒");
+		radomTime=200;
+		console.log("每期最后一天延迟200毫秒");
+	}else{
+		console.log("随机延迟"+radomTime+"毫秒");
 	}
-	console.log("随机延迟"+radomTime+"毫秒");
 	await $.wait(radomTime);//开始时间随机延迟100s
 	for(var i=0;i<cookies.length;i++){
 		cookie=cookies[i];
@@ -47,7 +48,7 @@ let dailyPersonalAnswerNum=0;
 			}
 
 		}while(dailyPersonalAnswerNum>0)
-		radomTime=3000+Math.floor(Math.random()*20000);
+		radomTime=1000+Math.floor(Math.random()*2000);
 		console.log("随机延迟"+radomTime+"毫秒");
 		await $.wait(radomTime);
 	}
