@@ -35,6 +35,12 @@ var cookieList=[
 	cookieList=cookieList.sort(()=>Math.random()-0.5);
 	console.log("开始----随机账号顺序");
 	for(var i=0;i<cookieList.length;i++){
+		//获取当前时间
+		var now=new Date();
+		if(now.getMinutes()>2){
+			console.log("超过整点2分钟，暂停！");
+			break;
+		}
 	
 		$.id="";
 		$.times=0;
