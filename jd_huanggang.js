@@ -41,7 +41,7 @@ var cookieList=[
 		$.cookie=cookieList[i];
 		await getCiShu();	
 		if($.times>1){
-			$.time=11+Math.floor(Math.random()*4);
+			$.time=14+Math.floor(Math.random()*4);
 			await getQuestion();	
 			console.log("答题时间"+$.time+"秒")
 			console.log("等待答题。。。")
