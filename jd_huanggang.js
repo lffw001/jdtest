@@ -156,7 +156,18 @@ function getMy(){
 			data=JSON.parse(data);
 			console.log("手机号："+data.data.phone);
 			console.log("我的总分："+data.data.jifen);
-			console.log("个人排名："+data.data.city_rank);
+			if(data.data.city_rank<100){
+				console.log("个人排名❤️❤️❤️："+data.data.city_rank);
+			}else{
+				console.log("个人排名："+data.data.city_rank);
+			}
+
+			if(data.data.lahei==0){
+				console.log("是否拉黑❤️❤️❤️："+data.data.lahei);
+			}else{
+				console.log("是否拉黑："+data.data.lahei);
+			}
+			
           } else {
             console.log(`服务器返回空数据`)
           }
