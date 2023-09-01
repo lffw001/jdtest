@@ -43,21 +43,22 @@ let ques=[];
 let dailyPersonalAnswerNum=0;
 let answerObjList=[];
 !(async () => {
-	//把cookies顺序打乱
-	cookies=cookies.sort(()=>Math.random()-0.5);
-	console.log("开始----随机账号顺序");
+
 	var now=new Date();
 	var d=now.getDate();
 	let radomTime=1000+Math.floor(Math.random()*10000);
 	if(d==31||d==7||d==14){
-		radomTime=200;
-		console.log("每期最后一天延迟200毫秒");
+		radomTime=20;
+		console.log("每期最后一天延迟20毫秒");
 	}else{
 		//radomTime=200;
 		console.log("随机延迟"+radomTime+"毫秒");
 	}
 	await $.wait(radomTime);//开始时间随机延迟100s
 	do{
+		//把cookies顺序打乱
+		cookies=cookies.sort(()=>Math.random()-0.5);
+		console.log("开始----随机账号顺序");
 		answerObjList=[];//置空
 		for(var i=0;i<cookies.length;i++){
 			cookie=cookies[i];
@@ -66,10 +67,11 @@ let answerObjList=[];
 			if(dailyPersonalAnswerNum>0){
 				//获取题目，并且塞入answerObjList
 				await getQuestion();
+				await $.wait(50);
 			}
 		}
 		if(answerObjList.length>0){
-			var time=16000+Math.floor(Math.random()*3000);
+			var time=16000-50*cookies.length+Math.floor(Math.random()*3000);
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
 		}
