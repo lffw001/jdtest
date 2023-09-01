@@ -19,8 +19,8 @@ let dailyPersonalAnswerNum=0;
 	var d=now.getDate();
 	let radomTime=1000+Math.floor(Math.random()*10000);
 	if(d==31||d==7||d==14){
-		radomTime=200;
-		console.log("每期最后一天延迟200毫秒");
+		radomTime=20;
+		console.log("每期最后一天延迟20毫秒");
 	}else{
 		console.log("随机延迟"+radomTime+"毫秒");
 	}
@@ -33,8 +33,8 @@ let dailyPersonalAnswerNum=0;
 			if(dailyPersonalAnswerNum>0){
 				var time=16500+Math.floor(Math.random()*2000);
 				if(d==31||d==7||d==14){
-					time=time-1500;
-					console.log("每期最后一天答题加速1s");
+					time=14000+Math.floor(Math.random()*1000);
+					console.log("每期最后一天答题14-15s");
 				}
 				//获取题目
 				await getQuestion();
@@ -42,7 +42,7 @@ let dailyPersonalAnswerNum=0;
 				await submitAnswer();
 				radomTime=3000+Math.floor(Math.random()*5000);
 				if(d==31||d==7||d==14){
-					radomTime=1000+Math.floor(Math.random()*500);
+					radomTime=500+Math.floor(Math.random()*500);
 					console.log("每期最后一天延迟"+radomTime+"毫秒");
 				}else{
 					console.log("随机延迟"+radomTime+"毫秒");
