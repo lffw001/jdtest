@@ -38,8 +38,8 @@ let dailyPersonalAnswerNum=0;
 			//获取题目
 			await getQuestion();
 			await $.wait(16000);
-			//await submitAnswer();
-			console.log("假装提交答案")
+			await submitAnswer();
+			//console.log("假装提交答案")
 			await $.wait(500);
 		}
 	}else{
@@ -78,10 +78,9 @@ let dailyPersonalAnswerNum=0;
 			//获取题目
 			await getQuestion();
 			await $.wait(time);
-			//await submitAnswer();
-			console.log("假装提交答案")
-			var now2=new Date();
-			console.log("时间："+now2.toLocaleTimeString());
+			await submitAnswer();
+			//console.log("假装提交答案")
+			console.log("时间："+new Date().toLocaleTimeString());
 			radomTime=3000+Math.floor(Math.random()*5000);
 			if(d==31||d==7||d==14){
 				radomTime=200+Math.floor(Math.random()*200);
