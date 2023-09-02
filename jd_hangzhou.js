@@ -87,7 +87,7 @@ let answerObjList=[];
 			await $.wait(100);
 		}
 		if(answerObjList.length>0){
-			var time=1000+Math.floor(Math.random()*1000);
+			var time=100+Math.floor(Math.random()*100);
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
 		}
