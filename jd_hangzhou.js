@@ -70,11 +70,10 @@ let answerObjList=[];
 			if(dailyPersonalAnswerNum>0){
 				//获取题目，并且塞入answerObjList
 				await getQuestion();
-				await $.wait(50);
 			}
 		}
 		if(answerObjList.length>0){
-			var time=16000-50*cookies.length+Math.floor(Math.random()*3000);
+			var time=16000-100*answerObjList.length+Math.floor(Math.random()*3000);
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
 		}
