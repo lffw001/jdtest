@@ -1,98 +1,100 @@
 /*
-杭州
+杭州3
  */
-const $ = new Env('test');
+const $ = new Env('杭州3');
 const fs = require('fs');
 const CryptoJS=require('crypto-js');
 
  
 let cookies=[
+	"sessionId=64eb4a8372be3400017fb34c&accountId=64eb4a8372be3400017fb34b&mobile=13776960525",
 	
-	//李斌
-	"sessionId=64df8f96bb5a4c000184527f&accountId=64df7a1c34b95700015e88f3&mobile=18012225989",//
-	"sessionId=64df828a6f50ed00011f6ee7&accountId=64df828a6f50ed00011f6ee6&mobile=18651306657",//
-	
-	"sessionId=64df907c34b95700015e8a4d&accountId=64df907c34b95700015e8a4c&mobile=13382348802",//
-	"sessionId=64df91654a5f69000166c26e&accountId=64df91654a5f69000166c26d&mobile=13382341414",//
-	"sessionId=64df92324d848c000101c38e&accountId=64df92324d848c000101c38d&mobile=13801484782",//
-	"sessionId=64df943d6f50ed00011f6fba&accountId=64df943d6f50ed00011f6fb9&mobile=18068603568",//
-	"sessionId=64e8c61072be3400017f7db8&accountId=64e8c61072be3400017f7db7&mobile=18068603469",//
-	"sessionId=64e8c755cde8ff000105abb5&accountId=64e8c755cde8ff000105abb4&mobile=13814742156",//
-	"sessionId=64df9513f5d598000160ce09&accountId=64df9513f5d598000160ce08&mobile=17802595869",//
-	
-	//李晶
-	"sessionId=64e611eae44edb00019679a2&accountId=64e611eae44edb00019679a1&mobile=13914467362",//
-	"sessionId=64e8b0eba3c9de000133335d&accountId=64e8b0eba3c9de000133335c&mobile=13914469324",//
-	
-	"sessionId=64eb4244cde8ff000105e08b&accountId=64eb4244cde8ff000105e08a&mobile=18360007968",
-	"sessionId=64eb434855c1e300012de682&accountId=64eb434855c1e300012de681&mobile=13218237976",
-	"sessionId=64eb4434a3c9de0001336995&accountId=64eb4434a3c9de0001336994&mobile=18533225140",
-	
-	//圈圈
-	"sessionId=64f1eed50aa84700012d7678&accountId=5e3e28f23791f10001e4496d&mobile=15061019998",
-	"sessionId=64e8b84868f9480001bdb5f7&accountId=64e8b723a3c9de00013333b0&mobile=13815962198",//
-	"sessionId=64e8b9c055c1e300012db069&accountId=64e56405cde8ff0001052ed3&mobile=18952612430",//
-	"sessionId=64e8bb09a0911c0001daeeb6&accountId=5e3e2a5abe8739000193a76d&mobile=18952612439",//
-	"sessionId=64e8bc24cde8ff000105ab26&accountId=64e8b064cb87460001408528&mobile=13775660776",//
-	"sessionId=64f1ef2329c0d500014ea457&accountId=64e5f80b72be3400017f16da&mobile=13912196077",
-	"sessionId=64f1fbcdcb38b10001cc445f&accountId=64f1fbcccb38b10001cc445e&mobile=15262755662",
-
-
 ]
 
 let cookie="";//
 let ques=[];
 let dailyPersonalAnswerNum=0;
-let answerObjList=[];
 !(async () => {
-
+	console.log("时间："+new Date().toLocaleTimeString());
+	var i=0;
+	cookie=cookies[i];
+	console.log("账号："+cookie.split("&")[2].split("=")[1]);
+	
+	//获取当前事件
 	var now=new Date();
 	var d=now.getDate();
+	
+	
+	if(d==30||d==6||d==13){
+		//如果当前日期是最后一天之前一天则等到23点45开始获取题目
+		//判断到23点59分43秒时间。
+		var hour=now.getHours();
+		var mins=now.getMinutes();
+		var seconds=now.getSeconds();
+		if(hour==23&&mins==59){
+			var temp=45-seconds;
+			console.log("距离夜里23点59分45秒还差"+temp+"秒");
+			await $.wait(temp*1000);
+			//获取题目
+			await getQuestion();
+			await $.wait(16000);
+			//await submitAnswer();
+			console.log("假装提交答案")
+			await $.wait(500);
+		}
+	}else{
+		//不是最后一天，判断距离凌晨的时间差，开始等待
+		var hour=now.getHours();
+		var mins=now.getMinutes();
+		var seconds=now.getSeconds();
+		if(hour==23&&mins==59){
+			var temp=61-seconds;
+			console.log("距离第二天凌晨还差："+temp+"秒")
+			await $.wait(temp*1000);
+		}
+	}
+	//答完题后重新获取当前时间及日期
+	now=new Date();
+	d=now.getDate();
+	
 	let radomTime=1000+Math.floor(Math.random()*10000);
 	if(d==31||d==7||d==14){
-		radomTime=20;
-		console.log("每期最后一天延迟20毫秒");
+		console.log("每期最后一天不延迟");
 	}else{
-		//radomTime=200;
 		console.log("随机延迟"+radomTime+"毫秒");
+		await $.wait(radomTime);//开始时间随机延迟100s
 	}
-	await $.wait(radomTime);//开始时间随机延迟100s
+	
+	var start=new Date();
+	console.log("当前时间："+start.toLocaleTimeString());
 	do{
-		//把cookies顺序打乱
-		cookies=cookies.sort(()=>Math.random()-0.5);
-		console.log("开始----随机账号顺序");
-		answerObjList=[];//置空
-		for(var i=0;i<cookies.length;i++){
-			cookie=cookies[i];
-			console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
-			await intGame();
-			if(dailyPersonalAnswerNum>0){
-				//获取题目，并且塞入answerObjList
-				await getQuestion();
-				await $.wait(50);
+		await intGame();
+		if(dailyPersonalAnswerNum>=0){
+			var time=16500+Math.floor(Math.random()*2000);
+			if(d==31||d==7||d==14){
+				time=15000+Math.floor(Math.random()*2000);
+				console.log("每期最后一天答题12-13s");
 			}
-		}
-		if(answerObjList.length>0){
-			var time=16000-50*cookies.length+Math.floor(Math.random()*3000);
-			console.log("随机延迟"+time+"毫秒");
+			//获取题目
+			await getQuestion();
 			await $.wait(time);
+			//await submitAnswer();
+			console.log("假装提交答案")
+			var now2=new Date();
+			console.log("时间："+now2.toLocaleTimeString());
+			radomTime=3000+Math.floor(Math.random()*5000);
+			if(d==31||d==7||d==14){
+				radomTime=200+Math.floor(Math.random()*200);
+				console.log("每期最后一天延迟"+radomTime+"毫秒");
+			}else{
+				console.log("随机延迟"+radomTime+"毫秒");
+			}
+
+			await $.wait(radomTime);
 		}
 
-		for(var i=0;i<answerObjList.length;i++){
-			cookie=answerObjList[i]["cookie"];
-			ques=answerObjList[i]["ques"];
-			console.log(cookie);
-			//console.log(ques);
-			await submitAnswer();
-			await $.wait(100);
-		}
-		if(answerObjList.length>0){
-			var time=1000+Math.floor(Math.random()*1000);
-			console.log("随机延迟"+time+"毫秒");
-			await $.wait(time);
-		}
-	}while(answerObjList.length>0)
-	
+	}while(dailyPersonalAnswerNum>=0)
+
 
 })().catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -143,10 +145,6 @@ function getQuestion(){
 					if (data.code==200) {//成功
 						console.log("😊 获取题目成功");
 						ques=data.data;
-						var answerObj={};
-						answerObj["cookie"]=cookie;
-						answerObj["ques"]=ques;
-						answerObjList.push(answerObj);
 					} else {
 						console.log("💩 获得列表失败:"+JSON.stringify(data));
 					}

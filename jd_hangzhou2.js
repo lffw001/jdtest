@@ -19,12 +19,12 @@ let dailyPersonalAnswerNum=0;
 	var d=now.getDate();
 	let radomTime=1000+Math.floor(Math.random()*10000);
 	if(d==31||d==7||d==14){
-		radomTime=20;
-		console.log("每期最后一天延迟20毫秒");
+		console.log("每期最后一天延迟0毫秒");
 	}else{
 		console.log("随机延迟"+radomTime+"毫秒");
+		await $.wait(radomTime);//开始时间随机延迟100s
 	}
-	await $.wait(radomTime);//开始时间随机延迟100s
+
 	for(var i=0;i<cookies.length;i++){
 		cookie=cookies[i];
 		console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
@@ -40,14 +40,14 @@ let dailyPersonalAnswerNum=0;
 				await getQuestion();
 				await $.wait(time);
 				await submitAnswer();
+				console.log("时间："+new Date().toLocaleTimeString());
 				radomTime=3000+Math.floor(Math.random()*5000);
 				if(d==31||d==7||d==14){
-					radomTime=500+Math.floor(Math.random()*500);
+					radomTime=100+Math.floor(Math.random()*200);
 					console.log("每期最后一天延迟"+radomTime+"毫秒");
 				}else{
 					console.log("随机延迟"+radomTime+"毫秒");
 				}
-
 				await $.wait(radomTime);
 			}
 
