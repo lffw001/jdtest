@@ -32,12 +32,12 @@ let dailyPersonalAnswerNum=0;
 		var mins=now.getMinutes();
 		var seconds=now.getSeconds();
 		if(hour==23&&mins==59){
-			var temp=45-seconds;
+			var temp=44-seconds;
 			console.log("距离夜里23点59分45秒还差"+temp+"秒");
 			await $.wait(temp*1000);
 			//获取题目
 			await getQuestion();
-			await $.wait(16000);
+			await $.wait(17000);
 			await submitAnswer();
 			//console.log("假装提交答案")
 			await $.wait(500);
