@@ -61,6 +61,7 @@ let answerObjList=[];
 		//把cookies顺序打乱
 		cookies=cookies.sort(()=>Math.random()-0.5);
 		console.log("开始----随机账号顺序");
+		console.log("时间："+new Date().toLocaleTimeString());
 		answerObjList=[];//置空
 		for(var i=0;i<cookies.length;i++){
 			cookie=cookies[i];
@@ -77,7 +78,7 @@ let answerObjList=[];
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
 		}
-
+		console.log("时间："+new Date().toLocaleTimeString());
 		for(var i=0;i<answerObjList.length;i++){
 			cookie=answerObjList[i]["cookie"];
 			ques=answerObjList[i]["ques"];
