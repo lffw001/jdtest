@@ -69,7 +69,7 @@ let dailyPersonalAnswerNum=0;
 	console.log("当前时间："+start.toLocaleTimeString());
 	do{
 		await intGame();
-		if(dailyPersonalAnswerNum>=0){
+		if(dailyPersonalAnswerNum>0){
 			var time=16500+Math.floor(Math.random()*2000);
 			if(d==31||d==7||d==14){
 				time=15000+Math.floor(Math.random()*2000);
@@ -92,7 +92,7 @@ let dailyPersonalAnswerNum=0;
 			await $.wait(radomTime);
 		}
 
-	}while(dailyPersonalAnswerNum>=0)
+	}while(dailyPersonalAnswerNum>0)
 
 
 })().catch((e) => {
