@@ -36,6 +36,9 @@ let cookies=[
 	"sessionId=64e8bc24cde8ff000105ab26&accountId=64e8b064cb87460001408528&mobile=13775660776",//
 	"sessionId=64f1ef2329c0d500014ea457&accountId=64e5f80b72be3400017f16da&mobile=13912196077",
 	"sessionId=64f1fbcdcb38b10001cc445f&accountId=64f1fbcccb38b10001cc445e&mobile=15262755662",
+	
+	//蔡
+	"sessionId=64f437e5436315000175b4e9&accountId=64f437e5436315000175b4e8&mobile=17798536287"
 
 
 ]
@@ -70,10 +73,11 @@ let answerObjList=[];
 			if(dailyPersonalAnswerNum>0){
 				//获取题目，并且塞入answerObjList
 				await getQuestion();
+				console.log("时间："+new Date().toLocaleTimeString());
 			}
 		}
 		if(answerObjList.length>0){
-			var time=16000-100*answerObjList.length+Math.floor(Math.random()*3000);
+			var time=16000-90*answerObjList.length+Math.floor(Math.random()*3000);
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
 		}
@@ -84,6 +88,7 @@ let answerObjList=[];
 			console.log(cookie);
 			//console.log(ques);
 			await submitAnswer();
+			console.log("时间："+new Date().toLocaleTimeString());
 			await $.wait(100);
 		}
 		if(answerObjList.length>0){
