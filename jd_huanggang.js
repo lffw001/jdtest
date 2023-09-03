@@ -248,12 +248,13 @@ function submitAnswer(){
 	
   return new Promise(async resolve => {
 	var checkjsonnum=[];
+	var ind={"A":1,"B":2,"C":3,"D":4};
 	for(var i=0;i<$.questionList.length;i++){
 		var obj={
 			"id":$.questionList[i].id,
 			"daan":$.questionList[i].daan,
 			"title":$.questionList[i].title,
-			"fldAnswer":1,
+			"fldAnswer":ind[$.questionList[i].daan],
 			"isCorrect":1
 		}
 		checkjsonnum.push(obj);
