@@ -18,13 +18,13 @@ if ($.isNode() && process.env.BEANCHANGE_BEANDETAILMODE){
 
 const fs = require('fs');
 const CR = require('crypto-js');
+const moment = require("moment");
 let matchtitle="昨日";
 let yesterday="";
 let TodayDate="";
 let startDate="";
 let endDate="";
 try {
-    const moment = require("moment");
     yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
     TodayDate = moment().format("YYYY-MM-DD");
     startDate = moment().startOf("month").format("YYYY_MM");
@@ -337,6 +337,7 @@ if(DisableIndex!=-1){
 			
 			console.log(`******开始查询【京东账号${$.index}】${$.nickName || $.UserName}*********`);
 		    $.UA = require('./USER_AGENTS').UARAM();
+			await checkplus();
 			await TotalBean();			
 		    //await TotalBean2();
 			if ($.beanCount == 0) {
@@ -414,11 +415,11 @@ if(DisableIndex!=-1){
 						
 			await getjdfruitinfo(); //东东农场
 			await $.wait(1000);
-			
+			await checkplus();
 			await Promise.all([        
 			        cash(), //特价金币
 			        bean(), //京豆查询
-			        jdCash(), //领现金
+			        //jdCash(), //领现金
 			        GetJoyRuninginfo(), //汪汪赛跑
 			        queryScores()
 			    ])
@@ -1055,22 +1056,36 @@ async function Monthbean() {
 async function jdCash() {
 	if (!EnableCash)
 		return;
-	let functionId = "cash_homePage";
-	let sign = await getSignfromNolan(functionId, {});
+    let opt = {
+        url: `https://api.m.jd.com`,
+        body: `functionId=cash_exchange_center&body={"version":"1","channel":"app"}&appid=signed_wh5&client=android&clientVersion=11.8.0&t=${Date.now()}`,
+        headers: {
+            'Host': 'api.m.jd.com',
+            'Origin': 'https://h5.m.jd.com',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'User-Agent': $.UA,
+            'Cookie': cookie
+        }
+    }
 		return new Promise((resolve) => {
-			$.post(apptaskUrl(functionId, sign), async (err, resp, data) => {
+			$.post(opt, async (err, resp, data) => {
 				try {
 					if (err) {
 						console.log(`${JSON.stringify(err)}`)
 						console.log(`jdCash API请求失败，请检查网路重试`)
 					} else {
 						if (safeGet(data)) {
-							data = JSON.parse(data);
-							if (data.code === 0 && data.data.result) {
-								$.jdCash = data.data.result.totalMoney || 0;								
-								return
-							}
-						}
+                            data = JSON.parse(data)
+                            if (data.code == 0) {
+                                if (data.data.bizCode == 0) {
+                                    $.jdCash = data.data.result.userMoney;
+                                } else {
+                                    //console.log(data.data.bizMsg);
+                                }
+                            } else {
+                                //console.log(data.msg)
+                            }
+					    }
 					}
 				} catch (e) {
 					$.logErr(e, resp)
@@ -1129,7 +1144,7 @@ function TotalBean() {
                         }
                         if (data['retcode'] === 0) {
                             $.nickName = (data['base'] && data['base'].nickname) || $.UserName;
-							$.isPlusVip=data['isPlusVip'];
+							//$.isPlusVip=data['isPlusVip'];
 							$.isRealNameAuth=data['isRealNameAuth'];
 							$.beanCount=(data['base'] && data['base'].jdNum) || 0 ;		
 							$.JingXiang = (data['base'] && data['base'].jvalue) || 0 ;						
@@ -2130,7 +2145,7 @@ function dwappexpire() {
                 } else {
                     data = JSON.parse(data)
                     if (data.code == 200) {
-                        data = data.data.userOperateList.length !== 0 ? new Date(data.data.userOperateList[0].time).toLocaleDateString() : '';
+                        data = data.data.userOperateList.length !== 0 ? moment(new Date(data.data.userOperateList[0].time)).format('M/D') : '';
                     } else {
                         //console.log(data.msg);
 						data = '';
@@ -2140,6 +2155,38 @@ function dwappexpire() {
                 $.logErr(e, resp);
             } finally {
                 resolve(data);
+            }
+        })
+    })
+}
+function checkplus() {
+    let opt = {
+        url: `https://api.m.jd.com/api?functionId=user_getUserInfo_v2`,
+		body: 'appid=plus_business&loginType=2&loginWQBiz=&scval=&body=%7B%22contentType%22%3A%221_2_3_4_5_8_9_11_12_16%22%2C%22qids%22%3A%226_2_5_18_1_7_9_11_12_14_16_17_25_38%22%2C%22checkLevel%22%3A1%2C%22signType%22%3A1003%7D',
+        headers: {
+            'User-Agent': $.UA,
+            'Cookie': cookie,
+			'Origin': 'https://plus.m.jd.com'
+        }
+    }
+    return new Promise(async (resolve) => {
+        $.post(opt, async (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(` API请求失败，请检查网路重试`)
+                } else {
+                    data = JSON.parse(data)
+                    if (data.code == 1711000) {
+                        $.isPlusVip = data.rs.plusUserBaseInfo.endDays ? true : false;
+						//console.log($.isPlusVip)
+                    } else {
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
             }
         })
     })
