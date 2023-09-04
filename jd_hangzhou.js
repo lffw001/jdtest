@@ -91,11 +91,6 @@ let answerObjList=[];
 			console.log("时间："+new Date().toLocaleTimeString());
 			await $.wait(200);
 		}
-		if(answerObjList.length>0){
-			var time=100+Math.floor(Math.random()*100);
-			console.log("随机延迟"+time+"毫秒");
-			await $.wait(time);
-		}
 	}while(answerObjList.length>0)
 	
 
