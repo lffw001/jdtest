@@ -77,7 +77,7 @@ let answerObjList=[];
 			}
 		}
 		if(answerObjList.length>0){
-			var time=16000-90*answerObjList.length+Math.floor(Math.random()*3000);
+			var time=16000-350*answerObjList.length+Math.floor(Math.random()*2000);
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
 		}
@@ -89,7 +89,7 @@ let answerObjList=[];
 			//console.log(ques);
 			await submitAnswer();
 			console.log("时间："+new Date().toLocaleTimeString());
-			await $.wait(100);
+			await $.wait(200);
 		}
 		if(answerObjList.length>0){
 			var time=100+Math.floor(Math.random()*100);
