@@ -46,13 +46,13 @@ var cookieList=[
 		$.cookie=cookieList[i];
 		await getCiShu();	
 		if($.times>1){
-			$.time=14+Math.floor(Math.random()*4);
+			$.time=11+Math.floor(Math.random()*2);
 			await getQuestion();	
 			console.log("答题时间"+$.time+"秒")
 			console.log("等待答题。。。")
 			await $.wait($.time*1000);
 			await submitAnswer();
-			await $.wait(2000);	
+			await $.wait(200);	
 			if($.id!=""){
 				console.log("抽奖号ID："+$.id);
 				var now=new Date();
@@ -60,7 +60,7 @@ var cookieList=[
 				await choujiang();
 			}
 		}
-		await $.wait(1000);	
+		await $.wait(100);	
 		await getMy();
 
 	}
