@@ -68,9 +68,8 @@ let answerObjList=[];
 		for(var i=0;i<cookies.length;i++){
 			cookie=cookies[i];
 			console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
-			if(dailyPersonalAnswerNum==0){
+			if(i==0){
 				await intGame();
-				//dailyPersonalAnswerNum=1
 				console.log("次数"+dailyPersonalAnswerNum);
 			}
 			if(dailyPersonalAnswerNum>0){
@@ -81,9 +80,11 @@ let answerObjList=[];
 			}
 		}
 		if(answerObjList.length>0){
-			var time=12000-50*(answerObjList.length-1)+Math.floor(Math.random()*2000);
+			var time=12500-50*(answerObjList.length-1)+Math.floor(Math.random()*1000);
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
+		}else{
+			dailyPersonalAnswerNum=0;
 		}
 		console.log("时间："+new Date().toLocaleTimeString());
 		for(var i=0;i<answerObjList.length;i++){
@@ -95,6 +96,7 @@ let answerObjList=[];
 			console.log("时间："+new Date().toLocaleTimeString());
 			await $.wait(50);
 		}
+		await $.wait(100);
 	}while(answerObjList.length>0)
 	
 
