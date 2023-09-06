@@ -60,20 +60,18 @@ let answerObjList=[];
 		console.log("随机延迟"+radomTime+"毫秒");
 	}
 	await $.wait(radomTime);//开始时间随机延迟100s
-	do{
+	//do{
 		//把cookies顺序打乱
 		cookies=cookies.sort(()=>Math.random()-0.5);
 		console.log("开始----随机账号顺序");
-		console.log("时间："+new Date().toLocaleTimeString());
 		answerObjList=[];//置空
 		for(var i=0;i<cookies.length;i++){
 			cookie=cookies[i];
 			console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
 			if(dailyPersonalAnswerNum==0){
-				//await intGame();
-				await $.wait(200);
-				console.log(1);
-				dailyPersonalAnswerNum=2;
+				await intGame();
+				//dailyPersonalAnswerNum=1
+				console.log("次数"+dailyPersonalAnswerNum);
 			}
 			if(dailyPersonalAnswerNum>0){
 				//获取题目，并且塞入answerObjList
@@ -83,7 +81,7 @@ let answerObjList=[];
 			}
 		}
 		if(answerObjList.length>0){
-			var time=11000-50*answerObjList.length+Math.floor(Math.random()*2000);
+			var time=12000-50*(answerObjList.length-1)+Math.floor(Math.random()*2000);
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
 		}
@@ -95,9 +93,9 @@ let answerObjList=[];
 			//console.log(ques);
 			submitAnswer();
 			console.log("时间："+new Date().toLocaleTimeString());
-			await $.wait(100);
+			await $.wait(50);
 		}
-	}while(answerObjList.length>0)
+	//}while(answerObjList.length>0)
 	
 
 })().catch((e) => {
