@@ -33,7 +33,7 @@ let dailyPersonalAnswerNum=0;
 			if(dailyPersonalAnswerNum>0){
 				var time=16500+Math.floor(Math.random()*2000);
 				if(d==31||d==7||d==14){
-					time=12000+Math.floor(Math.random()*1000);
+					time=13000+Math.floor(Math.random()*1000);
 					console.log("每期最后一天答题14-15s");
 				}
 				//获取题目
@@ -43,7 +43,7 @@ let dailyPersonalAnswerNum=0;
 				console.log("时间："+new Date().toLocaleTimeString());
 				radomTime=3000+Math.floor(Math.random()*5000);
 				if(d==31||d==7||d==14){
-					radomTime=100+Math.floor(Math.random()*200);
+					radomTime=0;
 					console.log("每期最后一天延迟"+radomTime+"毫秒");
 				}else{
 					console.log("随机延迟"+radomTime+"毫秒");
