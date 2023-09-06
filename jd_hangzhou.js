@@ -60,10 +60,10 @@ let answerObjList=[];
 		console.log("随机延迟"+radomTime+"毫秒");
 	}
 	await $.wait(radomTime);//开始时间随机延迟100s
+	//把cookies顺序打乱
+	cookies=cookies.sort(()=>Math.random()-0.5);
+	console.log("开始----随机账号顺序");
 	do{
-		//把cookies顺序打乱
-		cookies=cookies.sort(()=>Math.random()-0.5);
-		console.log("开始----随机账号顺序");
 		console.log("时间："+new Date().toLocaleTimeString());
 		answerObjList=[];//置空
 		for(var i=0;i<cookies.length;i++){
