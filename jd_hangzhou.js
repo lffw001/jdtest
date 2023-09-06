@@ -53,17 +53,18 @@ let answerObjList=[];
 	var d=now.getDate();
 	let radomTime=1000+Math.floor(Math.random()*10000);
 	if(d==31||d==7||d==14){
-		radomTime=0;
-		console.log("每期最后一天延迟0毫秒");
+		radomTime=20;
+		console.log("每期最后一天延迟20毫秒");
 	}else{
 		//radomTime=200;
 		console.log("随机延迟"+radomTime+"毫秒");
 	}
 	await $.wait(radomTime);//开始时间随机延迟100s
-	//把cookies顺序打乱
-	cookies=cookies.sort(()=>Math.random()-0.5);
-	console.log("开始----随机账号顺序");
 	do{
+		//把cookies顺序打乱
+		cookies=cookies.sort(()=>Math.random()-0.5);
+		console.log("开始----随机账号顺序");
+		console.log("时间："+new Date().toLocaleTimeString());
 		answerObjList=[];//置空
 		for(var i=0;i<cookies.length;i++){
 			cookie=cookies[i];
@@ -75,17 +76,14 @@ let answerObjList=[];
 			}
 			if(dailyPersonalAnswerNum>0){
 				//获取题目，并且塞入answerObjList
-				getQuestion();
-				await $.wait(50);
+				await getQuestion();
 				console.log("时间："+new Date().toLocaleTimeString());
 			}
 		}
 		if(answerObjList.length>0){
-			var time=12500-50*(answerObjList.length-1)+Math.floor(Math.random()*1000);
+			var time=12000-150*answerObjList.length+Math.floor(Math.random()*2000);
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
-		}else{
-			dailyPersonalAnswerNum=0;
 		}
 		console.log("时间："+new Date().toLocaleTimeString());
 		for(var i=0;i<answerObjList.length;i++){
@@ -93,11 +91,9 @@ let answerObjList=[];
 			ques=answerObjList[i]["ques"];
 			console.log(cookie);
 			//console.log(ques);
-			submitAnswer();
+			await submitAnswer();
 			console.log("时间："+new Date().toLocaleTimeString());
-			await $.wait(50);
 		}
-		await $.wait(100);
 	}while(answerObjList.length>0)
 	
 
