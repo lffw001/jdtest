@@ -72,7 +72,7 @@ let dailyPersonalAnswerNum=0;
 		if(dailyPersonalAnswerNum>0){
 			var time=16500+Math.floor(Math.random()*2000);
 			if(d==31||d==7||d==14){
-				time=13000+Math.floor(Math.random()*2000);
+				time=10000+Math.floor(Math.random()*2000);
 				console.log("每期最后一天答题15-17s");
 			}
 			//获取题目
