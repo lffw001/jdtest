@@ -60,7 +60,7 @@ let answerObjList=[];
 		console.log("随机延迟"+radomTime+"毫秒");
 	}
 	await $.wait(radomTime);//开始时间随机延迟100s
-	//do{
+	do{
 		//把cookies顺序打乱
 		cookies=cookies.sort(()=>Math.random()-0.5);
 		console.log("开始----随机账号顺序");
@@ -95,7 +95,7 @@ let answerObjList=[];
 			console.log("时间："+new Date().toLocaleTimeString());
 			await $.wait(50);
 		}
-	//}while(answerObjList.length>0)
+	}while(answerObjList.length>0)
 	
 
 })().catch((e) => {
