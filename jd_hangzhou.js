@@ -70,7 +70,7 @@ let answerObjList=[];
 			console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
 			if(i==0){
 				await intGame();
-				dailyPersonalAnswerNum=1;
+				//dailyPersonalAnswerNum=1;
 				console.log("次数"+dailyPersonalAnswerNum);
 			}
 			if(dailyPersonalAnswerNum>0){
