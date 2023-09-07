@@ -82,7 +82,7 @@ let answerObjList=[];
 		answerObjList=[];//置空
 		for(var i=0;i<cookies.length;i++){
 			//console.log("第"+(i+1)+"个账号："+cookies[i].split("&")[2].split("=")[1]);
-			if(dailyPersonalAnswerNum==0){
+			if(dailyPersonalAnswerNum==0||i==0){
 				await intGame(cookies[i]);
 				console.log("次数"+dailyPersonalAnswerNum);
 			}
