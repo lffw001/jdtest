@@ -7,7 +7,13 @@ const CryptoJS=require('crypto-js');
 
  
 let cookies=[
-	
+	//学生
+	"sessionId=64f93a9e1fc3e80001442284&accountId=5e3278f0b4b13f000156a621&mobile=13382626202",
+	"sessionId=64f93addd43bd900013cdc86&accountId=5e33cd960ecabc00011691aa&mobile=15152888756",
+	"sessionId=64f93b448bd7f20001ad3a17&accountId=64f93b448bd7f20001ad3a16&mobile=17712549656",
+	"sessionId=64f93b7f48426d00015ccf3b&accountId=64f93b7f48426d00015ccf3a&mobile=13921840358",
+	"sessionId=64f93bd4d43bd900013cdca3&accountId=63e315d551e9ec2780db8ae8&mobile=15895174202",
+	"sessionId=64f93c1c1c4f8f0001e6b222&accountId=63e315d551e9ec2780db8ae7&mobile=18962099551",
 	//李斌
 	"sessionId=64df8f96bb5a4c000184527f&accountId=64df7a1c34b95700015e88f3&mobile=18012225989",//
 	"sessionId=64df828a6f50ed00011f6ee7&accountId=64df828a6f50ed00011f6ee6&mobile=18651306657",//
@@ -39,7 +45,9 @@ let cookies=[
 	"sessionId=64f1fbcdcb38b10001cc445f&accountId=64f1fbcccb38b10001cc445e&mobile=15262755662",
 	
 	//蔡
-	"sessionId=64f437e5436315000175b4e9&accountId=64f437e5436315000175b4e8&mobile=17798536287"
+	"sessionId=64f437e5436315000175b4e9&accountId=64f437e5436315000175b4e8&mobile=17798536287",
+	
+
 
 
 ]
@@ -72,7 +80,7 @@ let answerObjList=[];
 		answerObjList=[];//置空
 		for(var i=0;i<cookies.length;i++){
 			//console.log("第"+(i+1)+"个账号："+cookies[i].split("&")[2].split("=")[1]);
-			if(i==0){
+			if(i<2&&dailyPersonalAnswerNum==0){
 				await intGame(cookies[i]);
 				console.log("次数"+dailyPersonalAnswerNum);
 			}
@@ -183,6 +191,7 @@ function submitAnswer(answerObj){
 		"answerKey":ques.answerKey,
 		"resultList":JSON.stringify(resultList)
 	}
+	console.log("😊 开始答题:"+cookie.split("&")[2].split("=")[1]);
 	const myRequest = getPostRequest(cookie,"https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/saveAsianAnswerResult", JSON.stringify(jsonObj));
 	return new Promise(resolve => {
 		$.post(myRequest, (err, resp, data) => {
