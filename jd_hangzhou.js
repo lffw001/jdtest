@@ -82,7 +82,7 @@ let answerObjList=[];
 		answerObjList=[];//置空
 		for(var i=0;i<cookies.length;i++){
 			//console.log("第"+(i+1)+"个账号："+cookies[i].split("&")[2].split("=")[1]);
-			if(i==0){
+			if(dailyPersonalAnswerNum==0){
 				await intGame(cookies[i]);
 				console.log("次数"+dailyPersonalAnswerNum);
 			}
@@ -93,14 +93,22 @@ let answerObjList=[];
 				console.log("时间："+new Date().toLocaleTimeString());
 			}
 		}
-		console.log(answerObjList.length);
+		await $.wait(2000);//先等待2s，让请求跑完后判断数组及时间
 		if(answerObjList.length>0){
-			//14346---16s
-			var time=14500-50*answerObjList.length+Math.floor(Math.random()*2000);
+			//11346---14-15s
+			var time=12500-100*answerObjList.length+Math.floor(Math.random()*2000);
+			var now3=new Date();
+			var d3=now3.getDate();
+			if(d3==31||d3==7||d3==14){
+				
+			}else{
+				time=time+2000;
+				console.log("不是最后一天答题时间+2S");
+			}
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
 		}
-		console.log(answerObjList.length);
+		console.log("答题数组长度："+answerObjList.length);
 		console.log("时间："+new Date().toLocaleTimeString());
 		for(var i=0;i<answerObjList.length;i++){
 			submitAnswer(answerObjList[i]);
