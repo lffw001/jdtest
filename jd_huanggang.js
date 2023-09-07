@@ -170,7 +170,7 @@ function getMy(){
 			}
 
 			if(data.data.lahei==0){
-				console.log("是否拉黑❤️❤️❤️："+data.data.lahei);
+				//console.log("是否拉黑❤️❤️❤️："+data.data.lahei);
 			}else{
 				console.log("是否拉黑："+data.data.lahei);
 			}
