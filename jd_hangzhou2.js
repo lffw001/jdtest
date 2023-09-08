@@ -29,7 +29,7 @@ let dailyPersonalAnswerNum=0;
 	if(hour==23&&mins==59){
 		var temp=60000-(seconds*1000+ms);
 		console.log("距离第二天凌晨还差："+temp+"毫秒")
-		await $.wait(temp+200);
+		await $.wait(temp+150);
 	}
 
 	for(var i=0;i<cookies.length;i++){
@@ -39,7 +39,7 @@ let dailyPersonalAnswerNum=0;
 		do{
 			await intGame();
 			if(dailyPersonalAnswerNum>0){
-				var time=14000+Math.floor(Math.random()*2000);
+				var time=14000+Math.floor(Math.random()*1000);
 				console.log("时间："+new Date().toLocaleTimeString());
 				//获取题目
 				await getQuestion();
@@ -49,7 +49,7 @@ let dailyPersonalAnswerNum=0;
 				console.log("时间："+new Date().toLocaleTimeString());
 				radomTime=3000+Math.floor(Math.random()*5000);
 				if(d==31||d==7||d==14){
-					radomTime=500;
+					radomTime=200;
 					console.log("每期最后一天延迟"+radomTime+"毫秒");
 				}else{
 					console.log("随机延迟"+radomTime+"毫秒");

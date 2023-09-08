@@ -63,7 +63,7 @@ let answerObjList=[];
 	//获取当前时间
 	var now=new Date();
 	var d=now.getDate();
-	//不是最后一天，判断距离凌晨的时间差，开始等待
+	//判断距离凌晨的时间差，开始等待
 	var hour=now.getHours();
 	var mins=now.getMinutes();
 	var seconds=now.getSeconds();
@@ -96,7 +96,7 @@ let answerObjList=[];
 		await $.wait(2000);//先等待2s，让请求跑完后判断数组及时间
 		if(answerObjList.length>0){
 			//11346---14-15s
-			var time=13000-100*answerObjList.length+Math.floor(Math.random()*2000);
+			var time=12500-100*answerObjList.length+Math.floor(Math.random()*1500);
 			var now3=new Date();
 			var d3=now3.getDate();
 			if(d3==31||d3==7||d3==14){
