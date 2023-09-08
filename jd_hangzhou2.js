@@ -7,7 +7,8 @@ const CryptoJS=require('crypto-js');
 
  
 let cookies=[
-	"sessionId=64df959c34b95700015e8a77&accountId=64df8e0d4a5f69000166c23b&mobile=13584640176",
+	
+	"sessionId=64eb4a8372be3400017fb34c&accountId=64eb4a8372be3400017fb34b&mobile=13776960525",
 	
 ]
 
@@ -15,14 +16,20 @@ let cookie="";//
 let ques=[];
 let dailyPersonalAnswerNum=0;
 !(async () => {
+	console.log("开始时间："+new Date().toLocaleTimeString());
+	let radomTime=1000;
+	//获取当前时间
 	var now=new Date();
 	var d=now.getDate();
-	let radomTime=1000+Math.floor(Math.random()*10000);
-	if(d==31||d==7||d==14){
-		console.log("每期最后一天延迟0毫秒");
-	}else{
-		console.log("随机延迟"+radomTime+"毫秒");
-		await $.wait(radomTime);//开始时间随机延迟100s
+	//不是最后一天，判断距离凌晨的时间差，开始等待
+	var hour=now.getHours();
+	var mins=now.getMinutes();
+	var seconds=now.getSeconds();
+	var ms=now.getMilliseconds();//毫秒
+	if(hour==23&&mins==59){
+		var temp=60000-(seconds*1000+ms);
+		console.log("距离第二天凌晨还差："+temp+"毫秒")
+		await $.wait(temp+200);
 	}
 
 	for(var i=0;i<cookies.length;i++){
@@ -31,19 +38,17 @@ let dailyPersonalAnswerNum=0;
 		do{
 			await intGame();
 			if(dailyPersonalAnswerNum>0){
-				var time=16500+Math.floor(Math.random()*2000);
-				if(d==31||d==7||d==14){
-					time=14000+Math.floor(Math.random()*1000);
-					console.log("每期最后一天答题14-15s");
-				}
+				var time=12000+Math.floor(Math.random()*2000);
+				console.log("时间："+new Date().toLocaleTimeString());
 				//获取题目
 				await getQuestion();
+				console.log("等待"+time+"毫秒");
 				await $.wait(time);
 				await submitAnswer();
 				console.log("时间："+new Date().toLocaleTimeString());
 				radomTime=3000+Math.floor(Math.random()*5000);
 				if(d==31||d==7||d==14){
-					radomTime=0;
+					radomTime=500;
 					console.log("每期最后一天延迟"+radomTime+"毫秒");
 				}else{
 					console.log("随机延迟"+radomTime+"毫秒");

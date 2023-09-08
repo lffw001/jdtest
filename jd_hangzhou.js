@@ -12,9 +12,10 @@ let cookies=[
 	"sessionId=64df8f96bb5a4c000184527f&accountId=64df7a1c34b95700015e88f3&mobile=18012225989",//
 	"sessionId=64df828a6f50ed00011f6ee7&accountId=64df828a6f50ed00011f6ee6&mobile=18651306657",//
 	
+	"sessionId=64df959c34b95700015e8a77&accountId=64df8e0d4a5f69000166c23b&mobile=13584640176",
 	"sessionId=64df907c34b95700015e8a4d&accountId=64df907c34b95700015e8a4c&mobile=13382348802",//
 	"sessionId=64df91654a5f69000166c26e&accountId=64df91654a5f69000166c26d&mobile=13382341414",//
-	"sessionId=64df92324d848c000101c38e&accountId=64df92324d848c000101c38d&mobile=13801484782",//
+	
 	"sessionId=64df943d6f50ed00011f6fba&accountId=64df943d6f50ed00011f6fb9&mobile=18068603568",//
 	"sessionId=64e8c61072be3400017f7db8&accountId=64e8c61072be3400017f7db7&mobile=18068603469",//
 	"sessionId=64e8c755cde8ff000105abb5&accountId=64e8c755cde8ff000105abb4&mobile=13814742156",//
@@ -43,55 +44,57 @@ let cookies=[
 
 ]
 
-let cookie="";//
-let ques=[];
+
 let dailyPersonalAnswerNum=0;
 let answerObjList=[];
 !(async () => {
-
+	console.log("开始时间："+new Date().toLocaleTimeString());
+	let radomTime=1000+Math.floor(Math.random()*10000);
+	//获取当前时间
 	var now=new Date();
 	var d=now.getDate();
-	let radomTime=1000+Math.floor(Math.random()*10000);
-	if(d==31||d==7||d==14){
-		radomTime=20;
-		console.log("每期最后一天延迟20毫秒");
-	}else{
-		//radomTime=200;
-		console.log("随机延迟"+radomTime+"毫秒");
+	//不是最后一天，判断距离凌晨的时间差，开始等待
+	var hour=now.getHours();
+	var mins=now.getMinutes();
+	var seconds=now.getSeconds();
+	var ms=now.getMilliseconds();//毫秒
+	if(hour==23&&mins==59){
+		var temp=60000-(seconds*1000+ms);
+		console.log("距离第二天凌晨还差："+temp+"毫秒")
+		await $.wait(temp+200);
 	}
-	await $.wait(radomTime);//开始时间随机延迟100s
 	//把cookies顺序打乱
-	cookies=cookies.sort(()=>Math.random()-0.5);
 	console.log("开始----随机账号顺序");
+	cookies=cookies.sort(()=>Math.random()-0.5);
+	
 	do{
 		console.log("时间："+new Date().toLocaleTimeString());
 		answerObjList=[];//置空
 		for(var i=0;i<cookies.length;i++){
-			cookie=cookies[i];
-			console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
+			//console.log("第"+(i+1)+"个账号："+cookies[i].split("&")[2].split("=")[1]);
 			if(i==0){
-				await intGame();
-				//dailyPersonalAnswerNum=1;
+				await intGame(cookies[i]);
 				console.log("次数"+dailyPersonalAnswerNum);
 			}
 			if(dailyPersonalAnswerNum>0){
 				//获取题目，并且塞入answerObjList
-				await getQuestion();
+				getQuestion(cookies[i]);
+				await $.wait(50);
 				console.log("时间："+new Date().toLocaleTimeString());
 			}
 		}
+		console.log(answerObjList.length);
 		if(answerObjList.length>0){
-			var time=12000-150*answerObjList.length+Math.floor(Math.random()*2000);
+			//14346---16s
+			var time=14500-50*answerObjList.length+Math.floor(Math.random()*2000);
 			console.log("随机延迟"+time+"毫秒");
 			await $.wait(time);
 		}
+		console.log(answerObjList.length);
 		console.log("时间："+new Date().toLocaleTimeString());
 		for(var i=0;i<answerObjList.length;i++){
-			cookie=answerObjList[i]["cookie"];
-			ques=answerObjList[i]["ques"];
-			console.log(cookie);
-			//console.log(ques);
-			await submitAnswer();
+			submitAnswer(answerObjList[i]);
+			await $.wait(50);
 			console.log("时间："+new Date().toLocaleTimeString());
 		}
 	}while(answerObjList.length>0)
@@ -104,9 +107,9 @@ let answerObjList=[];
 })
   
   
-function intGame(){
+function intGame(cookie){
 	return new Promise((resolve, reject) => {
-		let option = taskurlInt("https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/init?");
+		let option = taskurlInt(cookie,"https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/init?");
 		//console.log(option);
 		$.get(option, (err, resp, data) => {
 			try {
@@ -131,9 +134,9 @@ function intGame(){
 	})
 }
 
-function getQuestion(){
+function getQuestion(cookie){
 	return new Promise((resolve, reject) => {
-		let option = taskurlInt("https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/join?");
+		let option = taskurlInt(cookie,"https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/join?");
 		//console.log(option);
 		$.get(option, (err, resp, data) => {
 			try {
@@ -144,7 +147,7 @@ function getQuestion(){
 					data = JSON.parse(data);
 					//console.log(data)
 					if (data.code==200) {//成功
-						console.log("😊 获取题目成功");
+						console.log("😊 获取题目成功:"+cookie.split("&")[2].split("=")[1]);
 						ques=data.data;
 						var answerObj={};
 						answerObj["cookie"]=cookie;
@@ -164,8 +167,9 @@ function getQuestion(){
 }
 
 
-function submitAnswer(){
-
+function submitAnswer(answerObj){
+	let cookie=answerObj["cookie"];
+	let ques=answerObj["ques"];
 	let resultList=[];
 	for(var i=0;i<ques.questionList.length;i++){
 		let obj={
@@ -179,7 +183,7 @@ function submitAnswer(){
 		"answerKey":ques.answerKey,
 		"resultList":JSON.stringify(resultList)
 	}
-	const myRequest = getPostRequest("https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/saveAsianAnswerResult", JSON.stringify(jsonObj));
+	const myRequest = getPostRequest(cookie,"https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/saveAsianAnswerResult", JSON.stringify(jsonObj));
 	return new Promise(resolve => {
 		$.post(myRequest, (err, resp, data) => {
 		  try {
@@ -297,7 +301,7 @@ function getNowFormatDate() {
     return currentdate;
 }
 
-function taskurlInt(url) {
+function taskurlInt(cookie,url) {
 	return {
 		'url': url,
 		'headers': {
@@ -336,7 +340,7 @@ function taskurl(url) {
 		},
 	}
 }
-function getPostRequest(url, body) {
+function getPostRequest(cookie,url, body) {
   const method = `POST`;
   const headers = {
     'Host': 'qy.zjol.com.cn',
