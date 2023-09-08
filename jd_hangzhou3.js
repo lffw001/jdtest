@@ -1,65 +1,23 @@
 /*
-杭州
+杭州3
  */
-const $ = new Env('test');
+const $ = new Env('杭州3');
 const fs = require('fs');
 const CryptoJS=require('crypto-js');
 
  
 let cookies=[
-
-	//李斌
-	"sessionId=64df8f96bb5a4c000184527f&accountId=64df7a1c34b95700015e88f3&mobile=18012225989",//
-	"sessionId=64df828a6f50ed00011f6ee7&accountId=64df828a6f50ed00011f6ee6&mobile=18651306657",//
 	
-	"sessionId=64df959c34b95700015e8a77&accountId=64df8e0d4a5f69000166c23b&mobile=13584640176",
-	"sessionId=64df907c34b95700015e8a4d&accountId=64df907c34b95700015e8a4c&mobile=13382348802",//
-	"sessionId=64df91654a5f69000166c26e&accountId=64df91654a5f69000166c26d&mobile=13382341414",//
+	"sessionId=64eb4a8372be3400017fb34c&accountId=64eb4a8372be3400017fb34b&mobile=13776960525",
 	
-	"sessionId=64df943d6f50ed00011f6fba&accountId=64df943d6f50ed00011f6fb9&mobile=18068603568",//
-	"sessionId=64e8c61072be3400017f7db8&accountId=64e8c61072be3400017f7db7&mobile=18068603469",//
-	"sessionId=64e8c755cde8ff000105abb5&accountId=64e8c755cde8ff000105abb4&mobile=13814742156",//
-	"sessionId=64df9513f5d598000160ce09&accountId=64df9513f5d598000160ce08&mobile=17802595869",//
-	
-	//李晶
-	"sessionId=64e611eae44edb00019679a2&accountId=64e611eae44edb00019679a1&mobile=13914467362",//
-	"sessionId=64e8b0eba3c9de000133335d&accountId=64e8b0eba3c9de000133335c&mobile=13914469324",//
-	
-	"sessionId=64eb4244cde8ff000105e08b&accountId=64eb4244cde8ff000105e08a&mobile=18360007968",
-	"sessionId=64eb434855c1e300012de682&accountId=64eb434855c1e300012de681&mobile=13218237976",
-	"sessionId=64eb4434a3c9de0001336995&accountId=64eb4434a3c9de0001336994&mobile=18533225140",
-	
-	//圈圈
-	"sessionId=64f1eed50aa84700012d7678&accountId=5e3e28f23791f10001e4496d&mobile=15061019998",
-	"sessionId=64e8b84868f9480001bdb5f7&accountId=64e8b723a3c9de00013333b0&mobile=13815962198",//
-	"sessionId=64e8b9c055c1e300012db069&accountId=64e56405cde8ff0001052ed3&mobile=18952612430",//
-	"sessionId=64e8bb09a0911c0001daeeb6&accountId=5e3e2a5abe8739000193a76d&mobile=18952612439",//
-	"sessionId=64e8bc24cde8ff000105ab26&accountId=64e8b064cb87460001408528&mobile=13775660776",//
-	"sessionId=64f1ef2329c0d500014ea457&accountId=64e5f80b72be3400017f16da&mobile=13912196077",
-	"sessionId=64f1fbcdcb38b10001cc445f&accountId=64f1fbcccb38b10001cc445e&mobile=15262755662",
-	
-	//蔡
-	"sessionId=64f437e5436315000175b4e9&accountId=64f437e5436315000175b4e8&mobile=17798536287",
-	
-	//学生
-	"sessionId=64f93a9e1fc3e80001442284&accountId=5e3278f0b4b13f000156a621&mobile=13382626202",
-	"sessionId=64f93addd43bd900013cdc86&accountId=5e33cd960ecabc00011691aa&mobile=15152888756",
-	"sessionId=64f93b448bd7f20001ad3a17&accountId=64f93b448bd7f20001ad3a16&mobile=17712549656",
-	"sessionId=64f93b7f48426d00015ccf3b&accountId=64f93b7f48426d00015ccf3a&mobile=13921840358",
-	"sessionId=64f93bd4d43bd900013cdca3&accountId=63e315d551e9ec2780db8ae8&mobile=15895174202",
-	"sessionId=64f93c1c1c4f8f0001e6b222&accountId=63e315d551e9ec2780db8ae7&mobile=18962099551",
-	
-
-
-
 ]
 
-
+let cookie="";//
+let ques=[];
 let dailyPersonalAnswerNum=0;
-let answerObjList=[];
 !(async () => {
 	console.log("开始时间："+new Date().toLocaleTimeString());
-	let radomTime=1000+Math.floor(Math.random()*10000);
+	let radomTime=1000;
 	//获取当前时间
 	var now=new Date();
 	var d=now.getDate();
@@ -73,50 +31,37 @@ let answerObjList=[];
 		console.log("距离第二天凌晨还差："+temp+"毫秒")
 		await $.wait(temp+200);
 	}
-	//把cookies顺序打乱
-	console.log("开始----随机账号顺序");
-	cookies=cookies.sort(()=>Math.random()-0.5);
-	
-	do{
+
+	for(var i=0;i<cookies.length;i++){
 		console.log("时间："+new Date().toLocaleTimeString());
-		answerObjList=[];//置空
-		for(var i=0;i<cookies.length;i++){
-			//console.log("第"+(i+1)+"个账号："+cookies[i].split("&")[2].split("=")[1]);
-			if(dailyPersonalAnswerNum==0||i==0){
-				await intGame(cookies[i]);
-				console.log("次数"+dailyPersonalAnswerNum);
-			}
+		cookie=cookies[i];
+		console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
+		do{
+			await intGame();
 			if(dailyPersonalAnswerNum>0){
-				//获取题目，并且塞入answerObjList
-				getQuestion(cookies[i]);
-				await $.wait(50);
+				var time=12000+Math.floor(Math.random()*2000);
 				console.log("时间："+new Date().toLocaleTimeString());
+				//获取题目
+				await getQuestion();
+				console.log("等待"+time+"毫秒");
+				await $.wait(time);
+				await submitAnswer();
+				console.log("时间："+new Date().toLocaleTimeString());
+				radomTime=3000+Math.floor(Math.random()*5000);
+				if(d==31||d==7||d==14){
+					radomTime=500;
+					console.log("每期最后一天延迟"+radomTime+"毫秒");
+				}else{
+					console.log("随机延迟"+radomTime+"毫秒");
+				}
+				await $.wait(radomTime);
 			}
-		}
-		await $.wait(2000);//先等待2s，让请求跑完后判断数组及时间
-		if(answerObjList.length>0){
-			//11346---14-15s
-			var time=13000-100*answerObjList.length+Math.floor(Math.random()*2000);
-			var now3=new Date();
-			var d3=now3.getDate();
-			if(d3==31||d3==7||d3==14){
-				
-			}else{
-				time=time+2000;
-				console.log("不是最后一天答题时间+2S");
-			}
-			console.log("随机延迟"+time+"毫秒");
-			await $.wait(time);
-		}
-		console.log("答题数组长度："+answerObjList.length);
-		console.log("时间："+new Date().toLocaleTimeString());
-		for(var i=0;i<answerObjList.length;i++){
-			submitAnswer(answerObjList[i]);
-			await $.wait(50);
-			console.log("时间："+new Date().toLocaleTimeString());
-		}
-	}while(answerObjList.length>0)
-	
+
+		}while(dailyPersonalAnswerNum>0)
+		radomTime=1000+Math.floor(Math.random()*2000);
+		console.log("随机延迟"+radomTime+"毫秒");
+		await $.wait(radomTime);
+	}
 
 })().catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -125,9 +70,9 @@ let answerObjList=[];
 })
   
   
-function intGame(cookie){
+function intGame(){
 	return new Promise((resolve, reject) => {
-		let option = taskurlInt(cookie,"https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/init?");
+		let option = taskurlInt("https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/init?");
 		//console.log(option);
 		$.get(option, (err, resp, data) => {
 			try {
@@ -152,9 +97,9 @@ function intGame(cookie){
 	})
 }
 
-function getQuestion(cookie){
+function getQuestion(){
 	return new Promise((resolve, reject) => {
-		let option = taskurlInt(cookie,"https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/join?");
+		let option = taskurlInt("https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/join?");
 		//console.log(option);
 		$.get(option, (err, resp, data) => {
 			try {
@@ -165,12 +110,8 @@ function getQuestion(cookie){
 					data = JSON.parse(data);
 					//console.log(data)
 					if (data.code==200) {//成功
-						console.log("😊 获取题目成功:"+cookie.split("&")[2].split("=")[1]);
+						console.log("😊 获取题目成功");
 						ques=data.data;
-						var answerObj={};
-						answerObj["cookie"]=cookie;
-						answerObj["ques"]=ques;
-						answerObjList.push(answerObj);
 					} else {
 						console.log("💩 获得列表失败:"+JSON.stringify(data));
 					}
@@ -185,9 +126,8 @@ function getQuestion(cookie){
 }
 
 
-function submitAnswer(answerObj){
-	let cookie=answerObj["cookie"];
-	let ques=answerObj["ques"];
+function submitAnswer(){
+
 	let resultList=[];
 	for(var i=0;i<ques.questionList.length;i++){
 		let obj={
@@ -201,8 +141,7 @@ function submitAnswer(answerObj){
 		"answerKey":ques.answerKey,
 		"resultList":JSON.stringify(resultList)
 	}
-	console.log("😊 开始答题:"+cookie.split("&")[2].split("=")[1]);
-	const myRequest = getPostRequest(cookie,"https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/saveAsianAnswerResult", JSON.stringify(jsonObj));
+	const myRequest = getPostRequest("https://qy.zjol.com.cn/tmmobile/api/asianGamesAnswer/saveAsianAnswerResult", JSON.stringify(jsonObj));
 	return new Promise(resolve => {
 		$.post(myRequest, (err, resp, data) => {
 		  try {
@@ -320,7 +259,7 @@ function getNowFormatDate() {
     return currentdate;
 }
 
-function taskurlInt(cookie,url) {
+function taskurlInt(url) {
 	return {
 		'url': url,
 		'headers': {
@@ -359,7 +298,7 @@ function taskurl(url) {
 		},
 	}
 }
-function getPostRequest(cookie,url, body) {
+function getPostRequest(url, body) {
   const method = `POST`;
   const headers = {
     'Host': 'qy.zjol.com.cn',

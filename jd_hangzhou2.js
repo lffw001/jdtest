@@ -8,7 +8,7 @@ const CryptoJS=require('crypto-js');
  
 let cookies=[
 	
-	"sessionId=64eb4a8372be3400017fb34c&accountId=64eb4a8372be3400017fb34b&mobile=13776960525",
+	"sessionId=64df92324d848c000101c38e&accountId=64df92324d848c000101c38d&mobile=13801484782",//
 	
 ]
 
@@ -39,7 +39,7 @@ let dailyPersonalAnswerNum=0;
 		do{
 			await intGame();
 			if(dailyPersonalAnswerNum>0){
-				var time=12000+Math.floor(Math.random()*2000);
+				var time=14000+Math.floor(Math.random()*2000);
 				console.log("时间："+new Date().toLocaleTimeString());
 				//获取题目
 				await getQuestion();
