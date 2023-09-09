@@ -59,9 +59,9 @@ var cookieList=[
 				console.log("时间："+now.toLocaleTimeString());
 				await choujiang();
 			}
-		}else{
-			await getMy();
 		}
+		await getMy();
+
 	}
 
 
