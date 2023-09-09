@@ -504,6 +504,49 @@ function request(lli1l, Iili1 = {}) {
   });
 }
 
+function getH5st(ll1ilI, I1ilI) {
+  let llilil = {
+    "appId": ll1ilI,
+    ...I1ilI,
+    "ua": $.UA,
+    "pin": $.UserName
+  },
+      il1lii = {
+    "url": "http://kr.kingran.cf/h5st",
+    "body": JSON.stringify(llilil),
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "timeout": 30000
+  };
+  return new Promise(async li111I => {
+    $.post(il1lii, (i111Il, i111Ii, IlII1I) => {
+      let i1Il1i = "";
+
+      try {
+        if (i111Il) {
+          console.log("" + JSON.stringify(i111Il));
+          console.log($.name + " getH5st API请求失败，请检查网路重试");
+        } else {
+          IlII1I = JSON.parse(IlII1I);
+
+          if (typeof IlII1I === "object" && IlII1I && IlII1I.body) {
+            if (IlII1I.body) i1Il1i = IlII1I.body || "";
+          } else {
+            if (IlII1I.code == 400) {
+              console.log("\n" + IlII1I.msg);
+            } else console.log("\n可能连接不上接口，请检查网络");
+          }
+        }
+      } catch (lIll1I) {
+        $.logErr(lIll1I, i111Ii);
+      } finally {
+        li111I(i1Il1i);
+      }
+    });
+  });
+}
+
 const appidMap = {
   "plantBeanIndex": "d246a",
   "receiveNutrients": "b56b8",
