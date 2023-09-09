@@ -50,7 +50,7 @@ var cookieList=[
 			await getQuestion();	
 			console.log("答题时间"+$.time+"秒")
 			console.log("等待答题。。。")
-			await $.wait($.time*800);
+			await $.wait($.time*1000);
 			await submitAnswer();
 			//await $.wait(200);	
 			if($.id!=""){
