@@ -433,7 +433,7 @@ function requireConfig() {
     resolve()
   })
 }
-function request(function_id, body = {}) {
+/*function request(function_id, body = {}) {
   return new Promise(async resolve => {
     await $.wait(2000);
     $.post(taskUrl(function_id, body), (err, resp, data) => {
@@ -452,7 +452,58 @@ function request(function_id, body = {}) {
       }
     })
   })
+}*/
+
+function request(lli1l, Iili1 = {}) {
+  return new Promise(async IiIIi1 => {
+    let I11Iil = "";
+
+    if (!appidMap[lli1l]) {
+      I11Iil = JD_API_HOST + "?functionId=" + lli1l + "&body=" + encodeURIComponent(JSON.stringify(Iili1)) + "&appid=signed_wh5&client=apple&area=19_1601_50258_51885&build=167490&clientVersion=11.6.2";
+    } else {
+      Iili1.version = "9.2.4.3";
+      Iili1.monitor_source = "plant_m_plant_index";
+      !Iili1.monitor_refer && (Iili1.monitor_refer = "");
+      const I1iiI = {
+        "appid": "signed_wh5",
+        "client": "android",
+        "clientVersion": "11.6.2",
+        "functionId": lli1l,
+        "body": Iili1
+      };
+      let l111l1 = await getH5st(appidMap[lli1l], I1iiI);
+      I11Iil = JD_API_HOST + "?" + l111l1;
+    }
+
+    await $.wait(5000);
+    let l1liI1 = {
+      "url": I11Iil,
+      "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip,deflate,br",
+        "User-Agent": $.UA,
+        "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+        "Referer": "https://plantearth.m.jd.com/plantBean/index?source=lingjingdouqiandaorili&sid=4638f2f389065566747fbdb06702d79w&un_area=4_133_58530_0",
+        "Cookie": cookie
+      },
+      "timeout": 10000
+    };
+    $.get(l1liI1, async (llill1, Iill1, ll1il1) => {
+      try {
+        if (llill1) {
+          console.log("\n种豆得豆: API查询请求失败 ‼️‼️");
+          console.log("function_id:" + lli1l);
+          $.logErr(llill1);
+        } else ll1il1.indexOf("data") > -1 ? ll1il1 = JSON.parse(ll1il1) : (ll1il1 = JSON.parse(ll1il1), console.log(ll1il1.errorMessage));
+      } catch (illi11) {
+        $.logErr(illi11, Iill1);
+      } finally {
+        IiIIi1(ll1il1);
+      }
+    });
+  });
 }
+
 function taskUrl(function_id, body) {
   body["version"] = "9.2.4.2";
   body["monitor_source"] = "plant_app_plant_index";
