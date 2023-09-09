@@ -33,6 +33,7 @@ let dailyPersonalAnswerNum=0;
 	}
 
 	for(var i=0;i<cookies.length;i++){
+		console.log("时间："+new Date().toLocaleTimeString());
 		cookie=cookies[i];
 		console.log("第"+(i+1)+"个账号："+cookie.split("&")[2].split("=")[1]);
 		do{
