@@ -504,6 +504,19 @@ function request(lli1l, Iili1 = {}) {
   });
 }
 
+const appidMap = {
+  "plantBeanIndex": "d246a",
+  "receiveNutrients": "b56b8",
+  "cultureBean": "6a216",
+  "receiveNutrientsTask": "d22ac",
+  "plantChannelNutrientsTask": "2424e",
+  "shopNutrientsTask": "19c88",
+  "productTaskList": "7351b",
+  "productNutrientsTask": "a4e2d",
+  "collectUserNutr": "14357"
+};
+
+
 function taskUrl(function_id, body) {
   body["version"] = "9.2.4.2";
   body["monitor_source"] = "plant_app_plant_index";
