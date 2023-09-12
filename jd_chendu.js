@@ -57,7 +57,7 @@ var userList=[
 		console.log("第"+(i+1)+"个账号"+",手机:"+$.user.mobileNo)
 		await getQuestion();	
 		if($.gradeId!=null){
-			$.time=15000+Math.floor(Math.random()*1300);
+			$.time=15000+Math.floor(Math.random()*1800);
 			await $.wait($.time);
 			await submitAnswer();
 		}
