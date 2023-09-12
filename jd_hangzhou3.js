@@ -48,7 +48,9 @@ let dailyPersonalAnswerNum=0;
 				await submitAnswer();
 				console.log("时间："+new Date().toLocaleTimeString());
 				radomTime=3000+Math.floor(Math.random()*5000);
-				if(d==31||d==7||d==13||d==14){
+				var now1=new Date();
+				var d1=now.getDate();
+				if(d1==31||d1==7||d1==13||d1==14){
 					radomTime=50;
 					console.log("每期最后一天延迟"+radomTime+"毫秒");
 				}else{
