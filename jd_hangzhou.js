@@ -99,7 +99,7 @@ let answerObjList=[];
 			var time=12500-100*answerObjList.length+Math.floor(Math.random()*1500);
 			var now3=new Date();
 			var d3=now3.getDate();
-			if(d3==31||d3==7||d3==14){
+			if(d3==31||d3==7||d3==13||d3==14){
 				
 			}else{
 				time=time+2000;
