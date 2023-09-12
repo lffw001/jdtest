@@ -61,6 +61,7 @@ var userList=[
 			await $.wait($.time);
 			await submitAnswer();
 		}
+		await choujiang();
 		await $.wait(1000);
 	}
 
@@ -72,12 +73,12 @@ var userList=[
 	$.done();
 })
   
-function getCiShu(){
-  return new Promise(async resolve => {
+function choujiang(){
+   return new Promise(async resolve => {
 	var data={
-		"do":"tiku",
-		"op":"cishu",
-		"type":2,
+		"activityNo":"fqzeoy",
+		"joinerId":$.user.joinerId,
+		"rid":"",
 	}
 	var dataStr = "";
     for (var i in data) {
@@ -87,16 +88,16 @@ function getCiShu(){
     }
 
 	const options = {
-      "url": `https://dt.tylehuo.cn//api/tiku/cishu/`,
+      "url": `http://fqzeoy.wx.juxuewen.com/appActivity/lotteryWithQualifications.do `,
       "headers": {
-		  'Host': 'dt.tylehuo.cn',
+		  'Host': 'fqzeoy.wx.juxuewen.com',
 		  'Connection': 'keep-alive',
 		  'Referer': 'https://servicewechat.com/wxd0888dae7242773c/11/page-frame.html',
 		  'User-Agent': 'Mozilla/5.0 (Linux; Android 10; YAL-AL10 Build/HUAWEIYAL-AL10; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/3211 MMWEBSDK/20220303 Mobile Safari/537.36 MMWEBID/916 MicroMessenger/8.0.21.2120(0x2800153F) Process/toolsmp WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64',
 		  'Accept':'application/json, text/javascript, */*; q=0.01',
 		  'Accept-Encoding':'gzip, deflate',
 		  'Accept-Language': 'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7',
-		  'token':$.cookie,
+		  'token':$.user.cookie,
 		},
 	  "timeout": 3000,
 	  'body':dataStr
@@ -108,9 +109,10 @@ function getCiShu(){
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
+			console.log(data);
 			data=JSON.parse(data);
-			console.log("次数状态："+data.data);
-			$.times=data.data;
+
+			//console.log($.questionList);
           } else {
             console.log(`服务器返回空数据`)
           }
