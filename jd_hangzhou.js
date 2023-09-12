@@ -96,7 +96,7 @@ let answerObjList=[];
 		await $.wait(2000);//先等待2s，让请求跑完后判断数组及时间
 		if(answerObjList.length>0){
 			//11346---14-15s
-			var time=12500-100*answerObjList.length+Math.floor(Math.random()*1500);
+			var time=12500-100*answerObjList.length+Math.floor(Math.random()*1000);
 			var now3=new Date();
 			var d3=now3.getDate();
 			if(d3==31||d3==7||d3==13||d3==14){
