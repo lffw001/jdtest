@@ -39,7 +39,7 @@ let dailyPersonalAnswerNum=0;
 		do{
 			await intGame();
 			if(dailyPersonalAnswerNum>0){
-				var time=12000+Math.floor(Math.random()*2000);
+				var time=12000+Math.floor(Math.random()*1000);
 				console.log("时间："+new Date().toLocaleTimeString());
 				//获取题目
 				await getQuestion();
