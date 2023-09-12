@@ -44,22 +44,24 @@ var cookieList=[
 		$.times=0;
 		console.log("====>>>>第"+(i+1)+"个账号")
 		$.cookie=cookieList[i];
-		await getCiShu();	
-		if($.times>1){
-			$.time=7+Math.floor(Math.random()*2);
-			await getQuestion();	
-			console.log("答题时间"+$.time+"秒")
-			console.log("等待答题。。。")
-			await $.wait($.time*1000);
-			await submitAnswer();
-			//await $.wait(200);	
-			if($.id!=""){
-				console.log("抽奖号ID："+$.id);
-				var now=new Date();
-				console.log("时间："+now.toLocaleTimeString());
-				await choujiang();
+		do{
+			await getCiShu();	
+			if($.times>1){
+				$.time=7+Math.floor(Math.random()*2);
+				await getQuestion();	
+				console.log("答题时间"+$.time+"秒")
+				console.log("等待答题。。。")
+				await $.wait($.time*1000);
+				await submitAnswer();
+				//await $.wait(200);	
+				if($.id!=""){
+					console.log("抽奖号ID："+$.id);
+					var now=new Date();
+					console.log("时间："+now.toLocaleTimeString());
+					await choujiang();
+				}
 			}
-		}
+		}while($.times>1)
 		await getMy();
 
 	}
