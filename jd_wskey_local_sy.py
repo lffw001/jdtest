@@ -19,7 +19,10 @@ import uuid
 from urllib import parse
 from urllib.parse import quote
 import requests
-
+proxies = {
+    'https': 'http://shuiliux.asuscomm.com:5080',
+    'http': 'http://shuiliux.asuscomm.com:5080'
+}
 WSKEY_MODE = 0
 # 0 = Default / 1 = Debug!
 
@@ -180,7 +183,7 @@ def body(wskey):
         'pragma': 'no-cache',
         'Connection': 'close'
     }
-    genToken = requests.request("POST", url33, headers=headers, verify=False)
+    genToken = requests.request("POST", url33, headers=headers, proxies=proxies,verify=False)
     tokenKey = genToken.json()['tokenKey']
     # print(tokenKey)
     return tokenKey
