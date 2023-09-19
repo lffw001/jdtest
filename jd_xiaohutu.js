@@ -71,12 +71,15 @@ function startGame(){
 			console.log(getNowFormatDate()+"用户信息赋值。。。");
 			console.log(data);
 			data = JSON.parse(data);
-			let obj={
-				"cookie": $.cookie,
-				"key":data.data.key,
-				"id":data.data.id,
+			if(data.code==0){
+				let obj={
+					"cookie": $.cookie,
+					"key":data.data.key,
+					"id":data.data.id,
+				}
+				gameInfoList.push(obj);
 			}
-			gameInfoList.push(obj);
+			
 		  } catch (e) {
 			$.logErr(e, resp)
 		  } finally {
