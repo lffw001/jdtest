@@ -153,7 +153,7 @@ function sleep(time) {
     while(new Date().getTime() < startTime) {}
 };
 function blockcurSc(score,key) {
-	
+	console.log(score);
 	var  x = CryptoJS.enc.Utf8.parse(key),//key
 	s=CryptoJS.enc.Utf8.parse("cdlchd0123456789"),
 	a = CryptoJS.enc.Utf8.parse(score+""),
@@ -162,7 +162,7 @@ function blockcurSc(score,key) {
 		mode: CryptoJS.mode.CBC,
 		padding: CryptoJS.pad.Pkcs7
 	})
-	console.log(ss.ciphertext.toString());
+	//console.log(ss.ciphertext.toString());
 	return ss.ciphertext.toString();
 }
 function yyyymmdd() {
