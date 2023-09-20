@@ -31,6 +31,7 @@ let gameInfoList=[];
 	for(var i=0;i<cookies.length;i++){
 		console.log("第"+(i+1)+"个账号开始")
 		$.cookie=cookies[i];
+		//await getInfo();
 		//获取开始数据
 		await startGame();
 	}
@@ -60,6 +61,28 @@ let gameInfoList=[];
   .finally(() => {
     $.done();
   })
+  
+  
+function getInfo(){ 
+	
+	let body='';
+	const myRequest = getPostRequest("https://wx.cdh5.cn/2384_4549575a/index.php?s=/api/info", body);
+	//console.log(myRequest)
+	return new Promise(resolve => {
+		$.post(myRequest, (err, resp, data) => {
+		  try {
+			console.log(getNowFormatDate()+"用户信息赋值。。。");
+			console.log(data);
+			data = JSON.parse(data);
+			
+		  } catch (e) {
+			$.logErr(e, resp)
+		  } finally {
+			resolve();
+		  }
+		})
+    })
+}
 function startGame(){ 
 	
 	let body='';
