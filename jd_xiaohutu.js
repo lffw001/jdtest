@@ -33,7 +33,7 @@ let gameInfoList=[];
 		console.log("第"+(i+1)+"个账号开始")
 		$.cookie=cookies[i];
 		//获取开始数据
-		await getInfo();
+		await chou();
 		await startGame();
 	}
 	$.time=440+Math.floor(Math.random()*200);
@@ -49,7 +49,7 @@ let gameInfoList=[];
 		console.log("第"+(i+1)+"个账号奖品信息")
 		$.cookie=cookies[i];
 		//获取开始数据
-		await chou();
+		await getInfo();
 		await myAward();
 	}
 	
