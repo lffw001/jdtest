@@ -38,7 +38,7 @@ let gameInfoList=[];
 			await chou();
 		}
 		t++;
-	}while(t<=3)
+	}while(t<=2)
 	
 	for(var i=0;i<cookies.length;i++){
 		console.log("第"+(i+1)+"个账号奖品信息")
