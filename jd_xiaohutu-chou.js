@@ -1,7 +1,7 @@
 /*
-小糊涂
+小糊涂-抽奖
  */
-const $ = new Env('小糊涂');
+const $ = new Env('小糊涂-抽奖');
 // index.js
 const fs = require('fs');
 const CryptoJS=require('crypto-js');
@@ -29,21 +29,26 @@ let gameInfoList=[];
 !(async () => {
 	console.log(getNowFormatDate()+"开始游戏》》》");
 	gameInfoList=[];
+	var t=0;
+	do{
+		for(var i=0;i<cookies.length;i++){
+			console.log("第"+(i+1)+"个账号开始抽奖")
+			$.cookie=cookies[i];
+			//获取开始数据
+			await chou();
+		}
+		t++;
+	}while(t<=3)
+	
 	for(var i=0;i<cookies.length;i++){
-		console.log("第"+(i+1)+"个账号开始")
+		console.log("第"+(i+1)+"个账号奖品信息")
 		$.cookie=cookies[i];
 		//获取开始数据
 		await getInfo();
-		await startGame();
+		await myAward();
 	}
-	$.time=440+Math.floor(Math.random()*200);
-	console.log("等待"+$.time+"s")
-	await $.wait($.time*1000);
 	
-	for(var i=0;i<gameInfoList.length;i++){
-		console.log("第"+(i+1)+"个账号提交成绩")
-		await endGame(gameInfoList[i]);
-	}
+	
 	
 })()
   .catch((e) => {
