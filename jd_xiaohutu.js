@@ -27,8 +27,6 @@ let cookies=[
 let gameInfoList=[];
 !(async () => {
 	
-	do{
-		
 	
 		console.log(getNowFormatDate()+"开始游戏》》》");
 		gameInfoList=[];
@@ -39,7 +37,7 @@ let gameInfoList=[];
 			//获取开始数据
 			await startGame();
 		}
-		$.time=390+Math.floor(Math.random()*250);
+		$.time=360+Math.floor(Math.random()*200);
 		console.log("等待"+$.time+"s")
 		await $.wait($.time*1000);
 		
@@ -55,7 +53,6 @@ let gameInfoList=[];
 			await chou();
 			await myAward();
 		}
-	}while(1==1)
 	
 	
 })()
@@ -75,7 +72,7 @@ function getInfo(){
 	return new Promise(resolve => {
 		$.post(myRequest, (err, resp, data) => {
 		  try {
-			console.log(getNowFormatDate()+"用户信息赋值。。。");
+			//console.log(getNowFormatDate()+"用户信息赋值。。。");
 			//console.log(data);
 			data = JSON.parse(data);
 			console.log("微信名👨："+data.data.nick)
