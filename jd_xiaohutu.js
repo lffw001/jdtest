@@ -35,7 +35,7 @@ let gameInfoList=[];
 		//获取开始数据
 		await startGame();
 	}
-	$.time=440+Math.floor(Math.random()*220);
+	$.time=390+Math.floor(Math.random()*150);
 	console.log("等待"+$.time+"s")
 	await $.wait($.time*1000);
 	
