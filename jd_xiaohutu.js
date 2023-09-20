@@ -26,33 +26,32 @@ let cookies=[
 ]
 let gameInfoList=[];
 !(async () => {
+	console.log(getNowFormatDate()+"开始游戏》》》");
+	gameInfoList=[];
+	for(var i=0;i<cookies.length;i++){
+		console.log("第"+(i+1)+"个账号开始")
+		$.cookie=cookies[i];
+		//获取开始数据
+		await getInfo();
+		await startGame();
+	}
+	$.time=440+Math.floor(Math.random()*200);
+	console.log("等待"+$.time+"s")
+	await $.wait($.time*1000);
 	
+	for(var i=0;i<gameInfoList.length;i++){
+		console.log("第"+(i+1)+"个账号提交成绩")
+		await endGame(gameInfoList[i]);
+	}
 	
-		console.log(getNowFormatDate()+"开始游戏》》》");
-		gameInfoList=[];
-		for(var i=0;i<cookies.length;i++){
-			console.log("第"+(i+1)+"个账号开始")
-			$.cookie=cookies[i];
-			await getInfo();
-			//获取开始数据
-			await startGame();
-		}
-		$.time=360+Math.floor(Math.random()*200);
-		console.log("等待"+$.time+"s")
-		await $.wait($.time*1000);
-		
-		for(var i=0;i<gameInfoList.length;i++){
-			console.log("第"+(i+1)+"个账号提交成绩")
-			await endGame(gameInfoList[i]);
-		}
-		
-		for(var i=0;i<cookies.length;i++){
-			console.log("第"+(i+1)+"个账号奖品信息")
-			$.cookie=cookies[i];
-			//获取开始数据
-			await chou();
-			await myAward();
-		}
+	for(var i=0;i<cookies.length;i++){
+		console.log("第"+(i+1)+"个账号奖品信息")
+		$.cookie=cookies[i];
+		//获取开始数据
+		await chou();
+		await myAward();
+	}
+	
 	
 	
 })()
@@ -62,6 +61,7 @@ let gameInfoList=[];
   .finally(() => {
     $.done();
   })
+  
   
   
 function getInfo(){ 
@@ -115,7 +115,7 @@ function startGame(){
 }
 function endGame(obj){
 	$.cookie=obj.cookie;
-	let score=Math.floor($.time*4.2+Math.random()*1500);
+	let score=Math.floor($.time*4.5+Math.random()*1500);
 	let scoreStr=blockcurSc(score,obj.key);
 	let body='score='+scoreStr+'&id='+obj.id;
 	const myRequest = getPostRequest("https://wx.cdh5.cn/2384_4549575a/index.php?s=/api/endGame", body);
