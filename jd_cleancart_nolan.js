@@ -46,8 +46,8 @@ let cleancartProducts = ''
 const $ = new Env('清空购物车-Sign版');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
-//IOS等用户直接用NobyDa的jd cookie
 let XH_CLEAN_EXCEPT=process.env.XH_CLEAN_EXCEPT && process.env.XH_CLEAN_EXCEPT.split('@') || [];
+//IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [],
     cookie = '';
 if ($.isNode()) {
@@ -110,7 +110,7 @@ for (let i in productsArr) {
         $.cleancartProductsArr = cleancartProductsAll["*"]
       }else $.cleancartProductsArr = false
       if($.cleancartProductsArr) console.log($.cleancartProductsArr)
-       if(XH_CLEAN_EXCEPT.length&&XH_CLEAN_EXCEPT.indexOf($.UserName)>-1){
+      if(XH_CLEAN_EXCEPT.length&&XH_CLEAN_EXCEPT.indexOf($.UserName)>-1){
 				console.log("排除账号不清空");
 			}else{
 				 await run();
@@ -329,8 +329,8 @@ function jdSign(fn, body) {
 
 function taskPostUrl(url, body) {
     return {
-        url: `https://api.m.jd.com${url}&${body}`,
-        //body: body,
+        url: `https://api.m.jd.com${url}`,
+        body: body,
         headers: {
             "Accept": "*/*",
             "Accept-Language": "zh-cn",
