@@ -29,7 +29,7 @@ let gameInfoList=[];
 !(async () => {
 	console.log(getNowFormatDate()+"开始游戏》》》");
 	gameInfoList=[];
-	var t=0;
+	var t=1;
 	do{
 		for(var i=0;i<cookies.length;i++){
 			console.log("第"+(i+1)+"个账号开始抽奖")
