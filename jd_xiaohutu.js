@@ -28,38 +28,38 @@ let cookies=[
 let gameInfoList=[];
 !(async () => {
 	
-	do{
-		console.log(getNowFormatDate()+"开始游戏》》》");
-		gameInfoList=[];
 	
-		for(var i=0;i<cookies.length;i++){
-			console.log("第"+(i+1)+"个账号开始")
-			$.cookie=cookies[i];
-			//获取开始数据
-			await getInfo();
-			await startGame();
-			await $.wait(200);
-		}
-		$.time=440+Math.floor(Math.random()*200);
-		console.log("等待"+$.time+"s")
-		await $.wait($.time*1000);
-		
-		for(var i=0;i<gameInfoList.length;i++){
-			console.log("第"+(i+1)+"个账号提交成绩")
-			await endGame(gameInfoList[i]);
-		}
+	console.log(getNowFormatDate()+"开始游戏》》》");
+	gameInfoList=[];
 
+	for(var i=0;i<cookies.length;i++){
+		console.log("第"+(i+1)+"个账号开始")
+		$.cookie=cookies[i];
+		//获取开始数据
+		await getInfo();
+		await startGame();
+		await $.wait(200);
+	}
+	$.time=440+Math.floor(Math.random()*200);
+	console.log("等待"+$.time+"s")
+	await $.wait($.time*1000);
 	
+	for(var i=0;i<gameInfoList.length;i++){
+		console.log("第"+(i+1)+"个账号提交成绩")
+		await endGame(gameInfoList[i]);
+	}
 
-		for(var i=0;i<cookies.length;i++){
-			console.log("第"+(i+1)+"个账号开始抽奖")
-			$.cookie=cookies[i];
-			//获取开始数据
-			await chou();
-			await myAward();
-		}
+
+
+	for(var i=0;i<cookies.length;i++){
+		console.log("第"+(i+1)+"个账号开始抽奖")
+		$.cookie=cookies[i];
+		//获取开始数据
+		await chou();
+		await myAward();
+	}
 	
-	}while(1==1)
+	
 	
 	
 
