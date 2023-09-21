@@ -40,7 +40,7 @@ let gameInfoList=[];
 		await startGame();
 		await $.wait(200);
 	}
-	$.time=440+Math.floor(Math.random()*200);
+	$.time=440+Math.floor(Math.random()*180);
 	console.log("等待"+$.time+"s")
 	await $.wait($.time*1000);
 	
