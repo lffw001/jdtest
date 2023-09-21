@@ -26,10 +26,12 @@ let cookies=[
 	'2384_user_cookie=b4c17f2da295f33de6f4e45e076b16c5; PHPSESSID=aa9ca70dcf89999b39d67ba28bb5b5c3'//秋秋
 ]
 let gameInfoList=[];
+let cishu = process.env.JD_XHT_CISHU ? process.env.JD_XHT_CISHU : 1;
+
 !(async () => {
 	console.log(getNowFormatDate()+"开始游戏》》》");
 	gameInfoList=[];
-	var t=1;
+	var t=0;
 	do{
 		for(var i=0;i<cookies.length;i++){
 			console.log("第"+(i+1)+"个账号开始抽奖")
@@ -38,7 +40,7 @@ let gameInfoList=[];
 			await chou();
 		}
 		t++;
-	}while(t<=2)
+	}while(t<=cishu)
 	
 	for(var i=0;i<cookies.length;i++){
 		console.log("第"+(i+1)+"个账号奖品信息")
