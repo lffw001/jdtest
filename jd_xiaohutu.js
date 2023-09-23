@@ -41,6 +41,12 @@ let gameInfoList=[];
 		await $.wait(200);
 	}
 	$.time=440+Math.floor(Math.random()*180);
+	var start=new Date();
+	if(start.getHours()==7&&start.getMinutes()<10){
+		//650-7点10分有水，多抽3轮
+		$.time=240+Math.floor(Math.random()*180);
+
+	}
 	console.log("等待"+$.time+"s")
 	await $.wait($.time*1000);
 	
@@ -48,16 +54,45 @@ let gameInfoList=[];
 		console.log("第"+(i+1)+"个账号提交成绩")
 		await endGame(gameInfoList[i]);
 	}
+	//获取当前时间
+	var now=new Date();
+	if(now.getHours()>0&&now.getHours()<6){
+		console.log("1-6点不抽，无水")
+		//1-5点不抽，无水
+		for(var i=0;i<cookies.length;i++){
+			console.log("第"+(i+1)+"个账号")
+			$.cookie=cookies[i];
+			await myAward();
+		}
+		
+	}else if((now.getHours()==6&&now.getMinutes()>50)||(now.getHours()==7&&now.getMinutes()<12)){
+		//650-7点10分有水，多抽3轮
+		var cishu=0;
+		do{
+			for(var i=0;i<cookies.length;i++){
+				console.log("第"+(i+1)+"个账号开始抽奖")
+				$.cookie=cookies[i];
+				//获取开始数据
+				await chou();
+				await $.wait(200);
+				await myAward();
+			}
+			cishu++;
+		}while(cishu<14)
 
-
-
-	for(var i=0;i<cookies.length;i++){
-		console.log("第"+(i+1)+"个账号开始抽奖")
-		$.cookie=cookies[i];
-		//获取开始数据
-		await chou();
-		await myAward();
+		
+	}else{
+		for(var i=0;i<cookies.length;i++){
+			console.log("第"+(i+1)+"个账号开始抽奖")
+			$.cookie=cookies[i];
+			//获取开始数据
+			await chou();
+			await $.wait(200);
+			await myAward();
+		}
 	}
+
+
 	
 	
 	
