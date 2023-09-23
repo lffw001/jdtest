@@ -161,7 +161,7 @@ function startGame(){
 }
 function endGame(obj){
 	$.cookie=obj.cookie;
-	let score=Math.floor($.time*15+Math.random()*5000);
+	let score=Math.floor($.time*10+Math.random()*5000);
 	let scoreStr=blockcurSc(score,obj.key);
 	let body='score='+scoreStr+'&id='+obj.id;
 	const myRequest = getPostRequest("https://wx.cdh5.cn/2384_4549575a/index.php?s=/api/endGame", body);
