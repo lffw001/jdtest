@@ -7,7 +7,7 @@ const fs = require('fs');
 const CryptoJS=require('crypto-js');
 
 let cookies=[
-	'2384_user_cookie=d16dc0218e22e9c1809ef93a6c32f5a8; PHPSESSID=7349cb9b32e028e0c045bfeb554c3898;',
+	'2384_user_cookie=d16dc0218e22e9c1809ef93a6c32f5a8; PHPSESSID=7349cb9b32e028e0c045bfeb554c3898',
 	'2384_user_cookie=64852c64a3a7cec5f10eb8b618418b1b; PHPSESSID=e6afb390a04ff496f895941d6b4d7f6a',
 	'2384_user_cookie=7ebfbabb7cb450e34a49d7ead036ebd1; PHPSESSID=35f09679a0f5f43c5abd74b843c2761f',
 	'2384_user_cookie=6188710e3779cbb6d9d6c11dd6135e0b; PHPSESSID=b2c270ac221050af28f2cbdc942061c0',
@@ -23,6 +23,8 @@ let cookies=[
 	'2384_user_cookie=1ef0f33aafb8499ddcbfebf9d95f64ae; PHPSESSID=014e4bceb309049914555b087e8adee1',
 	'2384_user_cookie=18fa01921345bec986d8f6224377333a; PHPSESSID=61cdb4f26cacd6a5005e4c2148bd4851',
 	'2384_user_cookie=54fcf78a89323969ff2ddd23bd7abfa1; PHPSESSID=04e207339dd01fa792103da26c26ee6e',
+	'2384_user_cookie=a6c11c75691b4289d67b41d6fa621aa0; PHPSESSID=003e05cecd11e9e0d045bdaa1ce09fed',
+	'2384_user_cookie=4c3c21b5680c2b74b5a3bb147aada721; PHPSESSID=df4ff0ca031f39635ca4238ee109408d',
 	'2384_user_cookie=b4c17f2da295f33de6f4e45e076b16c5; PHPSESSID=aa9ca70dcf89999b39d67ba28bb5b5c3'//秋秋
 ]
 let gameInfoList=[];
@@ -159,7 +161,7 @@ function startGame(){
 }
 function endGame(obj){
 	$.cookie=obj.cookie;
-	let score=Math.floor($.time*20+Math.random()*10000);
+	let score=Math.floor($.time*20+Math.random()*8000);
 	let scoreStr=blockcurSc(score,obj.key);
 	let body='score='+scoreStr+'&id='+obj.id;
 	const myRequest = getPostRequest("https://wx.cdh5.cn/2384_4549575a/index.php?s=/api/endGame", body);
