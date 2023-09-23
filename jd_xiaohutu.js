@@ -56,7 +56,7 @@ let gameInfoList=[];
 	}
 	//获取当前时间
 	var now=new Date();
-	if(now.getHours()>0&&now.getHours()<6){
+	if((now.getHours()>0&&now.getHours()<6)||(now.getHours()==0&&now.getMinutes()>12)||(now.getHours()==6&&now.getMinutes()<40)){
 		console.log("1-6点不抽，无水")
 		//1-5点不抽，无水
 		for(var i=0;i<cookies.length;i++){
