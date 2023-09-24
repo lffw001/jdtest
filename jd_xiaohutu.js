@@ -261,7 +261,7 @@ function myAward(){
 				if(data.data[i].awardname!='满299减50元优惠券'){
 					console.log("🎁🎁🎁奖品"+(i+1)+":"+data.data[i].awardname)
 				}else{
-					console.log("🎁奖品"+(i+1)+":"+data.data[i].awardname+",数量："+data.data[i].ticket_count)
+					console.log("🎁🎁🎁奖品"+(i+1)+":"+data.data[i].awardname+",数量："+data.data[i].ticket_count)
 				}
 			}
 		
