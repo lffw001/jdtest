@@ -232,7 +232,7 @@ function rank(){
 			console.log(getNowFormatDate()+"获取排名前25名");
 			//
 			data = JSON.parse(data);
-			console.log(data);
+			//console.log(data);
 			var listTemp=data.data.list;
 			rankList=[];
 			for(var i=0;i<25;i++){
