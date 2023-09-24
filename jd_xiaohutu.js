@@ -41,15 +41,16 @@ let rankList=[];
 		//获取开始数据
 		await getInfo();
 		await startGame();
-		await $.wait(200);
 	}
 	$.time=440+Math.floor(Math.random()*180);
 	var start=new Date();
+	/**
 	if(start.getHours()==7&&start.getMinutes()<10){
 		//650-7点10分有水，多抽3轮
 		$.time=240+Math.floor(Math.random()*180);
 
 	}
+	**/
 	console.log("等待"+$.time+"s")
 	await $.wait($.time*1000);
 	
@@ -104,13 +105,6 @@ let rankList=[];
 		await chou();
 		await myAward();
 	}
-
-
-	
-	
-	
-	
-
 })()
   .catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -122,7 +116,6 @@ let rankList=[];
   
   
 function getInfo(){ 
-	
 	let body='';
 	const myRequest = getPostRequest("https://wx.cdh5.cn/2384_4549575a/index.php?s=/api/info", body);
 	//console.log(myRequest)
@@ -143,8 +136,8 @@ function getInfo(){
 		})
     })
 }
+
 function startGame(){ 
-	
 	let body='';
 	const myRequest = getPostRequest("https://wx.cdh5.cn/2384_4549575a/index.php?s=/api/startGame", body);
 	//console.log(myRequest)
@@ -172,13 +165,14 @@ function startGame(){
 		})
     })
 }
+
 function endGame(obj){
 	$.cookie=obj.cookie;
 	let score=Math.floor($.time*25+Math.random()*10000);
 	if(rankList.includes(obj.nick)){
 		//
 		console.log(obj.nick+",在前25名分数少点;")
-		score=Math.floor($.time*15+Math.random()*5000);
+		score=Math.floor($.time*15+Math.random()*8000);
 	}else{
 		console.log(obj.nick+",在前25名外;")
 	}
