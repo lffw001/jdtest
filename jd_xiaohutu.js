@@ -168,7 +168,7 @@ function startGame(){
 
 function endGame(obj){
 	$.cookie=obj.cookie;
-	let score=Math.floor($.time*25+Math.random()*10000);
+	let score=Math.floor($.time*30+Math.random()*12000);
 	if(rankList.includes(obj.nick)){
 		//
 		console.log(obj.nick+",在前25名分数少点;")
