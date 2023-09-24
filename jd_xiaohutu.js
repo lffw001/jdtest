@@ -168,13 +168,13 @@ function startGame(){
 
 function endGame(obj){
 	$.cookie=obj.cookie;
-	let score=Math.floor($.time*30+Math.random()*12000);
+	let score=Math.floor($.time*30+Math.random()*15000);
 	if(rankList.includes(obj.nick)){
 		//
-		console.log(obj.nick+",在前25名分数少点;")
+		console.log(obj.nick+",在前20名分数少点;")
 		score=Math.floor($.time*15+Math.random()*8000);
 	}else{
-		console.log(obj.nick+",在前25名外;")
+		console.log(obj.nick+",在前20名外;")
 	}
 	let scoreStr=blockcurSc(score,obj.key);
 	let body='score='+scoreStr+'&id='+obj.id;
@@ -229,7 +229,7 @@ function rank(){
 			//console.log(data);
 			var listTemp=data.data.list;
 			rankList=[];
-			for(var i=0;i<25;i++){
+			for(var i=0;i<20;i++){
 				rankList.push(listTemp[i].nick);
 			}
 		
