@@ -28,12 +28,13 @@ let cookies=[
 	'2384_user_cookie=b4c17f2da295f33de6f4e45e076b16c5; PHPSESSID=aa9ca70dcf89999b39d67ba28bb5b5c3'//秋秋
 ]
 let gameInfoList=[];
+let rankList=[];
 !(async () => {
 	
 	
 	console.log(getNowFormatDate()+"开始游戏》》》");
 	gameInfoList=[];
-
+	await rank();//获取前20排名
 	for(var i=0;i<cookies.length;i++){
 		console.log("第"+(i+1)+"个账号开始")
 		$.cookie=cookies[i];
@@ -56,6 +57,7 @@ let gameInfoList=[];
 		console.log("第"+(i+1)+"个账号提交成绩")
 		await endGame(gameInfoList[i]);
 	}
+	/**
 	//获取当前时间
 	var now=new Date();
 	if((now.getHours()>0&&now.getHours()<6)||(now.getHours()==0&&now.getMinutes()>12)||(now.getHours()==6&&now.getMinutes()<40)){
@@ -93,6 +95,15 @@ let gameInfoList=[];
 			await myAward();
 		}
 	}
+	**/
+	
+	for(var i=0;i<cookies.length;i++){
+		console.log("第"+(i+1)+"个账号开始抽奖")
+		$.cookie=cookies[i];
+		//获取开始数据
+		await chou();
+		await myAward();
+	}
 
 
 	
@@ -121,6 +132,7 @@ function getInfo(){
 			//console.log(getNowFormatDate()+"用户信息赋值。。。");
 			//console.log(data);
 			data = JSON.parse(data);
+			$.nick=data.data.nick;//当前账号
 			console.log("微信名👨："+data.data.nick)
 			
 		  } catch (e) {
@@ -147,6 +159,7 @@ function startGame(){
 					"cookie": $.cookie,
 					"key":data.data.key,
 					"id":data.data.id,
+					"nick":$.nick,
 				}
 				gameInfoList.push(obj);
 			}
@@ -161,7 +174,14 @@ function startGame(){
 }
 function endGame(obj){
 	$.cookie=obj.cookie;
-	let score=Math.floor($.time*10+Math.random()*5000);
+	let score=Math.floor($.time*20+Math.random()*10000);
+	if(rankList.includes(obj.nick)){
+		//
+		console.log(obj.nick+",在前25名分数少点;")
+		score=Math.floor($.time*10+Math.random()*5000);
+	}else{
+		console.log(obj.nick+",在前25名外;")
+	}
 	let scoreStr=blockcurSc(score,obj.key);
 	let body='score='+scoreStr+'&id='+obj.id;
 	const myRequest = getPostRequest("https://wx.cdh5.cn/2384_4549575a/index.php?s=/api/endGame", body);
@@ -200,6 +220,34 @@ function chou(){
 		})
     })
 }
+
+function rank(){ 
+	$.cookie=cookies[0];
+	let body='page=0';
+	const myRequest = getPostRequest("https://wx.cdh5.cn/2384_4549575a/index.php?s=/api/rank", body);
+	//console.log(myRequest)
+	return new Promise(resolve => {
+		$.post(myRequest, (err, resp, data) => {
+		  try {
+			console.log(getNowFormatDate()+"获取排名前25名");
+			//
+			data = JSON.parse(data);
+			console.log(data);
+			var listTemp=data.data.list;
+			rankList=[];
+			for(var i=0;i<25;i++){
+				rankList.push(listTemp[i].nick);
+			}
+		
+		  } catch (e) {
+			$.logErr(e, resp)
+		  } finally {
+			resolve();
+		  }
+		})
+    })
+}
+
 function myAward(){ 
 	let body='';
 	const myRequest = getPostRequest("https://wx.cdh5.cn/2384_4549575a/index.php?s=/api/myAward", body);
@@ -212,6 +260,8 @@ function myAward(){
 			for(var i=0;i<data.data.length;i++){
 				if(data.data[i].awardname!='满299减50元优惠券'){
 					console.log("🎁🎁🎁奖品"+(i+1)+":"+data.data[i].awardname)
+				}else{
+					console.log("🎁奖品"+(i+1)+":"+data.data[i].awardname+",数量："+data.data[i].ticket_count)
 				}
 			}
 		
