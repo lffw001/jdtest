@@ -44,7 +44,7 @@ let rankList=[];
 		await getInfo();
 		await startGame();
 	}
-	$.time=440+Math.floor(Math.random()*180);
+	$.time=500+Math.floor(Math.random()*120);
 	var start=new Date();
 	/**
 	if(start.getHours()==7&&start.getMinutes()<10){
@@ -231,7 +231,7 @@ function rank(){
 			//console.log(data);
 			var listTemp=data.data.list;
 			rankList=[];
-			for(var i=0;i<10;i++){
+			for(var i=0;i<1;i++){
 				rankList.push(listTemp[i].nick);
 			}
 		
