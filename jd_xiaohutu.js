@@ -174,7 +174,7 @@ function endGame(obj){
 	if(rankList.includes(obj.nick)){
 		//
 		console.log(obj.nick+",在前20名分数少点;")
-		score=Math.floor($.time*15+Math.random()*8000);
+		score=Math.floor($.time*20+Math.random()*10000);
 	}else{
 		console.log(obj.nick+",在前20名外;")
 	}
