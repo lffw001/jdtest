@@ -25,6 +25,8 @@ let cookies=[
 	'2384_user_cookie=54fcf78a89323969ff2ddd23bd7abfa1; PHPSESSID=04e207339dd01fa792103da26c26ee6e',
 	'2384_user_cookie=a6c11c75691b4289d67b41d6fa621aa0; PHPSESSID=003e05cecd11e9e0d045bdaa1ce09fed',
 	'2384_user_cookie=4c3c21b5680c2b74b5a3bb147aada721; PHPSESSID=df4ff0ca031f39635ca4238ee109408d',
+	'2384_user_cookie=e54e5f1d965a62774c944f22da861e2f; PHPSESSID=018569afcce5ae0497497a642b23e050',//圈圈1
+	'2384_user_cookie=727e11680a4b479b192b392fa54b219c; PHPSESSID=ed7de2d9faea8e63a9e2f2ea43293796',//圈圈2
 	'2384_user_cookie=b4c17f2da295f33de6f4e45e076b16c5; PHPSESSID=aa9ca70dcf89999b39d67ba28bb5b5c3'//秋秋
 ]
 let gameInfoList=[];
