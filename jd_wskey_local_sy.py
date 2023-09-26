@@ -190,7 +190,12 @@ def body(wskey):
 
 # 返回值 bool jd_ck
 def appjmp(wskey):  # 方法 传递 wskey & tokenKey
-    tokenKey = body(wskey)
+    try:  # 异常捕捉
+        tokenKey = body(wskey)
+    except Exception as err:  # 异常捕捉
+        print("genToken 接口错误 无法转换tokenKey,可能代理失效\n")  # 标准日志输出
+        print(str(err))  # 标准日志输出
+        return False, wskey  # 返回 -> False[Bool], Wskey
     ua = 'Dalvik/2.1.0 (Linux; U; Android 7.1.2; G011C Build/N2G48H)'
     wskey = "pt_" + str(wskey.split(";")[0])  # 变量组合 使用 ; 分割变量 拼接 pt_
     if tokenKey == 'xxx':  # 判断 tokenKey返回值
