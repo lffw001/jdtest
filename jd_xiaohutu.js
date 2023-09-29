@@ -46,13 +46,13 @@ let rankList=[];
 	}
 	$.time=500+Math.floor(Math.random()*120);
 	var start=new Date();
-	/**
+	
 	if(start.getHours()==7&&start.getMinutes()<10){
 		//650-7点10分有水，多抽3轮
-		$.time=240+Math.floor(Math.random()*180);
+		$.time=400+Math.floor(Math.random()*120);
 
 	}
-	**/
+	
 	console.log("等待"+$.time+"s")
 	await $.wait($.time*1000);
 	
@@ -60,7 +60,7 @@ let rankList=[];
 		console.log("第"+(i+1)+"个账号提交成绩")
 		await endGame(gameInfoList[i]);
 	}
-	/**
+
 	//获取当前时间
 	var now=new Date();
 	if((now.getHours()>0&&now.getHours()<6)||(now.getHours()==0&&now.getMinutes()>12)||(now.getHours()==6&&now.getMinutes()<40)){
@@ -98,8 +98,7 @@ let rankList=[];
 			await myAward();
 		}
 	}
-	**/
-	
+	/**
 	for(var i=0;i<cookies.length;i++){
 		console.log("第"+(i+1)+"个账号开始抽奖")
 		$.cookie=cookies[i];
@@ -107,6 +106,9 @@ let rankList=[];
 		await chou();
 		await myAward();
 	}
+	**/
+	
+	
 })()
   .catch((e) => {
     $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
