@@ -170,11 +170,11 @@ function startGame(){
 
 function endGame(obj){
 	$.cookie=obj.cookie;
-	let score=Math.floor($.time*50+Math.random()*8000);
+	let score=Math.floor($.time*55+Math.random()*8000);
 	if(rankList.includes(obj.nick)){
 		//
 		console.log(obj.nick+",在前20名分数少点;")
-		score=Math.floor($.time*40+Math.random()*10000);
+		score=Math.floor($.time*45+Math.random()*10000);
 	}else{
 		console.log(obj.nick+",在前20名外;")
 	}
