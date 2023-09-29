@@ -81,7 +81,7 @@ let rankList=[];
 				$.cookie=cookies[i];
 				//获取开始数据
 				await chou();
-				await $.wait(200);
+				//await $.wait(200);
 				await myAward();
 			}
 			cishu++;
@@ -94,7 +94,7 @@ let rankList=[];
 			$.cookie=cookies[i];
 			//获取开始数据
 			await chou();
-			await $.wait(200);
+			//await $.wait(200);
 			await myAward();
 		}
 	}
