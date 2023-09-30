@@ -67,30 +67,23 @@ class User{
 		await this.getInfo();
 		await this.startGame();
 		if(this.gameInfo!=null){
-			/*var time=440+Math.floor(Math.random()*200);
+			var time=400+Math.floor(Math.random()*280);
 			//console.log("等待时间"+time)
-			let score=Math.floor(time*100+Math.random()*30000);
+			let score=Math.floor(time*100+Math.random()*10000);
 			if(rankList.includes(this.nick)){
 				//
 				//console.log(this.nick+",在前25名分数少点;")
-				score=Math.floor(time*98+Math.random()*30000);
+				score=Math.floor(time*100+Math.random()*10000);
 			}else{
 				//console.log(this.nick+",在前25名外;")
 			}
-			score=300*/
-			var time=10*1000+parseInt(Math.random()*10)*1000
-		
-			var score=50000+parseInt(Math.random()*30000)
-			time=score*((60*1000*2.1)/10000)+parseInt(Math.random()*10)*1000
+
 			await $.wait(time*100);
 			console.log("👨"+this.nick+",time:"+time+",score:"+score);
 			await this.endGame(score);
 			await $.wait(2000);
 			await this.chou();
-			//await this.myAward();
-			this.run();
-		}else{
-			await this.run();
+			await this.myAward();
 		}
 		
 		
