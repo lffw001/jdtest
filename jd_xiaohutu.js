@@ -74,6 +74,7 @@ let rankList=[];
 		
 	}else if((now.getHours()==6&&now.getMinutes()>50)||(now.getHours()==7&&now.getMinutes()<12)){
 		//650-7点10分有水，多抽3轮
+		console.log("650-7点10分有水，多抽3轮")
 		var cishu=0;
 		do{
 			for(var i=0;i<cookies.length;i++){
@@ -89,6 +90,7 @@ let rankList=[];
 
 		
 	}else{
+		console.log("正常进行抽奖")
 		for(var i=0;i<cookies.length;i++){
 			console.log("第"+(i+1)+"个账号开始抽奖")
 			$.cookie=cookies[i];
