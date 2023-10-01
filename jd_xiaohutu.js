@@ -70,11 +70,11 @@ class User{
 		if(this.gameInfo!=null){
 			var time=400+Math.floor(Math.random()*280);
 			//console.log("等待时间"+time)
-			let score=Math.floor(time*70+Math.random()*15000);
+			let score=Math.floor(time*70+Math.random()*10000);
 			if(rankList.includes(this.nick)){
 				//
 				//console.log(this.nick+",在前25名分数少点;")
-				score=Math.floor(time*70+Math.random()*15000);
+				score=Math.floor(time*70+Math.random()*10000);
 			}else{
 				//console.log(this.nick+",在前25名外;")
 			}
