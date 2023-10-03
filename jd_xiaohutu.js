@@ -68,13 +68,13 @@ class User{
 		await this.getInfo();
 		await this.startGame();
 		if(this.gameInfo!=null){
-			var time=500+Math.floor(Math.random()*180);
+			var time=450+Math.floor(Math.random()*230);
 			//console.log("等待时间"+time)
-			let score=Math.floor(time*65+Math.random()*12000);
+			let score=Math.floor(time*75+Math.random()*15000);
 			if(rankList.includes(this.nick)){
 				//
 				//console.log(this.nick+",在前25名分数少点;")
-				score=Math.floor(time*65+Math.random()*12000);
+				score=Math.floor(time*75+Math.random()*15000);
 			}else{
 				//console.log(this.nick+",在前25名外;")
 			}
