@@ -86,7 +86,7 @@ class User{
 			await this.chou();
 			await this.myAward();
 			var now=new Date();
-			if(now.getMinutes()>18&&now.getMinutes()<30){
+			if(now.getMinutes()>=18&&now.getMinutes()<30){
 				//不开始
 			}else{
 				this.run();
