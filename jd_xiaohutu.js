@@ -8,27 +8,7 @@ const CryptoJS=require('crypto-js');
 
 let cookies=[
 
-	'2384_user_cookie=d16dc0218e22e9c1809ef93a6c32f5a8; PHPSESSID=7349cb9b32e028e0c045bfeb554c3898',
-	'2384_user_cookie=64852c64a3a7cec5f10eb8b618418b1b; PHPSESSID=e6afb390a04ff496f895941d6b4d7f6a',
-	'2384_user_cookie=7ebfbabb7cb450e34a49d7ead036ebd1; PHPSESSID=35f09679a0f5f43c5abd74b843c2761f',
-	'2384_user_cookie=6188710e3779cbb6d9d6c11dd6135e0b; PHPSESSID=b2c270ac221050af28f2cbdc942061c0',
-	'2384_user_cookie=5a0e08509a68caefb21cd62ddbb26cf6; PHPSESSID=1f2b5d2efe6ca7a7455656916d74b193',
-	'2384_user_cookie=1a3141527a2ed80d66d3b32380f598fa; PHPSESSID=b0e962919920bd7d194c39cf8ced3169',
-	'2384_user_cookie=fa3b4ef2dbefbbbc016be2a65b91abb8; PHPSESSID=87abb03644b8bdc5211f3c70ee1bb2d4',
-	'2384_user_cookie=d0d8c72b784cdf08f43fa8d54123bc74; PHPSESSID=50fbe3094acd551ace8c66ce5579793e',
-	'2384_user_cookie=62678f984b6b6723b3b476f10d85aa57; PHPSESSID=5975b88f7563e3d33cb99f68f312d1a2',
-	'2384_user_cookie=6a4ff7d93b8845a6e7296767bda0917b; PHPSESSID=ff4a4271e54f06b336621bc7776ac84d',
-	'2384_user_cookie=42e502e4b3ec4a357f6e529505d40765; PHPSESSID=1f25242cd352fce6d268726704384494',
-	'2384_user_cookie=93fca9884a10fac8464f5043c9a228fe; PHPSESSID=5010ddb2bda2c7d550e7675c59cb4fe9',
-	'2384_user_cookie=da8d7261f2fcbfb3e77bcc4cf07270ff; PHPSESSID=e6ea40332eb4c72b76025f5b3b5ec05c',
-	'2384_user_cookie=1ef0f33aafb8499ddcbfebf9d95f64ae; PHPSESSID=014e4bceb309049914555b087e8adee1',
-	'2384_user_cookie=18fa01921345bec986d8f6224377333a; PHPSESSID=61cdb4f26cacd6a5005e4c2148bd4851',
-	'2384_user_cookie=54fcf78a89323969ff2ddd23bd7abfa1; PHPSESSID=04e207339dd01fa792103da26c26ee6e',
-	'2384_user_cookie=a6c11c75691b4289d67b41d6fa621aa0; PHPSESSID=003e05cecd11e9e0d045bdaa1ce09fed',
-	'2384_user_cookie=4c3c21b5680c2b74b5a3bb147aada721; PHPSESSID=df4ff0ca031f39635ca4238ee109408d',
-	'2384_user_cookie=e54e5f1d965a62774c944f22da861e2f; PHPSESSID=018569afcce5ae0497497a642b23e050',//圈圈1
-	'2384_user_cookie=727e11680a4b479b192b392fa54b219c; PHPSESSID=ed7de2d9faea8e63a9e2f2ea43293796',//圈圈2
-	'2384_user_cookie=b4c17f2da295f33de6f4e45e076b16c5; PHPSESSID=aa9ca70dcf89999b39d67ba28bb5b5c3'//秋秋
+
 ]
 let gameInfoList=[];
 
@@ -70,11 +50,11 @@ class User{
 		if(this.gameInfo!=null){
 			var time=480+Math.floor(Math.random()*200);
 			//console.log("等待时间"+time)
-			let score=Math.floor(time*150+Math.random()*15000);
+			let score=Math.floor(time*180+Math.random()*15000);
 			if(rankList.includes(this.nick)){
 				//
 				//console.log(this.nick+",在前25名分数少点;")
-				score=Math.floor(time*150+Math.random()*15000);
+				score=Math.floor(time*180+Math.random()*15000);
 			}else{
 				//console.log(this.nick+",在前25名外;")
 			}
@@ -82,7 +62,7 @@ class User{
 			await $.wait(time*1000);
 			
 			await this.endGame(score);
-			await $.wait(1000);
+			await $.wait(500);
 			await this.chou();
 			await this.myAward();
 			var now=new Date();
