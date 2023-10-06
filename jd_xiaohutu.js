@@ -82,7 +82,7 @@ class User{
 			await $.wait(time*1000);
 			
 			await this.endGame(score);
-			await $.wait(500);
+			await $.wait(1000);
 			await this.chou();
 			await this.myAward();
 			var now=new Date();
