@@ -341,7 +341,7 @@ def check_ck(ck):  # 方法 检查 Cookie有效性 使用变量传递 单次调�
             'user-agent': ua
         }  # 设置 HTTP头
         try:  # 异常捕捉
-            res = requests.get(url=url, headers=headers, verify=False, proxies={"http": proxys, "https": proxys},
+            res = requests.get(url=url, headers=headers, verify=False,
                                timeout=10, allow_redirects=False)  # 进行 HTTP请求[GET] 超时 10秒
         except Exception as err:  # 异常捕捉
             logger.debug(str(err))  # 调试日志输出
@@ -405,7 +405,7 @@ def getToken(wskey):  # 方法 获取 Wskey转换使用的 Token 由 JD_API 返�
     try:  # 异常捕捉
         # 设置云端服务器地址 路由为 genToken
         url = str(base64.b64decode(
-            'aHR0cHM6Ly82ZHkubmJwbGF5LnNpdGUv').decode()) + 'sign'
+            'aHR0cHM6Ly82ZHkuamRwcm8uc2l0ZS8=').decode()) + 'sign'
         header = {"Content-Type": "application/json"}  # 设置 HTTP头
         data = {'body': {
             "to": "https%3a%2f%2fplogin.m.jd.com%2fjd-mlogin%2fstatic%2fhtml%2fappjmp_blank.html"}, 'fn': 'genToken'}
@@ -458,8 +458,7 @@ def appjmp(wskey, tokenKey):  # 方法 传递 wskey & tokenKey
     }  # 设置 HTTP_URL 参数
     url = 'https://un.m.jd.com/cgi-bin/app/appjmp'  # 设置 URL地址
     try:  # 异常捕捉
-        res = requests.get(url=url, headers=headers, params=params, verify=False, proxies={
-                           "http": proxys, "https": proxys}, allow_redirects=False, timeout=20)  # HTTP请求 [GET] 阻止跳转 超时 20秒
+        res = requests.get(url=url, headers=headers, params=params, verify=False,  allow_redirects=False, timeout=20)  # HTTP请求 [GET] 阻止跳转 超时 20秒
     except Exception as err:  # 异常捕捉
         logger.info("JD_appjmp 接口错误 请重试或者更换IP\n")  # 标准日志输出
         logger.info(str(err))  # 标准日志输出
