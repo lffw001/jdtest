@@ -15,7 +15,7 @@ const $ = new Env('东东农场-任务');
 let cookiesArr = [], cookie = '', jdFruitShareArr = [], isBox = false, notify, newShareCodes, allMessage = '';
 //助力好友分享码(最多3个,否则后面的助力失败),原因:京东农场每人每天只有3次助力机会
 let shareCodes = ['a3389a65c654410daa81b45bfb026088',
-  '828333606f7646c59b10c3c51724853c',
+  
   'd8fd255379cc4b648e48b38b5dd382b4',
   '5b3475c11fbf4770ad5c80174aae6f62',
   '1d6250353a4b446e9ff7a73920054ee0',
@@ -25,6 +25,7 @@ let shareCodes = ['a3389a65c654410daa81b45bfb026088',
   'b124a94e55c24261b7c302a46426ecd4',
   'a03d49eeb79e44f79803efcfa9d0dc59',
   '87c5ff87f8e940fd8a2285ea1ce6c9fb',
+    '828333606f7646c59b10c3c51724853c',
   'a0533ba2d07b4e19a4869b1515d00ea0',
   'cffbb500222e4323a786142b3b4e6b0d']
 const dy = require('./function/dylanz')

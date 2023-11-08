@@ -41,7 +41,9 @@ let roundList = [];
 let awardState = '';//上期活动的京豆是否收取
 let randomCount = $.isNode() ? 20 : 5;
 let num;
-$.newShareCode =  ['ppmjzfsnxeism4ifsn73te4bgu', 'olmijoxgmjutzdohyac3bq7kr6pyqg7bxm6nkby', 'vaxemtlhu2xwlgex2mozz7zmq7fhthbdlxk4xfi', 'mlrdw3aw26j3wcf4n7etx3nbvsqqdgfcwxutlya', '4npkonnsy7xi3yblvabzv2vpcfd3yuw6djociba', 'h6lmj2pwgkzncpqrmeksbtupocphhxpk54mtw7i', 'mh5uulbrvnknkaui3nlu4kl2cxstw6ajxn5l3iq', '4npkonnsy7xi3s6e7ctaxupeovawdgciofqee3a', 'olmijoxgmjutyvwjq7uyprdbsybgrzufjcgsyxi', 'o7eiltak46s2xrun4au23bbtctqlyye6lygaula'];
+$.newShareCode =  ['ppmjzfsnxeism4ifsn73te4bgu',  'vaxemtlhu2xwlgex2mozz7zmq7fhthbdlxk4xfi', 'mlrdw3aw26j3wcf4n7etx3nbvsqqdgfcwxutlya', '4npkonnsy7xi3yblvabzv2vpcfd3yuw6djociba', 'h6lmj2pwgkzncpqrmeksbtupocphhxpk54mtw7i', 'mh5uulbrvnknkaui3nlu4kl2cxstw6ajxn5l3iq', '4npkonnsy7xi3s6e7ctaxupeovawdgciofqee3a', 'olmijoxgmjutyvwjq7uyprdbsybgrzufjcgsyxi', 'o7eiltak46s2xrun4au23bbtctqlyye6lygaula',
+   'olmijoxgmjutzdohyac3bq7kr6pyqg7bxm6nkby',
+];
 let llerror=false;
 let lnrun = 0;
 let lnruns = 0;
