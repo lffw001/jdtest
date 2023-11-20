@@ -46,7 +46,7 @@ class User{
 		await this.detailExame();
 		
 		if(this.examQuestions.length>0){
-			let time=18000+Math.floor(Math.random()*4000);
+			let time=20000+Math.floor(Math.random()*7000);
 			console.log(this.nikName+"----等待"+time+"ms,开始答题")
 			await $.wait(time);
 			//答题开始
