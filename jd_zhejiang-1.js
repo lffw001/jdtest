@@ -7,8 +7,7 @@ const fs = require('fs');
 const CryptoJS=require('crypto-js');
 
 let cookies=[
-	'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpc3N1c2VyIiwiYXVkIjoiYXVkaWVuY2UiLCJ0ZW5hbnRfaWQiOiIwMDAwMDAiLCJ1c2VyX2lkIjoiODU0NCIsInN0dWRlbnRfaWQiOiI4NTQ0IiwidG9rZW5fdHlwZSI6ImFjY2Vzc190b2tlbiIsInd4X29wZW5faWQiOiJvMTlRMTZGVVdqT01tNDFXV0F3TUcza3JiMUk4IiwiY2xpZW50X2lkIjoic2FiZXIiLCJleHAiOjE3MDA0OTcyNDksIm5iZiI6MTcwMDQxMDg0OX0.uLqFroooAHl84vbitQgGBPW3Kr3vzvi1SljYnXJW2QiWG7i1HD0HVCytBfx-s-1WPKKcKkm0ta7TqjkeM0Pofg@leebear',
-	'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpc3N1c2VyIiwiYXVkIjoiYXVkaWVuY2UiLCJ0ZW5hbnRfaWQiOiIwMDAwMDAiLCJ1c2VyX2lkIjoiOTUyMiIsInN0dWRlbnRfaWQiOiI5NTIyIiwidG9rZW5fdHlwZSI6ImFjY2Vzc190b2tlbiIsInd4X29wZW5faWQiOiJvMTlRMTZLQWpJdHpXWUMtQU8tdXI0UHgtRkdzIiwiY2xpZW50X2lkIjoic2FiZXIiLCJleHAiOjE3MDA0OTc2MDksIm5iZiI6MTcwMDQxMTIwOX0.sPNERPJKn5HQS-IAs75LiG9KBflBUgf59uz6wUEDaDZKOooWC9oF0DobMk_q5JGh7ebVR5V8-_Uz8mOZ22YYFA@不见不散',
+	'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpc3N1c2VyIiwiYXVkIjoiYXVkaWVuY2UiLCJ0ZW5hbnRfaWQiOiIwMDAwMDAiLCJ1c2VyX2lkIjoiODU0NCIsInN0dWRlbnRfaWQiOiI4NTQ0IiwidG9rZW5fdHlwZSI6ImFjY2Vzc190b2tlbiIsInd4X29wZW5faWQiOiJvMTlRMTZGVVdqT01tNDFXV0F3TUcza3JiMUk4IiwiY2xpZW50X2lkIjoic2FiZXIiLCJleHAiOjE3MDA2NTA1MjAsIm5iZiI6MTcwMDU2NDEyMH0.V7FOLEE1UGlcHigaZNpBtoI15Kf9rUaANEP65nFmnpdeE9NLosaw8Dw_ZuxSDW92bRr5gUowYgS4TfVDWYBhjw@leebear',
 	
 
 
@@ -32,7 +31,7 @@ class User{
 		await this.detailExame();
 		
 		if(this.examQuestions.length>0){
-			let time=17500+Math.floor(Math.random()*4000);
+			let time=18000+Math.floor(Math.random()*4000);
 			console.log(this.nikName+"----等待"+time+"ms,开始答题")
 			await $.wait(time);
 			//答题开始
