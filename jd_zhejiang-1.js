@@ -7,7 +7,7 @@ const fs = require('fs');
 const CryptoJS=require('crypto-js');
 
 let cookies=[
-	'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpc3N1c2VyIiwiYXVkIjoiYXVkaWVuY2UiLCJ0ZW5hbnRfaWQiOiIwMDAwMDAiLCJ1c2VyX2lkIjoiODU0NCIsInN0dWRlbnRfaWQiOiI4NTQ0IiwidG9rZW5fdHlwZSI6ImFjY2Vzc190b2tlbiIsInd4X29wZW5faWQiOiJvMTlRMTZGVVdqT01tNDFXV0F3TUcza3JiMUk4IiwiY2xpZW50X2lkIjoic2FiZXIiLCJleHAiOjE3MDA2NTA1MjAsIm5iZiI6MTcwMDU2NDEyMH0.V7FOLEE1UGlcHigaZNpBtoI15Kf9rUaANEP65nFmnpdeE9NLosaw8Dw_ZuxSDW92bRr5gUowYgS4TfVDWYBhjw@leebear',
+	'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJpc3N1c2VyIiwiYXVkIjoiYXVkaWVuY2UiLCJ0ZW5hbnRfaWQiOiIwMDAwMDAiLCJ1c2VyX2lkIjoiODU0NCIsInN0dWRlbnRfaWQiOiI4NTQ0IiwidG9rZW5fdHlwZSI6ImFjY2Vzc190b2tlbiIsInd4X29wZW5faWQiOiJvMTlRMTZGVVdqT01tNDFXV0F3TUcza3JiMUk4IiwiY2xpZW50X2lkIjoic2FiZXIiLCJleHAiOjE3MDEyNTk1NzMsIm5iZiI6MTcwMTE3MzE3M30.TWoQAStTsEWjvK-370XfbVFSITZE1IIEInzG023Z6gBaW36DXCWr5PRM0dHe9ZG5YgBULAM7TuMUUZBRrm7pww@leebear',
 	
 
 
@@ -31,7 +31,7 @@ class User{
 		await this.detailExame();
 		
 		if(this.examQuestions.length>0){
-			let time=15000+Math.floor(Math.random()*4000);
+			let time=13000+Math.floor(Math.random()*100);
 			console.log(this.nikName+"----等待"+time+"ms,开始答题")
 			await $.wait(time);
 			//答题开始
