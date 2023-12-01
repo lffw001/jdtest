@@ -264,13 +264,13 @@ function taskurl(url) {
 //---------------------------------------------
 
 !(async () => {
-	if($.isNode()&&process.env.JD_MY){
+	//if($.isNode()&&process.env.JD_MY){
 		for(var i=0;i<cookies.length;i++){
 			var user=new User(cookies[i]);
 			user.run();
 		}
 
-	}
+	//}
 
 })()
   .catch((e) => {

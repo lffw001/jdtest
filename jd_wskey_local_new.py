@@ -18,7 +18,12 @@ import random
 
 WSKEY_MODE = 0
 # 0 = Default / 1 = Debug!
-
+if "ql_client_id" in os.environ and "ql_client_secret" in os.environ:
+    ql_client_id = os.environ['ql_client_id']
+    ql_client_secret = os.environ['ql_client_secret']
+else:
+    logger.info("\n清设置对方ql_client_id和ql_client_secret\n")  # 日志输出
+    sys.exit(1)  # 退出脚本
 
 def getua():
     global uuid, addressid, iosVer, iosV, clientVersion, iPhone, area, ADID
@@ -88,7 +93,7 @@ ver = 21212  # 版本号
 # def ql_2fa():
 #     ''' Demo
 #     if "WSKEY_TOKEN" in os.environ:
-#     url = 'http://127.0.0.1:{0}/api/user'.format(port)  # 设置 URL地址
+#     url = 'http://127.0.0.1:{0}/open/user'.format(port)  # 设置 URL地址
 #     try:  # 异常捕捉
 #         res = s.get(url)  # HTTP请求 [GET] 使用 session
 #     except Exception as err:  # 异常捕捉
@@ -98,12 +103,12 @@ ver = 21212  # 版本号
 #             twoFactorActivated = str(res.json()["data"]["twoFactorActivated"])
 #             if twoFactorActivated == 'true':
 #                 logger.info("青龙 2FA 已开启!")
-#     url = 'http://127.0.0.1:{0}/api/envs?searchValue=WSKEY_Client'.format(port)  # 设置 URL地址
+#     url = 'http://127.0.0.1:{0}/open/envs?searchValue=WSKEY_Client'.format(port)  # 设置 URL地址
 #     res = s.get(url)
 #     if res.status_code == 200 and res.json()["code"] == 200:
 #         data = res.json()["data"]
 #         if len(data) == 0:
-#             url = 'http://127.0.0.1:{0}/api/apps'
+#             url = 'http://127.0.0.1:{0}/open/apps'
 #             data = json.dumps({
 #                 "name": "wskey",
 #                 "scopes": ["crons", "envs", "configs", "scripts", "logs", "dependencies", "system"]
@@ -116,7 +121,7 @@ ver = 21212  # 版本号
 #                 wskey_value = 'client_id={0}&client_secret={1}'.format(client_id, client_secret)
 #                 data = [{"value": wskey_value, "name": "WSKEY_Client", "remarks": "WSKEY_OpenApi请勿删除"}]
 #                 data = json.dumps(data)  # Json格式化数据
-#                 url = 'http://127.0.0.1:{0}/api/envs'.format(port)  # 设置 URL地址
+#                 url = 'http://127.0.0.1:{0}/open/envs'.format(port)  # 设置 URL地址
 #                 s.post(url=url, data=data)  # HTTP[POST]请求 使用session
 #                 logger.info("\nWSKEY_Client变量添加完成\n--------------------\n")  # 标准日志输出
 #     '''
@@ -139,8 +144,13 @@ def ql_send(text):
         except Exception as err:  # 异常捕捉
             logger.debug(str(err))  # Debug日志输出
             logger.info("通知发送失败")  # 标准日志输出
-
-
+def get_token():
+    url = ql_url + "open/auth/token?client_id={}&client_secret={}".format(ql_client_id,ql_client_secret)
+    response = requests.request("GET", url).json()
+    print("获取青龙面板的token:",response)
+    return response["data"]["token"]
+def ql_login_by_client_id():#通过client_id方式登录
+    return get_token()
 # 登录青龙 返回值 token
 def get_qltoken(username, password, twoFactorSecret):  # 方法 用于获取青龙 Token
     logger.info("Token失效, 新登陆\n")  # 日志输出
@@ -151,7 +161,7 @@ def get_qltoken(username, password, twoFactorSecret):  # 方法 用于获取青�
             logger.debug(str(err))  # Debug日志输出
             logger.info("TOTP异常")
             sys.exit(1)
-        url = ql_url + "api/user/login"  # 设置青龙地址 使用 format格式化自定义端口
+        url = ql_url + "open/user/login"  # 设置青龙地址 使用 format格式化自定义端口
         payload = json.dumps({
             'username': username,
             'password': password
@@ -164,7 +174,7 @@ def get_qltoken(username, password, twoFactorSecret):  # 方法 用于获取青�
             # 使用 requests模块进行 HTTP POST请求
             res = requests.post(url=url, headers=headers, data=payload)
             if res.status_code == 200 and res.json()["code"] == 420:
-                url = ql_url + 'api/user/two-factor/login'
+                url = ql_url + 'open/user/two-factor/login'
                 data = json.dumps({
                     "username": username,
                     "password": password,
@@ -186,7 +196,7 @@ def get_qltoken(username, password, twoFactorSecret):  # 方法 用于获取青�
             logger.debug(str(err))  # Debug日志输出
             sys.exit(1)
     else:
-        url = ql_url + 'api/user/login'
+        url = ql_url + 'open/user/login'
         payload = {
             'username': username,
             'password': password
@@ -209,7 +219,7 @@ def get_qltoken(username, password, twoFactorSecret):  # 方法 用于获取青�
         except Exception as err:
             logger.debug(str(err))  # Debug日志输出
             logger.info("使用旧版青龙登录接口")
-            url = ql_url + 'api/login'  # 设置青龙地址 使用 format格式化自定义端口
+            url = ql_url + 'open/login'  # 设置青龙地址 使用 format格式化自定义端口
             payload = {
                 'username': username,
                 'password': password
@@ -257,7 +267,7 @@ def ql_login():  # 方法 青龙登录(获取Token 功能同上)
             # 调用方法 get_qltoken 传递 username & password
             return get_qltoken(username, password, twoFactorSecret)
         else:  # 判断分支
-            url = ql_url + 'api/user'  # 设置URL请求地址 使用 Format格式化端口
+            url = ql_url + 'open/user'  # 设置URL请求地址 使用 Format格式化端口
             headers = {
                 'Authorization': 'Bearer {0}'.format(token),
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36 Edg/94.0.992.38'
@@ -368,7 +378,7 @@ def getTokenx(wskey):  # 方法 获取 Wskey转换使用的 Token 由 JD_API 返
         return getToken_bak(wskey)
     try:  # 异常捕捉
         url = str(base64.b64decode(url_t).decode()) + \
-            'api/genToken'  # 设置云端服务器地址 路由为 genToken
+            'open/genToken'  # 设置云端服务器地址 路由为 genToken
         header = {"User-Agent": ua}  # 设置 HTTP头
         # 设置 HTTP请求参数 超时 20秒 Json解析
         params = requests.get(url=url, headers=header,
@@ -531,7 +541,7 @@ def serch_ck(pin):  # 方法 搜索 Pin
 
 
 def get_env():  # 方法 读取变量
-    url = ql_url + 'api/envs'
+    url = ql_url + 'open/envs'
     try:  # 异常捕捉
         res = s.get(url)  # HTTP请求 [GET] 使用 session
     except Exception as err:  # 异常捕捉
@@ -544,7 +554,7 @@ def get_env():  # 方法 读取变量
 
 
 def check_id():  # 方法 兼容青龙老版本与新版本 id & _id的问题
-    url = ql_url + 'api/envs'
+    url = ql_url + 'open/envs'
     try:  # 异常捕捉
         res = s.get(url).json()  # HTTP[GET] 请求 使用 session
     except Exception as err:  # 异常捕捉
@@ -561,7 +571,7 @@ def check_id():  # 方法 兼容青龙老版本与新版本 id & _id的问题
 
 
 def ql_update(e_id, n_ck):  # 方法 青龙更新变量 传递 id cookie
-    url = ql_url + 'api/envs'
+    url = ql_url + 'open/envs'
     data = {
         "name": "JD_COOKIE",
         "value": n_ck,
@@ -573,7 +583,7 @@ def ql_update(e_id, n_ck):  # 方法 青龙更新变量 传递 id cookie
 
 
 def ql_enable(e_id):  # 方法 青龙变量启用 传递值 eid
-    url = ql_url + 'api/envs/enable'
+    url = ql_url + 'open/envs/enable'
     data = '["{0}"]'.format(e_id)  # 格式化 POST 载荷
     res = json.loads(s.put(url=url, data=data).text)  # json模块读取 HTTP[PUT] 的返回值
     if res['code'] == 200:  # 判断返回值为 200
@@ -585,7 +595,7 @@ def ql_enable(e_id):  # 方法 青龙变量启用 传递值 eid
 
 
 def ql_disable(e_id):  # 方法 青龙变量禁用 传递 eid
-    url = ql_url + 'api/envs/disable'
+    url = ql_url + 'open/envs/disable'
     data = '["{0}"]'.format(e_id)  # 格式化 POST 载荷
     res = json.loads(s.put(url=url, data=data).text)  # json模块读取 HTTP[PUT] 的返回值
     if res['code'] == 200:  # 判断返回值为 200
@@ -599,14 +609,14 @@ def ql_disable(e_id):  # 方法 青龙变量禁用 传递 eid
 def ql_insert(i_ck):  # 方法 插入新变量
     data = [{"value": i_ck, "name": "JD_COOKIE"}]  # POST数据载荷组合
     data = json.dumps(data)  # Json格式化数据
-    url = ql_url + 'api/envs'
+    url = ql_url + 'open/envs'
     s.post(url=url, data=data)  # HTTP[POST]请求 使用session
     logger.info("\n账号添加完成\n--------------------\n")  # 标准日志输出
 
 
 def cloud_info():  # 方法 云端信息
     url = str(base64.b64decode(url_t).decode()) + \
-        'api/check_api'  # 设置 URL地址 路由 [check_api]
+        'open/check_api'  # 设置 URL地址 路由 [check_api]
     for i in range(3):  # For循环 3次
         try:  # 异常捕捉
             headers = {"authorization": "Bearer Shizuku"}  # 设置 HTTP头
@@ -667,9 +677,9 @@ def check_port():  # 方法 检查变量传递端口
             logger.debug(str(err))  # 调试日志输出
             logger.info("变量格式有问题...\n格式: export QL_PORT=\"端口号\"")  # 标准日志输出
             logger.info("使用默认端口5700")  # 标准日志输出
-            return 5700  # 返回端口 5700
+            return 5900  # 返回端口 5700
     else:  # 判断分支
-        port = 5700  # 默认5700端口
+        port = 5900  # 默认5700端口
     if not ql_check(port):  # 调用方法 [ql_check] 传递 [port]
         logger.info(str(
             port) + "端口检查失败, 如果改过端口, 请在变量中声明端口 \n在config.sh中加入 export QL_PORT=\"端口号\"")  # 标准日志输出
@@ -694,8 +704,8 @@ if __name__ == '__main__':  # Python主函数执行入口
     else:
         print(f"已配置代理: {proxy_url}\n")
     port = check_port()  # 调用方法 [check_port]  并赋值 [port]
-    ql_url = 'http://127.0.0.1:{0}/'.format(port)
-    token = ql_login()  # 调用方法 [ql_login]  并赋值 [token]
+    ql_url = 'http://192.168.168.21:{0}/'.format(port)
+    token = ql_login_by_client_id()  # 调用方法 [ql_login]  并赋值 [token]
     s = requests.session()  # 设置 request session方法
     s.headers.update({"authorization": "Bearer " + str(token)})  # 增加 HTTP头认证
     # 增加 HTTP头 json 类型
