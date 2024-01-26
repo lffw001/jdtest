@@ -3,8 +3,35 @@
  */
 //此处填写京东账号cookie。
 let CookieJDs = [
-  '',//账号一ck,例:pt_key=XXX;pt_pin=XXX;
-  '',//账号二ck,例:pt_key=XXX;pt_pin=XXX;如有更多,依次类推
+
+'pt_key=AAJlTktmADCAh-lU2W9blFd_Q4frlQSPXuoaqPODYVEX9VJYv3GLddV8R3f3ew7O-2d03j0U90M;pt_pin=libinxwz;',
+
+
+'pt_key=app_openAAJlUSjpADBXtSmN0Bd0Y-vQ41rP3lJZ_lk8YNDR8dUZ2ZeK0Tfa7alyj9oI8HOcxcSalXCMDJA;pt_pin=jd_61d5ffc77afbc;',
+
+
+'pt_key=app_openAAJlURCDADCa3A_2rfCNv0N8oWwugBfosYzmeOOeS1Rj2CMJmsrZ75K8a6xqIaN42W2JyFjgmMs;pt_pin=wdpcPPMuBenhKg;',
+
+
+'pt_key=AAJlTDT9ADDPm7J4YE8DgJtlzSxvqpxZE2ronH6rWDZRYheCjd61RuWf5lKxUZX23GdjBEnWjH8;pt_pin=jd_53504250c5652;',
+
+
+'pt_key=app_openAAJlUQz2ADDtYBBNkErLntj2Vai01vn_hq6VPgQoRXRXzK8f3YgWbuZC5-0UH5kA6mg7F7epZOI;pt_pin=jd_70b6936fd65a9;',
+
+
+'pt_key=AAJlTDu1ADBL6Mu8tdcDDM6My3Mz61-mjHURRsNip_ZTxbUI17RNbhLUFEwahervd6J-uFnk3ss;pt_pin=jd_uhQrHvOnkruH;',
+
+
+'pt_key=AAJlTDSYADBYD4vxZzoSViT7EZdfIu8f0roXIzMMllvFNlTTS4QscNNO4cX2S-1i08T8YioRYl4;pt_pin=wdFulrsXNvpcbf;',
+
+
+'pt_key=app_openAAJlULj0ADAvYI5HlCAV0OoG4NX9WvWm2_MoCDvTFdF6Hw1QQD8Wlp4Wjf3_KxmF12KIzDS0VAk;pt_pin=jd_SrCzReVimwxM;',
+
+
+'pt_key=app_openAAJlUPRwADDt_PDqvniCcuAcjGJyQf3Q3uCo1U5gdIAIe3duS4yN55mCWRyYBrJTh_QNHyBJupo;pt_pin=jd_bVxiAmQBpUij;',
+
+
+'pt_key=AAJlUXgZADCSJgsztPC_xfXSm8uoD4CCk-w0MWYNlOcYL4rpPyX_I37bnD56ZkxqS-Xh_gF9HF4;pt_pin=%E9%BB%9B%E8%89%B293;',
 ]
 let IP = '';
 // 判断环境变量里面是否有京东ck
